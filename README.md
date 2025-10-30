@@ -38,7 +38,15 @@ PC - WebGL
 
 
 ### Game Flow
-TBD
+The game is structured in multiple consecutive levels. Inside each level the player must explore the environment to find an item which is compelling with the story.
+
+The item may not be stated at the beginning of the level forcing the player to explore the map to find it. Once the item is found a message is given to the player telling him that he has found what he was looking for. After that the player can reach the exit of the level to accomplish it.
+
+Inside each level there are multiple npcs around and the player must hack various devices to distract them and sneak around without being caught.
+
+To hack a device the player must solve a small puzzle/minigame. Each hacked device has a different behaviour and must be fixed from the npcs.
+
+Hacking too much may increase the suspicion of the npcs and put them in alarm and if a certain threshold is exceeded they will find the player causing a game over and making him restart the level.
 
 ### Core Mechanics
  - Hacking system: The player can select a device to hack. Hacked devices could cause different interactions but most of the time they catch the attention of the homeowners.
