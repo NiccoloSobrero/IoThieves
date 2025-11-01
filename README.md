@@ -172,7 +172,6 @@ Something tense
 - Suspicion system
 - Overload system
 - Minigames
-- Interactable devices
 - UI:
     - MainMenu:
         - Play
@@ -208,11 +207,9 @@ Something tense
     - FOV visible to the player with a raycast
 - PIP movement system:
     - NavMesh
-- Device Highlight
 - Save/Load system (?)
 - Economy system (Balancing money stolen with skills price) - Emanuele (?)
 - Skill Tree system
-- Distractor elements (phone calls, delivery, etc) 
 
 
 
