@@ -170,7 +170,6 @@ Something tense
 ### Milestones:
 - Hacking System
 - Suspicion system
-- Overload system
 - Minigames
 - UI:
     - MainMenu:
