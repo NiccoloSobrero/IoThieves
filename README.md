@@ -164,3 +164,56 @@ Something tense
 - *Environmental Sounds*: Interactions with hackable devices (e.g. flickering, switches, phone sounds...).
 - *UI Sounds*: Menu navigation, time bar, game start and end cues.
 - *Tension Indicators*: Subtle audio cues for the suspicion system (e.g., heartbeat, home owner anger).
+
+
+
+### Milestones:
+- Hacking System
+- Suspicion system
+- Overload system
+- Minigames
+- Interactable devices
+- UI:
+    - MainMenu:
+        - Play
+        - Settings
+        - Skills
+        - Select Level
+        - Quit
+    - WorldUI:
+        - Suspicion level (top-center)
+        - Map (top-left) (?)
+    - MinigamesUI
+    - PauseMenu:
+        - Play
+        - Settings
+        - Quit
+    - EndLevelMenu:
+        - NextLevel
+        - Skills
+        - MainMenu
+    - GameOverMenu:
+        - Start
+        - Settings
+        - Quit
+- Level Design (for each level):
+    - Environment
+    - Characters
+    - Hackable devices
+    - Design a path to the goal (intended solution(s))
+- Cinematics
+- Camera System
+- NPC patrolling:
+    - movement by code (NavMesh is expensive)
+    - FOV visible to the player with a raycast
+- PIP movement system:
+    - NavMesh
+- Device Highlight
+- Save/Load system (?)
+- Economy system (Balancing money stolen with skills price) - Emanuele (?)
+- Skill Tree system
+- Distractor elements (phone calls, delivery, etc) 
+
+
+
+
