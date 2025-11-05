@@ -20,12 +20,12 @@ namespace Managers
 
         private void OnEnable()
         {
-            EventsManager.OnPointerClick.AddListener(OnPointerClicked);
+            EventsManager.OnPointerClickInWorld.AddListener(OnPointerClicked);
         }
 
         private void OnDisable()
         {
-            EventsManager.OnPointerClick.RemoveListener(OnPointerClicked);
+            EventsManager.OnPointerClickInWorld.RemoveListener(OnPointerClicked);
         }
 
         private void OnPointerClicked(Vector3 mousePosition)

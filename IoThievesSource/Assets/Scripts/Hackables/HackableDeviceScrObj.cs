@@ -8,5 +8,7 @@ namespace Hackables
         public string deviceName;
         public float suspicionLevelIncrease;
         public float attractionRange;
+
+        public GameObject minigamePrefab;
     }
 }

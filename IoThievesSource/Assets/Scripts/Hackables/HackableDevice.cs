@@ -1,11 +1,17 @@
+using Events;
 using UnityEngine;
 
 namespace Hackables
 {
-    public abstract class HackableDevice : MonoBehaviour
+    public class HackableDevice : MonoBehaviour
     {
         public HackableDeviceScrObj scrObj;
-        
-        public abstract void Hack();
+
+        public void Hack()
+        {
+            Debug.Log($"Hacking {scrObj.deviceName}");
+
+            EventsManager.OnHackableInteraction.Invoke(scrObj.minigamePrefab);
+        }
     }
 }

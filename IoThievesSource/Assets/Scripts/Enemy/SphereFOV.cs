@@ -1,3 +1,4 @@
+using SuspicionSystem;
 using UnityEngine;
 
 namespace Enemy
@@ -14,7 +15,6 @@ namespace Enemy
         [SerializeField] private Transform sphere;
 
         private bool _isAlerted;
-        private float _alertLevel;
         private float _alertIncrease;
 
         private void Update()
@@ -33,18 +33,7 @@ namespace Enemy
         {
             if (_isAlerted)
             {
-                _alertLevel += _alertIncrease * Time.deltaTime;
-                        
-                Debug.Log($"Alert: {_alertLevel} increased by {_alertIncrease}");
-            }
-            else if (_alertLevel > 0)
-            {
-                _alertLevel -= Time.deltaTime;
-
-                if (_alertLevel < 0)
-                {
-                    _alertLevel = 0;
-                }
+                SuspicionManager.Instance.IncreaseSuspicionLevel(_alertIncrease * Time.deltaTime);
             }
         }
 
@@ -63,6 +52,7 @@ namespace Enemy
             if (other.CompareTag("Player"))
             {
                 _isAlerted = false;
+                SuspicionManager.Instance.canDecreaseSuspicion = true;
             }
         }
 
@@ -78,7 +68,6 @@ namespace Enemy
                         detectionRange,
                         playerLayer))
                 {
-                    Debug.Log("Raycast hit");
                     if (Mathf.Abs(Vector3.Angle(gameObject.transform.forward, raycastDirection)) < fieldOfView / 2)
                     {
                         _alertIncrease = Vector3.Dot(gameObject.transform.forward, raycastDirection);
@@ -94,6 +83,8 @@ namespace Enemy
                 {
                     _isAlerted = false;
                 }
+                
+                SuspicionManager.Instance.canDecreaseSuspicion = !_isAlerted;
             }
         }
     }
