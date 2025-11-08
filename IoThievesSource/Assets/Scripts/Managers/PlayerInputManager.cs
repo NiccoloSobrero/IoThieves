@@ -1,4 +1,3 @@
-using System.Linq;
 using Events;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -38,6 +37,7 @@ namespace Managers
         private void OnEnable()
         {
             _actions.Gameplay.Enable();
+            _actions.Minigame.Enable();
         
             _actions.Gameplay.Move.performed += OnMove;
             _actions.Gameplay.Move.canceled += OnStopMove;
@@ -92,6 +92,11 @@ namespace Managers
         private void OnPointerClick(InputAction.CallbackContext context)
         {
             EventsManager.OnPointerClickInWorld?.Invoke(Input.mousePosition);
+        }
+
+        private void OnRightClick(InputAction.CallbackContext context)
+        {
+            MinigamesManager.Instance.CheckCompletion();
         }
     }
 }

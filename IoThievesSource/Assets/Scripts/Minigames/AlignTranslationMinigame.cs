@@ -42,7 +42,7 @@ namespace Minigames
         {
             if (changedToCompleted && changedToOriginal) return;
             
-            if (Mathf.Abs(controlledLine.anchoredPosition.y - targetLine.anchoredPosition.y) < deltaToComplete)
+            if (CheckCompletion())
             {
                 controlledLine.gameObject.GetComponent<Image>().color = colorCompletion;
             }
@@ -72,6 +72,11 @@ namespace Minigames
             
             slider.value = randControlledLinePos;
             controlledLine.anchoredPosition = new Vector2(randControlledLinePos, 0);
+        }
+
+        public override bool CheckCompletion()
+        {
+            return Mathf.Abs(controlledLine.anchoredPosition.y - targetLine.anchoredPosition.y) < deltaToComplete;
         }
     }
 }

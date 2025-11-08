@@ -44,7 +44,7 @@ namespace Minigames
         {
             if (changedToCompleted && changedToOriginal) return;
             
-            if (Quaternion.Angle(controlledLine.rotation, targetLine.rotation) < deltaToComplete)
+            if (CheckCompletion())
             {
                 controlledLine.gameObject.GetComponent<Image>().color = colorCompletion;
             }
@@ -73,6 +73,11 @@ namespace Minigames
             
             slider.value = randControlledLineRot;
             controlledLine.rotation = Quaternion.Euler(0, 0, randControlledLineRot);
+        }
+        
+        public override bool CheckCompletion()
+        {
+            return Quaternion.Angle(controlledLine.rotation, targetLine.rotation) < deltaToComplete;
         }
     }
 }
