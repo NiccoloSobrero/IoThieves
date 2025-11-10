@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/SkillTree/Components/SkillTree/skill-tree.uss?fileID=7433441132597879392&amp;guid=3ca3d23dc484d2b46a9147eb67c9cfd3&amp;type=3#skill-tree" />
+    <ui:VisualElement name="skillTree" class="skill-tree">
+        <!-- <ui:ScrollView name="skillTreeScrollView" class="skill-tree-scroll-view" /> -->
+    </ui:VisualElement>
+</ui:UXML>

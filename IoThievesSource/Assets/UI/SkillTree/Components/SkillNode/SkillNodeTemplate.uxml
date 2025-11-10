@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/SkillTree/Components/SkillNode/skill.uss?fileID=7433441132597879392&amp;guid=c1cc92a02a71d7643ab8d3be1bb06bf5&amp;type=3#skill" />
+    <ui:VisualElement name="skillNode" class="skill-node">
+        <ui:Button name="skillBuyButton" class="skill-buy">
+            <ui:Image name="skillIcon" class="skill-icon" />
+        </ui:Button>
+        <ui:Label name="skillName" class="skill-name"/>
+        <ui:Label name="skillCost" class="skill-cost" />
+    </ui:VisualElement>
+</ui:UXML>
