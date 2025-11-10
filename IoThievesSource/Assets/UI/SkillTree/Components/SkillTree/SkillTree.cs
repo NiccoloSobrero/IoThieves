@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -44,29 +43,24 @@ public class SkillTree : MonoBehaviour
         {
             var skillNodeInstance = skillNodeTemplate.Instantiate();
             var skillNodeVisualElement = skillNodeInstance.Q<VisualElement>("skillNode");
-            // var skillNodeIcon = skillNodeInstance.Q<Image>("skillIcon");
-            // var nameLabel =  skillNodeInstance.Q<Label>("skillName");
-            // var costLabel =  skillNodeInstance.Q<Label>("skillCost");
-            // var skillBuyButton = skillNodeInstance.Q<Button>("skillBuyButton");
-            
             var skillNodeIcon = skillNodeInstance.Q<Image>("skillIcon");
-            // var nameLabel =  skillNodeInstance.Q<Label>("skillName");
+            var nameLabel =  skillNodeInstance.Q<Label>("skillName");
             var costLabel =  skillNodeInstance.Q<Label>("skillCost");
-            var skillBuyButton = skillNodeInstance.Q<Button>("skillButton");
+            var skillBuyButton = skillNodeInstance.Q<Button>("skillBuyButton");
 
             if (skillNode.skill != null)
             {
-                // nameLabel.text = skillNode.skill.skillName;
+                nameLabel.text = skillNode.skill.skillName;
                 costLabel.text = $"{skillNode.skill.skillCost}";
                 if (skillNode.skill.skillIcon != null)
                 {
                     skillNodeIcon.image = skillNode.skill.skillIcon.texture;
                 }
             }
-            // skillNodeVisualElement.style.position = Position.Relative;
-            // skillNodeVisualElement.style.position = Position.Absolute;
-            // skillNodeVisualElement.style.left = skillNode.positionInTree.x;
-            // skillNodeVisualElement.style.top = skillNode.positionInTree.y;
+            
+            // should work at least in Editor but it isn't
+            skillBuyButton.tooltip = skillNode.skill.skillDescription;
+            
             if (skillNode == null)
             {
                 print("skillNode is null");
@@ -77,7 +71,7 @@ public class SkillTree : MonoBehaviour
                 print("skillNodeVisualElement is null");
             }
             
-            // UpdateSkillNodeVisual(skillNode, skillNodeVisualElement);
+            UpdateSkillNodeVisual(skillNode, skillNodeVisualElement);
 
             skillBuyButton.clicked += () =>
             {
@@ -95,13 +89,13 @@ public class SkillTree : MonoBehaviour
         var skillBuyButton = skillNodeVisualElement.Q<Button>("skillBuyButton");
         if (!skillNode.isLocked)
         {
-            skillBuyButton.text = "Owned";
+            // skillBuyButton.text = "Owned";
             skillBuyButton.SetEnabled(false);
             skillNodeVisualElement.AddToClassList("unlocked");
         }
         else
         {
-            skillBuyButton.text = "Buy";
+            // skillBuyButton.text = "Buy";
             skillBuyButton.SetEnabled(true);
             skillNodeVisualElement.RemoveFromClassList("unlocked");
         }

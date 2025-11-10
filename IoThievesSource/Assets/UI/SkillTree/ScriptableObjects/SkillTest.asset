@@ -15,3 +15,4 @@ MonoBehaviour:
   skillName: Test Skill
   skillCost: 300
   skillIcon: {fileID: 21300000, guid: 4216e42bd3eeb85459d4af37c6cc2cf5, type: 3}
+  skillDescription: This is just a skill description to test the button ui tooltip
