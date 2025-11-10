@@ -44,14 +44,19 @@ public class SkillTree : MonoBehaviour
         {
             var skillNodeInstance = skillNodeTemplate.Instantiate();
             var skillNodeVisualElement = skillNodeInstance.Q<VisualElement>("skillNode");
+            // var skillNodeIcon = skillNodeInstance.Q<Image>("skillIcon");
+            // var nameLabel =  skillNodeInstance.Q<Label>("skillName");
+            // var costLabel =  skillNodeInstance.Q<Label>("skillCost");
+            // var skillBuyButton = skillNodeInstance.Q<Button>("skillBuyButton");
+            
             var skillNodeIcon = skillNodeInstance.Q<Image>("skillIcon");
-            var nameLabel =  skillNodeInstance.Q<Label>("skillName");
+            // var nameLabel =  skillNodeInstance.Q<Label>("skillName");
             var costLabel =  skillNodeInstance.Q<Label>("skillCost");
-            var skillBuyButton = skillNodeInstance.Q<Button>("skillBuyButton");
+            var skillBuyButton = skillNodeInstance.Q<Button>("skillButton");
 
             if (skillNode.skill != null)
             {
-                nameLabel.text = skillNode.skill.skillName;
+                // nameLabel.text = skillNode.skill.skillName;
                 costLabel.text = $"{skillNode.skill.skillCost}";
                 if (skillNode.skill.skillIcon != null)
                 {
@@ -62,8 +67,17 @@ public class SkillTree : MonoBehaviour
             // skillNodeVisualElement.style.position = Position.Absolute;
             // skillNodeVisualElement.style.left = skillNode.positionInTree.x;
             // skillNodeVisualElement.style.top = skillNode.positionInTree.y;
+            if (skillNode == null)
+            {
+                print("skillNode is null");
+            }
+
+            if (skillNodeVisualElement == null)
+            {
+                print("skillNodeVisualElement is null");
+            }
             
-            UpdateSkillNodeVisual(skillNode, skillNodeVisualElement);
+            // UpdateSkillNodeVisual(skillNode, skillNodeVisualElement);
 
             skillBuyButton.clicked += () =>
             {

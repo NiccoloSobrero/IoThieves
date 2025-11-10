@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f4eb3fe80ca1b44889de88da1372d1c, type: 3}
   m_Name: SkillNodeTest 2
   m_EditorClassIdentifier: 
-  isLocked: 0
+  isLocked: 1
   skill: {fileID: 11400000, guid: 820f1a3b86c087f48bcc625a8f3522b8, type: 2}
   prerequisites: []
   positionInTree: {x: 150, y: 10}
