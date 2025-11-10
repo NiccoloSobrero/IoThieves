@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public enum InputContext
 {
+    None,
     Gameplay,
     Minigame
 }
@@ -15,7 +16,7 @@ namespace Managers
         public static PlayerInputManager Instance;
         
         private PlayerInputActions _actions;
-        private InputContext _currentContext;
+        private InputContext _currentContext = InputContext.None;
 
         public Vector2 Move { get; private set; }
 
@@ -43,6 +44,8 @@ namespace Managers
             _actions.Gameplay.Move.canceled += OnStopMove;
         
             _actions.Gameplay.Click.performed += OnPointerClick;
+            
+            _actions.Minigame.Click.canceled += OnMouseRelease;
             
             SetContext(InputContext.Gameplay);
         }
@@ -94,7 +97,7 @@ namespace Managers
             EventsManager.OnPointerClickInWorld?.Invoke(Input.mousePosition);
         }
 
-        private void OnRightClick(InputAction.CallbackContext context)
+        private void OnMouseRelease(InputAction.CallbackContext context)
         {
             MinigamesManager.Instance.CheckCompletion();
         }

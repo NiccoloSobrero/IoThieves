@@ -15,4 +15,4 @@ MonoBehaviour:
   deviceName: Smart light
   suspicionLevelIncrease: 0
   attractionRange: 0
-  minigamePrefab: {fileID: 7463523133826529984, guid: 6f52e82a69bc5684899aa70f448672a5, type: 3}
+  minigamePrefab: {fileID: 741677160991358894, guid: 6f52e82a69bc5684899aa70f448672a5, type: 3}

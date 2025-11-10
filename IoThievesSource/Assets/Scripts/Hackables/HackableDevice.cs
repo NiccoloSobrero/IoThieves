@@ -9,8 +9,6 @@ namespace Hackables
 
         public void Hack()
         {
-            Debug.Log($"Hacking {scrObj.deviceName}");
-
             EventsManager.OnHackableInteraction.Invoke(scrObj.minigamePrefab);
         }
     }

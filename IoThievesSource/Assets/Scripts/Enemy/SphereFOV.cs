@@ -14,6 +14,9 @@ namespace Enemy
         [Header("Sphere")]
         [SerializeField] private Transform sphere;
 
+        [Header("Billboard")]
+        [SerializeField] private GameObject billboard;
+
         private bool _isAlerted;
         private float _alertIncrease;
 
@@ -22,6 +25,8 @@ namespace Enemy
             UpdateDetectionSphere();
 
             ManageAlertLevel();
+            
+            billboard.SetActive(_isAlerted);
         }
 
         private void UpdateDetectionSphere()
@@ -52,7 +57,7 @@ namespace Enemy
             if (other.CompareTag("Player"))
             {
                 _isAlerted = false;
-                SuspicionManager.Instance.canDecreaseSuspicion = true;
+                SuspicionManager.Instance.RemoveEnemy(gameObject);
             }
         }
 
@@ -60,6 +65,8 @@ namespace Enemy
         {
             if (other.CompareTag("Player"))
             {
+                bool wasAlerted = _isAlerted;
+                
                 Vector3 raycastDirection = (Utility.ZeroOutY(other.transform.position) - Utility.ZeroOutY(rayOrigin.position)).normalized;
                 
                 if (Physics.Raycast(rayOrigin.position,
@@ -83,8 +90,15 @@ namespace Enemy
                 {
                     _isAlerted = false;
                 }
-                
-                SuspicionManager.Instance.canDecreaseSuspicion = !_isAlerted;
+
+                if (wasAlerted && !_isAlerted)
+                {
+                    SuspicionManager.Instance.RemoveEnemy(gameObject);
+                }
+                else if (!wasAlerted && _isAlerted)
+                {
+                    SuspicionManager.Instance.AddEnemy(gameObject);
+                }
             }
         }
     }

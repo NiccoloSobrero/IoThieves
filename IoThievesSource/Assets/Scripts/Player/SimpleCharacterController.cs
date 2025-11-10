@@ -6,18 +6,21 @@ namespace Player
     [RequireComponent(typeof(CharacterController))]
     public class SimpleCharacterController : MonoBehaviour
     {
-        [Header("Managers")]
-        [SerializeField] private PlayerInputManager inputManager;
-
+        [Header("References")] 
+        [SerializeField] private Transform graphics;
+        
         [Header("Settings")] 
-        [SerializeField] private float moveSpeed;
-        [SerializeField] private float rotationSpeed;
+        [SerializeField] private float moveSpeed = 5f;
+        [SerializeField] private float turnSmoothTime = 0.1f;
 
         private Camera _camera;
         private CharacterController _controller;
 
         private Vector3 _forward;
         private Vector3 _right;
+        
+        private float _turnSmoothVelocity;
+        
         private void Awake()
         {
             _camera = Camera.main;
@@ -25,13 +28,10 @@ namespace Player
 
             if (!_camera) return;
             
-            _forward = _camera.transform.forward;
-            _forward.y = 0;
-            _forward.Normalize();
+            // Works under assumption that camera doesn't turn
+            _forward = Vector3.ProjectOnPlane(_camera.transform.forward, Vector3.up).normalized;
         
-            _right = _camera.transform.right;
-            _right.y = 0;
-            _right.Normalize();
+            _right = Vector3.ProjectOnPlane(_camera.transform.right, Vector3.up).normalized;
         }
 
         private void Update()
@@ -41,8 +41,19 @@ namespace Player
 
         private void Move()
         {
-            Vector3 move = (_forward * inputManager.Move.y + _right * inputManager.Move.x).normalized * (moveSpeed * Time.deltaTime);
-            _controller.Move(move);
+            Vector3 moveDir = _forward * PlayerInputManager.Instance.Move.y 
+                            + _right * PlayerInputManager.Instance.Move.x;
+
+            if (moveDir.sqrMagnitude > 0.01f)
+            {
+                moveDir = moveDir.normalized;
+                
+                _controller.Move(moveDir * (moveSpeed * Time.deltaTime));
+            
+                float targetAngle = Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg;
+                float angle = Mathf.SmoothDampAngle(graphics.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothTime);
+                graphics.rotation = Quaternion.Euler(0f, angle, 0f);
+            }
         }
     }
 }

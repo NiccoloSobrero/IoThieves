@@ -1,4 +1,3 @@
-using System;
 using Events;
 using Hackables;
 using UnityEngine;
@@ -36,7 +35,6 @@ namespace Managers
             {
                 if (hit.transform.TryGetComponent(out HackableDevice hackableDevice))
                 {
-                    Debug.Log($"Clicked on {hit.collider.gameObject.name}. HackableDevice: {hackableDevice.scrObj.deviceName}");
                     hackableDevice.Hack();
                 }
             }
