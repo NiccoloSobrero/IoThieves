@@ -1,0 +1,21 @@
+.skill-tree {
+    align-self: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 100px;
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 40px;
+    height: 80%;
+    width: 80%;
+    flex-direction: row;
+    justify-content: space-around;
+    background-color: lightgrey;
+    border-radius: 10px;
+    border-width: 8px;
+    border-color: white;
+}
+
+.skill-tree-scroll-view {
+    
+}
