@@ -4,16 +4,10 @@
 }
 
 .main-menu-image {
-    /*border-color: white;*/
-    /*border-radius: 16px;*/
-    /*border-width: 4px;*/
     height: 80%;
 }
 
 .main-menu-buttons-container {
-    /*border-color: white;*/
-    /*border-radius: 16px;*/
-    /*border-width: 4px;*/
     height: 10%;
     width: 100%;
     flex-direction: row;
@@ -24,12 +18,3 @@
     height: 90%;
     width: 20%;
 }
-
-/*.main-menu-button:hover {*/
-/*    border-color: white;*/
-/*    border-radius: 16px;*/
-/*    border-width: 4px;*/
-/*    font-size: 30px;*/
-/*    scale: 1.1;*/
-/*    rotate: 2deg;*/
-/*}*/
