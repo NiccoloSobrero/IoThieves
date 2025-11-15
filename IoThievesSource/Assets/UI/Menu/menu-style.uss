@@ -1,0 +1,35 @@
+:root {
+    justify-content: center;
+}
+
+.menu-container {
+    align-self: center;
+    background-color: grey;
+    border-color: white;
+    border-radius: 16px;
+    border-width: 4px;
+}
+
+.menu-title {
+    align-self: center;
+    font-size: 48px;
+    -unity-font-style: bold;
+    margin-top: 2%;
+    height: 10%;
+}
+
+.menu-button {
+    background-color: rgba(255, 255, 255, 0);
+    -unity-font-style: bold;
+    font-size: 24px;
+    transition: 0.25s all;
+}
+
+.menu-button:hover {
+    border-color: white;
+    border-radius: 16px;
+    border-width: 4px;
+    font-size: 30px;
+    scale: 1.1;
+    rotate: 2deg;
+}
