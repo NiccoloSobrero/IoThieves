@@ -4,7 +4,7 @@
     <ui:VisualElement name="pauseMenuContainer" class="menu-container pause-menu-container">
         <ui:Label name="title" text="IoThieves" class="menu-title" />
         <ui:VisualElement name="pauseMenuButtonsContainer" class="pause-menu-buttons-container">
-            <ui:Button name="playButton" text="Play" class="menu-button pause-menu-button" />
+            <ui:Button name="resumeButton" text="Resume" class="menu-button pause-menu-button" />
             <ui:Button name="saveButton" text="Save" class="menu-button pause-menu-button" />
             <ui:Button name="optionsButton" text="Options" class="menu-button pause-menu-button" />
             <ui:Button name="quitButton" text="Quit" class="menu-button pause-menu-button" />

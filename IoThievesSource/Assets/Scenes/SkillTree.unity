@@ -129,6 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 102930739}
   - component: {fileID: 102930740}
+  - component: {fileID: 102930741}
   m_Layer: 0
   m_Name: MainMenu
   m_TagString: Untagged
@@ -170,6 +171,19 @@ MonoBehaviour:
   m_WorldSpaceSizeMode: 1
   m_WorldSpaceWidth: 1920
   m_WorldSpaceHeight: 1080
+--- !u!114 &102930741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 102930738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb68a8b92ad2834b808cd84e1cc6c27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuDocument: {fileID: 102930740}
 --- !u!1 &213522245
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,6 +462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1589770795}
   - component: {fileID: 1589770794}
+  - component: {fileID: 1589770796}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -489,6 +504,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1589770796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589770793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52e3f3a971b82e9459d13407dae8c558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuDocument: {fileID: 1589770794}
 --- !u!1 &1656381829
 GameObject:
   m_ObjectHideFlags: 0
