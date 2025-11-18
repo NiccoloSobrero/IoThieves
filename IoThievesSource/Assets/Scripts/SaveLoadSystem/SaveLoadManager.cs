@@ -15,6 +15,7 @@ namespace SaveLoadSystem
             EventsManager.OnGameLoaded.AddListener(HandleLoadedJson);
             EventsManager.OnGameLoadError.AddListener(HandleLoadError);
             EventsManager.OnGameSaveError.AddListener(HandleSaveError);
+            EventsManager.OnSaveGame.AddListener(SerializeAndSave);
         }
 
         private void OnDisable()
@@ -23,6 +24,7 @@ namespace SaveLoadSystem
             EventsManager.OnGameLoaded.RemoveListener(HandleLoadedJson);
             EventsManager.OnGameLoadError.RemoveListener(HandleLoadError);
             EventsManager.OnGameSaveError.RemoveListener(HandleSaveError);
+            EventsManager.OnSaveGame.RemoveListener(SerializeAndSave);
         }
         
     #region Buttons calls

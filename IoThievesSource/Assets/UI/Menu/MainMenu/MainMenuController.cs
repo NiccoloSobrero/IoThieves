@@ -15,9 +15,8 @@ public class MainMenuController : MenuController
 
     private void PlayGame()
     {
-        print("play game");
         // Go to next scene (Level 1)
-        EventsManager.OnGameStarted?.Invoke();
+        EventsManager.OnStartGame?.Invoke();
     }
     
 }

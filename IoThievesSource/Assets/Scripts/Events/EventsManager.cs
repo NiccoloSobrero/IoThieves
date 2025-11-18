@@ -18,9 +18,10 @@ namespace Events
         #endregion
         
         # region UI Events
-        public static readonly UnityEvent OnGameStarted = new();
-        public static readonly UnityEvent OnGameResumed = new();
-        public static readonly UnityEvent OnGameQuit = new();
+        public static readonly UnityEvent OnStartGame = new();
+        public static readonly UnityEvent OnSaveGame = new();
+        public static readonly UnityEvent OnResumeGame = new();
+        public static readonly UnityEvent OnQuitGame = new();
         # endregion
     }
 }

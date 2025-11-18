@@ -16,9 +16,8 @@ public class PauseMenuController : MenuController
 
     private void ResumeGame()
     {
-        print("resume game");
         // Time.timeScale = 1;
-        EventsManager.OnGameResumed?.Invoke();
+        EventsManager.OnResumeGame?.Invoke();
     }
     
 }
