@@ -28,8 +28,7 @@ namespace AI
             float angle = Vector3.SignedAngle(forwardDir, dir, Vector3.up);
             float angleMag = Mathf.Abs(angle);
             
-            if (angleMag < angularThreshold) isMoving = true;
-            else isMoving = false;
+            isMoving = angleMag < threshold;
 
             float rotateOf = angle * angularSpeed * Time.deltaTime;
             transform.Rotate(0,rotateOf,0);

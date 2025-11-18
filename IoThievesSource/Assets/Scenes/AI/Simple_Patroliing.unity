@@ -4119,11 +4119,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 2
   angularSpeed: 5.38
-  turnSmoothTime: 0.1
   isMoving: 1
   target: {fileID: 1791396855}
-  threshold: 0.6
-  angularThreshold: 30
+  threshold: 0.8
+  angularThreshold: 45
 --- !u!1 &1116407108
 GameObject:
   m_ObjectHideFlags: 0
@@ -6710,7 +6709,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372f80914bdb05845adb8593311f7bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neighbours: []
+  neighbours:
+  - {fileID: 310746046}
+  - {fileID: 654187087}
+  - {fileID: 362360270}
+  - {fileID: 1565094973}
+  - {fileID: 1679489478}
 --- !u!1 &2030132753
 GameObject:
   m_ObjectHideFlags: 0
