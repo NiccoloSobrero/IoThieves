@@ -21,3 +21,7 @@ MonoBehaviour:
     itemType: 2
     icon: {fileID: 0}
     folderContent: {fileID: 0}
+  - itemName: Super really long name to go out of the screen to infinity and beyond
+    itemType: 0
+    icon: {fileID: 0}
+    folderContent: {fileID: 0}

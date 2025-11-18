@@ -1,4 +1,3 @@
-using Managers;
 using UnityEngine;
 
 namespace Minigames
@@ -9,11 +8,11 @@ namespace Minigames
     
         public void CloseMinigameWindow()
         {
-            // minigameWindow.SetActive(false);
+            minigameWindow.SetActive(false);
             
-            PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
+            // PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
             
-            Destroy(minigameWindow);
+            // Destroy(minigameWindow);
         }
     }
 }

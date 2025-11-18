@@ -19,5 +19,5 @@ MonoBehaviour:
     folderContent: {fileID: 0}
   - itemName: Random folder
     itemType: 1
-    icon: {fileID: 21300000, guid: 4216e42bd3eeb85459d4af37c6cc2cf5, type: 3}
+    icon: {fileID: 21300000, guid: 1639ba3893f587d40a83d8c5c225ba32, type: 3}
     folderContent: {fileID: 11400000, guid: 481b1ea2437b0e6499f23b716a0f46a1, type: 2}

@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,10 +27,8 @@ namespace Minigames
                 {
                     _clickedOnce = false;
                 }
-                
             }
         }
-
 
         public void Customize(FolderItem item)
         {
@@ -42,7 +39,6 @@ namespace Minigames
             _contentScrObj = item.folderContent;
         }
 
-
         public void OnClick()
         {
             if (!_clickedOnce)
@@ -52,16 +48,15 @@ namespace Minigames
             }
             else
             {
-                Debug.Log("Double Click");
                 _clickedOnce = false;
                 
                 switch (_type)
                 {
                     case FolderItemType.FOLDER_ON_DESKTOP:
-                        DesktopManager.Instance.OpenDesktopFolder(_contentScrObj);
+                        DesktopManager.Instance.OpenDesktopFolder(_contentScrObj, label.text);
                         break;
                     case FolderItemType.FOLDER_IN_FOLDER:
-                        DesktopManager.Instance.OpenFolder(_contentScrObj);
+                        DesktopManager.Instance.OpenFolder(_contentScrObj, label.text);
                         break;
                     case FolderItemType.PROGRAM:
                         DesktopManager.Instance.OpenProgram();
@@ -71,16 +66,6 @@ namespace Minigames
                         break;
                 }
             }
-            
-            
-            
-            
-            
         }
-        
-        
-        
-        
-        
     }
 }
