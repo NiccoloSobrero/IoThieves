@@ -16,5 +16,11 @@ namespace Events
         public static readonly UnityEvent<string> OnGameSaveError = new();
         public static readonly UnityEvent<string> OnGameLoadError = new();
         #endregion
+        
+        # region UI Events
+        public static readonly UnityEvent OnGameStarted = new();
+        public static readonly UnityEvent OnGameResumed = new();
+        public static readonly UnityEvent OnGameQuit = new();
+        # endregion
     }
 }

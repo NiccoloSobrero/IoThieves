@@ -1,3 +1,4 @@
+using Events;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -20,6 +21,7 @@ public class MenuController : MonoBehaviour
     private void SaveGame()
     {
         print("save game");
+        // EventsManager.OnGameSaved?.Invoke();
     }
     
     private void OpenGameOptions()
@@ -30,5 +32,12 @@ public class MenuController : MonoBehaviour
     private void QuitGame()
     {
         print("quit game");
+        // temporary logic: move it in OnGameQuit Event
+        EventsManager.OnGameQuit?.Invoke();
+        # if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
     }
 }

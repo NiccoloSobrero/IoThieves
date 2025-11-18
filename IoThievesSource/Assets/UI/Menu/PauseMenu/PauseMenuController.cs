@@ -1,4 +1,5 @@
 using System;
+using Events;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -16,6 +17,8 @@ public class PauseMenuController : MenuController
     private void ResumeGame()
     {
         print("resume game");
+        // Time.timeScale = 1;
+        EventsManager.OnGameResumed?.Invoke();
     }
     
 }
