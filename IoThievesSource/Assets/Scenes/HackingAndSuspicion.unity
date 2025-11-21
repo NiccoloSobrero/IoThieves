@@ -2112,7 +2112,6 @@ GameObject:
   - component: {fileID: 1303712528}
   - component: {fileID: 1303712527}
   - component: {fileID: 1303712526}
-  - component: {fileID: 1303712529}
   m_Layer: 0
   m_Name: Ground
   m_TagString: Untagged
@@ -2210,38 +2209,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303712524}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1303712529
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1303712524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SerializedVersion: 0
-  m_AgentTypeID: 0
-  m_CollectObjects: 0
-  m_Size: {x: 10, y: 10, z: 10}
-  m_Center: {x: 0, y: 2, z: 0}
-  m_LayerMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_UseGeometry: 0
-  m_DefaultArea: 0
-  m_GenerateLinks: 0
-  m_IgnoreNavMeshAgent: 1
-  m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 0
-  m_TileSize: 256
-  m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
-  m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 3a7e1d34a85b4a14687011d921ef1501, type: 2}
-  m_BuildHeightMesh: 0
 --- !u!1 &1400758726
 GameObject:
   m_ObjectHideFlags: 0
@@ -4318,7 +4285,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4862760036622404200}
   - component: {fileID: 7448875785652276726}
-  - component: {fileID: 7448875785652276727}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -4338,35 +4304,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57cb171a318f15c4885cd5a9ccb71f61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alertBillboard: {fileID: 7971501041577242232}
   alertParent: {fileID: 1667434937}
   questionMarkRectMask: {fileID: 1582535346}
   exclamationMark1RectMask: {fileID: 1923176065}
   exclamationMark2RectMask: {fileID: 319122730}
-  questionMarkProgress: 1
-  exclamationMark1Progress: 0.4
-  exclamationMark2Progress: 0
---- !u!195 &7448875785652276727
-NavMeshAgent:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7448875785652276725}
-  m_Enabled: 1
-  m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
-  avoidancePriority: 50
-  m_AngularSpeed: 120
-  m_StoppingDistance: 0
-  m_AutoTraverseOffMeshLink: 1
-  m_AutoBraking: 1
-  m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 0
-  m_WalkableMask: 4294967295
-  m_ObstacleAvoidanceType: 4
+  timeBeforeAlertDecrease: 5
 --- !u!4 &7485516619763015553
 Transform:
   m_ObjectHideFlags: 0
@@ -4432,7 +4375,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &8444224384371588104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4445,6 +4388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bc3e519ca7b76d4db93cf1e0beb77d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alertManager: {fileID: 7448875785652276726}
   rayOrigin: {fileID: 2647368910571293606}
   detectionRange: 7
   fieldOfView: 135
@@ -4452,7 +4396,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   sphere: {fileID: 7485516619763015553}
-  billboard: {fileID: 7971501041577242232}
 --- !u!1 &8737838501124912445
 GameObject:
   m_ObjectHideFlags: 0
