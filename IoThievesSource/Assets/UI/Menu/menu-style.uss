@@ -4,7 +4,7 @@
 
 .menu-container {
     align-self: center;
-    background-color: grey;
+    background-color: rgba(128, 128, 128, 0);
     border-color: white;
     border-radius: 16px;
     border-width: 4px;
