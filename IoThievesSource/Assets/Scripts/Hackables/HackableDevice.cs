@@ -3,13 +3,26 @@ using UnityEngine;
 
 namespace Hackables
 {
-    public class HackableDevice : MonoBehaviour
+    public abstract class HackableDevice : MonoBehaviour
     {
         public HackableDeviceScrObj scrObj;
 
-        public void Hack()
+        public abstract void Hack();
+    }
+
+    public class HackableToMinigame : HackableDevice
+    {
+        public override void Hack()
         {
             EventsManager.OnHackableInteraction.Invoke(scrObj.minigamePrefab);
+        }
+    }
+
+    public class HackableToDesktop : HackableDevice
+    {
+        public override void Hack()
+        {
+            
         }
     }
 }
