@@ -1,6 +1,7 @@
-using System;
+using System.Collections.Generic;
 using Events;
 using Minigames;
+using Minigames.ScriptableObjects;
 using UnityEngine;
 
 namespace Managers
@@ -8,11 +9,18 @@ namespace Managers
     public class MinigamesManager : MonoBehaviour
     {
         public static MinigamesManager Instance;
-        
+
+        [SerializeField] private GameObject minigamesWindow;
         [SerializeField] private Transform minigamesParent;
+
+        public Transform MinigamesParent => minigamesParent;
         
-        private Minigame _currentMinigame;
-        // private readonly List<MinigameToObject> _instantiatedMinigames = new();
+        public readonly Queue<MinigameScrObj> MinigamesQueue = new();
+        private GameObject _currentMinigameObj;
+        
+        [Header("Minigames")]
+        [SerializeField] private PasswordDecryptorManager passwordDecryptionMinigame;
+        [SerializeField] private DesktopMinigame desktopMinigame;
 
         private void Awake()
         {
@@ -26,79 +34,48 @@ namespace Managers
                 Destroy(gameObject);
             }
         }
-
+        
         private void OnEnable()
         {
-            EventsManager.OnHackableInteraction.AddListener(SpawnMinigame);
+            EventsManager.OnMinigameCompleted.AddListener(MoveToNextMinigame);
         }
 
         private void OnDisable()
         {
-            EventsManager.OnHackableInteraction.RemoveListener(SpawnMinigame);
+            EventsManager.OnMinigameCompleted.RemoveListener(MoveToNextMinigame);
         }
 
-        private void SpawnMinigame(GameObject minigamePrefab)
+        public void MoveToNextMinigame()
         {
-            PlayerInputManager.Instance.SetContext(InputContext.Minigame);
-            
-            // MinigameToObject minigameElement = FindMinigameObject(minigamePrefab.GetComponent<Minigame>());
-            //
-            // if (minigameElement != null)
-            // {
-            //     minigameElement.window.SetActive(true);
-            //     _currentMinigame = minigameElement.minigame;
-            // }
-            // else
-            // {
-            //     _currentMinigame = Instantiate(minigamePrefab, minigamesParent).GetComponent<Minigame>();
-            //
-            //     _instantiatedMinigames.Add(new MinigameToObject(_currentMinigame, _currentMinigame.gameObject));
-            //
-            //     _currentMinigame.InitMinigame();
-            // }
-            
-            _currentMinigame = Instantiate(minigamePrefab, minigamesParent).GetComponent<Minigame>();
-            
-            _currentMinigame.InitMinigame();
-        }
-
-        public void CheckCompletion()
-        {
-            if (_currentMinigame.CheckCompletion())
+            if (_currentMinigameObj != null)
             {
-                //close minigame window
-                // FindMinigameObject(_currentMinigame).window.SetActive(false);
-                Destroy(_currentMinigame.gameObject);
-                PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
-                
-                /*TODO: confirm device hacking and attract nearby enemies*/
-                Debug.Log("Minigame check complete");
+                _currentMinigameObj.SetActive(false);
             }
+            
+            MinigamesQueue.Dequeue().InitMinigame();
         }
 
-        // private MinigameToObject FindMinigameObject(Minigame minigame)
-        // {
-        //     for (int i = 0; i < _instantiatedMinigames.Count; i++)
-        //     {
-        //         if (_instantiatedMinigames[i].minigame == minigame)
-        //         {
-        //             return _instantiatedMinigames[i];
-        //         }
-        //     }
-        //     return null;
-        // }
-    }
-
-    [Serializable]
-    public class MinigameToObject
-    {
-        public Minigame minigame;
-        public GameObject window;
-        
-        public MinigameToObject(Minigame minigame, GameObject window)
+        public void EnableWindow(bool enable)
         {
-            this.minigame = minigame;
-            this.window = window;
+            minigamesWindow.SetActive(enable);
+        }
+
+        public void InitPasswordDecryptionMinigame()
+        {
+            _currentMinigameObj = passwordDecryptionMinigame.gameObject;
+            
+            _currentMinigameObj.SetActive(true);
+            
+            passwordDecryptionMinigame.InitGame();
+        }
+
+        public void InitDesktopMinigame(FolderContentScrObj folderContentScrObj)
+        {
+            _currentMinigameObj = desktopMinigame.gameObject;
+            
+            _currentMinigameObj.SetActive(true);
+            
+            desktopMinigame.OpenDesktop(folderContentScrObj);
         }
     }
 }

@@ -17,6 +17,7 @@ namespace Minigames
         public string itemName;
         public FolderItemType itemType;
         public Sprite icon;
+        public float value;
 
         public FolderContentScrObj folderContent;
     }
@@ -24,9 +25,9 @@ namespace Minigames
 
     public enum FolderItemType
     {
-        FOLDER_IN_FOLDER,
-        FOLDER_ON_DESKTOP,
-        FILE,
-        PROGRAM
+        FolderInFolder,
+        FolderOnDesktop,
+        File,
+        Program
     }
 }

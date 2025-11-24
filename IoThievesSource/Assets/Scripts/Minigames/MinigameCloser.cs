@@ -11,8 +11,6 @@ namespace Minigames
             minigameWindow.SetActive(false);
             
             // PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
-            
-            // Destroy(minigameWindow);
         }
     }
 }

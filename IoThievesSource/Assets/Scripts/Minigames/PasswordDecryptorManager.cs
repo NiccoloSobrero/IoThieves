@@ -1,6 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
 using Events;
-using ObjectPooling;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -77,22 +77,7 @@ namespace Minigames
             EventsManager.OnClickDecryptPassword.RemoveListener(CheckSolution);
         }
 
-        private void Awake()
-        {
-            ObjectPoolingManager.Instance.CreatePool(decryptionOutputObject, decryptionOutputParent, 9, 50);
-            
-            InitGame();
-        }
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                InitGame();
-            }
-        }
-
-        private void InitGame()
+        public void InitGame()
         {
             // Init hearts
             _currentLeftAttempts = heartsObjects.Count;
@@ -163,10 +148,18 @@ namespace Minigames
             else
             {
                 PrintOutputOnCorrectGuess(guess);
-
-                // TODO: Fire minigame completed event
+                
                 _canCheckGuess = false;
+
+                StartCoroutine(WaitForCompletion());
             }
+        }
+
+        private IEnumerator WaitForCompletion()
+        {
+            yield return new WaitForSeconds(3f);
+            
+            EventsManager.OnMinigameCompleted?.Invoke();
         }
 
         private LetterResult[] GetCorrectnessArray(string guess)
@@ -219,14 +212,11 @@ namespace Minigames
         
         private void PrintOutputOnCorrectGuess(string guess)
         {
-            TextMeshProUGUI text1 = ObjectPoolingManager.Instance.GetObject(decryptionOutputObject.name).GetComponent<TextMeshProUGUI>();
-            text1.gameObject.SetActive(true);
+            TextMeshProUGUI text1 = Instantiate(decryptionOutputObject, decryptionOutputParent).GetComponent<TextMeshProUGUI>();
             
-            TextMeshProUGUI text2 = ObjectPoolingManager.Instance.GetObject(decryptionOutputObject.name).GetComponent<TextMeshProUGUI>();
-            text2.gameObject.SetActive(true);
+            TextMeshProUGUI text2 = Instantiate(decryptionOutputObject, decryptionOutputParent).GetComponent<TextMeshProUGUI>();
             
-            TextMeshProUGUI text3 = ObjectPoolingManager.Instance.GetObject(decryptionOutputObject.name).GetComponent<TextMeshProUGUI>();
-            text3.gameObject.SetActive(true);
+            TextMeshProUGUI text3 = Instantiate(decryptionOutputObject, decryptionOutputParent).GetComponent<TextMeshProUGUI>();
             
             text1.text = "> " + _correctColor + guess + _colorCloseStr;
             text2.text = "> Access granted.";
@@ -239,14 +229,11 @@ namespace Minigames
         {
             LetterResult[] results = GetCorrectnessArray(guess);
             
-            TextMeshProUGUI text1 = ObjectPoolingManager.Instance.GetObject(decryptionOutputObject.name).GetComponent<TextMeshProUGUI>();
-            text1.gameObject.SetActive(true);
+            TextMeshProUGUI text1 = Instantiate(decryptionOutputObject, decryptionOutputParent).GetComponent<TextMeshProUGUI>();
             
-            TextMeshProUGUI text2 = ObjectPoolingManager.Instance.GetObject(decryptionOutputObject.name).GetComponent<TextMeshProUGUI>();
-            text2.gameObject.SetActive(true);
+            TextMeshProUGUI text2 = Instantiate(decryptionOutputObject, decryptionOutputParent).GetComponent<TextMeshProUGUI>();
             
-            TextMeshProUGUI text3 = ObjectPoolingManager.Instance.GetObject(decryptionOutputObject.name).GetComponent<TextMeshProUGUI>();
-            text3.gameObject.SetActive(true);
+            TextMeshProUGUI text3 = Instantiate(decryptionOutputObject, decryptionOutputParent).GetComponent<TextMeshProUGUI>();
             
             string guessText = "> ";
 

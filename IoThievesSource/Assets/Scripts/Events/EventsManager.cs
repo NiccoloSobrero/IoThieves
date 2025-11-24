@@ -8,7 +8,7 @@ namespace Events
         #region Gameplay Events
         
         public static readonly UnityEvent<Vector3> OnPointerClickInWorld = new();
-        public static readonly UnityEvent<GameObject> OnHackableInteraction = new();
+        public static readonly UnityEvent OnMinigameCompleted = new();
         
         #endregion
         

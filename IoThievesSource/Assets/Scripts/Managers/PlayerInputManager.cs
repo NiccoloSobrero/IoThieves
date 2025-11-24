@@ -99,7 +99,7 @@ namespace Managers
 
         private void OnMouseRelease(InputAction.CallbackContext context)
         {
-            MinigamesManager.Instance.CheckCompletion();
+            // MinigamesManager.Instance.CheckCompletion();
         }
     }
 }

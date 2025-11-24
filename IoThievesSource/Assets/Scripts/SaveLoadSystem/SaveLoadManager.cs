@@ -70,7 +70,7 @@ namespace SaveLoadSystem
     #region The only things that can be touched
         private void SerializeAndSave()
         {
-            GameSaveData payload = new GameSaveData(player, SuspicionManager.Instance.CurrentSuspicionLevel);
+            GameSaveData payload = new GameSaveData(player);
             var json = JsonUtility.ToJson(payload);
             FirebaseWeb.SaveJson(json);
         }
@@ -85,8 +85,6 @@ namespace SaveLoadSystem
             player.gameObject.GetComponent<CharacterController>().enabled = false;
             player.SetPositionAndRotation(playerPos, playerRot);
             player.gameObject.GetComponent<CharacterController>().enabled = true;
-                
-            SuspicionManager.Instance.SetCurrentSuspicionLevel(data.suspicionLevel);
         }
     #endregion
     }

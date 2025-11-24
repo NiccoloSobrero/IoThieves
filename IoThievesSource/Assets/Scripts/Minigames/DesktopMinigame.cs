@@ -4,19 +4,14 @@ using UnityEngine;
 
 namespace Minigames
 {
-    public class DesktopManager : MonoBehaviour
+    public class DesktopMinigame : MonoBehaviour
     {
-        public static DesktopManager Instance;
-        
-        [SerializeField] private GameObject desktopObject;
-        [SerializeField] private Transform desktopParent;
+        [SerializeField] private Transform desktopFoldersParent;
         
         [SerializeField] private GameObject folderPrefab;
         
         [SerializeField] private GameObject folderObject;
-        [SerializeField] private Transform folderParent;
-        
-        [SerializeField] private FolderContentScrObj folderContent;
+        [SerializeField] private Transform folderItemsParent;
         
         [SerializeField] private GameObject folderIsEmptyObject;
         
@@ -28,25 +23,15 @@ namespace Minigames
         
         private FolderContentScrObj _desktop;
 
-        // private float _textPadding = 5f;
+        private bool _openedFirstFolder;
 
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-
             _pathTextRect = pathText.gameObject.GetComponent<RectTransform>();
-            
-            OpenDesktop(folderContent);
+
+            _openedFirstFolder = false;
         }
-        
+
         private void GenerateFolder(FolderContentScrObj scrObj, Transform parent)
         {
             if (scrObj == null)
@@ -58,16 +43,15 @@ namespace Minigames
             foreach (FolderItem item in scrObj.folderItems)
             {
                 Folder folder = Instantiate(folderPrefab, parent).GetComponent<Folder>();
-                folder.Customize(item);
+                folder.Customize(item, this);
             }
         }
 
         public void OpenDesktop(FolderContentScrObj scrObj)
         {
-            desktopObject.SetActive(true);
-            GenerateFolder(scrObj, desktopParent);
+            GenerateFolder(scrObj, desktopFoldersParent);
             
-            AddToPath("Desktop", scrObj);
+            AddToPath("C:\\Desktop", scrObj);
             _desktop = scrObj;
             
             UpdatePathText();
@@ -75,31 +59,37 @@ namespace Minigames
 
         public void OpenDesktopFolder(FolderContentScrObj scrObj, string folderName)
         {
-            ClearChildren(folderParent);
+            if (_openedFirstFolder) return;
+            
+            ClearChildren(folderItemsParent);
             
             folderObject.SetActive(true);
             
-            GenerateFolder(scrObj, folderParent);
+            GenerateFolder(scrObj, folderItemsParent);
             
             AddToPath(folderName, scrObj);
             
             UpdatePathText();
+            
+            _openedFirstFolder = true;
         }
         
         public void OpenFolder(FolderContentScrObj scrObj, string folderName)
         {
-            ClearChildren(folderParent.transform);
+            ClearChildren(folderItemsParent.transform);
             
-            GenerateFolder(scrObj, folderParent);
+            GenerateFolder(scrObj, folderItemsParent);
             
             AddToPath(folderName, scrObj);
             
             UpdatePathText();
         }
 
-        public void OpenFile()
+        public void OpenFile(string fileName, float time)
         {
-            Debug.Log("Do you want to download it?");
+            string currentPath = GetCurrentPath();
+            
+            DownloadsManager.Instance.AddDownload(currentPath + fileName, time);
         }
         
         public void OpenProgram()
@@ -119,16 +109,9 @@ namespace Minigames
 
         private void UpdatePathText()
         {
-            string newPath = "";
+            pathText.text = GetCurrentPath();
             
-            foreach (string folderName in _openPath)
-            {
-                newPath += folderName + "\\";
-            }
-            
-            pathText.text = newPath;
-            
-            CheckTruncation(newPath);
+            CheckTruncation(pathText.text);
         }
 
         private void CheckTruncation(string textToTruncate)
@@ -163,12 +146,12 @@ namespace Minigames
         {
             if (_pathScrObjs.Count <= 2) return;
             
-            ClearChildren(folderParent.transform);
+            ClearChildren(folderItemsParent.transform);
 
             _pathScrObjs.RemoveAt(_pathScrObjs.Count - 1);
             _openPath.RemoveAt(_openPath.Count - 1);
             
-            GenerateFolder(_pathScrObjs[^1], folderParent);
+            GenerateFolder(_pathScrObjs[^1], folderItemsParent);
             
             UpdatePathText();
         }
@@ -184,8 +167,22 @@ namespace Minigames
             _openPath.Clear();
             _pathScrObjs.Clear();
             
-            _openPath.Add("Desktop");
+            _openPath.Add("C:\\Desktop");
             _pathScrObjs.Add(_desktop);
+
+            _openedFirstFolder = false;
+        }
+
+        private string GetCurrentPath()
+        {
+            string result = "";
+            
+            foreach (string s in _openPath)
+            {
+                result += s + "\\";
+            }
+            
+            return result;
         }
     }
 }

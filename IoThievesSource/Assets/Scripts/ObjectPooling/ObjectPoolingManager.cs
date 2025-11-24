@@ -45,14 +45,12 @@ namespace ObjectPooling
 			{
 				return false;
 			}
-			else
-			{
-				ObjectPool nPool = new ObjectPool(objToPool, parent, initialPoolSize, maxPoolSize);
+
+			ObjectPool nPool = new ObjectPool(objToPool, parent, initialPoolSize, maxPoolSize);
 				
-				Instance._objectPools.Add(objToPool.name, nPool);
+			Instance._objectPools.Add(objToPool.name, nPool);
 				
-				return true;
-			}
+			return true;
 		}
 
 		public GameObject GetObject(string objName)

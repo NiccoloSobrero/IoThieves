@@ -12,10 +12,12 @@ namespace Minigames
         [SerializeField] private float deltaDoubleClick = 0.5f;
         [SerializeField] private Image icon;
         [SerializeField] private TextMeshProUGUI label;
+        private float _value;
         private FolderItemType _type;
         
         private FolderContentScrObj _contentScrObj;
-
+        
+        private DesktopMinigame _desktopMinigame;
 
         private void Update()
         {
@@ -30,13 +32,16 @@ namespace Minigames
             }
         }
 
-        public void Customize(FolderItem item)
+        public void Customize(FolderItem item, DesktopMinigame desktopMinigame)
         {
             icon.sprite = item.icon;
             label.text = item.itemName;
             _type = item.itemType;
+            _value = item.value;
 
             _contentScrObj = item.folderContent;
+            
+            _desktopMinigame = desktopMinigame;
         }
 
         public void OnClick()
@@ -52,17 +57,17 @@ namespace Minigames
                 
                 switch (_type)
                 {
-                    case FolderItemType.FOLDER_ON_DESKTOP:
-                        DesktopManager.Instance.OpenDesktopFolder(_contentScrObj, label.text);
+                    case FolderItemType.FolderOnDesktop:
+                        _desktopMinigame.OpenDesktopFolder(_contentScrObj, label.text);
                         break;
-                    case FolderItemType.FOLDER_IN_FOLDER:
-                        DesktopManager.Instance.OpenFolder(_contentScrObj, label.text);
+                    case FolderItemType.FolderInFolder:
+                        _desktopMinigame.OpenFolder(_contentScrObj, label.text);
                         break;
-                    case FolderItemType.PROGRAM:
-                        DesktopManager.Instance.OpenProgram();
+                    case FolderItemType.Program:
+                        _desktopMinigame.OpenProgram();
                         break;
-                    case FolderItemType.FILE: 
-                        DesktopManager.Instance.OpenFile();
+                    case FolderItemType.File:
+                        _desktopMinigame.OpenFile(label.text, _value);
                         break;
                 }
             }

@@ -33,7 +33,7 @@ namespace Managers
 
             if (Physics.Raycast(ray, out RaycastHit hit, maxRayDistance, interactableLayer))
             {
-                if (hit.transform.TryGetComponent(out HackableDevice hackableDevice))
+                if (hit.transform.TryGetComponent(out IHackable hackableDevice))
                 {
                     hackableDevice.Hack();
                 }
