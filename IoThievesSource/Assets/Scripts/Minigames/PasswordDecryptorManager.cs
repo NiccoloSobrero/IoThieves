@@ -65,6 +65,8 @@ namespace Minigames
         private readonly string _presentColor = "<color=#FFFF00>";
         private readonly string _absentColor = "<color=#FF0000>";
 
+        private float _bootingTime = 3f;
+
         private bool _canCheckGuess;
         
         private void OnEnable()
@@ -77,7 +79,7 @@ namespace Minigames
             EventsManager.OnClickDecryptPassword.RemoveListener(CheckSolution);
         }
 
-        public void InitGame()
+        public void InitMinigame()
         {
             // Init hearts
             _currentLeftAttempts = heartsObjects.Count;
@@ -142,7 +144,7 @@ namespace Minigames
                 {
                     Debug.Log("GAME OVER. Restarting Game.");
                     
-                    InitGame();
+                    InitMinigame();
                 }
             }
             else
@@ -157,7 +159,7 @@ namespace Minigames
 
         private IEnumerator WaitForCompletion()
         {
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(_bootingTime);
             
             EventsManager.OnMinigameCompleted?.Invoke();
         }
@@ -219,10 +221,27 @@ namespace Minigames
             TextMeshProUGUI text3 = Instantiate(decryptionOutputObject, decryptionOutputParent).GetComponent<TextMeshProUGUI>();
             
             text1.text = "> " + _correctColor + guess + _colorCloseStr;
-            text2.text = "> Access granted.";
-            text3.text = "> Booting system.";
+            text2.text = "> Access granted";
+            // text3.text = "> Booting in ";
+            StartCoroutine(UpdateWaitTimeText(text3, _bootingTime));
             
             UpdateOutputContentHeight();
+        }
+
+        private IEnumerator UpdateWaitTimeText(TextMeshProUGUI label, float time)
+        {
+            float timer = time;
+
+            while (timer > 0)
+            {
+                timer -= Time.deltaTime;
+
+                label.text = "> Booting in " + (int)(timer * 100) / 100f + "s";
+
+                yield return null;
+            }
+            
+            label.text = "> Booting in 0s";
         }
         
         private void PrintOutputOnWrongGuess(string guess)
@@ -268,7 +287,7 @@ namespace Minigames
             
             text2.text = "> " + guessedLetters + " / " + guess.Length;
             
-            text3.text = "> Entry denied.";
+            text3.text = "> Entry denied";
             
             UpdateOutputContentHeight();
         }

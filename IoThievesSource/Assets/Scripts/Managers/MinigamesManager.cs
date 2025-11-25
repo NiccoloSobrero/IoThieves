@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Events;
+using Hackables;
 using Minigames;
 using Minigames.ScriptableObjects;
 using UnityEngine;
@@ -11,12 +12,12 @@ namespace Managers
         public static MinigamesManager Instance;
 
         [SerializeField] private GameObject minigamesWindow;
-        [SerializeField] private Transform minigamesParent;
-
-        public Transform MinigamesParent => minigamesParent;
         
-        public readonly Queue<MinigameScrObj> MinigamesQueue = new();
+        private readonly Queue<MinigameScrObj> _minigamesQueue = new();
+        
         private GameObject _currentMinigameObj;
+        private MinigameScrObj _currentMinigameScrObj;
+        private HackableWithMinigames _currentHackedMinigame;
         
         [Header("Minigames")]
         [SerializeField] private PasswordDecryptorManager passwordDecryptionMinigame;
@@ -45,17 +46,23 @@ namespace Managers
             EventsManager.OnMinigameCompleted.RemoveListener(MoveToNextMinigame);
         }
 
-        public void MoveToNextMinigame()
+        private void MoveToNextMinigame()
         {
             if (_currentMinigameObj != null)
             {
                 _currentMinigameObj.SetActive(false);
             }
+
+            if (_currentHackedMinigame != null)
+            {
+                _currentHackedMinigame.TryRemovingMinigame(_currentMinigameScrObj);
+            }
             
-            MinigamesQueue.Dequeue().InitMinigame();
+            _currentMinigameScrObj = _minigamesQueue.Dequeue();
+            _currentMinigameScrObj.InitMinigame();
         }
 
-        public void EnableWindow(bool enable)
+        private void EnableWindow(bool enable)
         {
             minigamesWindow.SetActive(enable);
         }
@@ -66,7 +73,7 @@ namespace Managers
             
             _currentMinigameObj.SetActive(true);
             
-            passwordDecryptionMinigame.InitGame();
+            passwordDecryptionMinigame.InitMinigame();
         }
 
         public void InitDesktopMinigame(FolderContentScrObj folderContentScrObj)
@@ -75,7 +82,39 @@ namespace Managers
             
             _currentMinigameObj.SetActive(true);
             
-            desktopMinigame.OpenDesktop(folderContentScrObj);
+            desktopMinigame.InitMinigame(folderContentScrObj);
+        }
+
+        public void SetMinigamesLoop(HackableWithMinigames hackable, List<MinigameScrObj> minigames)
+        {
+            PlayerInputManager.Instance.SetContext(InputContext.Minigame);
+            
+            _currentHackedMinigame = hackable;
+            
+            _minigamesQueue.Clear();
+            
+            EnableWindow(true);
+            
+            foreach (MinigameScrObj minigameScrObj in minigames)
+            {
+                _minigamesQueue.Enqueue(minigameScrObj);
+            }
+
+            MoveToNextMinigame();
+        }
+
+        public void CloseMinigameWindow()
+        {
+            minigamesWindow.SetActive(false);
+            _currentMinigameObj.SetActive(false);
+            
+            _minigamesQueue.Clear();
+
+            _currentMinigameObj = null;
+            _currentMinigameScrObj = null;
+            _currentHackedMinigame = null;
+            
+            PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
         }
     }
 }

@@ -7,20 +7,20 @@ namespace Hackables
 {
     public class HackableWithMinigames : MonoBehaviour, IHackable
     {
-        public List<MinigameScrObj> minigameObjs = new();
+        [SerializeField] private List<MinigameScrObj> minigameObjs = new();
+
+        [SerializeField] private bool redoCompletedMinigameAfterReopen;
         
         public void Hack()
         {
-            MinigamesManager.Instance.MinigamesQueue.Clear();
-            
-            MinigamesManager.Instance.EnableWindow(true);
-            
-            foreach (MinigameScrObj minigameScrObj in minigameObjs)
-            {
-                MinigamesManager.Instance.MinigamesQueue.Enqueue(minigameScrObj);
-            }
+            MinigamesManager.Instance.SetMinigamesLoop(this, minigameObjs);
+        }
 
-            MinigamesManager.Instance.MoveToNextMinigame();
+        public void TryRemovingMinigame(MinigameScrObj minigameScrObj)
+        {
+            if (redoCompletedMinigameAfterReopen) return;
+            
+            minigameObjs.Remove(minigameScrObj);
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Minigames
         [SerializeField] private Image icon;
         [SerializeField] private TextMeshProUGUI label;
         private float _value;
-        private FolderItemType _type;
+        private DesktopItemType _type;
         
         private FolderContentScrObj _contentScrObj;
         
@@ -32,7 +32,7 @@ namespace Minigames
             }
         }
 
-        public void Customize(FolderItem item, DesktopMinigame desktopMinigame)
+        public void Customize(DesktopItem item, DesktopMinigame desktopMinigame)
         {
             icon.sprite = item.icon;
             label.text = item.itemName;
@@ -42,6 +42,11 @@ namespace Minigames
             _contentScrObj = item.folderContent;
             
             _desktopMinigame = desktopMinigame;
+
+            if (item.itemType == DesktopItemType.TargetFile)
+            {
+                label.text = "<b><i><color=red>" + label.text;
+            }
         }
 
         public void OnClick()
@@ -57,17 +62,20 @@ namespace Minigames
                 
                 switch (_type)
                 {
-                    case FolderItemType.FolderOnDesktop:
+                    case DesktopItemType.FolderOnDesktop:
                         _desktopMinigame.OpenDesktopFolder(_contentScrObj, label.text);
                         break;
-                    case FolderItemType.FolderInFolder:
+                    case DesktopItemType.FolderInFolder:
                         _desktopMinigame.OpenFolder(_contentScrObj, label.text);
                         break;
-                    case FolderItemType.Program:
+                    case DesktopItemType.Program:
                         _desktopMinigame.OpenProgram();
                         break;
-                    case FolderItemType.File:
+                    case DesktopItemType.File:
                         _desktopMinigame.OpenFile(label.text, _value);
+                        break;
+                    case DesktopItemType.TargetFile:
+                        _desktopMinigame.OpenTargetFile(label.text, _value);
                         break;
                 }
             }

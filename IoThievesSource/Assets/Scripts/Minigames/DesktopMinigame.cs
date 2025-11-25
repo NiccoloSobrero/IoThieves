@@ -40,19 +40,24 @@ namespace Minigames
                 return;
             }
             
-            foreach (FolderItem item in scrObj.folderItems)
+            ClearChildren(parent);
+            
+            foreach (DesktopItem item in scrObj.folderItems)
             {
                 Folder folder = Instantiate(folderPrefab, parent).GetComponent<Folder>();
                 folder.Customize(item, this);
             }
         }
 
-        public void OpenDesktop(FolderContentScrObj scrObj)
+        public void InitMinigame(FolderContentScrObj scrObj)
         {
+            folderObject.SetActive(false);
+            
             GenerateFolder(scrObj, desktopFoldersParent);
             
-            AddToPath("C:\\Desktop", scrObj);
             _desktop = scrObj;
+            
+            ResetPathToDesktop();
             
             UpdatePathText();
         }
@@ -60,8 +65,6 @@ namespace Minigames
         public void OpenDesktopFolder(FolderContentScrObj scrObj, string folderName)
         {
             if (_openedFirstFolder) return;
-            
-            ClearChildren(folderItemsParent);
             
             folderObject.SetActive(true);
             
@@ -76,8 +79,6 @@ namespace Minigames
         
         public void OpenFolder(FolderContentScrObj scrObj, string folderName)
         {
-            ClearChildren(folderItemsParent.transform);
-            
             GenerateFolder(scrObj, folderItemsParent);
             
             AddToPath(folderName, scrObj);
@@ -90,6 +91,15 @@ namespace Minigames
             string currentPath = GetCurrentPath();
             
             DownloadsManager.Instance.AddDownload(currentPath + fileName, time);
+        }
+        
+        public void OpenTargetFile(string fileName, float time)
+        {
+            string currentPath = GetCurrentPath();
+            
+            DownloadsManager.Instance.AddDownload(currentPath + fileName, time);
+            
+            Debug.Log("Found target file.");
         }
         
         public void OpenProgram()
@@ -145,8 +155,6 @@ namespace Minigames
         public void GoBack()
         {
             if (_pathScrObjs.Count <= 2) return;
-            
-            ClearChildren(folderItemsParent.transform);
 
             _pathScrObjs.RemoveAt(_pathScrObjs.Count - 1);
             _openPath.RemoveAt(_openPath.Count - 1);
@@ -171,6 +179,8 @@ namespace Minigames
             _pathScrObjs.Add(_desktop);
 
             _openedFirstFolder = false;
+            
+            ClearChildren(folderItemsParent);
         }
 
         private string GetCurrentPath()

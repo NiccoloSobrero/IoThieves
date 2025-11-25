@@ -7,15 +7,15 @@ namespace Minigames
     [CreateAssetMenu(menuName = "FolderContent", fileName = "FolderContent")]
     public class FolderContentScrObj : ScriptableObject
     {
-        public List<FolderItem> folderItems = new();
+        public List<DesktopItem> folderItems = new();
     }
 
 
     [Serializable]
-    public class FolderItem
+    public class DesktopItem
     {
         public string itemName;
-        public FolderItemType itemType;
+        public DesktopItemType itemType;
         public Sprite icon;
         public float value;
 
@@ -23,11 +23,12 @@ namespace Minigames
     }
 
 
-    public enum FolderItemType
+    public enum DesktopItemType
     {
         FolderInFolder,
         FolderOnDesktop,
         File,
+        TargetFile,
         Program
     }
 }
