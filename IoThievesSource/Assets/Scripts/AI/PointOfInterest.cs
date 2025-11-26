@@ -1,0 +1,26 @@
+using NUnit.Framework.Constraints;
+using UnityEngine;
+using UnityEngine.InputSystem.Controls;
+using UnityEngine.UI;
+
+namespace AI
+{
+    public class PointOfInterest : Waypoint
+    {
+        [SerializeField] private int interactTime;
+        [SerializeField] private float thisValue = 0;
+        [SerializeField] private bool isInteracting = false;
+
+        public bool interact()
+        {
+            thisValue += (1.0f/interactTime)*Time.deltaTime;
+            if (thisValue >= 1)
+            {
+                thisValue = 0;
+                return true;
+            }
+
+            return false;
+        }
+    }
+}
