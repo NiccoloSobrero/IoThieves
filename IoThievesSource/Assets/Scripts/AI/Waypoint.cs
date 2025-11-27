@@ -8,10 +8,10 @@ namespace AI
 {
     public class Waypoint : MonoBehaviour
     {
-        [SerializeField] private List<Waypoint> neighbours;
-        private Dictionary<Range, Waypoint> _waypoints =  new Dictionary<Range, Waypoint>();
-        [SerializeField] private float reductionPerc = 18.0f;
-        private void Awake()
+        [SerializeField] public List<Waypoint> neighbours;
+   //     private Dictionary<Range, Waypoint> _waypoints =  new Dictionary<Range, Waypoint>();
+   //     [SerializeField] private float reductionPerc = 18.0f;
+  /*      private void Awake()
         {
             reductionPerc = 18.0f;
             float rangeSize = 100.0f/neighbours.Count;
@@ -64,6 +64,6 @@ namespace AI
                                 newMin+interval + (r.Equals(range) ? -reductionPerc : 
                                                     increment));
             }
-        }
+        }*/
     }
 }

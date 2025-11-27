@@ -9,7 +9,6 @@ namespace AI
     {
         [SerializeField] private int interactTime;
         [SerializeField] private float thisValue = 0;
-        [SerializeField] private bool isInteracting = false;
 
         public bool interact()
         {

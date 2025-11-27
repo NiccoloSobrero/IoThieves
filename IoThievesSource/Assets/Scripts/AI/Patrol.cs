@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Unity.Mathematics.Geometry;
 using UnityEngine;
 
@@ -11,9 +12,14 @@ namespace AI
         [SerializeField] private bool isInteracting = false;
         
         [SerializeField] private Waypoint target;
+        private Waypoint[,] lastchoices = new Waypoint[10, 2];
         [SerializeField] private float threshold; 
         [SerializeField] private float angularThreshold = 30.0f; //degrees
 
+        
+        private Queue<Movement> recentMovements = new Queue<Movement>();
+        private const int MAX_MOVEMENT_HISTORY = 15;
+        
         void Update()
         {
             if (target is null)
@@ -51,11 +57,79 @@ namespace AI
 
                 if (!isInteracting)
                 {
-                    target = target.GetNextPatrolTarget();
+                    target = ChooseNextWaypoint(target);
                     isMoving = true;
                 }
                 
             }
         }
+        public Waypoint ChooseNextWaypoint(Waypoint currentWaypoint)
+        {
+            if (currentWaypoint.neighbours == null || currentWaypoint.neighbours.Count == 0)
+                return null;
+
+            // Crea lista di waypoint disponibili escludendo quelli già visitati
+            List<Waypoint> availableWaypoints = new List<Waypoint>();
+
+            foreach (Waypoint neighbour in currentWaypoint.neighbours)
+            {
+                if (!IsInRecentMovements(currentWaypoint, neighbour))
+                {
+                    availableWaypoints.Add(neighbour);
+                }
+            }
+
+            // Se tutti i movimenti sono stati già fatti, sceglie da tutti i vicini
+            if (availableWaypoints.Count == 0)
+            {
+                availableWaypoints.AddRange(currentWaypoint.neighbours);
+            }
+
+            // Sceglie casualmente
+            Waypoint nextWaypoint = availableWaypoints[Random.Range(0, availableWaypoints.Count)];
+
+            // Salva il movimento
+            AddMovement(currentWaypoint, nextWaypoint);
+
+            return nextWaypoint;
+        }
+
+        private void AddMovement(Waypoint from, Waypoint to)
+        {
+            // Rimuove il movimento più vecchio se abbiamo raggiunto il limite
+            if (recentMovements.Count >= MAX_MOVEMENT_HISTORY)
+            {
+                recentMovements.Dequeue();
+            }
+
+            recentMovements.Enqueue(new Movement(from, to));
+        } 
+        
+        private bool IsInRecentMovements(Waypoint from, Waypoint to)
+        {
+            foreach (Movement movement in recentMovements)
+            {
+                if (movement.Equals(from, to))
+                    return true;
+            }
+            return false;
+        }
+        
+        private struct Movement
+        {
+            public Waypoint from;
+            public Waypoint to;
+
+            public Movement(Waypoint from, Waypoint to)
+            {
+                this.from = from;
+                this.to = to;
+            }
+
+            public bool Equals(Waypoint fromWaypoint, Waypoint toWaypoint)
+            {
+                return from == fromWaypoint && to == toWaypoint;
+            }
+        } 
     }
 }
