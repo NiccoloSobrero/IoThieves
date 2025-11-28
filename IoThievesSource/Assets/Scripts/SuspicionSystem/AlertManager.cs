@@ -50,6 +50,7 @@ namespace SuspicionSystem
         public AlertState Level0State   { get; private set; }
         public AlertState Level1State { get; private set; }
         public AlertState Level2State { get; private set; }
+        public AlertState GameOverState { get; private set; }
         
         private AlertState _currentState;
         
@@ -60,6 +61,7 @@ namespace SuspicionSystem
             Level0State = new Level0AlertState();
             Level1State = new Level1AlertState();
             Level2State = new Level2AlertState();
+            GameOverState = new GameOverAlertState();
             
             Initialize();
             

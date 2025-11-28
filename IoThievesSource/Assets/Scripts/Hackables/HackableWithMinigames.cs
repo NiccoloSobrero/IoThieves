@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace Hackables
 {
-    public class HackableWithMinigames : MonoBehaviour, IHackable
+    public class HackableWithMinigames : MonoBehaviour
     {
-        [SerializeField] private List<MinigameScrObj> minigameObjs = new();
+        /*[SerializeField] private List<MinigameScrObj> minigameObjs = new();
 
         [SerializeField] private bool redoCompletedMinigameAfterReopen;
         
-        public void Hack()
+        public void Interact()
         {
             MinigamesManager.Instance.SetMinigamesLoop(this, minigameObjs);
         }
@@ -21,6 +21,6 @@ namespace Hackables
             if (redoCompletedMinigameAfterReopen) return;
             
             minigameObjs.Remove(minigameScrObj);
-        }
+        }*/
     }
 }

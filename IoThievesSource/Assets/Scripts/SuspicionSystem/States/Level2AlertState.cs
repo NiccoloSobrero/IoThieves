@@ -30,6 +30,14 @@ namespace SuspicionSystem.States
             if (ctx.IsPlayerInRange)
             {
                 Suspicion = Mathf.Clamp01(Suspicion + AlertIncreaseSpeed * dt);
+                
+                if (Suspicion >= AlertThreshold)
+                {
+                    Suspicion = 1f;
+                    
+                    ctx.ChangeState(ctx.GameOverState);
+                }
+                
             }
             else if (ctx.CanDecreaseSuspicion)
             {

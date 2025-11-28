@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Events;
 using Hackables;
+using Interactables;
 using Minigames;
 using Minigames.ScriptableObjects;
 using UnityEngine;
@@ -17,7 +18,7 @@ namespace Managers
         
         private GameObject _currentMinigameObj;
         private MinigameScrObj _currentMinigameScrObj;
-        private HackableWithMinigames _currentHackedMinigame;
+        private Interactable _currentInteractable;
         
         [Header("Minigames")]
         [SerializeField] private PasswordDecryptorManager passwordDecryptionMinigame;
@@ -53,9 +54,9 @@ namespace Managers
                 _currentMinigameObj.SetActive(false);
             }
 
-            if (_currentHackedMinigame != null)
+            if (_currentInteractable != null)
             {
-                _currentHackedMinigame.TryRemovingMinigame(_currentMinigameScrObj);
+                _currentInteractable.TryRemovingMinigame(_currentMinigameScrObj);
             }
             
             _currentMinigameScrObj = _minigamesQueue.Dequeue();
@@ -85,11 +86,11 @@ namespace Managers
             desktopMinigame.InitMinigame(folderContentScrObj);
         }
 
-        public void SetMinigamesLoop(HackableWithMinigames hackable, List<MinigameScrObj> minigames)
+        public void SetMinigamesLoop(Interactable interactable, List<MinigameScrObj> minigames)
         {
             PlayerInputManager.Instance.SetContext(InputContext.Minigame);
             
-            _currentHackedMinigame = hackable;
+            _currentInteractable = interactable;
             
             _minigamesQueue.Clear();
             
@@ -112,9 +113,24 @@ namespace Managers
 
             _currentMinigameObj = null;
             _currentMinigameScrObj = null;
-            _currentHackedMinigame = null;
+            _currentInteractable = null;
             
             PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
         }
+
+
+        public void InitSafeCodeMinigame()
+        {
+            
+            _currentMinigameObj = passwordDecryptionMinigame.gameObject;
+            
+            _currentMinigameObj.SetActive(true);
+            
+            passwordDecryptionMinigame.InitMinigame();
+        }
+        
+        
+        
+        
     }
 }
