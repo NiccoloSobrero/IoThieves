@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 13143073}
   - component: {fileID: 13143072}
   - component: {fileID: 13143075}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (28)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,6 @@ MonoBehaviour:
   - {fileID: 791172240}
   interactTime: 3
   thisValue: 0
-  isInteracting: 0
 --- !u!1 &25558850
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,7 +259,7 @@ GameObject:
   - component: {fileID: 25558853}
   - component: {fileID: 25558852}
   - component: {fileID: 25558855}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (12)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -648,7 +647,7 @@ GameObject:
   - component: {fileID: 75220328}
   - component: {fileID: 75220327}
   - component: {fileID: 75220330}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -879,7 +878,7 @@ GameObject:
   - component: {fileID: 237648479}
   - component: {fileID: 237648478}
   - component: {fileID: 237648481}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1004,7 +1003,7 @@ GameObject:
   - component: {fileID: 248044053}
   - component: {fileID: 248044052}
   - component: {fileID: 248044055}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1128,7 +1127,7 @@ GameObject:
   - component: {fileID: 253724626}
   - component: {fileID: 253724625}
   - component: {fileID: 253724628}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (18)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1268,7 +1267,7 @@ GameObject:
   - component: {fileID: 276006700}
   - component: {fileID: 276006699}
   - component: {fileID: 276006702}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (25)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1393,7 +1392,7 @@ GameObject:
   - component: {fileID: 310746044}
   - component: {fileID: 310746043}
   - component: {fileID: 310746046}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1627,7 +1626,7 @@ GameObject:
   - component: {fileID: 362360268}
   - component: {fileID: 362360267}
   - component: {fileID: 362360270}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1754,7 +1753,7 @@ GameObject:
   - component: {fileID: 372912237}
   - component: {fileID: 372912236}
   - component: {fileID: 372912239}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (23)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1880,7 +1879,7 @@ GameObject:
   - component: {fileID: 397418537}
   - component: {fileID: 397418536}
   - component: {fileID: 397418539}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (20)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2223,7 +2222,7 @@ GameObject:
   - component: {fileID: 551727509}
   - component: {fileID: 551727508}
   - component: {fileID: 551727511}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (32)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2359,7 +2358,7 @@ Transform:
   m_GameObject: {fileID: 624410115}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2413,7 +2412,7 @@ GameObject:
   - component: {fileID: 654187085}
   - component: {fileID: 654187084}
   - component: {fileID: 654187087}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2528,7 +2527,6 @@ MonoBehaviour:
   - {fileID: 1939405547}
   interactTime: 4
   thisValue: 0
-  isInteracting: 0
 --- !u!1 &711461376
 GameObject:
   m_ObjectHideFlags: 0
@@ -2542,7 +2540,7 @@ GameObject:
   - component: {fileID: 711461379}
   - component: {fileID: 711461378}
   - component: {fileID: 711461381}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (14)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2667,7 +2665,7 @@ GameObject:
   - component: {fileID: 791172238}
   - component: {fileID: 791172237}
   - component: {fileID: 791172240}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (30)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2794,7 +2792,7 @@ GameObject:
   - component: {fileID: 810295414}
   - component: {fileID: 810295413}
   - component: {fileID: 810295416}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3041,10 +3039,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 833763799}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1427795034}
   - {fileID: 346809925}
@@ -3140,7 +3138,7 @@ GameObject:
   - component: {fileID: 890488082}
   - component: {fileID: 890488081}
   - component: {fileID: 890488084}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (29)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3266,7 +3264,7 @@ GameObject:
   - component: {fileID: 902649959}
   - component: {fileID: 902649958}
   - component: {fileID: 902649961}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (22)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3391,7 +3389,7 @@ GameObject:
   - component: {fileID: 951960622}
   - component: {fileID: 951960621}
   - component: {fileID: 951960624}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (31)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3516,7 +3514,7 @@ GameObject:
   - component: {fileID: 957078334}
   - component: {fileID: 957078333}
   - component: {fileID: 957078336}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (21)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3749,7 +3747,7 @@ GameObject:
   - component: {fileID: 1004738282}
   - component: {fileID: 1004738281}
   - component: {fileID: 1004738284}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (26)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3978,7 +3976,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1062679416}
-  - component: {fileID: 1062679417}
+  - component: {fileID: 1062679418}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -3995,14 +3993,14 @@ Transform:
   m_GameObject: {fileID: 1062679415}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.494, y: 0.031, z: -8.467}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 9.445, y: 0.1, z: -9.375}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 833763800}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1062679417
+--- !u!114 &1062679418
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4011,16 +4009,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1062679415}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af7d1aa560e98514d9a5950116598ca1, type: 3}
+  m_Script: {fileID: 11500000, guid: efa156b458ed4b54b992c6a2f0666264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  angularSpeed: 5.38
-  isMoving: 1
-  isInteracting: 0
-  target: {fileID: 1791396855}
-  threshold: 0.8
-  angularThreshold: 45
+  startState: 0
 --- !u!1 &1116407108
 GameObject:
   m_ObjectHideFlags: 0
@@ -4034,7 +4026,7 @@ GameObject:
   - component: {fileID: 1116407111}
   - component: {fileID: 1116407110}
   - component: {fileID: 1116407113}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (33)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4158,7 +4150,7 @@ GameObject:
   - component: {fileID: 1261143333}
   - component: {fileID: 1261143332}
   - component: {fileID: 1261143335}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (34)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4282,7 +4274,7 @@ GameObject:
   - component: {fileID: 1347349469}
   - component: {fileID: 1347349468}
   - component: {fileID: 1347349471}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (19)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4514,7 +4506,7 @@ GameObject:
   - component: {fileID: 1411338568}
   - component: {fileID: 1411338567}
   - component: {fileID: 1411338570}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (24)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4855,7 +4847,7 @@ GameObject:
   - component: {fileID: 1451400371}
   - component: {fileID: 1451400370}
   - component: {fileID: 1451400373}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (27)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4978,7 +4970,7 @@ GameObject:
   - component: {fileID: 1490048841}
   - component: {fileID: 1490048840}
   - component: {fileID: 1490048844}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5094,7 +5086,6 @@ MonoBehaviour:
   - {fileID: 1791396855}
   interactTime: 5
   thisValue: 0
-  isInteracting: 0
 --- !u!1 &1497026327
 GameObject:
   m_ObjectHideFlags: 0
@@ -5108,7 +5099,7 @@ GameObject:
   - component: {fileID: 1497026330}
   - component: {fileID: 1497026329}
   - component: {fileID: 1497026332}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (15)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5355,7 +5346,7 @@ GameObject:
   - component: {fileID: 1565094971}
   - component: {fileID: 1565094970}
   - component: {fileID: 1565094973}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5470,7 +5461,6 @@ MonoBehaviour:
   - {fileID: 1939405547}
   interactTime: 2
   thisValue: 0
-  isInteracting: 0
 --- !u!1 &1654996061
 GameObject:
   m_ObjectHideFlags: 0
@@ -5592,7 +5582,7 @@ GameObject:
   - component: {fileID: 1679489476}
   - component: {fileID: 1679489475}
   - component: {fileID: 1679489478}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (10)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5718,7 +5708,7 @@ GameObject:
   - component: {fileID: 1747601175}
   - component: {fileID: 1747601174}
   - component: {fileID: 1747601177}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (17)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6400,7 +6390,7 @@ GameObject:
   - component: {fileID: 1939405545}
   - component: {fileID: 1939405544}
   - component: {fileID: 1939405547}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (9)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6880,7 +6870,7 @@ GameObject:
   - component: {fileID: 2123229994}
   - component: {fileID: 2123229993}
   - component: {fileID: 2123229996}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WayPoint (16)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7060,6 +7050,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WayPoint
       objectReference: {fileID: 0}
+    - target: {fileID: 8340493245038791492, guid: dba7ccf35df739648aef9c3df174754c, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7076,6 +7070,10 @@ PrefabInstance:
     - target: {fileID: 4580467090748218242, guid: 61c3f4af3a95146409cdb1fba44464ab, type: 3}
       propertyPath: m_Name
       value: WayPoint (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4580467090748218242, guid: 61c3f4af3a95146409cdb1fba44464ab, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5443988649820253035, guid: 61c3f4af3a95146409cdb1fba44464ab, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7117,6 +7115,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5985319715839056299, guid: 61c3f4af3a95146409cdb1fba44464ab, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 2e690a60e2192d9428759d5c44010dec, type: 2}
     - target: {fileID: 8002232101334616121, guid: 61c3f4af3a95146409cdb1fba44464ab, type: 3}
       propertyPath: neighbours.Array.size
       value: 3

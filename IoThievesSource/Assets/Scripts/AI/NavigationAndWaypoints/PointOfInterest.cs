@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.Controls;
 using UnityEngine.UI;
 
-namespace AI
+namespace AI.NavigationAndWaypoints
 {
     public class PointOfInterest : Waypoint
     {
