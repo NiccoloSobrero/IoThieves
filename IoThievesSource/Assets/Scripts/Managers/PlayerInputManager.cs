@@ -52,7 +52,7 @@ namespace Managers
 
         private void OnDisable()
         {
-            _actions.Gameplay.Disable();
+            DisableAll();
         }
 
         public void SetContext(InputContext context)
@@ -100,6 +100,21 @@ namespace Managers
         private void OnMouseRelease(InputAction.CallbackContext context)
         {
             // MinigamesManager.Instance.CheckCompletion();
+        }
+
+        private void ThrowDistraction(InputAction.CallbackContext context)
+        {
+            
+        }
+
+        private void IncreaseThrowDistance(InputAction.CallbackContext context)
+        {
+            
+        }
+        
+        private void DecreaseThrowDistance(InputAction.CallbackContext context)
+        {
+            
         }
     }
 }

@@ -109,6 +109,33 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Throw"",
+                    ""type"": ""Button"",
+                    ""id"": ""b53f933e-4d70-4798-9781-ca876bcc53d8"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""IncreaseThrowDistance"",
+                    ""type"": ""Value"",
+                    ""id"": ""f2668484-67b8-477f-bad9-73f61cf7ba46"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""DecreaseThrowDistance"",
+                    ""type"": ""Value"",
+                    ""id"": ""78a9d60c-3aae-41bc-a7b2-2983c5b17c89"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -252,6 +279,39 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard&Mouse"",
                     ""action"": ""Click"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""816877a7-5575-4274-9dff-3893d1bb0af4"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Throw"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""669f39d0-8213-4a91-a49e-fba0a8c5e5fa"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""IncreaseThrowDistance"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8717a0ea-f237-4579-922e-2f3d8a8291c8"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DecreaseThrowDistance"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -841,6 +901,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Click = m_Gameplay.FindAction("Click", throwIfNotFound: true);
+        m_Gameplay_Throw = m_Gameplay.FindAction("Throw", throwIfNotFound: true);
+        m_Gameplay_IncreaseThrowDistance = m_Gameplay.FindAction("IncreaseThrowDistance", throwIfNotFound: true);
+        m_Gameplay_DecreaseThrowDistance = m_Gameplay.FindAction("DecreaseThrowDistance", throwIfNotFound: true);
         // Minigame
         m_Minigame = asset.FindActionMap("Minigame", throwIfNotFound: true);
         m_Minigame_Navigate = m_Minigame.FindAction("Navigate", throwIfNotFound: true);
@@ -936,6 +999,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private List<IGameplayActions> m_GameplayActionsCallbackInterfaces = new List<IGameplayActions>();
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Click;
+    private readonly InputAction m_Gameplay_Throw;
+    private readonly InputAction m_Gameplay_IncreaseThrowDistance;
+    private readonly InputAction m_Gameplay_DecreaseThrowDistance;
     /// <summary>
     /// Provides access to input actions defined in input action map "Gameplay".
     /// </summary>
@@ -955,6 +1021,18 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Gameplay/Click".
         /// </summary>
         public InputAction @Click => m_Wrapper.m_Gameplay_Click;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/Throw".
+        /// </summary>
+        public InputAction @Throw => m_Wrapper.m_Gameplay_Throw;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/IncreaseThrowDistance".
+        /// </summary>
+        public InputAction @IncreaseThrowDistance => m_Wrapper.m_Gameplay_IncreaseThrowDistance;
+        /// <summary>
+        /// Provides access to the underlying input action "Gameplay/DecreaseThrowDistance".
+        /// </summary>
+        public InputAction @DecreaseThrowDistance => m_Wrapper.m_Gameplay_DecreaseThrowDistance;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -987,6 +1065,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Click.started += instance.OnClick;
             @Click.performed += instance.OnClick;
             @Click.canceled += instance.OnClick;
+            @Throw.started += instance.OnThrow;
+            @Throw.performed += instance.OnThrow;
+            @Throw.canceled += instance.OnThrow;
+            @IncreaseThrowDistance.started += instance.OnIncreaseThrowDistance;
+            @IncreaseThrowDistance.performed += instance.OnIncreaseThrowDistance;
+            @IncreaseThrowDistance.canceled += instance.OnIncreaseThrowDistance;
+            @DecreaseThrowDistance.started += instance.OnDecreaseThrowDistance;
+            @DecreaseThrowDistance.performed += instance.OnDecreaseThrowDistance;
+            @DecreaseThrowDistance.canceled += instance.OnDecreaseThrowDistance;
         }
 
         /// <summary>
@@ -1004,6 +1091,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Click.started -= instance.OnClick;
             @Click.performed -= instance.OnClick;
             @Click.canceled -= instance.OnClick;
+            @Throw.started -= instance.OnThrow;
+            @Throw.performed -= instance.OnThrow;
+            @Throw.canceled -= instance.OnThrow;
+            @IncreaseThrowDistance.started -= instance.OnIncreaseThrowDistance;
+            @IncreaseThrowDistance.performed -= instance.OnIncreaseThrowDistance;
+            @IncreaseThrowDistance.canceled -= instance.OnIncreaseThrowDistance;
+            @DecreaseThrowDistance.started -= instance.OnDecreaseThrowDistance;
+            @DecreaseThrowDistance.performed -= instance.OnDecreaseThrowDistance;
+            @DecreaseThrowDistance.canceled -= instance.OnDecreaseThrowDistance;
         }
 
         /// <summary>
@@ -1318,6 +1414,27 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnClick(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Throw" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnThrow(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "IncreaseThrowDistance" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnIncreaseThrowDistance(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DecreaseThrowDistance" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDecreaseThrowDistance(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Minigame" which allows adding and removing callbacks.
