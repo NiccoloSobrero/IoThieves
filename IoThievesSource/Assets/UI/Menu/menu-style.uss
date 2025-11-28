@@ -1,5 +1,9 @@
 :root {
     justify-content: center;
+    /*-unity-font: url("/Assets/Fonts/VT323-Regular SDF.asset");*/
+    /*-unity-font-definition: unset;*/
+    -unity-font-definition: initial;
+    -unity-font: url(../../Fonts/VT323-Regular.ttf);
 }
 
 .menu-container {
@@ -11,7 +15,7 @@
 
 .menu-title {
     align-self: center;
-    font-size: 48px;
+    font-size: 64px;
     -unity-font-style: bold;
     margin-top: 2%;
     height: 10%;
@@ -20,7 +24,7 @@
 .menu-button {
     background-color: rgba(255, 255, 255, 0);
     -unity-font-style: bold;
-    font-size: 24px;
+    font-size: 48px;
     transition: 0.25s all;
 }
 
