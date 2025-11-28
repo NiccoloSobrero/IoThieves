@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
         EventsManager.OnResumeGame.AddListener(ResumeGame);
         EventsManager.OnQuitGame.AddListener(QuitGame);
         EventsManager.OnOptionsClicked.AddListener(OpenOptions);
+        EventsManager.OnRestartGame.AddListener(RestartGame);
     }
 
     private void OnDisable()
@@ -34,6 +35,8 @@ public class GameManager : MonoBehaviour
         EventsManager.OnSaveGame.RemoveListener(SaveGame);
         EventsManager.OnResumeGame.RemoveListener(ResumeGame);
         EventsManager.OnQuitGame.RemoveListener(QuitGame);
+        EventsManager.OnOptionsClicked.RemoveListener(OpenOptions);
+        EventsManager.OnRestartGame.RemoveListener(RestartGame);
     }
 
     private void StartGame()
@@ -52,6 +55,11 @@ public class GameManager : MonoBehaviour
     {
         print("Resuming Game");
         Time.timeScale = 1f;
+    }
+
+    private void RestartGame()
+    {
+        print("Restarting Game");
     }
 
     private void OpenOptions()

@@ -1,0 +1,12 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Menu/GameOverMenu/game-over-menu.uss?fileID=7433441132597879392&amp;guid=06d8808270a70614a9db246ee7e7de0b&amp;type=3#game-over-menu" />
+    <Style src="project://database/Assets/UI/Menu/menu-style.uss?fileID=7433441132597879392&amp;guid=8baf226fee4253342832e9861d4f70e9&amp;type=3#menu-style" />
+    <ui:VisualElement name="gameOverMenuContainer" class="menu-container game-over-menu-container">
+        <ui:Label name="title" text="IoThieves" class="menu-title" />
+        <ui:VisualElement name="gameOverMenuButtonsContainer" class="game-over-menu-buttons-container">
+            <ui:Button name="restartButton" text="Restart" class="menu-button game-over-menu-button" />
+            <ui:Button name="optionsButton" text="Options" class="menu-button game-over-menu-button" />
+            <ui:Button name="quitButton" text="Quit" class="menu-button game-over-menu-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

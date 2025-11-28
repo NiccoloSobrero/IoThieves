@@ -13,7 +13,10 @@ public class MenuController : MonoBehaviour
         var saveButton = root.Q<Button>("saveButton");
         var optionsButton = root.Q<Button>("optionsButton");
         var quitButton = root.Q<Button>("quitButton");
-        saveButton.clicked += SaveGame;
+        if (saveButton != null)
+        {
+            saveButton.clicked += SaveGame;
+        }
         optionsButton.clicked += OpenGameOptions;
         quitButton.clicked += QuitGame;
     }
