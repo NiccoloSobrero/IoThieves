@@ -34,6 +34,7 @@ namespace Events
         public static readonly UnityEvent OnSaveGame = new();
         public static readonly UnityEvent OnResumeGame = new();
         public static readonly UnityEvent OnQuitGame = new();
+        public static readonly UnityEvent OnOptionsClicked = new();
         # endregion
     }
 }

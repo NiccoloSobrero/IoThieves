@@ -25,17 +25,12 @@ public class MenuController : MonoBehaviour
     
     private void OpenGameOptions()
     {
-        print("open game options");
+        EventsManager.OnOptionsClicked?.Invoke();
     }
     
     private void QuitGame()
     {
         // temporary logic: move it in OnGameQuit Event
         EventsManager.OnQuitGame?.Invoke();
-        # if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-        #else
-        Application.Quit();
-        #endif
     }
 }
