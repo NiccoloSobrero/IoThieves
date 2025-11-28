@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
-using Hackables;
 using Managers;
 using Minigames.ScriptableObjects;
 using UnityEngine;
 
 namespace Interactables
 {
-    public class Interactable : MonoBehaviour
+    public class InteractToMinigames : MonoBehaviour, IInteractable
     {
         [SerializeField] private List<MinigameScrObj> minigameObjs = new();
         [SerializeField] private bool redoCompletedMinigameAfterReopen;
@@ -14,8 +13,6 @@ namespace Interactables
         public void Interact()
         {
             MinigamesManager.Instance.SetMinigamesLoop(this, minigameObjs);
-            
-            
         }
         
         public void TryRemovingMinigame(MinigameScrObj minigameScrObj)
@@ -24,6 +21,5 @@ namespace Interactables
             
             minigameObjs.Remove(minigameScrObj);
         }
-        
     }
 }

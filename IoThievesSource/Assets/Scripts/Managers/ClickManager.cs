@@ -1,5 +1,5 @@
 using Events;
-using Hackables;
+using Interactables;
 using UnityEngine;
 
 namespace Managers
@@ -33,9 +33,9 @@ namespace Managers
 
             if (Physics.Raycast(ray, out RaycastHit hit, maxRayDistance, interactableLayer))
             {
-                if (hit.transform.TryGetComponent(out IInteractable hackableDevice))
+                if (hit.transform.TryGetComponent(out IInteractable interactable))
                 {
-                    hackableDevice.Interact();
+                    interactable.Interact();
                 }
             }
         }

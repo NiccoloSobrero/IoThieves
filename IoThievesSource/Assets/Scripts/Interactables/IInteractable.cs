@@ -1,4 +1,4 @@
-﻿namespace Hackables
+﻿namespace Interactables
 {
     public interface IInteractable
     {

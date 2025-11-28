@@ -15,7 +15,7 @@ namespace Minigames
         Correct
     }
     
-    public class PasswordDecryptorManager : MonoBehaviour
+    public class PasswordDecryptionMinigame : MonoBehaviour
     {
         [SerializeField] private List<TerminalLine> terminalLines = new();
         [SerializeField] private List<GameObject> heartsObjects = new();

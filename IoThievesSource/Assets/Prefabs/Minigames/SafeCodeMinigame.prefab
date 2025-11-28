@@ -2103,7 +2103,7 @@ GameObject:
   - component: {fileID: 6004842868965739821}
   - component: {fileID: 4195491764774978849}
   m_Layer: 5
-  m_Name: PasswordGame
+  m_Name: SafeCodeMinigame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

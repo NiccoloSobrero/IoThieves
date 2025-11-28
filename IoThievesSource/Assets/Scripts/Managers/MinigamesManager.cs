@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Events;
-using Hackables;
 using Interactables;
 using Minigames;
 using Minigames.ScriptableObjects;
@@ -18,11 +17,12 @@ namespace Managers
         
         private GameObject _currentMinigameObj;
         private MinigameScrObj _currentMinigameScrObj;
-        private Interactable _currentInteractable;
+        private InteractToMinigames _currentInteractableToMinigames;
         
         [Header("Minigames")]
-        [SerializeField] private PasswordDecryptorManager passwordDecryptionMinigame;
+        [SerializeField] private PasswordDecryptionMinigame passwordDecryptionMinigame;
         [SerializeField] private DesktopMinigame desktopMinigame;
+        [SerializeField] private SafeCodeMinigame safeCodeMinigame;
 
         private void Awake()
         {
@@ -54,9 +54,9 @@ namespace Managers
                 _currentMinigameObj.SetActive(false);
             }
 
-            if (_currentInteractable != null)
+            if (_currentInteractableToMinigames != null)
             {
-                _currentInteractable.TryRemovingMinigame(_currentMinigameScrObj);
+                _currentInteractableToMinigames.TryRemovingMinigame(_currentMinigameScrObj);
             }
             
             _currentMinigameScrObj = _minigamesQueue.Dequeue();
@@ -86,11 +86,11 @@ namespace Managers
             desktopMinigame.InitMinigame(folderContentScrObj);
         }
 
-        public void SetMinigamesLoop(Interactable interactable, List<MinigameScrObj> minigames)
+        public void SetMinigamesLoop(InteractToMinigames interactable, List<MinigameScrObj> minigames)
         {
             PlayerInputManager.Instance.SetContext(InputContext.Minigame);
             
-            _currentInteractable = interactable;
+            _currentInteractableToMinigames = interactable;
             
             _minigamesQueue.Clear();
             
@@ -113,24 +113,19 @@ namespace Managers
 
             _currentMinigameObj = null;
             _currentMinigameScrObj = null;
-            _currentInteractable = null;
+            _currentInteractableToMinigames = null;
             
             PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
         }
 
 
-        public void InitSafeCodeMinigame()
+        public void InitSafeCodeMinigame(string targetPassword)
         {
-            
-            _currentMinigameObj = passwordDecryptionMinigame.gameObject;
+            _currentMinigameObj = safeCodeMinigame.gameObject;
             
             _currentMinigameObj.SetActive(true);
             
-            passwordDecryptionMinigame.InitMinigame();
+            safeCodeMinigame.InitMinigame(targetPassword);
         }
-        
-        
-        
-        
     }
 }
