@@ -19,6 +19,7 @@ namespace AI
         private void Update()
         {
             _currentState?.Execute();
+        
             if(Input.GetKeyDown(KeyCode.Space))     //Just for Testing Purposes
                 if(_currentState is PatrolState)
                     ChangeState(AINames.Idle);

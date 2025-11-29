@@ -6,7 +6,7 @@ namespace SuspicionSystem.States
     {
         public override AlertLevel Level => AlertLevel.Level1;
         
-        public Level1AlertState()
+        public Level1AlertState() //AiControllerChangeState
         {
             AlertDecreaseSpeed = 0.02f;
             AlertIncreaseSpeed = 0.1f;
@@ -36,7 +36,7 @@ namespace SuspicionSystem.States
                 {
                     Suspicion = 1f;
                     
-                    ctx.ChangeState(ctx.Level2State);
+                    ctx.ChangeState(ctx.Level2State); //Livello2 di suspiciousness per AI?? 
                 }
             }
             else if (ctx.CanDecreaseSuspicion)
@@ -48,6 +48,7 @@ namespace SuspicionSystem.States
                     Suspicion = 0f;
                     
                     ctx.ChangeState(ctx.Level0State);
+                    //AIController -> Change State
                 }
             }
         }
