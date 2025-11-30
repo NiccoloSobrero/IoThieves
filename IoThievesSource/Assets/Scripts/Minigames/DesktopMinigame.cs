@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Levels;
 using TMPro;
 using UnityEngine;
 
@@ -6,6 +7,9 @@ namespace Minigames
 {
     public class DesktopMinigame : MonoBehaviour
     {
+        private const string DesktopPath = "C:\\Desktop";
+        
+        [Header("References")]
         [SerializeField] private Transform desktopFoldersParent;
         
         [SerializeField] private GameObject folderPrefab;
@@ -25,6 +29,11 @@ namespace Minigames
 
         private bool _openedFirstFolder;
 
+        [Header("Objective")]
+        [SerializeField] private LevelObjectiveScrObj objective;
+        
+        private readonly List<string> _targetFiles = new();
+
         private void Awake()
         {
             _pathTextRect = pathText.gameObject.GetComponent<RectTransform>();
@@ -34,13 +43,13 @@ namespace Minigames
 
         private void GenerateFolder(FolderContentScrObj scrObj, Transform parent)
         {
+            ClearChildren(parent);
+            
             if (scrObj == null)
             {
                 folderIsEmptyObject.SetActive(true);
                 return;
             }
-            
-            ClearChildren(parent);
             
             foreach (DesktopItem item in scrObj.folderItems)
             {
@@ -49,13 +58,16 @@ namespace Minigames
             }
         }
 
-        public void InitMinigame(FolderContentScrObj scrObj)
+        public void InitMinigame(FolderContentScrObj desktopScrObj)
         {
             folderObject.SetActive(false);
             
-            GenerateFolder(scrObj, desktopFoldersParent);
+            GenerateFolder(desktopScrObj, desktopFoldersParent);
             
-            _desktop = scrObj;
+            _desktop = desktopScrObj;
+            
+            _targetFiles.Clear();
+            ComputeTargetFilesList(_desktop, DesktopPath + "\\");
             
             ResetPathToDesktop();
             
@@ -98,8 +110,6 @@ namespace Minigames
             string currentPath = GetCurrentPath();
             
             DownloadsManager.Instance.AddDownload(currentPath + fileName, time);
-            
-            Debug.Log("Found target file.");
         }
         
         public void OpenProgram()
@@ -175,7 +185,7 @@ namespace Minigames
             _openPath.Clear();
             _pathScrObjs.Clear();
             
-            _openPath.Add("C:\\Desktop");
+            _openPath.Add(DesktopPath);
             _pathScrObjs.Add(_desktop);
 
             _openedFirstFolder = false;
@@ -193,6 +203,38 @@ namespace Minigames
             }
             
             return result;
+        }
+
+        private void ComputeTargetFilesList(FolderContentScrObj folderContentScrObj, string currentPath)
+        {
+            foreach (DesktopItem folderItem in folderContentScrObj.folderItems)
+            {
+                if (folderItem.itemType == DesktopItemType.TargetFile)
+                {
+                    _targetFiles.Add(currentPath + folderItem.itemName);
+                }
+                else if (folderItem.itemType is DesktopItemType.FolderInFolder or DesktopItemType.FolderOnDesktop && 
+                         folderItem.folderContent != null)
+                {
+                    ComputeTargetFilesList(folderItem.folderContent, currentPath + folderItem.itemName + "\\");
+                }
+            }
+        }
+
+        public void CheckCompletion()
+        {
+            List<string> downloadedFiles = DownloadsManager.Instance.DownloadedFiles;
+            
+            foreach (string targetFilePath in _targetFiles)
+            {
+                if (!downloadedFiles.Contains(targetFilePath))
+                {
+                    return;
+                }
+            }
+            
+            // Only execute if all target files are downloaded
+            objective.Complete();
         }
     }
 }

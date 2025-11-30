@@ -19,6 +19,7 @@ namespace Minigames
         private bool _isSectionHidden;
         
         private readonly List<string> _downloadedFiles = new();
+        public List<string> DownloadedFiles => _downloadedFiles;
 
         private void Awake()
         {
@@ -49,8 +50,6 @@ namespace Minigames
             
             downloadSectionAnimator.SetBool(IsHidden, _isSectionHidden);
             
-            _downloadedFiles.Add(filePath);
-            
             StartCoroutine(DownloadProgressCoroutine(filePath, time));
             
             UpdateContentHeight();
@@ -71,6 +70,8 @@ namespace Minigames
                 
                 yield return null;
             }
+            
+            _downloadedFiles.Add(filePath);
             
             resource.Complete();
         }

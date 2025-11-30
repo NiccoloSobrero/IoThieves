@@ -21,6 +21,8 @@ namespace Interactables
             if (!_canStartProduction || _hasCreatedDistraction) return;
             
             StartCoroutine(ProduceDistraction(timeToProduce));
+            
+            // if created -> Add to player throwable
         }
 
         private IEnumerator ProduceDistraction(float time)

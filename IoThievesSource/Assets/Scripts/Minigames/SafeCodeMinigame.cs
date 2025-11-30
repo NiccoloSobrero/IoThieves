@@ -43,6 +43,8 @@ namespace Minigames
     
         public void ClearText()
         {
+            _currentTypedPassword.Clear();
+            
             for (int i = 0; i < _passwordLength; i++)
             {
                 _currentTypedPassword.Append('_');

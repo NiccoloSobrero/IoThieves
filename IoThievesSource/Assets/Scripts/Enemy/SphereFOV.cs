@@ -9,15 +9,15 @@ namespace Enemy
         [SerializeField] private AlertManager alertManager;
         
         [Header("Raycast settings")]
-        [SerializeField] private Transform rayOrigin;
+        // [SerializeField] private Transform rayOrigin;
         [SerializeField] private float detectionRange;
-        [SerializeField, Range(0, 180)] private float fieldOfView;
-        [SerializeField] private LayerMask playerLayer;
+        // [SerializeField, Range(0, 180)] private float fieldOfView;
+        // [SerializeField] private LayerMask playerLayer;
         
         [Header("Sphere")]
         [SerializeField] private Transform sphere;
 
-        private bool _isAlerted;
+        // private bool _isAlerted;
 
         private void Awake()
         {

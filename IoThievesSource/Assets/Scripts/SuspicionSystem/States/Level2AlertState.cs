@@ -14,7 +14,7 @@ namespace SuspicionSystem.States
             AlertThreshold = 1f;
             Suspicion = 0f;
         }
-
+        
         public override void Enter(AlertManager ctx)
         {
             Debug.Log("Entered Level2AlertState");
@@ -37,7 +37,6 @@ namespace SuspicionSystem.States
                     
                     ctx.ChangeState(ctx.GameOverState);
                 }
-                
             }
             else if (ctx.CanDecreaseSuspicion)
             {

@@ -8,16 +8,22 @@ namespace Interactables.ThrowableDistraction
         private Rigidbody _rb;
         public Rigidbody Rb => _rb;
 
+        [SerializeField] private LayerMask enemyLayer;
+        [SerializeField] private float attractionRange;
+        
+        private const int MaxAttractableEnemies = 10;
+        private readonly Collider[] _enemies = new Collider[MaxAttractableEnemies];
+
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
+            
+            _rb.isKinematic = true;
         }
 
         public void OnPickedUp(Transform parent)
         {
             _rb.isKinematic = true;
-            _rb.linearVelocity = Vector3.zero;
-            _rb.angularVelocity = Vector3.zero;
             transform.SetParent(parent);
             transform.localPosition = Vector3.zero;
             transform.localRotation = Quaternion.identity;
@@ -27,6 +33,21 @@ namespace Interactables.ThrowableDistraction
         {
             transform.SetParent(null);
             _rb.isKinematic = false;
+        }
+
+        private void OnCollisionEnter(Collision _)
+        {
+            Vector3 collisionPos = gameObject.transform.position;
+            
+            gameObject.SetActive(false);
+            
+            int size = Physics.OverlapSphereNonAlloc(gameObject.transform.position, attractionRange, _enemies, enemyLayer);
+
+            for (int i = 0; i < size; i++)
+            {
+                Debug.Log($"Attracting enemy {i} at pos {collisionPos}");
+                // _enemies[i].GetComponent<Enemy>().AttractAt(collisionPos);
+            }
         }
     }
 }

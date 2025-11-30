@@ -10,7 +10,6 @@ public class GameOverAlertState : AlertState
         Debug.Log("Entered GameOverAlertState");
         
         GameManager.Instance.TriggerGameOver();
-        
     }
 
     public override void Exit(AlertManager ctx)
@@ -22,11 +21,4 @@ public class GameOverAlertState : AlertState
     {
         //stato di errore 
     }
-
-
-
-
-
-
-
 }

@@ -123,7 +123,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""IncreaseThrowDistance"",
                     ""type"": ""Value"",
                     ""id"": ""f2668484-67b8-477f-bad9-73f61cf7ba46"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -132,7 +132,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""name"": ""DecreaseThrowDistance"",
                     ""type"": ""Value"",
                     ""id"": ""78a9d60c-3aae-41bc-a7b2-2983c5b17c89"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -296,7 +296,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""669f39d0-8213-4a91-a49e-fba0a8c5e5fa"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Mouse>/scroll/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -307,7 +307,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8717a0ea-f237-4579-922e-2f3d8a8291c8"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Mouse>/scroll/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

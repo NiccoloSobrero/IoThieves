@@ -55,15 +55,6 @@ namespace Interactables.ThrowableDistraction
             Vector3 initialVelocity = ComputeInitialVelocity();
 
             ShowTrajectory(holdPoint.position, initialVelocity);
-
-            if (Input.GetMouseButtonDown(0))
-            {
-                Throw();
-            }
-
-            // Mouse wheel for power
-            if (Input.mouseScrollDelta.y > 0) IncreaseThrowDistance();
-            if (Input.mouseScrollDelta.y < 0) DecreaseThrowDistance();
         }
         
         public void TryPickUp(Throwable target)
@@ -89,11 +80,15 @@ namespace Interactables.ThrowableDistraction
 
         public void IncreaseThrowDistance()
         {
+            if (!IsHolding) return;
+            
             _currentPower = Mathf.Clamp(_currentPower + powerStep, minPower, maxPower);
         }
 
         public void DecreaseThrowDistance()
         {
+            if (!IsHolding) return;
+            
             _currentPower = Mathf.Clamp(_currentPower - powerStep, minPower, maxPower);
         }
 
@@ -135,7 +130,7 @@ namespace Interactables.ThrowableDistraction
             {
                 if (!Physics.GetIgnoreLayerCollision(layer, i))
                 {
-                    // Add a layer to a LayerMask
+                    // Add a layer to a LayerMask (magic)
                     _throwableCollisionMask |= 1 << i;
                 }
             }

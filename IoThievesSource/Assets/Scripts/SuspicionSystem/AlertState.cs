@@ -8,7 +8,6 @@
         protected float AlertDecreaseSpeed = 0f;
         
         protected float AlertThreshold = 1f;
-
         public float Suspicion = 0f;
         
         public virtual void Enter(AlertManager ctx) { }

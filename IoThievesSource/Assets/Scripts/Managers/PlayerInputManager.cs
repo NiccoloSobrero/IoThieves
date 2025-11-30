@@ -1,4 +1,5 @@
 using Events;
+using Interactables.ThrowableDistraction;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,6 +18,9 @@ namespace Managers
         
         private PlayerInputActions _actions;
         private InputContext _currentContext = InputContext.None;
+
+        [Header("References")]
+        [SerializeField] private PlayerThrower playerThrower;
 
         public Vector2 Move { get; private set; }
 
@@ -44,6 +48,10 @@ namespace Managers
             _actions.Gameplay.Move.canceled += OnStopMove;
         
             _actions.Gameplay.Click.performed += OnPointerClick;
+            
+            _actions.Gameplay.Throw.performed += ThrowDistraction;
+            _actions.Gameplay.IncreaseThrowDistance.performed += IncreaseThrowDistance;
+            _actions.Gameplay.DecreaseThrowDistance.performed += DecreaseThrowDistance;
             
             _actions.Minigame.Click.canceled += OnMouseRelease;
             
@@ -104,17 +112,17 @@ namespace Managers
 
         private void ThrowDistraction(InputAction.CallbackContext context)
         {
-            
+            playerThrower.Throw();
         }
 
         private void IncreaseThrowDistance(InputAction.CallbackContext context)
         {
-            
+            playerThrower.IncreaseThrowDistance();
         }
         
         private void DecreaseThrowDistance(InputAction.CallbackContext context)
         {
-            
+            playerThrower.DecreaseThrowDistance();
         }
     }
 }
