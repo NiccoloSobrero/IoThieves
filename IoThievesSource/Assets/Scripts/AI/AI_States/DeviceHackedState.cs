@@ -6,17 +6,17 @@ namespace AI.AI_States
 {
     public class DeviceHackedState : AIState
     {
-        private float speed = 2.0f;
-        private float angularSpeed = 2f;
+        private float _speed = 2.0f;
+        private float _angularSpeed = 2f;
         
-        private PointOfInterest hackedDevice;
-        private List<Waypoint> path;
-        private bool destinationReached = false;
+        private PointOfInterest _hackedDevice;
+        private List<Waypoint> _path;
+        private bool _destinationReached = false;
 
-        private float turningThreshold = 1.0f;
-        private float nextWaypointThreshold = 0.5f;
+        private float _turningThreshold = 1.0f;
+        private float _nextWaypointThreshold = 0.5f;
 
-        private bool isResolving = false;
+        private bool _isResolving = false;
         
         public DeviceHackedState(AIController npc) : base(npc) {}
 
@@ -27,13 +27,13 @@ namespace AI.AI_States
             foreach (PointOfInterest poi in hackedObjects)
             {
                 if (!(poi.AssignedDevice is null))
-                    hackedDevice = poi;
+                    _hackedDevice = poi;
             }
-            if(hackedDevice is not null)
-                path = PathFinding.FindPath(findNearestWaypoint(), hackedDevice);
+            if(_hackedDevice is not null)
+                _path = PathFinding.FindPath(FindNearestWaypoint(), _hackedDevice);
         }
 
-        private Waypoint findNearestWaypoint()
+        private Waypoint FindNearestWaypoint()
         {
             LayerMask mask = LayerMask.GetMask("Default");
             
@@ -72,45 +72,45 @@ namespace AI.AI_States
         
         public override void Execute()
         {
-            if (destinationReached)     //Resolve the reached device
+            if (_destinationReached)     //Resolve the reached device
             {
-                isResolving = hackedDevice.interact();
+                _isResolving = _hackedDevice.interact();
 
-                if (!isResolving)
+                if (!_isResolving)
                 {
                     //Get all the hacked device
                     //remove the current solved device
                     //get the next device
                     //compute the new path
                     //path = PathFinding.FindPath(findNearestWaypoint(), hackedDevice);
-                    destinationReached = false;
+                    _destinationReached = false;
                     //If no more hacked device --> Npc.ChangeState
                 }
             }
             else                  //Reach the hacked device
             {
                 
-                Vector3 dir = path[0].transform.position - Npc.transform.position;
-                Vector3 velocity = dir.normalized * (speed * Time.deltaTime);
+                Vector3 dir = _path[0].transform.position - Npc.transform.position;
+                Vector3 velocity = dir.normalized * (_speed * Time.deltaTime);
                 Npc.transform.position  += new Vector3(velocity.x, 0, velocity.z);
 
-                if (dir.magnitude < turningThreshold)
+                if (dir.magnitude < _turningThreshold)
                 {
                     Vector3 forwardDir = Npc.transform.forward.normalized;
                     float angle = Vector3.SignedAngle(forwardDir, dir, Vector3.up);
-                    float rotateOf = angle * angularSpeed * Time.deltaTime;
+                    float rotateOf = angle * _angularSpeed * Time.deltaTime;
                     Npc.transform.Rotate(0,rotateOf,0);
                 }
             
-                float distance = Vector3.Distance(Npc.transform.position, path[0].transform.position);
-                if (distance < nextWaypointThreshold)
+                float distance = Vector3.Distance(Npc.transform.position, _path[0].transform.position);
+                if (distance < _nextWaypointThreshold)
                 {
-                    Waypoint reached = path[0];
-                    path.RemoveAt(0);
+                    Waypoint reached = _path[0];
+                    _path.RemoveAt(0);
 
-                    if (reached.Equals(hackedDevice))
+                    if (reached.Equals(_hackedDevice))
                     {
-                        destinationReached = true;
+                        _destinationReached = true;
                     }
                 }
             }
