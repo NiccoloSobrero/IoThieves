@@ -10,6 +10,8 @@ namespace AI
         private AIState _currentState;
         private StateFactory _stateFactory;
 
+        private AIState _previousState;
+
         private void Awake()
         {
             _stateFactory = new StateFactory(this);
@@ -31,8 +33,16 @@ namespace AI
         {
             AIState targetState = _stateFactory.GetState(state);
             _currentState?.Exit();
+            _previousState = _currentState;
             _currentState = targetState;
             _currentState?.Enter();
+        }
+
+        public void PreviousState()
+        {
+           _currentState?.Exit();
+           (_currentState, _previousState) = (_previousState, _currentState);
+           _currentState?.Enter();
         }
         
     }
