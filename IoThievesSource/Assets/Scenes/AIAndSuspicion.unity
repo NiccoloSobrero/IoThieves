@@ -246,6 +246,7 @@ MonoBehaviour:
   - {fileID: 791172240}
   interactTime: 3
   thisValue: 0
+  assignedDevice: {fileID: 0}
 --- !u!1 &25558850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1255,7 +1256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa156b458ed4b54b992c6a2f0666264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startState: 0
+  startState: 1
 --- !u!4 &272689855 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5443988649820253035, guid: 61c3f4af3a95146409cdb1fba44464ab, type: 3}
@@ -2702,6 +2703,7 @@ MonoBehaviour:
   - {fileID: 1939405547}
   interactTime: 4
   thisValue: 0
+  assignedDevice: {fileID: 0}
 --- !u!1 &711461376
 GameObject:
   m_ObjectHideFlags: 0
@@ -5451,6 +5453,7 @@ MonoBehaviour:
   - {fileID: 1791396855}
   interactTime: 5
   thisValue: 0
+  assignedDevice: {fileID: 0}
 --- !u!1 &1497026327
 GameObject:
   m_ObjectHideFlags: 0
@@ -5826,6 +5829,7 @@ MonoBehaviour:
   - {fileID: 1939405547}
   interactTime: 2
   thisValue: 0
+  assignedDevice: {fileID: 0}
 --- !u!1 &1654996061
 GameObject:
   m_ObjectHideFlags: 0

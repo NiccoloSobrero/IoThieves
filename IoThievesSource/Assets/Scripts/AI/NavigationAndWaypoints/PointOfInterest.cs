@@ -9,6 +9,9 @@ namespace AI.NavigationAndWaypoints
     {
         [SerializeField] private int interactTime;
         [SerializeField] private float thisValue = 0;
+        [SerializeField] private GameObject assignedDevice;
+
+        public GameObject AssignedDevice => assignedDevice;
 
         public bool interact()
         {

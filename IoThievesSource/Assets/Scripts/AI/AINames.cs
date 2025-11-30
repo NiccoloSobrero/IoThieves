@@ -5,6 +5,6 @@ namespace AI
         Patrol,
         Suspicious,
         Idle,
-        Chase
+        DeviceHacked,
     }
 }

@@ -8,12 +8,14 @@ namespace AI
             private IdleState idleState;
             private SuspiciousState suspiciousState;
             private PatrolState patrolState;
+            private DeviceHackedState deviceHackedState;
             
             public StateFactory(AIController controller)
             {
                 idleState = new IdleState(controller);
                 suspiciousState = new SuspiciousState(controller);
                 patrolState = new PatrolState(controller);
+                deviceHackedState = new DeviceHackedState(controller);
             }
             
             public AIState GetState(AINames stateName)
@@ -23,10 +25,10 @@ namespace AI
                     case AINames.Idle : return idleState;
                     case AINames.Suspicious : return suspiciousState;
                     case AINames.Patrol: return patrolState;
+                    case AINames.DeviceHacked: return deviceHackedState;
                     default: throw new ArgumentException($"Invalid state name: {stateName}.");
                 }
             }
-
         }
 
 }
