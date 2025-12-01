@@ -9,7 +9,7 @@ namespace Interactables.ThrowableDistraction
         public Rigidbody Rb => _rb;
 
         [SerializeField] private LayerMask enemyLayer;
-        [SerializeField] private float attractionRange;
+        private float _attractionRange;
         
         private const int MaxAttractableEnemies = 10;
         private readonly Collider[] _enemies = new Collider[MaxAttractableEnemies];
@@ -21,8 +21,10 @@ namespace Interactables.ThrowableDistraction
             _rb.isKinematic = true;
         }
 
-        public void OnPickedUp(Transform parent)
+        public void Init(Transform parent, float attractionRange)
         {
+            _attractionRange = attractionRange;
+            
             _rb.isKinematic = true;
             transform.SetParent(parent);
             transform.localPosition = Vector3.zero;
@@ -41,7 +43,7 @@ namespace Interactables.ThrowableDistraction
             
             gameObject.SetActive(false);
             
-            int size = Physics.OverlapSphereNonAlloc(gameObject.transform.position, attractionRange, _enemies, enemyLayer);
+            int size = Physics.OverlapSphereNonAlloc(gameObject.transform.position, _attractionRange, _enemies, enemyLayer);
 
             for (int i = 0; i < size; i++)
             {

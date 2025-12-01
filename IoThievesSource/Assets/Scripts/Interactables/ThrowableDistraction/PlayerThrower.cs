@@ -14,7 +14,7 @@ namespace Interactables.ThrowableDistraction
         [SerializeField] private float powerStep = 1f;
         [SerializeField] private float verticalBoost = 4f;
 
-        [SerializeField] private Throwable heldThrowable;
+        private Throwable _heldThrowable;
         private float _currentPower;
         private Vector3 _aimDirection;
         
@@ -29,7 +29,7 @@ namespace Interactables.ThrowableDistraction
 
         private LayerMask _throwableCollisionMask;
 
-        private bool IsHolding => heldThrowable != null;
+        public bool IsHolding => _heldThrowable != null;
 
         private void Awake()
         {
@@ -39,8 +39,6 @@ namespace Interactables.ThrowableDistraction
             _ground = new Plane(Vector3.up, Vector3.zero);
             
             lineRenderer.positionCount = 0;
-            
-            SetCollisionMask();
         }
 
         private void Update()
@@ -57,12 +55,16 @@ namespace Interactables.ThrowableDistraction
             ShowTrajectory(holdPoint.position, initialVelocity);
         }
         
-        public void TryPickUp(Throwable target)
+        public bool TryPickUp(Throwable target, float attractionRange)
         {
-            if (IsHolding) return;
+            if (IsHolding || target == null) return false;
 
-            heldThrowable = target;
-            heldThrowable.OnPickedUp(holdPoint);
+            _heldThrowable = target;
+            _heldThrowable.Init(holdPoint, attractionRange);
+            
+            SetCollisionMask();
+
+            return true;
         }
 
         public void Throw()
@@ -71,10 +73,10 @@ namespace Interactables.ThrowableDistraction
 
             Vector3 initialVelocity = ComputeInitialVelocity();
 
-            heldThrowable.OnThrown();
-            heldThrowable.Rb.linearVelocity = initialVelocity;
+            _heldThrowable.OnThrown();
+            _heldThrowable.Rb.linearVelocity = initialVelocity;
 
-            heldThrowable = null;
+            _heldThrowable = null;
             HideTrajectory();
         }
 
@@ -124,7 +126,7 @@ namespace Interactables.ThrowableDistraction
 
         private void SetCollisionMask()
         {
-            int layer = heldThrowable.gameObject.layer;
+            int layer = _heldThrowable.gameObject.layer;
 
             for (int i = 0; i < 32; i++)
             {

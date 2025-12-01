@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Events;
+using Levels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -68,6 +69,8 @@ namespace Minigames
         private float _bootingTime = 3f;
 
         private bool _canCheckGuess;
+
+        private LevelObjectiveScrObj _objective;
         
         private void OnEnable()
         {
@@ -79,8 +82,10 @@ namespace Minigames
             EventsManager.OnClickDecryptPassword.RemoveListener(CheckSolution);
         }
 
-        public void InitMinigame()
+        public void InitMinigame(LevelObjectiveScrObj objective)
         {
+            _objective = objective;
+            
             // Init hearts
             _currentLeftAttempts = heartsObjects.Count;
 
@@ -144,7 +149,7 @@ namespace Minigames
                 {
                     Debug.Log("GAME OVER. Restarting Game.");
                     
-                    InitMinigame();
+                    InitMinigame(_objective);
                 }
             }
             else
@@ -153,15 +158,17 @@ namespace Minigames
                 
                 _canCheckGuess = false;
 
-                StartCoroutine(WaitForCompletion());
+                StartCoroutine(CompleteMinigameAfter(_bootingTime));
             }
         }
 
-        private IEnumerator WaitForCompletion()
+        private IEnumerator CompleteMinigameAfter(float time)
         {
-            yield return new WaitForSeconds(_bootingTime);
+            yield return new WaitForSeconds(time);
             
             EventsManager.OnMinigameCompleted?.Invoke();
+            
+            _objective?.Complete();
         }
 
         private LetterResult[] GetCorrectnessArray(string guess)

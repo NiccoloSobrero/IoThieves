@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Text;
 using Events;
+using Levels;
 using TMPro;
 using UnityEngine;
 
@@ -15,9 +16,13 @@ namespace Minigames
         private string _targetPassword;
         private int _typedPasswordLength;
         private StringBuilder _currentTypedPassword;
+
+        private LevelObjectiveScrObj _objective;
         
-        public void InitMinigame(string targetPassword)
+        public void InitMinigame(string targetPassword, LevelObjectiveScrObj objective)
         {
+            _objective = objective;
+            
             _targetPassword = targetPassword;
             _passwordLength = targetPassword.Length;
             _currentTypedPassword = new StringBuilder();
@@ -61,7 +66,7 @@ namespace Minigames
             {
                 Debug.Log($"{displayText.text} is the correct password.");
                 
-                StartCoroutine(WaitForCompletion(waitTime));
+                StartCoroutine(CompleteMinigameAfter(waitTime));
             }
             else
             {
@@ -69,11 +74,13 @@ namespace Minigames
             }
         }
 
-        private IEnumerator WaitForCompletion(float time)
+        private IEnumerator CompleteMinigameAfter(float time)
         {
             yield return new WaitForSeconds(time);
             
             EventsManager.OnMinigameCompleted?.Invoke();
+            
+            _objective?.Complete();
         }
     }
 }

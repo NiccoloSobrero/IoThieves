@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Events;
 using Levels;
 using TMPro;
 using UnityEngine;
@@ -29,8 +30,7 @@ namespace Minigames
 
         private bool _openedFirstFolder;
 
-        [Header("Objective")]
-        [SerializeField] private LevelObjectiveScrObj objective;
+        private LevelObjectiveScrObj _objective;
         
         private readonly List<string> _targetFiles = new();
 
@@ -58,13 +58,14 @@ namespace Minigames
             }
         }
 
-        public void InitMinigame(FolderContentScrObj desktopScrObj)
+        public void InitMinigame(FolderContentScrObj desktopScrObj, LevelObjectiveScrObj objective)
         {
+            _desktop = desktopScrObj;
+            _objective = objective;
+            
             folderObject.SetActive(false);
             
             GenerateFolder(desktopScrObj, desktopFoldersParent);
-            
-            _desktop = desktopScrObj;
             
             _targetFiles.Clear();
             ComputeTargetFilesList(_desktop, DesktopPath + "\\");
@@ -234,7 +235,9 @@ namespace Minigames
             }
             
             // Only execute if all target files are downloaded
-            objective.Complete();
+            _objective?.Complete();
+            
+            EventsManager.OnMinigameCompleted?.Invoke();
         }
     }
 }

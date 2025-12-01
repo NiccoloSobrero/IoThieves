@@ -1,16 +1,17 @@
-﻿using Managers;
+﻿using Levels;
+using Managers;
 using UnityEngine;
 
 namespace Minigames.ScriptableObjects
 {
     [CreateAssetMenu(fileName = "SafeCodeMinigame", menuName = "Minigames/Safe Code Minigame")]
-    public class SafeCodeMinigameScrObj: MinigameScrObj
+    public class SafeCodeMinigameScrObj : MinigameScrObj
     {
         public string targetPassword;
-        
-        public override void InitMinigame()
+
+        public override void InitMinigame(LevelObjectiveScrObj objectiveScrObj)
         {
-            MinigamesManager.Instance.InitSafeCodeMinigame(targetPassword);
+            MinigamesManager.Instance.InitSafeCodeMinigame(targetPassword, objectiveScrObj);
         }
     }
 }

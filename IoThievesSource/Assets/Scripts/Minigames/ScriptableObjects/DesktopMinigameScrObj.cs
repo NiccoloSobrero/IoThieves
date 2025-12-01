@@ -1,4 +1,5 @@
-﻿using Managers;
+﻿using Levels;
+using Managers;
 using UnityEngine;
 
 namespace Minigames.ScriptableObjects
@@ -8,9 +9,9 @@ namespace Minigames.ScriptableObjects
     {
         public FolderContentScrObj folderContentScrObj;
         
-        public override void InitMinigame()
+        public override void InitMinigame(LevelObjectiveScrObj objectiveScrObj)
         {
-            MinigamesManager.Instance.InitDesktopMinigame(folderContentScrObj);
+            MinigamesManager.Instance.InitDesktopMinigame(folderContentScrObj, objectiveScrObj);
         }
     }
 }
