@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using AI.NavigationAndWaypoints;
 using UnityEngine;
@@ -8,23 +7,28 @@ namespace AI.AI_States
 {
     public class SuspiciousState : AIState
     {
-        private float speed = 1.50f;
-        private float angularSpeed = 2f;
-        private bool isMoving = true;
+        private float _speed = 1.50f;
+        private float _angularSpeed = 2f;
+        private bool _isMoving = true;
         
-        private Waypoint destinationWaypoint;
+        private Waypoint _destinationWaypoint;
         
-        private Vector3 nextDestination;
+        private Vector3 _nextDestination;
         
-        private float threshold = 0.3f; 
-        private float angularThreshold = 30.0f; //degrees
-        private float minDistance = 1.5f;        //Below this distance no intermediate points will be added
-        private Vector3[] positions;
-        private int positionIndex = 0;
-        private float radius = 0.5f;
+        private float _threshold = 0.3f; 
+        private float _angularThreshold = 30.0f; //degrees
+        private float _minDistance = 1.5f;        //Below this distance no intermediate points will be added
+        private Vector3[] _positions;
+        private int _positionIndex = 0;
+        private float _radius = 0.5f;
+
+        private float _waitedTime = 0;
+        private float _waitingTime;
+        private const float MaxWaitingTime = 3.0f;
+        private bool _midpointReached = false;
         
-        private Queue<Movement> recentMovements = new Queue<Movement>();
-        private const int MAX_MOVEMENT_HISTORY = 15;
+        private Queue<Waypoint> _recentMovements = new Queue<Waypoint>();
+        private const int MaxMovementHistory = 15;
         public SuspiciousState(AIController npc) : base(npc) {}
 
         public override void Enter()
@@ -61,48 +65,59 @@ namespace AI.AI_States
                     }
                 }
             }
-            destinationWaypoint = bestWaypoint;
+            _destinationWaypoint = bestWaypoint;
             ComputeMiddlePoints();
+            
+            //Wait a second before it starts moving
+            _midpointReached = true;
+            _isMoving = false;
+            _waitingTime = Random.value * MaxWaitingTime; //Random waiting time up to 3 seconds
         }
         
-        //Guardarsi intorno
-        //Camminare in giro cercando di rimanere nell'area attorno al trigger
-        //Lo fa per un tot e poi torna a "cazzeggiare??"
-           
-        //Idea:
-        //Simile a Patrol MA: 
-        //   -Raggiungere il prossimo waypoint usando un simil randomWalk -> Splittare la total distance e ogni tot scegliere a caso un intorno da raggiungere
-        //   -Far ruotare la visuale del Npc rispetto al displacement della linea direttaa (diretto o inverso)
         public override void Execute()
         {
-            if (destinationWaypoint is null)
+            if (_destinationWaypoint is null)
                 return;
-            
-            Debug.Log("Destination; "+ nextDestination);
-            Vector3 dir = nextDestination - Npc.transform.position;
-            dir.Normalize();
 
-            Vector3 forwardDir = Npc.transform.forward.normalized;
-            
-            float angle = Vector3.SignedAngle(forwardDir, dir, Vector3.up);
-            float angleMag = Mathf.Abs(angle);
-            
-            isMoving = angleMag < angularThreshold;
-            float rotateOf = angle * angularSpeed * Time.deltaTime;
-            Npc.transform.Rotate(0,rotateOf,0);
-
-            if (isMoving)
+            if (_midpointReached)               //Wait before continue searching
             {
-                Vector3 velocity = dir * (speed * Time.deltaTime);
-                Npc.transform.position  += new Vector3(velocity.x, 0, velocity.z);
-            }
-
-            float distance = (nextDestination - Npc.transform.position).magnitude;
-            
-            if (distance < threshold)
-            { 
+                _waitedTime += (1.0f) / _waitingTime * Time.deltaTime;
+                if (_waitedTime >= 1.0f)
+                {
+                    _midpointReached = false;
+                    _waitedTime = 0;
                     NextDestination();
-                    isMoving = true;
+                    _isMoving = true;
+                }
+            }
+            else
+            {
+                Vector3 dir = _nextDestination - Npc.transform.position;
+                dir.Normalize();
+
+                Vector3 forwardDir = Npc.transform.forward.normalized;
+            
+                float angle = Vector3.SignedAngle(forwardDir, dir, Vector3.up);
+                float angleMag = Mathf.Abs(angle);
+            
+                _isMoving = angleMag < _angularThreshold;
+                float rotateOf = angle * _angularSpeed * Time.deltaTime;
+                Npc.transform.Rotate(0,rotateOf,0);
+
+                if (_isMoving)
+                {
+                    Vector3 velocity = dir * (_speed * Time.deltaTime);
+                    Npc.transform.position  += new Vector3(velocity.x, 0, velocity.z);
+                }
+
+                float distance = (_nextDestination - Npc.transform.position).magnitude;
+            
+                if (distance < _threshold)
+                {
+                    _midpointReached = true;
+                    _isMoving = false;
+                    _waitingTime = Random.value * MaxWaitingTime; //Random waiting time up to 3 seconds
+                }
             }
         }
 
@@ -120,7 +135,7 @@ namespace AI.AI_States
 
             foreach (Waypoint neighbour in currentWaypoint.neighbours)
             {
-                if (!IsInRecentMovements(currentWaypoint, neighbour))
+                if (!IsInRecentMovements(neighbour))
                 {
                     availableWaypoints.Add(neighbour);
                 }
@@ -133,28 +148,27 @@ namespace AI.AI_States
 
             Waypoint nextWaypoint = availableWaypoints[Random.Range(0, availableWaypoints.Count)];
 
-            AddMovement(currentWaypoint, nextWaypoint);
+            AddMovement(nextWaypoint);
 
-            destinationWaypoint = nextWaypoint;
+            _destinationWaypoint = nextWaypoint;
             ComputeMiddlePoints();
         }
 
-        private void AddMovement(Waypoint from, Waypoint to)
+        private void AddMovement(Waypoint to)
         {
-            // Rimuove il movimento più vecchio se abbiamo raggiunto il limite
-            if (recentMovements.Count >= MAX_MOVEMENT_HISTORY)
+            if (_recentMovements.Count >= MaxMovementHistory)
             {
-                recentMovements.Dequeue();
+                _recentMovements.Dequeue();
             }
 
-            recentMovements.Enqueue(new Movement(from, to));
+            _recentMovements.Enqueue(to);
         } 
-        
-        private bool IsInRecentMovements(Waypoint from, Waypoint to)
+      
+        private bool IsInRecentMovements(Waypoint to)
         {
-            foreach (Movement movement in recentMovements)
+            foreach (Waypoint movement in _recentMovements)
             {
-                if (movement.Equals(from, to))
+                if (movement.Equals(to))
                     return true;
             }
             return false;
@@ -162,52 +176,44 @@ namespace AI.AI_States
 
         private void NextDestination()
         {
-            if (Vector3.Distance(nextDestination, destinationWaypoint.transform.position) < 0.05f)
+            if (Vector3.Distance(_nextDestination, _destinationWaypoint.transform.position) < 0.05f)
             { //If I reached a Waypoint ---> New Waypoint is Needed
-                ChooseNextWaypoint(destinationWaypoint);
+                ChooseNextWaypoint(_destinationWaypoint);
             }      
-            else if (positionIndex >= positions.Length-1)
+            else if (_positionIndex >= _positions.Length-1)
             {
                 //I finished the middlePoints --> I have to reach the DestinationWayPoint
-                nextDestination = destinationWaypoint.transform.position;
+                _nextDestination = _destinationWaypoint.transform.position;
             }
             else
             {
-                nextDestination = positions[positionIndex];
-                positionIndex++;
+                _nextDestination = _positions[_positionIndex];
+                _positionIndex++;
             }
         }
 
         private void ComputeMiddlePoints()
         {
-           float distance =  Vector3.Distance(Npc.transform.position, destinationWaypoint.transform.position);
-           int points = Mathf.FloorToInt(distance / minDistance);
-           positions = new Vector3[points];
-           Debug.Log("There are this intermediate points : " + points);
+           float distance =  Vector3.Distance(Npc.transform.position, _destinationWaypoint.transform.position);
+           int points = Random.Range(0,Mathf.FloorToInt(distance / _minDistance)+1);
+           _positions = new Vector3[points];
 
            for (int i = 0; i < points; i++)
            {
                float t = (float)(i + 1) / (points + 1);
 
                float angle = Random.Range(0f, Mathf.PI * 2f);
-               float x = Mathf.Cos(angle) * radius;
-               float z = Mathf.Sin(angle) * radius;
+               float x = Mathf.Cos(angle) * _radius;
+               float z = Mathf.Sin(angle) * _radius;
 
-               positions[i] = Vector3.Lerp(Npc.transform.position, destinationWaypoint.transform.position, t) +
+               _positions[i] = Vector3.Lerp(Npc.transform.position, _destinationWaypoint.transform.position, t) +
                               new Vector3(x, .1f, z);
            }
 
-           positionIndex = 0;
+           _positionIndex = 0;
            NextDestination(); 
         }
         
     }
     
-    /* Per gli Hackables
-     *  - FindObjectOfType PointOfIntersts
-     *  - Trova quello che ha il device impazzuto
-     *  - A* per trovare la strada ed arrivarci
-     *  - Fine solving --> Previous State (patrolling / suspicion)
-     * 
-     */
 }
