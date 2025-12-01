@@ -244,9 +244,7 @@ MonoBehaviour:
   - {fileID: 237648481}
   - {fileID: 890488084}
   - {fileID: 791172240}
-  interactTime: 3
-  thisValue: 0
-  assignedDevice: {fileID: 0}
+  assignedDevice: {fileID: 1464739154}
 --- !u!1 &25558850
 GameObject:
   m_ObjectHideFlags: 0
@@ -866,6 +864,55 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 173867813}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &223217883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 223217885}
+  - component: {fileID: 223217884}
+  m_Layer: 0
+  m_Name: HackedDevice
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &223217884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223217883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f427c4be8741a0b07eeb3cf2c15762, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTime: 5
+  value: 0
+  isHacked: 1
+  hackedValue: 0
+  hackedTime: 4
+--- !u!4 &223217885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 223217883}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.36, y: -1.26, z: -11.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &237648476
 GameObject:
   m_ObjectHideFlags: 0
@@ -1256,7 +1303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efa156b458ed4b54b992c6a2f0666264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startState: 1
+  startState: 3
 --- !u!114 &263243653 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3346137037427755614, guid: b70a31a0cf487634ab01d99f58694117, type: 3}
@@ -2600,6 +2647,55 @@ Transform:
   - {fileID: 1261143331}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &637295689
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 637295691}
+  - component: {fileID: 637295690}
+  m_Layer: 0
+  m_Name: HackedDevice2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &637295690
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637295689}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f427c4be8741a0b07eeb3cf2c15762, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTime: 5
+  value: 0
+  isHacked: 1
+  hackedValue: 0
+  hackedTime: 4
+--- !u!4 &637295691
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637295689}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.36, y: -1.26, z: -11.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &654187082
 GameObject:
   m_ObjectHideFlags: 0
@@ -2726,9 +2822,7 @@ MonoBehaviour:
   - {fileID: 362360270}
   - {fileID: 1565094973}
   - {fileID: 1939405547}
-  interactTime: 4
-  thisValue: 0
-  assignedDevice: {fileID: 0}
+  assignedDevice: {fileID: 637295690}
 --- !u!1 &711461376
 GameObject:
   m_ObjectHideFlags: 0
@@ -5352,6 +5446,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   neighbours:
   - {fileID: 1004738284}
+--- !u!1 &1464739153
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1464739155}
+  - component: {fileID: 1464739154}
+  m_Layer: 0
+  m_Name: HackedDevice3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1464739154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464739153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f427c4be8741a0b07eeb3cf2c15762, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTime: 5
+  value: 0
+  isHacked: 1
+  hackedValue: 0
+  hackedTime: 4
+--- !u!4 &1464739155
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464739153}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.36, y: -1.26, z: -11.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1490048838
 GameObject:
   m_ObjectHideFlags: 0
@@ -5479,8 +5622,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   neighbours:
   - {fileID: 1791396855}
-  interactTime: 5
-  thisValue: 0
   assignedDevice: {fileID: 0}
 --- !u!1 &1497026327
 GameObject:
@@ -5855,8 +5996,6 @@ MonoBehaviour:
   - {fileID: 654187087}
   - {fileID: 362360270}
   - {fileID: 1939405547}
-  interactTime: 2
-  thisValue: 0
   assignedDevice: {fileID: 0}
 --- !u!1 &1654996061
 GameObject:
@@ -7594,6 +7733,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: 2e690a60e2192d9428759d5c44010dec, type: 2}
     - target: {fileID: 8002232101334616121, guid: 61c3f4af3a95146409cdb1fba44464ab, type: 3}
+      propertyPath: assignedDevice
+      value: 
+      objectReference: {fileID: 223217884}
+    - target: {fileID: 8002232101334616121, guid: 61c3f4af3a95146409cdb1fba44464ab, type: 3}
       propertyPath: neighbours.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -7627,3 +7770,6 @@ SceneRoots:
   - {fileID: 624410116}
   - {fileID: 1121569070}
   - {fileID: 1692983523}
+  - {fileID: 223217885}
+  - {fileID: 637295691}
+  - {fileID: 1464739155}

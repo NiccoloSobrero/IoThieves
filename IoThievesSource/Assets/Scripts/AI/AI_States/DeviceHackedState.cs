@@ -96,11 +96,9 @@ namespace AI.AI_States
 
                 if (_solved)
                 {
-                    Debug.Log("Solved");
                     _hackedDevice = FindHackedDevice();
                     if (_hackedDevice is not null)
                     {
-                        Debug.Log("New Hacked Device");
                         _path = PathFinding.FindPath(FindNearestWaypoint(), _hackedDevice);
                         _destinationReached = false;
                     }
@@ -113,14 +111,16 @@ namespace AI.AI_States
                 Vector3 dir = _path[0].transform.position - Npc.transform.position;
                 Vector3 velocity = dir.normalized * (_speed * Time.deltaTime);
                 Npc.transform.position  += new Vector3(velocity.x, 0, velocity.z);
-
-                if (dir.magnitude < _turningThreshold)
-                {
-                    Vector3 forwardDir = Npc.transform.forward.normalized;
-                    float angle = Vector3.SignedAngle(forwardDir, dir, Vector3.up);
-                    float rotateOf = angle * _angularSpeed * Time.deltaTime;
-                    Npc.transform.Rotate(0,rotateOf,0);
-                }
+                
+                Vector3 forwardDir = Npc.transform.forward.normalized;
+                Vector3 lookDir = dir;
+                
+                if (dir.magnitude < _turningThreshold && _path.Count > 1)
+                   lookDir = _path[1].transform.position - Npc.transform.position;
+                    
+                float angle = Vector3.SignedAngle(forwardDir, lookDir, Vector3.up);
+                float rotateOf = angle * _angularSpeed * Time.deltaTime;
+                Npc.transform.Rotate(0,rotateOf,0);
             
                 float distance = Vector3.Distance(Npc.transform.position, _path[0].transform.position);
                 if (distance < _nextWaypointThreshold)
@@ -130,13 +130,12 @@ namespace AI.AI_States
 
                     if (reached.Equals(_hackedDevice))
                     {
-                        Debug.Log("reached destination");
                         _destinationReached = true;
                     }
                 }
             }
         }
-
+        
         public override void Exit()
         {
         }
