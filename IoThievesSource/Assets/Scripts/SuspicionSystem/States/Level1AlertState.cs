@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using AI;
+using AI.AI_States;
+using UnityEngine;
 
 namespace SuspicionSystem.States
 {
@@ -6,7 +8,7 @@ namespace SuspicionSystem.States
     {
         public override AlertLevel Level => AlertLevel.Level1;
         
-        public Level1AlertState() //AiControllerChangeState
+        public Level1AlertState() 
         {
             AlertDecreaseSpeed = 0.02f;
             AlertIncreaseSpeed = 0.1f;
@@ -19,6 +21,11 @@ namespace SuspicionSystem.States
         {
             Debug.Log("Entered Level1AlertState");
             ctx.ShowAlertBillboard(true);
+            
+            AIController aiC = ctx.EnemyAdapter.AIController;
+            aiC.ChangeState(AINames.Suspicious);
+            AIState sus = aiC.StateFactory.GetState(AINames.Suspicious);
+            ((SuspiciousState) sus).VerySuspicious(false);
         }
 
         public override void Exit(AlertManager ctx)
@@ -36,7 +43,7 @@ namespace SuspicionSystem.States
                 {
                     Suspicion = 1f;
                     
-                    ctx.ChangeState(ctx.Level2State); //Livello2 di suspiciousness per AI?? 
+                    ctx.ChangeState(ctx.Level2State); 
                 }
             }
             else if (ctx.CanDecreaseSuspicion)
@@ -48,7 +55,6 @@ namespace SuspicionSystem.States
                     Suspicion = 0f;
                     
                     ctx.ChangeState(ctx.Level0State);
-                    //AIController -> Change State
                 }
             }
         }

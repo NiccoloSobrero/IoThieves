@@ -7,12 +7,19 @@ namespace AI.AI_States
 {
     public class SuspiciousState : AIState
     {
+        private float _baseSpeed = 1.5f;
+        private float _baseAngularSpeed = 2f;
+        
+        private bool _verySuspicious = false;
+        private float _verySuspiciousSpeed = 2.5f;
+        private float _verySuspiciousAngularSpeed = 3.0f;
+        
         private float _speed = 1.50f;
         private float _angularSpeed = 2f;
         private bool _isMoving = true;
         
-        private Waypoint _destinationWaypoint;
         
+        private Waypoint _destinationWaypoint;
         private Vector3 _nextDestination;
         
         private float _threshold = 0.3f; 
@@ -40,7 +47,7 @@ namespace AI.AI_States
                 FindObjectsInactive.Exclude,
                 FindObjectsSortMode.None);
            
-            float maxCheckDistance = 50f;
+            float maxCheckDistance = 20f;
             float bestDistance = Mathf.Infinity;
             Waypoint bestWaypoint = null;
            
@@ -116,16 +123,32 @@ namespace AI.AI_States
                 {
                     _midpointReached = true;
                     _isMoving = false;
-                    _waitingTime = Random.value * MaxWaitingTime; //Random waiting time up to 3 seconds
+                    _waitingTime = Random.value * MaxWaitingTime * (_verySuspicious ? 0.5f : 1.0f); //Random waiting time up to 3 seconds (halved if verySuspicious)
                 }
             }
         }
 
         public override void Exit()
         {
-          //Text: Must have been the wind 
+            _verySuspicious = false;
+            //Text: Must have been the wind 
         }
-        
+
+        public void VerySuspicious(bool suspicious)
+        {
+            if (suspicious)
+            {
+                _speed = _verySuspiciousSpeed;
+                _angularSpeed = _verySuspiciousAngularSpeed;
+                _verySuspicious = true;
+            }
+            else
+            {
+                _speed = _baseSpeed;
+                _angularSpeed = _baseAngularSpeed;
+                _verySuspicious = false;
+            }
+        }
         public void ChooseNextWaypoint(Waypoint currentWaypoint)
         {
             if (currentWaypoint.neighbours == null || currentWaypoint.neighbours.Count == 0)

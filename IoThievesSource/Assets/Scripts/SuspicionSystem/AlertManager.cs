@@ -1,4 +1,5 @@
 using System.Collections;
+using AI;
 using SuspicionSystem.States;
 using UnityEngine;
 using UnityEngine.UI;
@@ -54,9 +55,14 @@ namespace SuspicionSystem
         private AlertState _currentState;
         
         private Coroutine _decayDelayRoutine;
+        
+        //Added by Fede
+        public EnemyAdapter EnemyAdapter { get; set; }
 
         private void Awake()
         {
+            EnemyAdapter = GetComponent<EnemyAdapter>();
+            
             Level0State = new Level0AlertState();
             Level1State = new Level1AlertState();
             Level2State = new Level2AlertState();

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using AI;
+using UnityEngine;
 
 namespace SuspicionSystem.States
 {
@@ -18,6 +19,8 @@ namespace SuspicionSystem.States
         {
             Debug.Log("Entered Level0AlertState");
             ctx.ShowAlertBillboard(false);
+            
+            ctx.EnemyAdapter.AIController.ChangeState(AINames.Patrol);
         }
 
         public override void Exit(AlertManager ctx)
