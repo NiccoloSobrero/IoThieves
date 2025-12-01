@@ -6,19 +6,19 @@ namespace AI.AI_States
 {
     public class PatrolState : AIState
     {
-         private float speed = 2.0f;
-         private float angularSpeed = 2f;
-         private bool isMoving = true;
-         private bool isInteracting = false;
+         private float _speed = 2.0f;
+         private float _angularSpeed = 2f;
+         private bool _isMoving = true;
+         private bool _isInteracting = false;
         
-         private Waypoint target;
-         private Waypoint lastWaypoint;
-         private float threshold = 0.8f; 
-         private float angularThreshold = 45.0f; //degrees
+         private Waypoint _target;
+         private Waypoint _lastWaypoint;
+         private float _threshold = 0.8f; 
+         private float _angularThreshold = 45.0f; //degrees
 
         
-        private Queue<Movement> recentMovements = new Queue<Movement>();
-        private const int MAX_MOVEMENT_HISTORY = 15;
+        private Queue<Movement> _recentMovements = new Queue<Movement>();
+        private const int MaxMovementHistory = 15;
 
 
         public PatrolState(AIController npc) : base(npc){}
@@ -53,17 +53,17 @@ namespace AI.AI_States
         private void AddMovement(Waypoint from, Waypoint to)
         {
             // Rimuove il movimento più vecchio se abbiamo raggiunto il limite
-            if (recentMovements.Count >= MAX_MOVEMENT_HISTORY)
+            if (_recentMovements.Count >= MaxMovementHistory)
             {
-                recentMovements.Dequeue();
+                _recentMovements.Dequeue();
             }
 
-            recentMovements.Enqueue(new Movement(from, to));
+            _recentMovements.Enqueue(new Movement(from, to));
         } 
         
         private bool IsInRecentMovements(Waypoint from, Waypoint to)
         {
-            foreach (Movement movement in recentMovements)
+            foreach (Movement movement in _recentMovements)
             {
                 if (movement.Equals(from, to))
                     return true;
@@ -74,9 +74,9 @@ namespace AI.AI_States
         public override void Enter() //Chooses the First waypoint to reach
         {
             LayerMask mask = LayerMask.GetMask("Default");
-            if (!(lastWaypoint is null))        
+            if (!(_lastWaypoint is null))        
             {
-                Vector3 direction = lastWaypoint.transform.position - Npc.transform.position;
+                Vector3 direction = _lastWaypoint.transform.position - Npc.transform.position;
                 float distance = direction.magnitude;
                 
                 if (!Physics.Raycast(
@@ -85,7 +85,7 @@ namespace AI.AI_States
                         distance,
                         mask))           //If the last targeted destination is still reachable
                 {
-                    target = lastWaypoint;
+                    _target = _lastWaypoint;
                     return;
                 }
             }
@@ -119,15 +119,15 @@ namespace AI.AI_States
                     }
                 }
             }
-            target = bestWaypoint;
+            _target = bestWaypoint;
         }
 
         public override void Execute()
         {
-            if (target is null)
+            if (_target is null)
                 return;
             
-            Vector3 dir = target.transform.position - Npc.transform.position;
+            Vector3 dir = _target.transform.position - Npc.transform.position;
             dir.Normalize();
 
             Vector3 forwardDir = Npc.transform.forward.normalized;
@@ -135,31 +135,31 @@ namespace AI.AI_States
             float angle = Vector3.SignedAngle(forwardDir, dir, Vector3.up);
             float angleMag = Mathf.Abs(angle);
             
-            isMoving = angleMag < angularThreshold;
+            _isMoving = angleMag < _angularThreshold;
 
-            float rotateOf = angle * angularSpeed * Time.deltaTime;
+            float rotateOf = angle * _angularSpeed * Time.deltaTime;
             Npc.transform.Rotate(0,rotateOf,0);
 
-            if (isMoving)
+            if (_isMoving)
             {
-                Vector3 velocity = dir * (speed * Time.deltaTime);
+                Vector3 velocity = dir * (_speed * Time.deltaTime);
                 Npc.transform.position  += new Vector3(velocity.x, 0, velocity.z);
             }
 
-            float distance = (target.transform.position - Npc.transform.position).magnitude;
+            float distance = (_target.transform.position - Npc.transform.position).magnitude;
             
-            if (distance < threshold)
+            if (distance < _threshold)
             {
-                if (target is PointOfInterest poi)
+                if (_target is PointOfInterest poi)
                 {
-                    isMoving = false;
-                    isInteracting = !poi.interact();
+                    _isMoving = false;
+                    _isInteracting = !poi.AssignedDevice.Interact();
                 }
 
-                if (!isInteracting)
+                if (!_isInteracting)
                 {
-                    target = ChooseNextWaypoint(target);
-                    isMoving = true;
+                    _target = ChooseNextWaypoint(_target);
+                    _isMoving = true;
                 }
                 
             }
@@ -167,24 +167,24 @@ namespace AI.AI_States
 
         public override void Exit()
         {
-            lastWaypoint = target;
+            _lastWaypoint = _target;
         }
     }
     
     struct Movement
     {
-        public Waypoint from;
-        public Waypoint to;
+        public Waypoint From;
+        public Waypoint To;
 
         public Movement(Waypoint from, Waypoint to)
         {
-            this.from = from;
-            this.to = to;
+            this.From = from;
+            this.To = to;
         }
 
         public bool Equals(Waypoint fromWaypoint, Waypoint toWaypoint)
         {
-            return from == fromWaypoint && to == toWaypoint;
+            return From == fromWaypoint && To == toWaypoint;
         }
     }
 }

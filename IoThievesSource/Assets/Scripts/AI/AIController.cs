@@ -7,7 +7,7 @@ namespace AI
     {
         [Header("AI Settings")]
         [SerializeField] private AINames startState;
-        private AIState _currentState;
+        [SerializeField] private AIState _currentState;
         private StateFactory _stateFactory;
 
         private AIState _previousState;
@@ -15,18 +15,20 @@ namespace AI
         private void Awake()
         {
             _stateFactory = new StateFactory(this);
+            _previousState = _stateFactory.GetState(AINames.Idle);
             ChangeState(startState);
         }
         
         private void Update()
         {
             _currentState?.Execute();
-        
+        /*
             if(Input.GetKeyDown(KeyCode.Space))     //Just for Testing Purposes
                 if(_currentState is PatrolState)
                     ChangeState(AINames.Idle);
                 else
                     ChangeState(AINames.Patrol);
+        */
         }
         
         public void ChangeState(AINames state)
