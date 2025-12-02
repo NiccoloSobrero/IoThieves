@@ -5,13 +5,14 @@ namespace Interactables
     [RequireComponent(typeof(Collider))]
     public class StunTrigger : MonoBehaviour
     {
-        [SerializeField] private float range;
-        
         private void Awake()
         {
-            gameObject.transform.localScale = new Vector3(range, range, range);
-            
             gameObject.SetActive(false);
+        }
+
+        public void Init(float radius)
+        {
+            gameObject.transform.localScale = new Vector3(radius, radius, radius);
         }
         
         private void OnTriggerEnter(Collider other)

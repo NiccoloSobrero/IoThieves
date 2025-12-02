@@ -4,11 +4,17 @@ namespace Interactables
 {
     public class InteractToStun : MonoBehaviour, IInteractable
     {
-        [SerializeField] private GameObject stunSphere;
+        [SerializeField] private StunTrigger stunTrigger;
+        [SerializeField] private float stunRadius;
+
+        private void Awake()
+        {
+            stunTrigger.Init(stunRadius);
+        }
         
         public void Interact()
         {
-            stunSphere.SetActive(true);
+            stunTrigger.gameObject.SetActive(true);
         }
     }
 }

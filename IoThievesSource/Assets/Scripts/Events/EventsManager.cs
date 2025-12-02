@@ -21,7 +21,7 @@ namespace Events
         public static readonly UnityEvent<string> OnGameLoadError = new();
         
         #endregion
-
+        
         
         #region Minigames
 
@@ -29,11 +29,19 @@ namespace Events
 
         #endregion
         
+        
         # region UI Events
         public static readonly UnityEvent OnStartGame = new();
         public static readonly UnityEvent OnSaveGame = new();
         public static readonly UnityEvent OnResumeGame = new();
         public static readonly UnityEvent OnQuitGame = new();
         # endregion
+
+
+        #region Tutorial Events
+
+        // public static readonly UnityEvent OnDialogueEnded = new();
+
+        #endregion
     }
 }

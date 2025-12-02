@@ -110,7 +110,7 @@ namespace Minigames
         {
             string currentPath = GetCurrentPath();
             
-            DownloadsManager.Instance.AddDownload(currentPath + fileName, time);
+            DownloadsManager.Instance.AddDownload(currentPath + fileName, time, _objective);
         }
         
         public void OpenProgram()
@@ -233,9 +233,6 @@ namespace Minigames
                     return;
                 }
             }
-            
-            // Only execute if all target files are downloaded
-            _objective?.Complete();
             
             EventsManager.OnMinigameCompleted?.Invoke();
         }

@@ -13,7 +13,7 @@ namespace SaveLoadSystem
         // Editor/other platforms: stubs to avoid the code to blow up
          private static void FB_SetTarget(string goName)
          {
-             Debug.Log("(Stub) FB_SetTarget "  + goName);
+             // Debug.Log("(Stub) FB_SetTarget "  + goName);
          }
         
          private static void FB_Save(string json)

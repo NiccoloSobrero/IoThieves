@@ -1,3 +1,4 @@
+using DialogueSystem;
 using Events;
 using Interactables.ThrowableDistraction;
 using UnityEngine;
@@ -7,7 +8,8 @@ public enum InputContext
 {
     None,
     Gameplay,
-    Minigame
+    Minigame,
+    Dialogue
 }
 
 namespace Managers
@@ -43,7 +45,9 @@ namespace Managers
         {
             _actions.Gameplay.Enable();
             _actions.Minigame.Enable();
+            _actions.Dialogue.Enable();
         
+            // Gameplay map
             _actions.Gameplay.Move.performed += OnMove;
             _actions.Gameplay.Move.canceled += OnStopMove;
         
@@ -53,7 +57,11 @@ namespace Managers
             _actions.Gameplay.IncreaseThrowDistance.performed += IncreaseThrowDistance;
             _actions.Gameplay.DecreaseThrowDistance.performed += DecreaseThrowDistance;
             
+            // Minigames map
             _actions.Minigame.Click.canceled += OnMouseRelease;
+            
+            // Dialogue map
+            _actions.Dialogue.ContinueDialogue.performed += ContinueDialogue;
             
             SetContext(InputContext.Gameplay);
         }
@@ -78,6 +86,9 @@ namespace Managers
                 case InputContext.Minigame:
                     _actions.Minigame.Enable();
                     break;
+                case InputContext.Dialogue:
+                    _actions.Dialogue.Enable();
+                    break;
                 default:
                     Debug.LogError($"Unhandled context {context}");
                     break;
@@ -88,6 +99,7 @@ namespace Managers
         {
             _actions.Gameplay.Disable();
             _actions.Minigame.Disable();
+            _actions.Dialogue.Disable();
         }
 
         private void OnMove(InputAction.CallbackContext context)
@@ -123,6 +135,11 @@ namespace Managers
         private void DecreaseThrowDistance(InputAction.CallbackContext context)
         {
             playerThrower.DecreaseThrowDistance();
+        }
+        
+        private void ContinueDialogue(InputAction.CallbackContext context)
+        {
+            DialogueManager.Instance.GenerateNextLine();
         }
     }
 }

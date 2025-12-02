@@ -64,13 +64,7 @@ namespace Minigames
         {
             if (_currentTypedPassword.Equals(_targetPassword))
             {
-                Debug.Log($"{displayText.text} is the correct password.");
-                
                 StartCoroutine(CompleteMinigameAfter(waitTime));
-            }
-            else
-            {
-                Debug.Log($"{displayText.text} is not the correct password.");
             }
         }
 

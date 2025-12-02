@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Levels;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,7 +40,7 @@ namespace Minigames
             _downloadProgressGrid = downloadProgressParent.GetComponent<GridLayoutGroup>();
         }
 
-        public void AddDownload(string filePath, float time)
+        public void AddDownload(string filePath, float time, LevelObjectiveScrObj objective = null)
         {
             if (_downloadedFiles.Contains(filePath))
             {
@@ -50,12 +51,12 @@ namespace Minigames
             
             downloadSectionAnimator.SetBool(IsHidden, _isSectionHidden);
             
-            StartCoroutine(DownloadProgressCoroutine(filePath, time));
+            StartCoroutine(DownloadProgressCoroutine(filePath, time, objective));
             
             UpdateContentHeight();
         }
 
-        private IEnumerator DownloadProgressCoroutine(string filePath, float time)
+        private IEnumerator DownloadProgressCoroutine(string filePath, float time, LevelObjectiveScrObj objective)
         {
             float timer = 0f;
             DownloadingResource resource = Instantiate(downloadProgressPrefab, downloadProgressParent).GetComponent<DownloadingResource>();
@@ -74,6 +75,8 @@ namespace Minigames
             _downloadedFiles.Add(filePath);
             
             resource.Complete();
+            
+            objective?.Complete();
         }
 
         public void ShowHide()

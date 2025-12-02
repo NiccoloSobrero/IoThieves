@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Enemy;
+using UnityEngine;
 
 namespace Interactables.ThrowableDistraction
 {
@@ -47,8 +48,10 @@ namespace Interactables.ThrowableDistraction
 
             for (int i = 0; i < size; i++)
             {
-                Debug.Log($"Attracting enemy {i} at pos {collisionPos}");
-                // _enemies[i].GetComponent<Enemy>().AttractAt(collisionPos);
+                if (_enemies[i].TryGetComponent(out AttractableEnemy enemy))
+                {
+                    enemy.MoveTowards(collisionPos);
+                }
             }
         }
     }

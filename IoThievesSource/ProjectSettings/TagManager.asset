@@ -11,11 +11,11 @@ TagManager:
   - Player
   - Water
   - UI
-  - Interactable
-  - Throwable
   - Enemy
-  - 
-  - 
+  - Throwable
+  - Interactable(Red)
+  - Interactable(Green)
+  - Interactable(Blue)
   - 
   - 
   - 

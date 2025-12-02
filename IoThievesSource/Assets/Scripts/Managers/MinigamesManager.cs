@@ -69,8 +69,6 @@ namespace Managers
                 
                 PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
             }
-            
-            Debug.Log("Queued:  " + _minigamesQueue.Count);
         }
 
         private void EnableWindow(bool enable)

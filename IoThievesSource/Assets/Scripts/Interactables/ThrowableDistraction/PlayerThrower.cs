@@ -158,7 +158,7 @@ namespace Interactables.ThrowableDistraction
                 if (Physics.Raycast(lastPos, 
                         (pos - lastPos).normalized, 
                         out RaycastHit hit, (pos - lastPos).magnitude, 
-                        _throwableCollisionMask))
+                        _throwableCollisionMask) && !hit.collider.isTrigger)
                 {
                     lineRenderer.SetPosition(i, hit.point);
                     lineRenderer.positionCount = i + 1;
