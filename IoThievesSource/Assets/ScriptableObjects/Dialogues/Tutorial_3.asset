@@ -15,4 +15,11 @@ MonoBehaviour:
   dialogueLines:
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: ' Now... we wait...'
+    text: And... done.
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: Throw the distraction in that blue area over there.
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: Try fixing the distance of the throw with the scroll wheel, aim and throw
+      with right click.

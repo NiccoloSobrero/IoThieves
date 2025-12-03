@@ -6,6 +6,8 @@ namespace Levels
     {
         private TutorialLevelManager _levelManager;
 
+        [SerializeField] private string enteringTag;
+
         public void Init(TutorialLevelManager levelManager)
         {
             _levelManager = levelManager;
@@ -13,9 +15,12 @@ namespace Levels
 
         private void OnTriggerEnter(Collider other)
         {
-            _levelManager.NextObjective();
+            if (other.CompareTag(enteringTag))
+            {
+                _levelManager.NextObjective();
             
-            gameObject.SetActive(false);
+                gameObject.SetActive(false);
+            }
         }
     }
 }

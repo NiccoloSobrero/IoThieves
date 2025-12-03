@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8797636586036667091}
   m_Layer: 7
   m_Name: Throwable
-  m_TagString: Untagged
+  m_TagString: Throwable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -152,4 +152,3 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 256
-  attractionRange: 10

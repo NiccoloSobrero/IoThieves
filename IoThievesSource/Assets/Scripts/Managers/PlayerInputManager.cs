@@ -9,7 +9,8 @@ public enum InputContext
     None,
     Gameplay,
     Minigame,
-    Dialogue
+    Dialogue,
+    Disabled
 }
 
 namespace Managers
@@ -46,6 +47,7 @@ namespace Managers
             _actions.Gameplay.Enable();
             _actions.Minigame.Enable();
             _actions.Dialogue.Enable();
+            _actions.Disabled.Enable();
         
             // Gameplay map
             _actions.Gameplay.Move.performed += OnMove;
@@ -89,6 +91,9 @@ namespace Managers
                 case InputContext.Dialogue:
                     _actions.Dialogue.Enable();
                     break;
+                case InputContext.Disabled:
+                    _actions.Disabled.Enable();
+                    break;
                 default:
                     Debug.LogError($"Unhandled context {context}");
                     break;
@@ -100,6 +105,7 @@ namespace Managers
             _actions.Gameplay.Disable();
             _actions.Minigame.Disable();
             _actions.Dialogue.Disable();
+            _actions.Disabled.Disable();
         }
 
         private void OnMove(InputAction.CallbackContext context)

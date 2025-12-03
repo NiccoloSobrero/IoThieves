@@ -27,22 +27,21 @@ namespace Interactables
         
         private Collider[] _playerColliders = new Collider[1];
         
-        private bool _hasCreatedDistraction;
-        private bool _canStartProduction;
+        public bool canStartProduction = true;
+        private bool _hasCreatedDistraction = false;
+        
+        private TutorialObjective _tutorialObjective;
 
         private void Awake()
         {
             progressBillboard.SetActive(false);
             checkObj.SetActive(false);
             fillImage.fillAmount = 0;
-            
-            _hasCreatedDistraction = false;
-            _canStartProduction = true;
         }
 
         public void Interact()
         {
-            if (_canStartProduction)
+            if (canStartProduction)
             {
                 if (Physics.OverlapSphereNonAlloc(
                         gameObject.transform.position, 
@@ -74,7 +73,13 @@ namespace Interactables
                         fillImage.fillAmount = 0;
                         
                         _hasCreatedDistraction = false;
-                        _canStartProduction = true;
+                        canStartProduction = true;
+
+                        if (_tutorialObjective != null)
+                        {
+                            _tutorialObjective.Complete();
+                            _tutorialObjective = null;
+                        }
                     }
                 }
             }
@@ -82,7 +87,7 @@ namespace Interactables
 
         private IEnumerator ProduceDistraction(float productionTime)
         {
-            _canStartProduction = false;
+            canStartProduction = false;
             
             progressBillboard.SetActive(true);
             checkObj.SetActive(false);
@@ -102,6 +107,11 @@ namespace Interactables
             checkObj.SetActive(true);
             
             _hasCreatedDistraction = true;
+        }
+
+        public void SetObjective(TutorialObjective tutorialObjective)
+        {
+            _tutorialObjective = tutorialObjective;
         }
     }
 }

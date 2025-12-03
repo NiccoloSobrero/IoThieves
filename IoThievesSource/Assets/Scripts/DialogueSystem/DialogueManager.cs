@@ -1,5 +1,4 @@
 using System.Collections;
-using Events;
 using Levels;
 using Managers;
 using TMPro;
@@ -150,18 +149,16 @@ namespace DialogueSystem
         private void CloseDialogueWindow()
         {
             _currentLine = 0;
+            
+            PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
+            
+            dialogueWindow.SetActive(false);
 
             if (_tutorialObjective != null)
             {
                 _tutorialObjective.Complete();
                 _tutorialObjective = null;
             }
-            
-            // EventsManager.OnDialogueEnded.Invoke();
-            
-            PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
-            
-            dialogueWindow.SetActive(false);
         }
     }
 }
