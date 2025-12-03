@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:IoThievesSource/Assets/Prefabs/Player.prefab.meta
 guid: 45b0b31cdac2ac9479c95ddf4a6be730
+========
+guid: caea618fa0ac9d349b8db4746ae90e5d
+>>>>>>>> Minimap:IoThievesSource/Assets/Prefabs/Minimap/MiniMap_Marker.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 

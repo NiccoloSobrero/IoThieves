@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:IoThievesSource/Assets/Scenes/AIAndSuspicion.unity.meta
 guid: 3330efae33e9fa545a2f5bf41884722c
 DefaultImporter:
+========
+guid: f985efb29a156c14fbd81b7dcd50a0c3
+PrefabImporter:
+>>>>>>>> Minimap:IoThievesSource/Assets/Prefabs/Minimap/Minimap.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
