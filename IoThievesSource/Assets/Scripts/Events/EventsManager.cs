@@ -21,13 +21,14 @@ namespace Events
         public static readonly UnityEvent<string> OnGameLoadError = new();
         
         #endregion
-
+        
         
         #region Minigames
 
         public static readonly UnityEvent<string> OnClickDecryptPassword = new();
 
         #endregion
+        
         
         # region UI Events
         public static readonly UnityEvent OnStartGame = new();
@@ -37,5 +38,12 @@ namespace Events
         public static readonly UnityEvent OnOptionsClicked = new();
         public static readonly UnityEvent OnRestartGame = new();
         # endregion
+
+
+        #region Tutorial Events
+
+        // public static readonly UnityEvent OnDialogueEnded = new();
+
+        #endregion
     }
 }

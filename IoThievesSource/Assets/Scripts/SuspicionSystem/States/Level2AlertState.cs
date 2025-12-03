@@ -16,7 +16,7 @@ namespace SuspicionSystem.States
             AlertThreshold = 1f;
             Suspicion = 0f;
         }
-
+        
         public override void Enter(AlertManager ctx)
         {
             AIState sus = ctx.EnemyAdapter.AIController.StateFactory.GetState(AINames.Suspicious);
@@ -35,6 +35,13 @@ namespace SuspicionSystem.States
             if (ctx.IsPlayerInRange)
             {
                 Suspicion = Mathf.Clamp01(Suspicion + AlertIncreaseSpeed * dt);
+                
+                if (Suspicion >= AlertThreshold)
+                {
+                    Suspicion = 1f;
+                    
+                    ctx.ChangeState(ctx.GameOverState);
+                }
             }
             else if (ctx.CanDecreaseSuspicion)
             {

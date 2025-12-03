@@ -1,4 +1,6 @@
+using DialogueSystem;
 using Events;
+using Interactables.ThrowableDistraction;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +8,9 @@ public enum InputContext
 {
     None,
     Gameplay,
-    Minigame
+    Minigame,
+    Dialogue,
+    Disabled
 }
 
 namespace Managers
@@ -17,6 +21,9 @@ namespace Managers
         
         private PlayerInputActions _actions;
         private InputContext _currentContext = InputContext.None;
+
+        [Header("References")]
+        [SerializeField] private PlayerThrower playerThrower;
 
         public Vector2 Move { get; private set; }
 
@@ -39,20 +46,31 @@ namespace Managers
         {
             _actions.Gameplay.Enable();
             _actions.Minigame.Enable();
+            _actions.Dialogue.Enable();
+            _actions.Disabled.Enable();
         
+            // Gameplay map
             _actions.Gameplay.Move.performed += OnMove;
             _actions.Gameplay.Move.canceled += OnStopMove;
         
             _actions.Gameplay.Click.performed += OnPointerClick;
             
+            _actions.Gameplay.Throw.performed += ThrowDistraction;
+            _actions.Gameplay.IncreaseThrowDistance.performed += IncreaseThrowDistance;
+            _actions.Gameplay.DecreaseThrowDistance.performed += DecreaseThrowDistance;
+            
+            // Minigames map
             _actions.Minigame.Click.canceled += OnMouseRelease;
+            
+            // Dialogue map
+            _actions.Dialogue.ContinueDialogue.performed += ContinueDialogue;
             
             SetContext(InputContext.Gameplay);
         }
 
         private void OnDisable()
         {
-            _actions.Gameplay.Disable();
+            DisableAll();
         }
 
         public void SetContext(InputContext context)
@@ -70,6 +88,12 @@ namespace Managers
                 case InputContext.Minigame:
                     _actions.Minigame.Enable();
                     break;
+                case InputContext.Dialogue:
+                    _actions.Dialogue.Enable();
+                    break;
+                case InputContext.Disabled:
+                    _actions.Disabled.Enable();
+                    break;
                 default:
                     Debug.LogError($"Unhandled context {context}");
                     break;
@@ -80,6 +104,8 @@ namespace Managers
         {
             _actions.Gameplay.Disable();
             _actions.Minigame.Disable();
+            _actions.Dialogue.Disable();
+            _actions.Disabled.Disable();
         }
 
         private void OnMove(InputAction.CallbackContext context)
@@ -100,6 +126,26 @@ namespace Managers
         private void OnMouseRelease(InputAction.CallbackContext context)
         {
             // MinigamesManager.Instance.CheckCompletion();
+        }
+
+        private void ThrowDistraction(InputAction.CallbackContext context)
+        {
+            playerThrower.Throw();
+        }
+
+        private void IncreaseThrowDistance(InputAction.CallbackContext context)
+        {
+            playerThrower.IncreaseThrowDistance();
+        }
+        
+        private void DecreaseThrowDistance(InputAction.CallbackContext context)
+        {
+            playerThrower.DecreaseThrowDistance();
+        }
+        
+        private void ContinueDialogue(InputAction.CallbackContext context)
+        {
+            DialogueManager.Instance.GenerateNextLine();
         }
     }
 }

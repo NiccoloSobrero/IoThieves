@@ -1,4 +1,5 @@
-﻿using Managers;
+﻿using Levels;
+using Managers;
 using UnityEngine;
 
 namespace Minigames.ScriptableObjects
@@ -6,9 +7,9 @@ namespace Minigames.ScriptableObjects
     [CreateAssetMenu(fileName = "PasswordDecryptionMinigame", menuName = "Minigames/Password decryption minigame")]
     public class PasswordDecryptionMinigameScrObj : MinigameScrObj
     {
-        public override void InitMinigame()
+        public override void InitMinigame(LevelObjectiveScrObj objectiveScrObj)
         {
-            MinigamesManager.Instance.InitPasswordDecryptionMinigame();
+            MinigamesManager.Instance.InitPasswordDecryptionMinigame(objectiveScrObj);
         }
     }
 }

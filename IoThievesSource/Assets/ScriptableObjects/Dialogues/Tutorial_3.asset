@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2bec28576622e5469ff125d61c4e3a5, type: 3}
+  m_Name: Tutorial_3
+  m_EditorClassIdentifier: 
+  dialogueLines:
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: And... done.
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: Throw the distraction in that blue area over there.
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: Try fixing the distance of the throw with the scroll wheel, aim and throw
+      with right click.

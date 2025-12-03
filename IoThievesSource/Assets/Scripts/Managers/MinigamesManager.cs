@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using Events;
-using Hackables;
+using Interactables;
+using Levels;
 using Minigames;
-using Minigames.ScriptableObjects;
 using UnityEngine;
 
 namespace Managers
@@ -13,15 +13,16 @@ namespace Managers
 
         [SerializeField] private GameObject minigamesWindow;
         
-        private readonly Queue<MinigameScrObj> _minigamesQueue = new();
+        private readonly Queue<MinigameAndObjective> _minigamesQueue = new();
         
         private GameObject _currentMinigameObj;
-        private MinigameScrObj _currentMinigameScrObj;
-        private HackableWithMinigames _currentHackedMinigame;
+        private MinigameAndObjective _currentMinigameAndObjective;
+        private InteractToMinigames _currentInteractableToMinigames;
         
         [Header("Minigames")]
-        [SerializeField] private PasswordDecryptorManager passwordDecryptionMinigame;
+        [SerializeField] private PasswordDecryptionMinigame passwordDecryptionMinigame;
         [SerializeField] private DesktopMinigame desktopMinigame;
+        [SerializeField] private SafeCodeMinigame safeCodeMinigame;
 
         private void Awake()
         {
@@ -53,13 +54,21 @@ namespace Managers
                 _currentMinigameObj.SetActive(false);
             }
 
-            if (_currentHackedMinigame != null)
+            if (_currentInteractableToMinigames != null)
             {
-                _currentHackedMinigame.TryRemovingMinigame(_currentMinigameScrObj);
+                _currentInteractableToMinigames.TryRemovingMinigame(_currentMinigameAndObjective);
             }
-            
-            _currentMinigameScrObj = _minigamesQueue.Dequeue();
-            _currentMinigameScrObj.InitMinigame();
+
+            if (_minigamesQueue.TryDequeue(out _currentMinigameAndObjective))
+            {
+                _currentMinigameAndObjective.minigameScrObj.InitMinigame(_currentMinigameAndObjective.objectiveScrObj);
+            }
+            else
+            {
+                EnableWindow(false);
+                
+                PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
+            }
         }
 
         private void EnableWindow(bool enable)
@@ -67,37 +76,19 @@ namespace Managers
             minigamesWindow.SetActive(enable);
         }
 
-        public void InitPasswordDecryptionMinigame()
-        {
-            _currentMinigameObj = passwordDecryptionMinigame.gameObject;
-            
-            _currentMinigameObj.SetActive(true);
-            
-            passwordDecryptionMinigame.InitMinigame();
-        }
-
-        public void InitDesktopMinigame(FolderContentScrObj folderContentScrObj)
-        {
-            _currentMinigameObj = desktopMinigame.gameObject;
-            
-            _currentMinigameObj.SetActive(true);
-            
-            desktopMinigame.InitMinigame(folderContentScrObj);
-        }
-
-        public void SetMinigamesLoop(HackableWithMinigames hackable, List<MinigameScrObj> minigames)
+        public void SetMinigamesLoop(InteractToMinigames interactable, List<MinigameAndObjective> minigames)
         {
             PlayerInputManager.Instance.SetContext(InputContext.Minigame);
             
-            _currentHackedMinigame = hackable;
+            _currentInteractableToMinigames = interactable;
             
             _minigamesQueue.Clear();
             
             EnableWindow(true);
             
-            foreach (MinigameScrObj minigameScrObj in minigames)
+            foreach (MinigameAndObjective minigame in minigames)
             {
-                _minigamesQueue.Enqueue(minigameScrObj);
+                _minigamesQueue.Enqueue(minigame);
             }
 
             MoveToNextMinigame();
@@ -111,10 +102,39 @@ namespace Managers
             _minigamesQueue.Clear();
 
             _currentMinigameObj = null;
-            _currentMinigameScrObj = null;
-            _currentHackedMinigame = null;
+            _currentMinigameAndObjective = null;
+            _currentInteractableToMinigames = null;
             
             PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
         }
+        
+        #region Minigames Init()
+        public void InitPasswordDecryptionMinigame(LevelObjectiveScrObj objectiveScrObj)
+        {
+            _currentMinigameObj = passwordDecryptionMinigame.gameObject;
+            
+            _currentMinigameObj.SetActive(true);
+            
+            passwordDecryptionMinigame.InitMinigame(objectiveScrObj);
+        }
+
+        public void InitDesktopMinigame(FolderContentScrObj folderContentScrObj, LevelObjectiveScrObj objectiveScrObj)
+        {
+            _currentMinigameObj = desktopMinigame.gameObject;
+            
+            _currentMinigameObj.SetActive(true);
+            
+            desktopMinigame.InitMinigame(folderContentScrObj, objectiveScrObj);
+        }
+        
+        public void InitSafeCodeMinigame(string targetPassword, LevelObjectiveScrObj objectiveScrObj)
+        {
+            _currentMinigameObj = safeCodeMinigame.gameObject;
+            
+            _currentMinigameObj.SetActive(true);
+            
+            safeCodeMinigame.InitMinigame(targetPassword, objectiveScrObj);
+        }
+        #endregion
     }
 }
