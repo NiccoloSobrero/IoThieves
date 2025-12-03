@@ -1,3 +1,4 @@
+using Managers;
 using SuspicionSystem;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ public class GameOverAlertState : AlertState
     {
         Debug.Log("Entered GameOverAlertState");
         
-        GameManager.Instance.TriggerGameOver();
+        GameManager2.Instance.TriggerGameOver();
     }
 
     public override void Exit(AlertManager ctx)
