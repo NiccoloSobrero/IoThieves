@@ -155,18 +155,24 @@ namespace Interactables.ThrowableDistraction
 
                 Vector3 lastPos = lineRenderer.GetPosition(i - 1);
                 
-                if (Physics.Raycast(lastPos, 
-                        (pos - lastPos).normalized, 
-                        out RaycastHit hit, (pos - lastPos).magnitude, 
-                        _throwableCollisionMask) && !hit.collider.isTrigger)
+                RaycastHit[] hits = new RaycastHit[2];
+                
+                Physics.RaycastNonAlloc(lastPos, (pos - lastPos).normalized, hits, (pos - lastPos).magnitude, _throwableCollisionMask);
+                
+                if (hits.Length == 0) continue;
+                
+                foreach (RaycastHit hit in hits)
                 {
-                    lineRenderer.SetPosition(i, hit.point);
-                    lineRenderer.positionCount = i + 1;
+                    if (hit.collider != null && !hit.collider.isTrigger)
+                    {
+                        lineRenderer.SetPosition(i, hit.point);
+                        lineRenderer.positionCount = i + 1;
                     
-                    impactPointObj.transform.position = hit.point;
-                    impactPointObj.SetActive(true);
+                        impactPointObj.transform.position = hit.point;
+                        impactPointObj.SetActive(true);
                     
-                    return;
+                        return;
+                    }
                 }
             }
             

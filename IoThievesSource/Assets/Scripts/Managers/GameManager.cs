@@ -1,6 +1,7 @@
 using System;
 using Events;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,6 +44,8 @@ public class GameManager : MonoBehaviour
     {
         // load correct level
         print("Starting Game");
+
+        SceneManager.LoadScene("TutorialLevel");
     }
 
     private void SaveGame()

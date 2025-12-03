@@ -46,6 +46,7 @@ namespace Interactables.ThrowableDistraction
             
             int size = Physics.OverlapSphereNonAlloc(gameObject.transform.position, _attractionRange, _enemies, enemyLayer);
 
+            Debug.Log(size + " enemies detected");
             for (int i = 0; i < size; i++)
             {
                 if (_enemies[i].TryGetComponent(out AttractableEnemy enemy))

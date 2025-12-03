@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4551341600958047393}
   - component: {fileID: 8390631200332822247}
   - component: {fileID: 8797636586036667091}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Throwable
   m_TagString: Throwable
   m_Icon: {fileID: 0}
@@ -151,4 +151,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 128

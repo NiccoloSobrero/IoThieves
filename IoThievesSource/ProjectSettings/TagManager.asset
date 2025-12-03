@@ -12,12 +12,7 @@ TagManager:
   - Player
   - Water
   - UI
-  - 
   - Waypoint
-  - 
-  - 
-  - 
-  - 
   - Enemy
   - Throwable
   - Interactable(Red)
@@ -42,7 +37,7 @@ TagManager:
   - 
   - 
   - 
-  - Minimap
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0
