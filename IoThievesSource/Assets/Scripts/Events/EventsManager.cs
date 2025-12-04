@@ -42,7 +42,7 @@ namespace Events
 
         #region Tutorial Events
 
-        // public static readonly UnityEvent OnDialogueEnded = new();
+        // public static readonly UnityEvent OnOpenPasswordPad = new();
 
         #endregion
     }
