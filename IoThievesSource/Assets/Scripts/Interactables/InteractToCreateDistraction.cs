@@ -27,7 +27,7 @@ namespace Interactables
         
         private Collider[] _playerColliders = new Collider[1];
         
-        public bool canStartProduction = true;
+        [HideInInspector] public bool canStartProduction = true;
         private bool _hasCreatedDistraction = false;
         
         private TutorialObjective _tutorialObjective;

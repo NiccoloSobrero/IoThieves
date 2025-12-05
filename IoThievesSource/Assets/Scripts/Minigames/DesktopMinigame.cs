@@ -22,9 +22,15 @@ namespace Minigames
         
         [SerializeField] private TextMeshProUGUI pathText;
         private RectTransform _pathTextRect;
+
+        [SerializeField] private GameObject openFileObj;
         
         private readonly List<string> _openPath = new();
         private readonly List<FolderContentScrObj> _pathScrObjs = new();
+
+        private string _currentOpenFileName;
+        private float _currentOpenFileDownloadTime;
+        private bool _isCurrentOpenFileTarget;
         
         private FolderContentScrObj _desktop;
 
@@ -64,6 +70,7 @@ namespace Minigames
             _objective = objective;
             
             folderObject.SetActive(false);
+            openFileObj.SetActive(false);
             
             GenerateFolder(desktopScrObj, desktopFoldersParent);
             
@@ -103,14 +110,36 @@ namespace Minigames
         {
             string currentPath = GetCurrentPath();
             
-            DownloadsManager.Instance.AddDownload(currentPath + fileName, time);
+            _currentOpenFileName = currentPath + fileName;
+            _currentOpenFileDownloadTime = time;
+            _isCurrentOpenFileTarget = false;
+            
+            // Set file graphics
+            openFileObj.SetActive(true);
         }
         
         public void OpenTargetFile(string fileName, float time)
         {
             string currentPath = GetCurrentPath();
             
-            DownloadsManager.Instance.AddDownload(currentPath + fileName, time, _objective);
+            _currentOpenFileName = currentPath + fileName;
+            _currentOpenFileDownloadTime = time;
+            _isCurrentOpenFileTarget = true;
+            
+            // Set file graphics
+            openFileObj.SetActive(true);
+        }
+
+        public void DownloadFile()
+        {
+            if (_isCurrentOpenFileTarget)
+            {
+                DownloadsManager.Instance.AddDownload(_currentOpenFileName, _currentOpenFileDownloadTime, _objective);
+            }
+            else
+            {
+                DownloadsManager.Instance.AddDownload(_currentOpenFileName, _currentOpenFileDownloadTime);
+            }
         }
         
         public void OpenProgram()

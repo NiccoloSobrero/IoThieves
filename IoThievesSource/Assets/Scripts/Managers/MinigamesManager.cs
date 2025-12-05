@@ -3,6 +3,7 @@ using Events;
 using Interactables;
 using Levels;
 using Minigames;
+using Minigames.ScriptableObjects;
 using UnityEngine;
 
 namespace Managers
@@ -23,6 +24,9 @@ namespace Managers
         [SerializeField] private PasswordDecryptionMinigame passwordDecryptionMinigame;
         [SerializeField] private DesktopMinigame desktopMinigame;
         [SerializeField] private SafeCodeMinigame safeCodeMinigame;
+
+        private MinigameScrObjToObjective _desktopMinigameOpenObjective;
+        private MinigameScrObjToObjective _passwordDecryptionMinigameOpenObjective;
 
         private void Awake()
         {
@@ -62,6 +66,21 @@ namespace Managers
             if (_minigamesQueue.TryDequeue(out _currentMinigameAndObjective))
             {
                 _currentMinigameAndObjective.minigameScrObj.InitMinigame(_currentMinigameAndObjective.objectiveScrObj);
+
+                if (_desktopMinigameOpenObjective != null &&
+                    _currentMinigameAndObjective.minigameScrObj == _desktopMinigameOpenObjective.MinigameScrObj)
+                {
+                    _desktopMinigameOpenObjective.Objective.Complete();
+
+                    _desktopMinigameOpenObjective = null;
+                }
+                else if (_passwordDecryptionMinigameOpenObjective != null &&
+                    _currentMinigameAndObjective.minigameScrObj == _passwordDecryptionMinigameOpenObjective.MinigameScrObj)
+                {
+                    _passwordDecryptionMinigameOpenObjective.Objective.Complete();
+
+                    _passwordDecryptionMinigameOpenObjective = null;
+                }
             }
             else
             {
@@ -136,5 +155,31 @@ namespace Managers
             safeCodeMinigame.InitMinigame(targetPassword, objectiveScrObj);
         }
         #endregion
+
+        #region Minigames objective initialization
+
+        public void SetDesktopMinigameOpenObjective(MinigameScrObj minigameScrObj, TutorialObjective objective)
+        {
+            _desktopMinigameOpenObjective = new MinigameScrObjToObjective(minigameScrObj, objective);
+        }
+        
+        public void SetPasswordDecryptionMinigameOpenObjective(MinigameScrObj minigameScrObj, TutorialObjective objective)
+        {
+            _passwordDecryptionMinigameOpenObjective = new MinigameScrObjToObjective(minigameScrObj, objective);
+        }
+
+        #endregion
+    }
+    
+    public class MinigameScrObjToObjective
+    {
+        public readonly MinigameScrObj MinigameScrObj;
+        public readonly TutorialObjective Objective;
+
+        public MinigameScrObjToObjective(MinigameScrObj minigameScrObj, TutorialObjective objective)
+        {
+            MinigameScrObj = minigameScrObj;
+            Objective = objective;
+        }
     }
 }

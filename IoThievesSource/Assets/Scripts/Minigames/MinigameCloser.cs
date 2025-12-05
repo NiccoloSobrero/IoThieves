@@ -9,8 +9,6 @@ namespace Minigames
         public void CloseMinigameWindow()
         {
             minigameWindow.SetActive(false);
-            
-            // PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
         }
     }
 }
