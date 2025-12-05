@@ -9,6 +9,7 @@ namespace AI
             private SuspiciousState suspiciousState;
             private PatrolState patrolState;
             private DeviceHackedState deviceHackedState;
+            private NoiseHeardState noiseHeardState;
             
             public StateFactory(AIController controller)
             {
@@ -26,6 +27,7 @@ namespace AI
                     case AINames.Suspicious : return suspiciousState;
                     case AINames.Patrol: return patrolState;
                     case AINames.DeviceHacked: return deviceHackedState;
+                    case AINames.NoiseHeardState : return noiseHeardState;
                     default: throw new ArgumentException($"Invalid state name: {stateName}.");
                 }
             }
