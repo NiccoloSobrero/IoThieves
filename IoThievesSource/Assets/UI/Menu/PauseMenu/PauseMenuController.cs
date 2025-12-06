@@ -14,10 +14,17 @@ public class PauseMenuController : MenuController
         resumeButton.clicked += ResumeGame;
     }
 
+    public void PauseMenu()
+    {
+        Time.timeScale = 0;
+        base.menuDocument.enabled = true;
+    }
+
     private void ResumeGame()
     {
-        // Time.timeScale = 1;
-        EventsManager.OnResumeGame?.Invoke();
+        Time.timeScale = 1;
+        // EventsManager.OnResumeGame?.Invoke();
+        base.menuDocument.enabled = false;
     }
     
 }

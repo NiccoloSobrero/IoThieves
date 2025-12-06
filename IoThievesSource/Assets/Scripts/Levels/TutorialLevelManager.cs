@@ -16,6 +16,7 @@ namespace Levels
         private static readonly int Open = Animator.StringToHash("Open");
         private TutorialObjective _objective;
         [SerializeField] private Transform cameraTarget;
+        [SerializeField] private EndLevelMenuController endLevelMenuController;
         
         [Header("Step 0")]
         [SerializeField] private DialogueLinesScrObj tutorialDialogue0;
@@ -299,6 +300,7 @@ namespace Levels
         private void EndLevel()
         {
             Debug.Log("EndLevel");
+            endLevelMenuController.ActivateEndLevelUI();
         }
     }
 }

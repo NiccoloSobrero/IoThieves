@@ -1,3 +1,4 @@
+using System;
 using Events;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -22,7 +23,7 @@ public class MenuController : MonoBehaviour
         optionsButton.clicked += OpenGameOptions;
         quitButton.clicked += QuitGame;
     }
-    
+
     private void SaveGame()
     {
         EventsManager.OnSaveGame?.Invoke();
@@ -35,7 +36,6 @@ public class MenuController : MonoBehaviour
     
     private void QuitGame()
     {
-        // temporary logic: move it in OnGameQuit Event
         EventsManager.OnQuitGame?.Invoke();
     }
 }

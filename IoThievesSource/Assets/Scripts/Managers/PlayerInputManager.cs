@@ -25,6 +25,8 @@ namespace Managers
         [Header("References")]
         [SerializeField] private PlayerThrower playerThrower;
 
+        [SerializeField] private PauseMenuController pauseMenuController;
+
         public Vector2 Move { get; private set; }
 
         private void Awake()
@@ -58,6 +60,8 @@ namespace Managers
             _actions.Gameplay.Throw.performed += ThrowDistraction;
             _actions.Gameplay.IncreaseThrowDistance.performed += IncreaseThrowDistance;
             _actions.Gameplay.DecreaseThrowDistance.performed += DecreaseThrowDistance;
+
+            _actions.Gameplay.Pause.performed += PauseGame;
             
             // Minigames map
             _actions.Minigame.Click.canceled += OnMouseRelease;
@@ -146,6 +150,11 @@ namespace Managers
         private void ContinueDialogue(InputAction.CallbackContext context)
         {
             DialogueManager.Instance.GenerateNextLine();
+        }
+
+        private void PauseGame(InputAction.CallbackContext context)
+        {
+            pauseMenuController.PauseMenu();
         }
     }
 }
