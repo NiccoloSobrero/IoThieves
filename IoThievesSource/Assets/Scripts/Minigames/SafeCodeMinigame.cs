@@ -79,12 +79,6 @@ namespace Minigames
             if (_currentTypedPassword.Equals(_targetPassword))
             {
                 StartCoroutine(CompleteMinigameAfter(waitTime));
-
-                if (_onGuessedPassword != null)
-                {
-                    _onGuessedPassword.Complete();
-                    _onGuessedPassword = null;
-                }
             }
         }
 
@@ -95,6 +89,12 @@ namespace Minigames
             EventsManager.OnMinigameCompleted?.Invoke();
             
             _objective?.Complete();
+            
+            if (_onGuessedPassword != null)
+            {
+                _onGuessedPassword.Complete();
+                _onGuessedPassword = null;
+            }
         }
 
         public void SetOnGuessedPassword(TutorialObjective onGuessedPassword)

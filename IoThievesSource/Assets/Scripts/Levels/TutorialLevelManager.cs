@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using DialogueSystem;
+using Enemy;
 using Interactables;
 using Managers;
 using Minigames;
@@ -12,6 +13,7 @@ namespace Levels
 {
     public class TutorialLevelManager : MonoBehaviour
     {
+        private static readonly int Open = Animator.StringToHash("Open");
         private TutorialObjective _objective;
         [SerializeField] private Transform cameraTarget;
         
@@ -73,8 +75,21 @@ namespace Levels
         [SerializeField] private SafeCodeMinigame safeCodeMinigame;
 
         [Space] [Header("Step 11")] 
+        [SerializeField] private DialogueLinesScrObj tutorialDialogue11;
+        [SerializeField] private Animator shuttersAnim;
+        [SerializeField] private AttractableEnemy enemyCamera;
+        [SerializeField] private InteractToAttract hackableCube;
+        [SerializeField] private Transform shutterCameraTransform;
+
+        [SerializeField] private Transform playerTransform;
+        [SerializeField] private Transform playerTargetPos;
+        [SerializeField] private float playerTimeToMove;
+        
+        [Space]
+        [Header("Step 12")]
+        [SerializeField] private DialogueLinesScrObj tutorialDialogue12;
         [SerializeField] private GameObject endLevelTrigger;
-        [SerializeField] private GameObject shutters;
+        [SerializeField] private GameObject exitCollider;
         
         private List<UnityAction> _steps = new();
         
@@ -103,6 +118,8 @@ namespace Levels
             endLevelTrigger.GetComponent<LevelTrigger>().Init(this);
             endLevelTrigger.SetActive(false);
             
+            hackableCube.gameObject.SetActive(false);
+            
             _currentStep = 0;
             
             // Build steps
@@ -114,7 +131,7 @@ namespace Levels
                 Step_6, Step_7,
                 Step_8, Step_9,
                 Step_10, Step_11,
-                Step_12
+                Step_12, EndLevel
             };
         }
         
@@ -256,15 +273,32 @@ namespace Levels
 
         private void Step_11()
         {
-            shutters.SetActive(false);
-            endLevelTrigger.SetActive(true);
+            DialogueManager.Instance.SetDialogue(tutorialDialogue11);
+            DialogueManager.Instance.OpenDialogueWindow();
+
+            Vector3 targetPos = shutterCameraTransform.position;
+            targetPos.y = 0;
+            
+            enemyCamera.MoveTowards(targetPos);
+            
+            hackableCube.gameObject.SetActive(true);
+            hackableCube.SetOnInteractObjective(_objective);
+
+            shuttersAnim.SetTrigger(Open);
         }
 
         private void Step_12()
         {
-            Debug.Log("Level ended");
+            DialogueManager.Instance.SetDialogue(tutorialDialogue12);
+            DialogueManager.Instance.OpenDialogueWindow();
             
-            // Call end level function
+            endLevelTrigger.SetActive(true);
+            exitCollider.SetActive(false);
+        }
+
+        private void EndLevel()
+        {
+            Debug.Log("EndLevel");
         }
     }
 }

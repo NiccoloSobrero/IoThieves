@@ -53,7 +53,6 @@ namespace Managers
 
         private void MoveToNextMinigame()
         {
-            Debug.Log("Called MoveToNextMinigame");
             if (_currentMinigameObj != null)
             {
                 _currentMinigameObj.SetActive(false);
