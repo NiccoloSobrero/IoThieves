@@ -1,0 +1,13 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Menu/EndLevelMenuDocumentComponent/end-level-document-component.uss?fileID=7433441132597879392&amp;guid=34c867220180c4297a5ffae7da6cd1cb&amp;type=3#end-level-document-component" />
+    <ui:VisualElement name="cardContainer" class="card-container">
+        <ui:Button name="cardButton" class="card-button">
+            <ui:VisualElement name="cardTitleContainer" class="card-title-container">
+                <ui:Label name="cardTitle" text="Document" class="card-title" />
+            </ui:VisualElement>
+            <ui:VisualElement name="cardDescriptionContainer" class="card-description-container">
+                <ui:Label name="cardDescription" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." class="card-description" />
+            </ui:VisualElement>
+        </ui:Button>
+    </ui:VisualElement>
+</ui:UXML>

@@ -8,7 +8,7 @@ public class EndLevelMenuController : MonoBehaviour
     [SerializeField]
     protected UIDocument menuDocument;
     [SerializeField]
-    private VisualTreeAsset documentButtonTemplate;
+    private VisualTreeAsset documentCardTemplate;
     [SerializeField]
     private List<string> documents = new List<string>();
     
@@ -23,12 +23,12 @@ public class EndLevelMenuController : MonoBehaviour
 
     private void UpdateUI()
     {
-        if (documentButtonTemplate == null)
+        if (documentCardTemplate == null)
             return;
         foreach (string document in documents)
         {
-            var documentButtonInstance = documentButtonTemplate.Instantiate();
-            var nameLabel =  documentButtonInstance.Q<Label>("endLevelDescription");
+            var documentButtonInstance = documentCardTemplate.Instantiate();
+            var nameLabel =  documentButtonInstance.Q<Label>("cardDescription");
             nameLabel.text = document;
             endLevelMenuContainerVisualElement.Add(documentButtonInstance);
         }

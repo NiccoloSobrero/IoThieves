@@ -1661,7 +1661,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &102930739
 Transform:
   m_ObjectHideFlags: 0
@@ -24182,7 +24182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1551799430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24230,7 +24230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuDocument: {fileID: 1551799430}
-  documentButtonTemplate: {fileID: 9197481963319205126, guid: cc0b7a2cc641a456bbe92c7d536f5c47, type: 3}
+  documentCardTemplate: {fileID: 9197481963319205126, guid: cc0b7a2cc641a456bbe92c7d536f5c47, type: 3}
   documents:
   - "Questo \xE8 il primo documento di prova"
   - "Questo \xE8 il secondo documento di prova"
