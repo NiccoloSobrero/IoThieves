@@ -1,0 +1,5 @@
+.end-level-menu-container {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(128, 128, 128, 1);
+}
