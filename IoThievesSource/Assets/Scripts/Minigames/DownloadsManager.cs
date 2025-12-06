@@ -22,6 +22,12 @@ namespace Minigames
         private readonly List<string> _downloadedFiles = new();
         public List<string> DownloadedFiles => _downloadedFiles;
 
+        #region Tutorial Objectives
+
+        private TutorialObjective _onDownloadTargetFile;
+
+        #endregion
+
         private void Awake()
         {
             if (Instance == null)
@@ -40,7 +46,7 @@ namespace Minigames
             _downloadProgressGrid = downloadProgressParent.GetComponent<GridLayoutGroup>();
         }
 
-        public void AddDownload(string filePath, float time, LevelObjectiveScrObj objective = null)
+        public void AddDownload(string filePath, float time, bool isTarget, LevelObjectiveScrObj objective = null)
         {
             if (_downloadedFiles.Contains(filePath))
             {
@@ -51,12 +57,14 @@ namespace Minigames
             
             downloadSectionAnimator.SetBool(IsHidden, _isSectionHidden);
             
-            StartCoroutine(DownloadProgressCoroutine(filePath, time, objective));
+            _downloadedFiles.Add(filePath);
+            
+            StartCoroutine(DownloadProgressCoroutine(filePath, time, isTarget, objective));
             
             UpdateContentHeight();
         }
 
-        private IEnumerator DownloadProgressCoroutine(string filePath, float time, LevelObjectiveScrObj objective)
+        private IEnumerator DownloadProgressCoroutine(string filePath, float time, bool isTarget, LevelObjectiveScrObj objective)
         {
             float timer = 0f;
             DownloadingResource resource = Instantiate(downloadProgressPrefab, downloadProgressParent).GetComponent<DownloadingResource>();
@@ -72,11 +80,15 @@ namespace Minigames
                 yield return null;
             }
             
-            _downloadedFiles.Add(filePath);
-            
             resource.Complete();
             
             objective?.Complete();
+
+            if (_onDownloadTargetFile != null && isTarget)
+            {
+                _onDownloadTargetFile.Complete();
+                _onDownloadTargetFile = null;
+            }
         }
 
         public void ShowHide()
@@ -96,6 +108,11 @@ namespace Minigames
                               _downloadProgressGrid.padding.top;
             
             rect.sizeDelta = new Vector2(rect.sizeDelta.x, newHeight);
+        }
+
+        public void SetOnDownloadTargetFile(TutorialObjective objective)
+        {
+            _onDownloadTargetFile = objective;
         }
     }
 }

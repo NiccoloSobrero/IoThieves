@@ -10,7 +10,10 @@ namespace Minigames
     public class SafeCodeMinigame : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI displayText;
+        [SerializeField] private GameObject solutionObj;
         [SerializeField] private float waitTime;
+
+        private bool _foundSolution;
 
         private int _passwordLength;
         private string _targetPassword;
@@ -18,6 +21,12 @@ namespace Minigames
         private StringBuilder _currentTypedPassword;
 
         private LevelObjectiveScrObj _objective;
+
+        #region Tutorial Objectives
+
+        private TutorialObjective _onGuessedPassword;
+
+        #endregion
         
         public void InitMinigame(string targetPassword, LevelObjectiveScrObj objective)
         {
@@ -34,6 +43,11 @@ namespace Minigames
             }
             
             displayText.text = _currentTypedPassword.ToString();
+
+            if (_foundSolution)
+            {
+                solutionObj.SetActive(true);
+            }
         }
     
         public void OnDigitClicked(string digit)
@@ -65,6 +79,12 @@ namespace Minigames
             if (_currentTypedPassword.Equals(_targetPassword))
             {
                 StartCoroutine(CompleteMinigameAfter(waitTime));
+
+                if (_onGuessedPassword != null)
+                {
+                    _onGuessedPassword.Complete();
+                    _onGuessedPassword = null;
+                }
             }
         }
 
@@ -75,6 +95,11 @@ namespace Minigames
             EventsManager.OnMinigameCompleted?.Invoke();
             
             _objective?.Complete();
+        }
+
+        public void SetOnGuessedPassword(TutorialObjective onGuessedPassword)
+        {
+            _onGuessedPassword = onGuessedPassword;
         }
     }
 }

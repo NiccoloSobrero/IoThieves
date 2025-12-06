@@ -18,6 +18,7 @@ namespace Minigames
         public DesktopItemType itemType;
         public Sprite icon;
         public float value;
+        public Sprite documentSprite;
 
         public FolderContentScrObj folderContent;
     }

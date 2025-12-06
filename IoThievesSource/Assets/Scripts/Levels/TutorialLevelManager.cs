@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DialogueSystem;
 using Interactables;
 using Managers;
+using Minigames;
 using Minigames.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,7 +18,7 @@ namespace Levels
         [Header("Step 0")]
         [SerializeField] private DialogueLinesScrObj tutorialDialogue0;
         [SerializeField] private GameObject step0Trigger;
-        [SerializeField] private GameObject exitInteractable;
+        [SerializeField] private GameObject codePadInteractable;
         [SerializeField] private AnimationCurve targetMovementCurve;
         [SerializeField] private LayerMask greenInteractableLayer;
         [SerializeField] private float timeToPan;
@@ -52,6 +53,7 @@ namespace Levels
         [SerializeField] private LayerMask defaultLayer;
         [SerializeField] private MinigameScrObj passwordDecryptionMinigame;
         [SerializeField] private MinigameScrObj desktopNavigationMinigame;
+        [SerializeField] private DesktopMinigame desktopMinigame;
         
         [Space]
         [Header("Step 7")]
@@ -64,6 +66,15 @@ namespace Levels
         [Space]
         [Header("Step 9")]
         [SerializeField] private DialogueLinesScrObj tutorialDialogue9;
+        
+        [Space]
+        [Header("Step 10")]
+        [SerializeField] private DialogueLinesScrObj tutorialDialogue10;
+        [SerializeField] private SafeCodeMinigame safeCodeMinigame;
+
+        [Space] [Header("Step 11")] 
+        [SerializeField] private GameObject endLevelTrigger;
+        [SerializeField] private GameObject shutters;
         
         private List<UnityAction> _steps = new();
         
@@ -89,6 +100,9 @@ namespace Levels
             step2Trigger.GetComponent<LevelTrigger>().Init(this);
             step2Trigger.SetActive(false);
             
+            endLevelTrigger.GetComponent<LevelTrigger>().Init(this);
+            endLevelTrigger.SetActive(false);
+            
             _currentStep = 0;
             
             // Build steps
@@ -98,7 +112,9 @@ namespace Levels
                 Step_2, Step_3,
                 Step_4, Step_5,
                 Step_6, Step_7,
-                Step_8, Step_9
+                Step_8, Step_9,
+                Step_10, Step_11,
+                Step_12
             };
         }
         
@@ -115,7 +131,7 @@ namespace Levels
         // Intro dialogue + activate trigger for next step
         private void Step_0()
         {
-            DialogueManager.Instance.SetDialogue(tutorialDialogue0, _objective);
+            DialogueManager.Instance.SetDialogue(tutorialDialogue0, InputContext.Disabled, _objective);
             DialogueManager.Instance.OpenDialogueWindow();
 
             step0Trigger.SetActive(true);
@@ -126,7 +142,7 @@ namespace Levels
         {
             PlayerInputManager.Instance.SetContext(InputContext.Disabled);
             
-            StartCoroutine(MoveCameraTo(exitInteractable.transform.position, timeToPan, timeStay));
+            StartCoroutine(MoveCameraTo(codePadInteractable.transform.position, timeToPan, timeStay));
         }
 
         private IEnumerator MoveCameraTo(Vector3 target, float panTime, float stayTime)
@@ -146,7 +162,7 @@ namespace Levels
                 yield return null;
             }
             
-            exitInteractable.layer = (int)Mathf.Log(greenInteractableLayer.value, 2);
+            codePadInteractable.layer = (int)Mathf.Log(greenInteractableLayer.value, 2);
             
             yield return new WaitForSeconds(stayTime);
             
@@ -191,7 +207,7 @@ namespace Levels
 
         private void Step_5()
         {
-            DialogueManager.Instance.SetDialogue(tutorialDialogue5, _objective);
+            DialogueManager.Instance.SetDialogue(tutorialDialogue5, tutorialObjective:_objective);
             DialogueManager.Instance.OpenDialogueWindow();
         }
 
@@ -206,24 +222,49 @@ namespace Levels
             // Then set up desktop navigation minigame to display last dialogue
             MinigamesManager.Instance.SetPasswordDecryptionMinigameOpenObjective(passwordDecryptionMinigame, _objective);
             MinigamesManager.Instance.SetDesktopMinigameOpenObjective(desktopNavigationMinigame, _objective);
+            desktopMinigame.SetOnOpenFolderWithTargetObjective(_objective);
         }
         
         private void Step_7()
         {
-            DialogueManager.Instance.SetDialogue(tutorialDialogue7);
+            DialogueManager.Instance.SetDialogue(tutorialDialogue7, InputContext.Minigame);
             DialogueManager.Instance.OpenDialogueWindow();
         }
 
         private void Step_8()
         {
-            DialogueManager.Instance.SetDialogue(tutorialDialogue8);
+            DialogueManager.Instance.SetDialogue(tutorialDialogue8, InputContext.Minigame);
             DialogueManager.Instance.OpenDialogueWindow();
         }
 
         private void Step_9()
         {
-            DialogueManager.Instance.SetDialogue(tutorialDialogue9);
+            DialogueManager.Instance.SetDialogue(tutorialDialogue9, InputContext.Minigame);
             DialogueManager.Instance.OpenDialogueWindow();
+            
+            DownloadsManager.Instance.SetOnDownloadTargetFile(_objective);
+        }
+        
+        private void Step_10()
+        {
+            DialogueManager.Instance.SetDialogue(tutorialDialogue10, InputContext.Minigame);
+            DialogueManager.Instance.OpenDialogueWindow();
+            
+            codePadInteractable.layer = (int)Mathf.Log(greenInteractableLayer.value, 2);
+            safeCodeMinigame.SetOnGuessedPassword(_objective);
+        }
+
+        private void Step_11()
+        {
+            shutters.SetActive(false);
+            endLevelTrigger.SetActive(true);
+        }
+
+        private void Step_12()
+        {
+            Debug.Log("Level ended");
+            
+            // Call end level function
         }
     }
 }

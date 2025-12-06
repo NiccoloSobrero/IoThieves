@@ -20,7 +20,7 @@ namespace DialogueSystem
         [SerializeField] private GameObject textCompletedObj;
 
         private const float CharactersDelay = 0.01f;
-        private const float SkipTextGenerationDelay = 0.5f;
+        private const float SkipTextGenerationDelay = 0f;
         
         private int _currentLine;
         private bool _completedTextGeneration;
@@ -30,6 +30,8 @@ namespace DialogueSystem
         private Coroutine _skipTextGenerationCoroutine;
         
         private TutorialObjective _tutorialObjective;
+
+        private InputContext _closingInputContext;
 
         private void Awake()
         {
@@ -47,10 +49,13 @@ namespace DialogueSystem
             _canSkipTextGeneration = false;
         }
 
-        public void SetDialogue(DialogueLinesScrObj dialogueLinesScrObj, TutorialObjective tutorialObjective = null)
+        public void SetDialogue(DialogueLinesScrObj dialogueLinesScrObj, 
+            InputContext closingInputContext = InputContext.Gameplay, 
+            TutorialObjective tutorialObjective = null)
         {
             _dialogueLinesScrObj = dialogueLinesScrObj;
             _tutorialObjective = tutorialObjective;
+            _closingInputContext = closingInputContext;
         }
 
         public void GenerateNextLine()
@@ -150,7 +155,7 @@ namespace DialogueSystem
         {
             _currentLine = 0;
             
-            PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
+            PlayerInputManager.Instance.SetContext(_closingInputContext);
             
             dialogueWindow.SetActive(false);
 

@@ -24,6 +24,7 @@ namespace Minigames
         private RectTransform _pathTextRect;
 
         [SerializeField] private GameObject openFileObj;
+        [SerializeField] private DesktopNavFile desktopNavFile;
         
         private readonly List<string> _openPath = new();
         private readonly List<FolderContentScrObj> _pathScrObjs = new();
@@ -39,6 +40,13 @@ namespace Minigames
         private LevelObjectiveScrObj _objective;
         
         private readonly List<string> _targetFiles = new();
+
+        
+        #region Tutorial Objectives
+
+        private TutorialObjective _onOpenFolderWithTarget;
+
+        #endregion
 
         private void Awake()
         {
@@ -57,10 +65,22 @@ namespace Minigames
                 return;
             }
             
+            bool hasTargetFile = false;
+            
             foreach (DesktopItem item in scrObj.folderItems)
             {
                 Folder folder = Instantiate(folderPrefab, parent).GetComponent<Folder>();
                 folder.Customize(item, this);
+
+                if (item.itemType == DesktopItemType.TargetFile)
+                {
+                    hasTargetFile = true;
+                }
+            }
+
+            if (_onOpenFolderWithTarget != null && hasTargetFile)
+            {
+                _onOpenFolderWithTarget.Complete();
             }
         }
 
@@ -106,7 +126,7 @@ namespace Minigames
             UpdatePathText();
         }
 
-        public void OpenFile(string fileName, float time)
+        public void OpenFile(string fileName, float time, Sprite documentSprite)
         {
             string currentPath = GetCurrentPath();
             
@@ -114,17 +134,21 @@ namespace Minigames
             _currentOpenFileDownloadTime = time;
             _isCurrentOpenFileTarget = false;
             
+            desktopNavFile.AdaptToImage(documentSprite, fileName);
+            
             // Set file graphics
             openFileObj.SetActive(true);
         }
         
-        public void OpenTargetFile(string fileName, float time)
+        public void OpenTargetFile(string fileName, float time, Sprite documentSprite)
         {
             string currentPath = GetCurrentPath();
             
             _currentOpenFileName = currentPath + fileName;
             _currentOpenFileDownloadTime = time;
             _isCurrentOpenFileTarget = true;
+            
+            desktopNavFile.AdaptToImage(documentSprite, fileName);
             
             // Set file graphics
             openFileObj.SetActive(true);
@@ -134,11 +158,11 @@ namespace Minigames
         {
             if (_isCurrentOpenFileTarget)
             {
-                DownloadsManager.Instance.AddDownload(_currentOpenFileName, _currentOpenFileDownloadTime, _objective);
+                DownloadsManager.Instance.AddDownload(_currentOpenFileName, _currentOpenFileDownloadTime,  _isCurrentOpenFileTarget, _objective);
             }
             else
             {
-                DownloadsManager.Instance.AddDownload(_currentOpenFileName, _currentOpenFileDownloadTime);
+                DownloadsManager.Instance.AddDownload(_currentOpenFileName, _currentOpenFileDownloadTime, _isCurrentOpenFileTarget);
             }
         }
         
@@ -264,6 +288,11 @@ namespace Minigames
             }
             
             EventsManager.OnMinigameCompleted?.Invoke();
+        }
+
+        public void SetOnOpenFolderWithTargetObjective(TutorialObjective onOpenFolderWithTarget)
+        {
+            _onOpenFolderWithTarget = onOpenFolderWithTarget;
         }
     }
 }

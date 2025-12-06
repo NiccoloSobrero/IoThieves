@@ -12,6 +12,8 @@ namespace Minigames
         [SerializeField] private float deltaDoubleClick = 0.5f;
         [SerializeField] private Image icon;
         [SerializeField] private TextMeshProUGUI label;
+
+        private Sprite _documentSprite;
         private float _value;
         private DesktopItemType _type;
         
@@ -40,6 +42,7 @@ namespace Minigames
             _fileName = item.itemName;
             _type = item.itemType;
             _value = item.value;
+            _documentSprite = item.documentSprite;
             
             _contentScrObj = item.folderContent;
             
@@ -78,10 +81,10 @@ namespace Minigames
                         _desktopMinigame.OpenProgram();
                         break;
                     case DesktopItemType.File:
-                        _desktopMinigame.OpenFile(_fileName, _value);
+                        _desktopMinigame.OpenFile(_fileName, _value, _documentSprite);
                         break;
                     case DesktopItemType.TargetFile:
-                        _desktopMinigame.OpenTargetFile(_fileName, _value);
+                        _desktopMinigame.OpenTargetFile(_fileName, _value, _documentSprite);
                         break;
                 }
             }
