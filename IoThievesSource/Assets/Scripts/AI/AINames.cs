@@ -6,5 +6,6 @@ namespace AI
         Suspicious,
         Idle,
         DeviceHacked,
+        NoiseHeardState,
     }
 }
