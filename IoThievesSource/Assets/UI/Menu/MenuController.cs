@@ -11,7 +11,9 @@ public class MenuController : MonoBehaviour
     {
         var root = menuDocument.rootVisualElement;
         var saveButton = root.Q<Button>("saveButton");
+        saveButton.SetEnabled(false);
         var optionsButton = root.Q<Button>("optionsButton");
+        optionsButton.SetEnabled(false);
         var quitButton = root.Q<Button>("quitButton");
         if (saveButton != null)
         {
