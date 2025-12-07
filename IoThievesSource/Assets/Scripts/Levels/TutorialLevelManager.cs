@@ -17,9 +17,12 @@ namespace Levels
     public class TutorialLevelManager : MonoBehaviour
     {
         private static readonly int Open = Animator.StringToHash("Open");
-        // private TutorialObjective _objective;
+        
         [SerializeField] private Transform cameraTarget;
         [SerializeField] private EndLevelMenuController endLevelMenuController;
+        [SerializeField] private LayerMask interactableLayer;
+        
+        [SerializeField] private LayerMask defaultLayer;
 
         [Header("Step reset")] 
         [SerializeField] private DialogueLinesScrObj onStepReset;
@@ -32,15 +35,15 @@ namespace Levels
         [SerializeField] private DialogueLinesScrObj tutorialDialogue0;
         [SerializeField] private GameObject step0Trigger;
         [SerializeField] private GameObject codePadInteractable;
+        [SerializeField] private GameObject codePadInteractableOutline;
         [SerializeField] private AnimationCurve targetMovementCurve;
-        [SerializeField] private LayerMask greenInteractableLayer;
         [SerializeField] private float timeToPan;
         [SerializeField] private float timeStay;
         
         [Space]
         [Header("Step 1")]
         [SerializeField] private InteractToCreateDistraction printerInteractable;
-        [SerializeField] private LayerMask blueInteractableLayer;
+        [SerializeField] private GameObject printerInteractableOutline;
 
         [Space]
         [Header("Step 2")]
@@ -64,7 +67,7 @@ namespace Levels
         [Space]
         [Header("Step 6")]
         [SerializeField] private GameObject pcInteractable;
-        [SerializeField] private LayerMask defaultLayer;
+        [SerializeField] private GameObject pcInteractableOutline;
         [SerializeField] private MinigameScrObj passwordDecryptionMinigame;
         [SerializeField] private MinigameScrObj desktopNavigationMinigame;
         [SerializeField] private DesktopMinigame desktopMinigame;
@@ -120,8 +123,6 @@ namespace Levels
 
         private void Init()
         {
-            // _objective = new TutorialObjective(this);
-            
             step0Trigger.GetComponent<LevelTrigger>().Init(this);
             step0Trigger.SetActive(false);
             
@@ -132,6 +133,10 @@ namespace Levels
             endLevelTrigger.SetActive(false);
             
             hackableCube.gameObject.SetActive(false);
+            
+            printerInteractableOutline.SetActive(false);
+            pcInteractableOutline.SetActive(false);
+            codePadInteractableOutline.SetActive(false);
             
             _currentStep = 0;
             
@@ -196,7 +201,8 @@ namespace Levels
                 yield return null;
             }
             
-            codePadInteractable.layer = (int)Mathf.Log(greenInteractableLayer.value, 2);
+            codePadInteractable.layer = (int)Mathf.Log(interactableLayer.value, 2);
+            codePadInteractableOutline.SetActive(true);
             
             yield return new WaitForSeconds(stayTime);
             
@@ -219,7 +225,8 @@ namespace Levels
             DialogueManager.Instance.OpenDialogueWindow();
             
             // Set up printer
-            printerInteractable.gameObject.layer = (int)Mathf.Log(blueInteractableLayer.value, 2);
+            printerInteractable.gameObject.layer = (int)Mathf.Log(interactableLayer.value, 2);
+            printerInteractableOutline.SetActive(true);
             printerInteractable.onPickUpThrowable.AddListener(NextStepOnPickUpThrowable);
             
             _lastValidPosition = playerTransform.position;
@@ -262,8 +269,10 @@ namespace Levels
         {
             // Close Pad password minigame and highlight pc and disable code pad minigame
             codePadMinigame.gameObject.layer = (int)Mathf.Log(defaultLayer.value, 2);
+            codePadInteractableOutline.SetActive(false);
             MinigamesManager.Instance.CloseMinigameWindow();
-            pcInteractable.layer = (int)Mathf.Log(greenInteractableLayer.value, 2);
+            pcInteractable.layer = (int)Mathf.Log(interactableLayer.value, 2);
+            pcInteractableOutline.SetActive(true);
             
             // Set up pc minigame to activate next objective when opening each minigame
             // Then set up desktop navigation minigame to display last dialogue
@@ -306,7 +315,8 @@ namespace Levels
             DialogueManager.Instance.SetDialogue(tutorialDialogue10, PlayerInputManager.Instance.CurrentContext);
             DialogueManager.Instance.OpenDialogueWindow();
             
-            codePadInteractable.layer = (int)Mathf.Log(greenInteractableLayer.value, 2);
+            codePadInteractable.layer = (int)Mathf.Log(interactableLayer.value, 2);
+            codePadInteractableOutline.SetActive(true);
             safeCodeMinigame.onGuessedPassword.AddListener(NextStepOnSafeMinigamePasswordGuessed);
             
             _lastValidPosition = playerTransform.position;

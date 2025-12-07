@@ -15,9 +15,9 @@ TagManager:
   - Waypoint
   - Enemy
   - Throwable
-  - Interactable(Red)
-  - Interactable(Green)
-  - Interactable(Blue)
+  - Interactable
+  - 
+  - 
   - 
   - 
   - 
