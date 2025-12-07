@@ -17,7 +17,7 @@ public class EndLevelMenuController : MonoBehaviour
     private void OnEnable()
     {
         var root = menuDocument.rootVisualElement;
-        endLevelMenuContainerVisualElement = root.Q<VisualElement>("endLevelMenuContainer");
+        endLevelMenuContainerVisualElement = root.Q<VisualElement>("endLevelMenuCardsContainer");
         UpdateUI();
     }
 

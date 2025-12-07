@@ -24232,12 +24232,10 @@ MonoBehaviour:
   menuDocument: {fileID: 1551799430}
   documentCardTemplate: {fileID: 9197481963319205126, guid: cc0b7a2cc641a456bbe92c7d536f5c47, type: 3}
   documents:
-  - "Questo \xE8 il primo documento di prova"
-  - "Questo \xE8 il secondo documento di prova"
-  - "Questo \xE8 il terzo documento di prova"
-  - "Questo \xE8 il quarto documento di prova"
-  - "Questo \xE8 il quinto documento di prova"
-  - "Questo \xE8 il sesto documento di prova"
+  - "Questo \xE8 il primo documento di prova. Questo \xE8 il primo documento di prova"
+  - "Questo \xE8 il secondo documento di prova. Questo \xE8 il secondo documento
+    di prova"
+  - "Questo \xE8 il terzo documento di prova. Questo \xE8 il terzo documento di prova"
 --- !u!4 &1554354150 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2b0671c89b483b54aaee2106e74ab0d6, type: 3}

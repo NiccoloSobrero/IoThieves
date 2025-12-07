@@ -3,6 +3,7 @@
     <Style src="project://database/Assets/UI/Menu/menu-style.uss?fileID=7433441132597879392&amp;guid=8baf226fee4253342832e9861d4f70e9&amp;type=3#menu-style" />
     <ui:VisualElement name="endLevelMenuContainer" class="menu-container end-level-menu-container" >
         <ui:Label name="endLevelTitle" text="Level Completed" class="menu-title" />
+        <ui:VisualElement name="endLevelMenuCardsContainer" class="end-level-menu-cards-container" />
         
     </ui:VisualElement>
 </ui:UXML>

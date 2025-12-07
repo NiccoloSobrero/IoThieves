@@ -3,3 +3,13 @@
     height: 100%;
     background-color: rgba(128, 128, 128, 1);
 }
+
+.end-level-menu-cards-container {
+    /*border-color: black;*/
+    /*border-width: 2px;*/
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    justify-content: space-around;
+    align-items: stretch;
+}
