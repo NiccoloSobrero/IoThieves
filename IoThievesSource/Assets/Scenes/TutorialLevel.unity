@@ -9111,14 +9111,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuDocument: {fileID: 1646750694}
-  documentButtonTemplate: {fileID: 9197481963319205126, guid: cc0b7a2cc641a456bbe92c7d536f5c47, type: 3}
+  documentCardTemplate: {fileID: 9197481963319205126, guid: cc0b7a2cc641a456bbe92c7d536f5c47, type: 3}
   documents:
-  - "Questo \xE8 il primo documento di prova"
-  - "Questo \xE8 il secondo documento di prova"
-  - "Questo \xE8 il terzo documento di prova"
-  - "Questo \xE8 il quarto documento di prova"
-  - "Questo \xE8 il quinto documento di prova"
-  - "Questo \xE8 il sesto documento di prova"
+  - "Thanks for diving into the demo! The adventure isn\u2019t over; new chapters
+    are on the way. Come back soon and be among the first to experience what\u2019s
+    next!"
 --- !u!114 &1646750694
 MonoBehaviour:
   m_ObjectHideFlags: 0

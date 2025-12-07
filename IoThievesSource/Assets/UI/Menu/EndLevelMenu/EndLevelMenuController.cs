@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Events;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -17,6 +18,8 @@ public class EndLevelMenuController : MonoBehaviour
     private void OnEnable()
     {
         var root = menuDocument.rootVisualElement;
+        var quitButton = root.Q<Button>("quitButton");
+        quitButton.clicked += QuitGame;
         endLevelMenuContainerVisualElement = root.Q<VisualElement>("endLevelMenuCardsContainer");
         UpdateUI();
     }
@@ -32,6 +35,11 @@ public class EndLevelMenuController : MonoBehaviour
             nameLabel.text = document;
             endLevelMenuContainerVisualElement.Add(documentButtonInstance);
         }
+    }
+    
+    private void QuitGame()
+    {
+        EventsManager.OnQuitGame?.Invoke();
     }
 
     public void ActivateEndLevelUI()
