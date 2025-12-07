@@ -7,29 +7,31 @@ In a world where everything is connected to the Internet and fully automated, th
 people’s quality of life, but has also reinvented the art of theft. 
 Hack smart buildings to obtain sensitive informations from people's connected devices and computers by distracting them hacking their smart devices and letting your robotic companion sneak inside. But beware: if the owners notice you, they will call the police. Can you succeed without being caught? 
 
-*Genre*:
+**Genre**:
  - Stealth-like
  - Puzzle game
 
-Changelog (17/10/25): Stealth-like is considered the best choice due to the fact that it is easier to implement both in terms of coding and design.
+__*Changelog (17/10/25)*__: Stealth-like is considered the best choice due to the fact that it is easier to implement both in terms of coding and design.
+
+__*Changelog (7/12/25)*__: Stealth-like is now considered a sub-genre, we are mainly focused on puzzle game
 
 
-*Players*:
+**Players**:
  - Single player
 
 ## Technical Specs
 
-*Game view*:
+**Game view**:
  - 3D, isometric, low poly
     - Visual Style: Cartoonish rendering with bright, soft colors and subtle shadows. Low-poly models with minimalistic shapes.
  - 2D, top down, pixel art
 
 __*Changelog (17/10/25)*__: 3D is likely the best choice to fit the game style and mechanics. 2D still remains a valid option. This part requires further discussion, especially with the designer.
 
-*Language*:
+**Language**:
 Unity - C#
 
-*Platform*:
+**Platform**:
 PC - WebGL
 
 ---
@@ -44,19 +46,33 @@ The item may not be stated at the beginning of the level forcing the player to e
 
 Inside each level there are multiple npcs around and the player must hack various devices to distract them and sneak around without being caught.
 
-To hack a device the player must solve a small puzzle/minigame. Each hacked device has a different behaviour and must be fixed from the npcs.
+There are 2 main categories of objets:
+1) interactable objects
+1) hackable objects
 
-Hacking too much may increase the suspicion of the npcs and put them in alarm and if a certain threshold is exceeded they will find the player causing a game over and making him restart the level.
+Inside the __interactable objects__ there are 3 sub categories: 
+- **trowable**: they can be trown to distract enemies
+- **pick-ups**: they can be picked up --> collectables
+- **minigame**: the interaction starts a minigame
+
+
+Inside the __hackable objects__ there are 3 sub categories: 
+- **attract**: the interaction redirects the enemies path towards them
+- **stun**: if activated near an NPC it can stun them 
+- **minigame**: the interaction starts a minigame
+
 
 ### Core Mechanics
- - Hacking system: The player can select a device to hack. Hacked devices could cause different interactions but most of the time they catch the attention of the homeowners.
- - Suspicion system: Hacking too many devices increases the owner's suspicion level
+ - **Hacking system**: The player can select a device to hack. Hacked devices could cause different interactions but most of the time they catch the attention of the homeowners.
+ - **Suspicion system**: Hacking too many devices increases the owner's suspicion level
     - Past a certain suspicion threshold is instant "Game Over”
     - Increasing the suspicion level gives the owner a larger FoV
- - Overload system: Too many hacked devices cause a game over.
-    - Changelog (17/10/25): Overload system has been excluded from the list of mechanics.
- - Minigame to hack a device → puzzle game + timer
- - Interactable devices:
+ - **Overload system**: Too many hacked devices cause a game over.
+    - __*Changelog (17/10/25)*__: Overload system has been excluded from the list of mechanics.
+ - **Minigame** to hack a device → puzzle game + timer
+    - __*Changelog (7/12/25)*__: no more timer, and minigame only to the most important devices.
+
+ - **Interactable & Hackable devices**:
     - Smart lights → ON/OFF
     - Alexa → ON/OFF (longer time to disable)
     - TV ON/OFF + Audio level (Louder noise attracts people from further away and takes more time to fix but raises suspicion level)
@@ -74,19 +90,24 @@ Hacking too much may increase the suspicion of the npcs and put them in alarm an
 
 ### Player actions
  - Device hacking: Point and click (mouse)
+ - Interactable objects: Point and click (mouse)
  - Camera movement:
     - Automatically follows the bot or some point of interest
     - WASD (keyboard)
-    - Pan and zoom (mouse)
  - Bot movement: 
     - WASD (keyboard)
     - Point and click (mouse)
  - __*Changelog (17/10/25)*__: Indecision on inputs for camera movement and bot movement.
+ - __*Changelog (7/12/25)*__: we decided to do the "Camera Automatically follows the bot".
+ - __*Changelog (7/12/25)*__: we decided to do the WASD (keyboard) movement for the bot".
 
 
 ### Challenges
 - *Time Pressure*
 - *Strategic Path*
+- *puzzle*
+
+__*Changelog (7/12/25)*__: no more time pressure.
 
 ---
 
@@ -106,16 +127,17 @@ Hacking too much may increase the suspicion of the npcs and put them in alarm an
    - different suspicion threshold depending on the context
 - No grading system for the performance inside a level, you either pass or fail.
  - Skill Tree(?)
- - 
+ __*Changelog (7/12/25)*__: no more skill tree
+
 
 ### Win and lose conditions
  - Win conditions: 
-    - Reaching a certain threshold of stolen money(?)
-    - Stealing the assigned item/data
+    - satisfying objectives of each level
+    - exit the level without noticing
+    
  - Lose conditions:
     - Being spotted from an “enemy”
     - Suspicion system reaches a certain threshold
-
 
 
 ---
@@ -125,12 +147,15 @@ Hacking too much may increase the suspicion of the npcs and put them in alarm an
 - *In-Game Interface*:
   - Minigame Interface
   - World Interface
+  - Gameover menu
+  - Pause level menu
+  - End level menu
 
 ---
 
 ## Characters
 - *The Hacker (Player)*
-- *The Bot (Player)*
+- *PIP: The Bot (Player)*
 - *Home owners (Enemies)*
 - *NPCs* (TBD)
 
