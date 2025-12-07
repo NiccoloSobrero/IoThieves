@@ -14,9 +14,12 @@ namespace Levels
     public class TutorialLevelManager : MonoBehaviour
     {
         private static readonly int Open = Animator.StringToHash("Open");
-        private TutorialObjective _objective;
+        // private TutorialObjective _objective;
         [SerializeField] private Transform cameraTarget;
         [SerializeField] private EndLevelMenuController endLevelMenuController;
+
+        [Header("Step reset")] 
+        [SerializeField] private DialogueLinesScrObj onStepReset;
         
         [Header("Step 0")]
         [SerializeField] private DialogueLinesScrObj tutorialDialogue0;
@@ -29,7 +32,7 @@ namespace Levels
         
         [Space]
         [Header("Step 1")]
-        [SerializeField] private GameObject printerInteractable;
+        [SerializeField] private InteractToCreateDistraction printerInteractable;
         [SerializeField] private LayerMask blueInteractableLayer;
 
         [Space]
@@ -108,7 +111,7 @@ namespace Levels
 
         private void Init()
         {
-            _objective = new TutorialObjective(this);
+            // _objective = new TutorialObjective(this);
             
             step0Trigger.GetComponent<LevelTrigger>().Init(this);
             step0Trigger.SetActive(false);
@@ -146,16 +149,16 @@ namespace Levels
             }
         }
 
-        // Intro dialogue + activate trigger for next step
         private void Step_0()
         {
-            DialogueManager.Instance.SetDialogue(tutorialDialogue0, InputContext.Disabled, _objective);
+            DialogueManager.Instance.onDialogueComplete.AddListener(NextStepOnDialogueCompleted);
+            
+            DialogueManager.Instance.SetDialogue(tutorialDialogue0, InputContext.Disabled);
             DialogueManager.Instance.OpenDialogueWindow();
 
             step0Trigger.SetActive(true);
         }
 
-        // Move camera to target and back to player
         private void Step_1()
         {
             PlayerInputManager.Instance.SetContext(InputContext.Disabled);
@@ -203,8 +206,8 @@ namespace Levels
             DialogueManager.Instance.OpenDialogueWindow();
             
             // Set up printer
-            printerInteractable.layer = (int)Mathf.Log(blueInteractableLayer.value, 2);
-            printerInteractable.GetComponent<InteractToCreateDistraction>().SetObjective(_objective);
+            printerInteractable.gameObject.layer = (int)Mathf.Log(blueInteractableLayer.value, 2);
+            printerInteractable.onPickUpThrowable.AddListener(NextStepOnPickUpThrowable);
         }
 
         private void Step_3()
@@ -220,12 +223,14 @@ namespace Levels
             DialogueManager.Instance.SetDialogue(tutorialDialogue4);
             DialogueManager.Instance.OpenDialogueWindow();
             
-            codePadMinigame.SetOnInteractObjective(_objective);
+            codePadMinigame.onInteract.AddListener(NextStepOnCodePadInteract);
         }
 
         private void Step_5()
         {
-            DialogueManager.Instance.SetDialogue(tutorialDialogue5, tutorialObjective:_objective);
+            DialogueManager.Instance.onDialogueComplete.AddListener(NextStepOnDialogueCompleted);
+            
+            DialogueManager.Instance.SetDialogue(tutorialDialogue5);
             DialogueManager.Instance.OpenDialogueWindow();
         }
 
@@ -238,9 +243,10 @@ namespace Levels
             
             // Set up pc minigame to activate next objective when opening each minigame
             // Then set up desktop navigation minigame to display last dialogue
-            MinigamesManager.Instance.SetPasswordDecryptionMinigameOpenObjective(passwordDecryptionMinigame, _objective);
-            MinigamesManager.Instance.SetDesktopMinigameOpenObjective(desktopNavigationMinigame, _objective);
-            desktopMinigame.SetOnOpenFolderWithTargetObjective(_objective);
+            MinigamesManager.Instance.onDesktopMinigameOpened.AddListener(OnDesktopMinigameOpened);
+            MinigamesManager.Instance.onPasswordDecryptionMinigameOpened.AddListener(OnPasswordDecryptionMinigameOpen);
+            
+            desktopMinigame.onOpenFolderWithTarget.AddListener(NextStepOnOpenFolderWithTarget);
         }
         
         private void Step_7()
@@ -260,7 +266,7 @@ namespace Levels
             DialogueManager.Instance.SetDialogue(tutorialDialogue9, InputContext.Minigame);
             DialogueManager.Instance.OpenDialogueWindow();
             
-            DownloadsManager.Instance.SetOnDownloadTargetFile(_objective);
+            DownloadsManager.Instance.onDownloadTargetFile.AddListener(NextStepOnDownloadTargetFile);
         }
         
         private void Step_10()
@@ -269,7 +275,7 @@ namespace Levels
             DialogueManager.Instance.OpenDialogueWindow();
             
             codePadInteractable.layer = (int)Mathf.Log(greenInteractableLayer.value, 2);
-            safeCodeMinigame.SetOnGuessedPassword(_objective);
+            safeCodeMinigame.onGuessedPassword.AddListener(NextStepOnSafeMinigamePasswordGuessed);
         }
 
         private void Step_11()
@@ -283,7 +289,7 @@ namespace Levels
             enemyCamera.MoveTowards(targetPos);
             
             hackableCube.gameObject.SetActive(true);
-            hackableCube.SetOnInteractObjective(_objective);
+            hackableCube.onInteract.AddListener(NextStepOnHackableCubeInteract);
 
             shuttersAnim.SetTrigger(Open);
         }
@@ -302,5 +308,77 @@ namespace Levels
             Debug.Log("EndLevel");
             endLevelMenuController.ActivateEndLevelUI();
         }
+
+        public void ResetToCurrentStep()
+        {
+            DialogueManager.Instance.SetDialogue(onStepReset);
+            DialogueManager.Instance.OpenDialogueWindow();
+            
+            // Fade out and set player position to a valid spot
+        }
+
+        #region Event Callbacks
+
+        private void NextStepOnDialogueCompleted()
+        {
+            DialogueManager.Instance.onDialogueComplete.RemoveListener(NextStepOnDialogueCompleted);
+            NextObjective();
+        }
+
+        private void NextStepOnPickUpThrowable()
+        {
+            printerInteractable.onPickUpThrowable.RemoveListener(NextStepOnPickUpThrowable);
+            NextObjective();
+        }
+
+        private void NextStepOnCodePadInteract()
+        {
+            codePadMinigame.onInteract.RemoveListener(NextStepOnCodePadInteract);
+            NextObjective();
+        }
+        
+        private void OnDesktopMinigameOpened(MinigameScrObj opened)
+        {
+            if (opened == desktopNavigationMinigame)
+            {
+                MinigamesManager.Instance.onDesktopMinigameOpened.RemoveListener(OnDesktopMinigameOpened);
+                NextObjective();
+            }
+        }
+
+        private void OnPasswordDecryptionMinigameOpen(MinigameScrObj opened)
+        {
+            if (opened == passwordDecryptionMinigame)
+            {
+                MinigamesManager.Instance.onPasswordDecryptionMinigameOpened.RemoveListener(OnPasswordDecryptionMinigameOpen);
+                NextObjective();
+            }
+        }
+
+        private void NextStepOnOpenFolderWithTarget()
+        {
+            desktopMinigame.onOpenFolderWithTarget.RemoveListener(NextStepOnOpenFolderWithTarget);
+            NextObjective();
+        }
+
+        private void NextStepOnDownloadTargetFile()
+        {
+            DownloadsManager.Instance.onDownloadTargetFile.RemoveListener(NextStepOnDownloadTargetFile);
+            NextObjective();
+        }
+
+        private void NextStepOnSafeMinigamePasswordGuessed()
+        {
+            safeCodeMinigame.onGuessedPassword.RemoveListener(NextStepOnSafeMinigamePasswordGuessed);
+            NextObjective();
+        }
+
+        private void NextStepOnHackableCubeInteract()
+        {
+            hackableCube.onInteract.RemoveListener(NextStepOnHackableCubeInteract);
+            NextObjective();
+        }
+        
+        #endregion
     }
 }

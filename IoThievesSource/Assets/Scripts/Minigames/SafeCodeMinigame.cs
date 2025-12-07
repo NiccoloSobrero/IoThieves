@@ -4,6 +4,7 @@ using Events;
 using Levels;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Minigames
 {
@@ -22,9 +23,9 @@ namespace Minigames
 
         private LevelObjectiveScrObj _objective;
 
-        #region Tutorial Objectives
+        #region Events
 
-        private TutorialObjective _onGuessedPassword;
+        [HideInInspector] public UnityEvent onGuessedPassword;
 
         #endregion
         
@@ -90,16 +91,7 @@ namespace Minigames
             
             _objective?.Complete();
             
-            if (_onGuessedPassword != null)
-            {
-                _onGuessedPassword.Complete();
-                _onGuessedPassword = null;
-            }
-        }
-
-        public void SetOnGuessedPassword(TutorialObjective onGuessedPassword)
-        {
-            _onGuessedPassword = onGuessedPassword;
+            onGuessedPassword?.Invoke();
         }
     }
 }

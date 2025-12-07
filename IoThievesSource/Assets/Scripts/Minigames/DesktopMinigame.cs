@@ -3,6 +3,7 @@ using Events;
 using Levels;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Minigames
 {
@@ -42,9 +43,9 @@ namespace Minigames
         private readonly List<string> _targetFiles = new();
 
         
-        #region Tutorial Objectives
+        #region Events
 
-        private TutorialObjective _onOpenFolderWithTarget;
+        [HideInInspector] public UnityEvent onOpenFolderWithTarget;
 
         #endregion
 
@@ -78,9 +79,9 @@ namespace Minigames
                 }
             }
 
-            if (_onOpenFolderWithTarget != null && hasTargetFile)
+            if (hasTargetFile)
             {
-                _onOpenFolderWithTarget.Complete();
+                onOpenFolderWithTarget?.Invoke();
             }
         }
 
@@ -288,11 +289,6 @@ namespace Minigames
             }
             
             EventsManager.OnMinigameCompleted?.Invoke();
-        }
-
-        public void SetOnOpenFolderWithTargetObjective(TutorialObjective onOpenFolderWithTarget)
-        {
-            _onOpenFolderWithTarget = onOpenFolderWithTarget;
         }
     }
 }

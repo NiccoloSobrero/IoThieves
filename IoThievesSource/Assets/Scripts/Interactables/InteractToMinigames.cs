@@ -3,6 +3,7 @@ using Levels;
 using Managers;
 using Minigames.ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Interactables
 {
@@ -10,18 +11,18 @@ namespace Interactables
     {
         [SerializeField] private List<MinigameAndObjective> minigames = new();
         [SerializeField] private bool redoCompletedMinigameAfterReopen;
+
+        #region Events
         
-        private TutorialObjective _onInteractObjective;
+        [HideInInspector] public UnityEvent onInteract;
+
+        #endregion
         
         public void Interact()
         {
             MinigamesManager.Instance.SetMinigamesLoop(this, minigames);
 
-            if (_onInteractObjective != null)
-            {
-                _onInteractObjective.Complete();
-                _onInteractObjective = null;
-            }
+            onInteract?.Invoke();
         }
         
         public void TryRemovingMinigame(MinigameAndObjective minigameAndObjective)
@@ -29,11 +30,6 @@ namespace Interactables
             if (redoCompletedMinigameAfterReopen) return;
             
             minigames.Remove(minigameAndObjective);
-        }
-
-        public void SetOnInteractObjective(TutorialObjective objective)
-        {
-            _onInteractObjective = objective;
         }
     }
 

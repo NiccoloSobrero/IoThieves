@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using Interactables.ThrowableDistraction;
-using Levels;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Interactables
@@ -25,12 +25,16 @@ namespace Interactables
         [SerializeField] private Image fillImage;
         [SerializeField] private GameObject checkObj;
         
-        private Collider[] _playerColliders = new Collider[1];
+        private readonly Collider[] _playerColliders = new Collider[1];
         
         [HideInInspector] public bool canStartProduction = true;
         private bool _hasCreatedDistraction = false;
-        
-        private TutorialObjective _tutorialObjective;
+
+        #region Events
+
+        [HideInInspector] public UnityEvent onPickUpThrowable;
+
+        #endregion
 
         private void Awake()
         {
@@ -75,11 +79,7 @@ namespace Interactables
                         _hasCreatedDistraction = false;
                         canStartProduction = true;
 
-                        if (_tutorialObjective != null)
-                        {
-                            _tutorialObjective.Complete();
-                            _tutorialObjective = null;
-                        }
+                        onPickUpThrowable?.Invoke();
                     }
                 }
             }
@@ -107,11 +107,6 @@ namespace Interactables
             checkObj.SetActive(true);
             
             _hasCreatedDistraction = true;
-        }
-
-        public void SetObjective(TutorialObjective tutorialObjective)
-        {
-            _tutorialObjective = tutorialObjective;
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Levels;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Minigames
@@ -22,9 +23,9 @@ namespace Minigames
         private readonly List<string> _downloadedFiles = new();
         public List<string> DownloadedFiles => _downloadedFiles;
 
-        #region Tutorial Objectives
+        #region Events
 
-        private TutorialObjective _onDownloadTargetFile;
+        [HideInInspector] public UnityEvent onDownloadTargetFile;
 
         #endregion
 
@@ -84,10 +85,9 @@ namespace Minigames
             
             objective?.Complete();
 
-            if (_onDownloadTargetFile != null && isTarget)
+            if (isTarget)
             {
-                _onDownloadTargetFile.Complete();
-                _onDownloadTargetFile = null;
+                onDownloadTargetFile?.Invoke();
             }
         }
 
@@ -108,11 +108,6 @@ namespace Minigames
                               _downloadProgressGrid.padding.top;
             
             rect.sizeDelta = new Vector2(rect.sizeDelta.x, newHeight);
-        }
-
-        public void SetOnDownloadTargetFile(TutorialObjective objective)
-        {
-            _onDownloadTargetFile = objective;
         }
     }
 }

@@ -1,6 +1,6 @@
 using Enemy;
-using Levels;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Interactables
 {
@@ -12,9 +12,9 @@ namespace Interactables
         private const int MaxAttractableEnemies = 10;
         private readonly Collider[] _enemies = new Collider[MaxAttractableEnemies];
 
-        #region Tutorial Objectives
+        #region Events
 
-        private TutorialObjective _onInteract;
+        [HideInInspector] public UnityEvent onInteract;
 
         #endregion
         
@@ -32,16 +32,7 @@ namespace Interactables
                 }
             }
 
-            if (_onInteract != null)
-            {
-                _onInteract.Complete();
-                _onInteract = null;
-            }
-        }
-
-        public void SetOnInteractObjective(TutorialObjective onInteract)
-        {
-            _onInteract = onInteract;
+            onInteract?.Invoke();
         }
     }
 }

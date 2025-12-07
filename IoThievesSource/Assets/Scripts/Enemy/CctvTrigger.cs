@@ -1,3 +1,4 @@
+using Levels;
 using UnityEngine;
 
 namespace Enemy
@@ -5,6 +6,8 @@ namespace Enemy
     [RequireComponent(typeof(SphereCollider))]
     public class CctvTrigger : MonoBehaviour
     {
+        [SerializeField] TutorialLevelManager tutorialLevelManager;
+        
         [SerializeField] private float radius;
         private const float CylinderHeight = 0.1f;
 
@@ -12,12 +15,12 @@ namespace Enemy
         {
             gameObject.transform.localScale = new Vector3(radius, CylinderHeight, radius);
         }
-        
+
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                Debug.Log("Game Over.");
+                tutorialLevelManager.ResetToCurrentStep();
             }
         }
     }

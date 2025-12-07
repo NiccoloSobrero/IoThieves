@@ -1,8 +1,8 @@
 using System.Collections;
-using Levels;
 using Managers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace DialogueSystem
@@ -28,10 +28,14 @@ namespace DialogueSystem
         
         private Coroutine _textGenerationCoroutine;
         private Coroutine _skipTextGenerationCoroutine;
-        
-        private TutorialObjective _tutorialObjective;
 
         private InputContext _closingInputContext;
+
+        #region Events
+
+        [HideInInspector] public UnityEvent onDialogueComplete;
+
+        #endregion
 
         private void Awake()
         {
@@ -50,11 +54,9 @@ namespace DialogueSystem
         }
 
         public void SetDialogue(DialogueLinesScrObj dialogueLinesScrObj, 
-            InputContext closingInputContext = InputContext.Gameplay, 
-            TutorialObjective tutorialObjective = null)
+            InputContext closingInputContext = InputContext.Gameplay)
         {
             _dialogueLinesScrObj = dialogueLinesScrObj;
-            _tutorialObjective = tutorialObjective;
             _closingInputContext = closingInputContext;
         }
 
@@ -159,11 +161,7 @@ namespace DialogueSystem
             
             dialogueWindow.SetActive(false);
 
-            if (_tutorialObjective != null)
-            {
-                _tutorialObjective.Complete();
-                _tutorialObjective = null;
-            }
+            onDialogueComplete?.Invoke();
         }
     }
 }
