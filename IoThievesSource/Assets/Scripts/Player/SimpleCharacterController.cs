@@ -1,3 +1,4 @@
+using System.Collections;
 using Managers;
 using UnityEngine;
 
@@ -20,6 +21,8 @@ namespace Player
         private Vector3 _right;
         
         private float _turnSmoothVelocity;
+        
+        private const float DistanceThreshold = 0.1f;
         
         private void Awake()
         {
@@ -53,6 +56,29 @@ namespace Player
                 float targetAngle = Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg;
                 float angle = Mathf.SmoothDampAngle(graphics.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothTime);
                 graphics.rotation = Quaternion.Euler(0f, angle, 0f);
+            }
+        }
+
+        public void MoveTowards(Vector3 targetPosition)
+        {
+            StartCoroutine(MoveTowardsRoutine(targetPosition));
+        }
+        
+        private IEnumerator MoveTowardsRoutine(Vector3 targetPosition)
+        {
+            while (Vector3.Distance(targetPosition, transform.position) > DistanceThreshold)
+            {
+                Vector3 moveDir = targetPosition - transform.position;
+
+                moveDir = moveDir.normalized;
+                
+                _controller.Move(moveDir * (moveSpeed * Time.deltaTime));
+            
+                float targetAngle = Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg;
+                float angle = Mathf.SmoothDampAngle(graphics.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothTime);
+                graphics.rotation = Quaternion.Euler(0f, angle, 0f);
+
+                yield return null;
             }
         }
     }

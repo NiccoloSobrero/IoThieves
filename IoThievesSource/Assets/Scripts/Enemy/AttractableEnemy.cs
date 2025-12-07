@@ -8,7 +8,7 @@ namespace Enemy
         
         [SerializeField] private float speed;
 
-        private const float DistanceThreshold = 0.5f;
+        private const float DistanceThreshold = 0.1f;
         private const float TurnSmoothTime = 0.1f;
         private float _turnSmoothVelocity;
         

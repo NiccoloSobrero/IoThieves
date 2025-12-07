@@ -20,7 +20,8 @@ namespace Managers
         public static PlayerInputManager Instance;
         
         private PlayerInputActions _actions;
-        [SerializeField] private InputContext _currentContext = InputContext.None;
+        private InputContext _currentContext = InputContext.None;
+        public InputContext CurrentContext => _currentContext;
 
         [Header("References")]
         [SerializeField] private PlayerThrower playerThrower;

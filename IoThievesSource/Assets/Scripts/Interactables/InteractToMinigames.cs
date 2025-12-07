@@ -12,6 +12,11 @@ namespace Interactables
         [SerializeField] private List<MinigameAndObjective> minigames = new();
         [SerializeField] private bool redoCompletedMinigameAfterReopen;
 
+        [SerializeField] private float maxDistanceToInteract;
+        [SerializeField] private LayerMask playerLayer;
+        
+        private readonly Collider[] _playerColliders = new Collider[1];
+
         #region Events
         
         [HideInInspector] public UnityEvent onInteract;
@@ -20,9 +25,16 @@ namespace Interactables
         
         public void Interact()
         {
-            MinigamesManager.Instance.SetMinigamesLoop(this, minigames);
+            if (Physics.OverlapSphereNonAlloc(
+                    gameObject.transform.position, 
+                    maxDistanceToInteract, 
+                    _playerColliders, 
+                    playerLayer) > 0)
+            {
+                MinigamesManager.Instance.SetMinigamesLoop(this, minigames);
 
-            onInteract?.Invoke();
+                onInteract?.Invoke();
+            }
         }
         
         public void TryRemovingMinigame(MinigameAndObjective minigameAndObjective)
@@ -30,6 +42,12 @@ namespace Interactables
             if (redoCompletedMinigameAfterReopen) return;
             
             minigames.Remove(minigameAndObjective);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(gameObject.transform.position, maxDistanceToInteract);
         }
     }
 

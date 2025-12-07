@@ -40,9 +40,12 @@ namespace Interactables.ThrowableDistraction
 
         private void OnCollisionEnter(Collision _)
         {
+            HandleCollision();
+        }
+
+        protected virtual void HandleCollision()
+        {
             Vector3 collisionPos = gameObject.transform.position;
-            
-            gameObject.SetActive(false);
             
             int size = Physics.OverlapSphereNonAlloc(gameObject.transform.position, _attractionRange, _enemies, enemyLayer);
 
@@ -53,6 +56,8 @@ namespace Interactables.ThrowableDistraction
                     enemy.MoveTowards(collisionPos);
                 }
             }
+            
+            Destroy(gameObject);
         }
     }
 }

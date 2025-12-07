@@ -28,7 +28,22 @@ namespace Minigames
         [HideInInspector] public UnityEvent onGuessedPassword;
 
         #endregion
-        
+
+        private void Awake()
+        {
+            _foundSolution = false;
+        }
+
+        private void OnEnable()
+        {
+            EventsManager.OnFoundCodePadSolution.AddListener(() => _foundSolution = true);
+        }
+
+        private void OnDisable()
+        {
+            EventsManager.OnFoundCodePadSolution.RemoveListener(() => _foundSolution = true);
+        }
+
         public void InitMinigame(string targetPassword, LevelObjectiveScrObj objective)
         {
             _objective = objective;
@@ -45,10 +60,7 @@ namespace Minigames
             
             displayText.text = _currentTypedPassword.ToString();
 
-            if (_foundSolution)
-            {
-                solutionObj.SetActive(true);
-            }
+            solutionObj.SetActive(_foundSolution);
         }
     
         public void OnDigitClicked(string digit)

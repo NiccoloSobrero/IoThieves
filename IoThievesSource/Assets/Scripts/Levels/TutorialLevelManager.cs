@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using DialogueSystem;
 using Enemy;
+using Events;
 using Interactables;
 using Managers;
 using Minigames;
 using Minigames.ScriptableObjects;
+using Player;
+using UI;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,6 +23,10 @@ namespace Levels
 
         [Header("Step reset")] 
         [SerializeField] private DialogueLinesScrObj onStepReset;
+        [SerializeField] private FadeInOut fadeScreen;
+        [SerializeField] private float fadeInTime;
+        [SerializeField] private float fadeStayTime;
+        [SerializeField] private float fadeOutTime;
         
         [Header("Step 0")]
         [SerializeField] private DialogueLinesScrObj tutorialDialogue0;
@@ -47,6 +54,7 @@ namespace Levels
         [Space]
         [Header("Step 4")]
         [SerializeField] private DialogueLinesScrObj tutorialDialogue4;
+        [SerializeField] private AttractableEnemy cctvAttractable;
         [SerializeField] private InteractToMinigames codePadMinigame;
         
         [Space]
@@ -86,8 +94,8 @@ namespace Levels
         [SerializeField] private Transform shutterCameraTransform;
 
         [SerializeField] private Transform playerTransform;
+        [SerializeField] private SimpleCharacterController playerController;
         [SerializeField] private Transform playerTargetPos;
-        [SerializeField] private float playerTimeToMove;
         
         [Space]
         [Header("Step 12")]
@@ -96,6 +104,7 @@ namespace Levels
         [SerializeField] private GameObject exitCollider;
         
         private List<UnityAction> _steps = new();
+        private Vector3 _lastValidPosition;
         
         private int _currentStep;
 
@@ -157,6 +166,8 @@ namespace Levels
             DialogueManager.Instance.OpenDialogueWindow();
 
             step0Trigger.SetActive(true);
+
+            _lastValidPosition = playerTransform.position;
         }
 
         private void Step_1()
@@ -164,6 +175,8 @@ namespace Levels
             PlayerInputManager.Instance.SetContext(InputContext.Disabled);
             
             StartCoroutine(MoveCameraTo(codePadInteractable.transform.position, timeToPan, timeStay));
+            
+            _lastValidPosition = playerTransform.position;
         }
 
         private IEnumerator MoveCameraTo(Vector3 target, float panTime, float stayTime)
@@ -208,6 +221,8 @@ namespace Levels
             // Set up printer
             printerInteractable.gameObject.layer = (int)Mathf.Log(blueInteractableLayer.value, 2);
             printerInteractable.onPickUpThrowable.AddListener(NextStepOnPickUpThrowable);
+            
+            _lastValidPosition = playerTransform.position;
         }
 
         private void Step_3()
@@ -216,6 +231,8 @@ namespace Levels
             DialogueManager.Instance.OpenDialogueWindow();
             
             step2Trigger.SetActive(true);
+            
+            _lastValidPosition = playerTransform.position;
         }
 
         private void Step_4()
@@ -224,6 +241,11 @@ namespace Levels
             DialogueManager.Instance.OpenDialogueWindow();
             
             codePadMinigame.onInteract.AddListener(NextStepOnCodePadInteract);
+            
+            // Move cctv
+            cctvAttractable.MoveTowards(step2Trigger.transform.position);
+            
+            _lastValidPosition = playerTransform.position;
         }
 
         private void Step_5()
@@ -232,6 +254,8 @@ namespace Levels
             
             DialogueManager.Instance.SetDialogue(tutorialDialogue5);
             DialogueManager.Instance.OpenDialogueWindow();
+            
+            _lastValidPosition = playerTransform.position;
         }
 
         private void Step_6()
@@ -247,18 +271,24 @@ namespace Levels
             MinigamesManager.Instance.onPasswordDecryptionMinigameOpened.AddListener(OnPasswordDecryptionMinigameOpen);
             
             desktopMinigame.onOpenFolderWithTarget.AddListener(NextStepOnOpenFolderWithTarget);
+            
+            _lastValidPosition = playerTransform.position;
         }
         
         private void Step_7()
         {
             DialogueManager.Instance.SetDialogue(tutorialDialogue7, InputContext.Minigame);
             DialogueManager.Instance.OpenDialogueWindow();
+            
+            _lastValidPosition = playerTransform.position;
         }
 
         private void Step_8()
         {
             DialogueManager.Instance.SetDialogue(tutorialDialogue8, InputContext.Minigame);
             DialogueManager.Instance.OpenDialogueWindow();
+            
+            _lastValidPosition = playerTransform.position;
         }
 
         private void Step_9()
@@ -267,15 +297,21 @@ namespace Levels
             DialogueManager.Instance.OpenDialogueWindow();
             
             DownloadsManager.Instance.onDownloadTargetFile.AddListener(NextStepOnDownloadTargetFile);
+            
+            _lastValidPosition = playerTransform.position;
         }
         
         private void Step_10()
         {
-            DialogueManager.Instance.SetDialogue(tutorialDialogue10, InputContext.Minigame);
+            DialogueManager.Instance.SetDialogue(tutorialDialogue10, PlayerInputManager.Instance.CurrentContext);
             DialogueManager.Instance.OpenDialogueWindow();
             
             codePadInteractable.layer = (int)Mathf.Log(greenInteractableLayer.value, 2);
             safeCodeMinigame.onGuessedPassword.AddListener(NextStepOnSafeMinigamePasswordGuessed);
+            
+            _lastValidPosition = playerTransform.position;
+            
+            EventsManager.OnFoundCodePadSolution.Invoke();
         }
 
         private void Step_11()
@@ -292,6 +328,11 @@ namespace Levels
             hackableCube.onInteract.AddListener(NextStepOnHackableCubeInteract);
 
             shuttersAnim.SetTrigger(Open);
+            
+            // Move player to safe spot
+            playerController.MoveTowards(playerTargetPos.position);
+            
+            _lastValidPosition = playerTargetPos.position;
         }
 
         private void Step_12()
@@ -301,6 +342,8 @@ namespace Levels
             
             endLevelTrigger.SetActive(true);
             exitCollider.SetActive(false);
+            
+            _lastValidPosition = playerTransform.position;
         }
 
         private void EndLevel()
@@ -311,10 +354,24 @@ namespace Levels
 
         public void ResetToCurrentStep()
         {
+            StartCoroutine(ResetToCurrentStepCoroutine());
+        }
+
+        private IEnumerator ResetToCurrentStepCoroutine()
+        {
+            PlayerInputManager.Instance.SetContext(InputContext.Disabled);
+            
+            fadeScreen.gameObject.SetActive(true);
+            fadeScreen.StartFade(fadeInTime, fadeStayTime, fadeOutTime);
+            
+            yield return new WaitForSeconds(fadeInTime);
+            
+            playerTransform.position = _lastValidPosition;
+            
+            yield return new WaitForSeconds(fadeStayTime + fadeOutTime);
+            
             DialogueManager.Instance.SetDialogue(onStepReset);
             DialogueManager.Instance.OpenDialogueWindow();
-            
-            // Fade out and set player position to a valid spot
         }
 
         #region Event Callbacks
