@@ -67,6 +67,8 @@ public class EndLevelMenuController : MonoBehaviour
             Debug.LogError("Container is NULL!");
             return;
         }
+        
+        endLevelMenuContainerVisualElement.Clear();
 
         foreach (string document in documents)
         {
