@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     {
         EventsManager.OnStartGame.AddListener(StartGame);
         EventsManager.OnSaveGame.AddListener(SaveGame);
+        EventsManager.OnPauseGame.AddListener(PauseGame);
         EventsManager.OnResumeGame.AddListener(ResumeGame);
         EventsManager.OnQuitGame.AddListener(QuitGame);
         EventsManager.OnOptionsClicked.AddListener(OpenOptions);
@@ -34,6 +35,7 @@ public class GameManager : MonoBehaviour
     {
         EventsManager.OnStartGame.RemoveListener(StartGame);
         EventsManager.OnSaveGame.RemoveListener(SaveGame);
+        EventsManager.OnPauseGame.RemoveListener(PauseGame);
         EventsManager.OnResumeGame.RemoveListener(ResumeGame);
         EventsManager.OnQuitGame.RemoveListener(QuitGame);
         EventsManager.OnOptionsClicked.RemoveListener(OpenOptions);
@@ -53,10 +55,16 @@ public class GameManager : MonoBehaviour
         // useful if we want to show some loading screen or some feedback to the player
         print("Saving Game");
     }
+    
+    private void PauseGame()
+    {
+        print("Pausing Game in GameManager");
+        Time.timeScale = 0f;
+    }
 
     private void ResumeGame()
     {
-        print("Resuming Game");
+        print("Resuming Game in GameManager");
         Time.timeScale = 1f;
     }
 

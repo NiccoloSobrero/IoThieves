@@ -155,7 +155,9 @@ namespace Managers
 
         private void PauseGame(InputAction.CallbackContext context)
         {
-            pauseMenuController.PauseMenu();
+            // pauseMenuController.PauseMenu();
+            print("Executing pause");
+            EventsManager.OnPauseGame?.Invoke();
         }
     }
 }
