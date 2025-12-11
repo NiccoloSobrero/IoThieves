@@ -359,7 +359,8 @@ namespace Levels
         private void EndLevel()
         {
             Debug.Log("EndLevel");
-            endLevelMenuController.ActivateEndLevelUI();
+            // endLevelMenuController.ActivateEndLevelUI();
+            EventsManager.OnEndLevel?.Invoke();
         }
 
         public void ResetToCurrentStep()
