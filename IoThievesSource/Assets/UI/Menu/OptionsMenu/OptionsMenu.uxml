@@ -1,22 +1,51 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI/Menu/OptionsMenu/options-menu.uss?fileID=7433441132597879392&amp;guid=ce192d7cfa8aa4ef387c44151b26e79f&amp;type=3#options-menu" />
     <Style src="project://database/Assets/UI/Menu/menu-style.uss?fileID=7433441132597879392&amp;guid=8baf226fee4253342832e9861d4f70e9&amp;type=3#menu-style" />
-    <ui:VisualElement name="optionsContainer" class="menu-container options-menu-container">
-        <ui:VisualElement name="optionsTopElementsContainer" class="options-top-elements-container">
-            <ui:Label name="optionsTitle" text="Options" class="options-title" />
-            <ui:VisualElement name="optionsButtonsContainer" class="options-buttons-container">
-                <ui:Label name="sfxVolumeLabel" class="option-label" text="SFX Volume" />
-                <ui:Slider name="sfxVolumeSlider" class="option-slider" fill="true" />
-                <ui:Label name="musicVolumeLabel" class="option-label" text="Music Volume" />
-                <ui:Slider name="musicVolumeSlider" class="option-slider" fill="true" />
-                <!-- <ui:Button name="btn" text="Button" class="menu-button" /> -->
-                <!-- <ui:Button name="btn" text="Button" class="menu-button" /> -->
-                <!-- <ui:Button name="btn" text="Button" class="menu-button" /> -->
+    <ui:VisualElement name="optionsMenuContainer" class="menu-container options-menu-container">
+        <ui:VisualElement name="titleContainer" class="title-container">
+            <ui:Label name="optionsTitle" class="options-title" text="Options" />
+        </ui:VisualElement>
+        <ui:VisualElement name="optionsContainer" class="options-container">
+            <ui:VisualElement name="slidersContainer" class="sliders-container">
+                <ui:VisualElement name="MusicSliderContainer" class="slider-container">
+                    <ui:Label name="musicVolumeLabel" class="label option-label" text="Music Volume" />
+                    <ui:Slider name="musicSlider" class="action-slider" fill="true" />
+                </ui:VisualElement>
+                <ui:VisualElement name="SfxSliderContainer" class="slider-container">
+                    <ui:Label name="sfxVolumeLabel" class="label option-label" text="SFX Volume" />
+                    <ui:Slider name="sfxSlider" class="action-slider" fill="true" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+            <ui:VisualElement name="actionsContainer" class="actions-container">
+                <ui:VisualElement name="actionContainer" class="action-container">
+                    <ui:Label name="moveUpLabel" class="label action-label" text="Move Up" />
+                    <ui:DropdownField name="moveUpDropdown" class="action-dropdown" />
+                </ui:VisualElement>
+                <ui:VisualElement name="actionContainer" class="action-container">
+                    <ui:Label name="moveDownLabel" class="label action-label" text="Move Down" />
+                    <ui:DropdownField name="moveDownDropdown" class="action-dropdown" />
+                </ui:VisualElement>
+                <ui:VisualElement name="actionContainer" class="action-container">
+                    <ui:Label name="moveLeftLabel" class="label action-label" text="Move Left" />
+                    <ui:DropdownField name="moveLeftDropdown" class="action-dropdown" />
+                </ui:VisualElement>
+                <ui:VisualElement name="actionContainer" class="action-container">
+                    <ui:Label name="moveRightLabel" class="label action-label" text="Move Right" />
+                    <ui:DropdownField name="moveRightDropdown" class="action-dropdown" />
+                </ui:VisualElement>
+                <ui:VisualElement name="actionContainer" class="action-container">
+                    <ui:Label name="interactLabel" class="label action-label" text="Interact" />
+                    <ui:DropdownField name="interactDropdown" class="action-dropdown" />
+                </ui:VisualElement>
+                <ui:VisualElement name="actionContainer" class="action-container">
+                    <ui:Label name="executeLabel" class="label action-label" text="Execute" />
+                    <ui:DropdownField name="executeDropdown" class="action-dropdown" />
+                </ui:VisualElement>
             </ui:VisualElement>
         </ui:VisualElement>
-        <ui:VisualElement name="optionsBottomElementsContainer" class="options-bottom-elements-container">
-            <ui:Button name="backButton" text="Back" class="menu-button options-button" />
-            <ui:Button name="saveButton" text="Save" class="menu-button options-button" />
+        <ui:VisualElement name="buttonsContainer" class="buttons-container">
+            <ui:Button name="backButton" class="menu-button options-button" text="Back" />
+            <ui:Button name="saveButton" class="menu-button options-button" text="Save" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
