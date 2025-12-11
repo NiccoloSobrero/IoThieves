@@ -68,6 +68,7 @@
 
 .action-dropdown {
     width: 40%;
+    font-size: 36px;
 }
 
 .buttons-container {
