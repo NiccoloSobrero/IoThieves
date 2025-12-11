@@ -39,6 +39,7 @@ namespace Events
         public static readonly UnityEvent OnOptionsClicked = new();
         public static readonly UnityEvent OnRestartGame = new();
         public static readonly UnityEvent OnEndLevel = new();
+        public static readonly UnityEvent OnOptionsSave = new();
         # endregion
 
 
