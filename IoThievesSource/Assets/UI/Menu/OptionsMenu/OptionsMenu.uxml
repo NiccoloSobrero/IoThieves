@@ -5,9 +5,13 @@
         <ui:VisualElement name="optionsTopElementsContainer" class="options-top-elements-container">
             <ui:Label name="optionsTitle" text="Options" class="options-title" />
             <ui:VisualElement name="optionsButtonsContainer" class="options-buttons-container">
-                <ui:Button name="btn" text="Button" class="menu-button" />
-                <ui:Button name="btn" text="Button" class="menu-button" />
-                <ui:Button name="btn" text="Button" class="menu-button" />
+                <ui:Label name="sfxVolumeLabel" class="option-label" text="SFX Volume" />
+                <ui:Slider name="sfxVolumeSlider" class="option-slider" fill="true" />
+                <ui:Label name="musicVolumeLabel" class="option-label" text="Music Volume" />
+                <ui:Slider name="musicVolumeSlider" class="option-slider" fill="true" />
+                <!-- <ui:Button name="btn" text="Button" class="menu-button" /> -->
+                <!-- <ui:Button name="btn" text="Button" class="menu-button" /> -->
+                <!-- <ui:Button name="btn" text="Button" class="menu-button" /> -->
             </ui:VisualElement>
         </ui:VisualElement>
         <ui:VisualElement name="optionsBottomElementsContainer" class="options-bottom-elements-container">
