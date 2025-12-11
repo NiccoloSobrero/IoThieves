@@ -1,0 +1,18 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/Menu/OptionsMenu/options-menu.uss?fileID=7433441132597879392&amp;guid=ce192d7cfa8aa4ef387c44151b26e79f&amp;type=3#options-menu" />
+    <Style src="project://database/Assets/UI/Menu/menu-style.uss?fileID=7433441132597879392&amp;guid=8baf226fee4253342832e9861d4f70e9&amp;type=3#menu-style" />
+    <ui:VisualElement name="optionsContainer" class="menu-container options-menu-container">
+        <ui:VisualElement name="optionsTopElementsContainer" class="options-top-elements-container">
+            <ui:Label name="optionsTitle" text="Options" class="options-title" />
+            <ui:VisualElement name="optionsButtonsContainer" class="options-buttons-container">
+                <ui:Button name="btn" text="Button" class="menu-button" />
+                <ui:Button name="btn" text="Button" class="menu-button" />
+                <ui:Button name="btn" text="Button" class="menu-button" />
+            </ui:VisualElement>
+        </ui:VisualElement>
+        <ui:VisualElement name="optionsBottomElementsContainer" class="options-bottom-elements-container">
+            <ui:Button name="backButton" text="Back" class="menu-button options-button" />
+            <ui:Button name="saveButton" text="Save" class="menu-button options-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
