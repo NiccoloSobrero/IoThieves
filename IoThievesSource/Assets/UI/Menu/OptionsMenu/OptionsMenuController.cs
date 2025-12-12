@@ -12,56 +12,114 @@ public class OptionsMenuController : MonoBehaviour
     [SerializeField] private InputActionAsset inputActions;
 
     private InputAction move;
+    private InputAction interact;
+    private InputAction execute;
+
+    private string previousButtonLabel = string.Empty;
+
+    private readonly string MOVE_ACTION = "Move";
+    private readonly string CLICK_ACTION = "Click";
+    private readonly string THROW_ACTION = "Throw";
+    private readonly string WASD_ACTION = "WASD";
+    
 
     private void Awake()
     {
         var gameplay = inputActions.FindActionMap("Gameplay");
 
-        move = gameplay.FindAction("Move");
+        move = gameplay.FindAction(MOVE_ACTION);
+
+        interact = gameplay.FindAction(CLICK_ACTION);
+        execute = gameplay.FindAction(THROW_ACTION);
     }
 
-    private void RebindButton(Button button, InputAction action, string partName)
+    private void OnEnable()
     {
-        button.text = GetDisplayName(action, partName);
+        var root = optionsMenuDocument.rootVisualElement;
+        var backButton = root.Q<Button>("backButton");
+        backButton.clicked += HideOptionsMenu;
+        
+        var saveButton = root.Q<Button>("saveButton");
+        saveButton.clicked += SaveOptions;
 
-        button.clicked += () =>
+        var moveUpButton = root.Q<Button>("moveUpButton");
+        moveUpButton.clicked += () =>
         {
-            RebindAction(button, action, partName);
+            RebindComposite(move, moveUpButton, WASD_ACTION, "Up");
         };
+
+        var moveDownButton = root.Q<Button>("moveDownButton");
+        moveDownButton.clicked += () =>
+        {
+            RebindComposite(move, moveDownButton, WASD_ACTION, "Down");
+        };
+
+        var moveLeftButton = root.Q<Button>("moveLeftButton");
+        moveLeftButton.clicked += () =>
+        {
+            RebindComposite(move, moveLeftButton, WASD_ACTION, "Left");
+        };
+
+        var moveRightButton = root.Q<Button>("moveRightButton");
+        moveRightButton.clicked += () =>
+        {
+            RebindComposite(move, moveRightButton, WASD_ACTION, "Right");
+        };
+
+        var interactButton = root.Q<Button>("interactButton");
+        interactButton.clicked += () =>
+        {
+            RebindSimple(interact, interactButton);
+        };
+        
+        var executeButton = root.Q<Button>("executeButton");
+        executeButton.clicked += () =>
+        {
+            RebindSimple(execute, executeButton);
+        };
+        
+        EventsManager.OnOptionsClicked.AddListener(ShowMenuOptions);
+        HideOptionsMenu();
     }
 
-    private void RebindAction(Button button, InputAction action, string partName)
+    private void OnDisable()
     {
-        int bindingIndex = FindCompositePart(action, "WASD", partName);
-        
-        button.text = "Press a key...";
-        button.SetEnabled(false);
-
-        
-        action.Disable();
-
-        action.PerformInteractiveRebinding(bindingIndex)
-            .WithCancelingThrough("<keyboard>/escape")
-            .OnCancel(op =>
-            {
-                button.text = GetDisplayName(action, partName);
-                button.SetEnabled(true);
-                op.Dispose();
-                action.Enable();
-            })
-            .OnComplete(op =>
-            {
-                button.text = GetDisplayName(action, partName);
-                button.SetEnabled(true);
-                op.Dispose();
-                action.Enable();
-            })
-            .Start();
+        EventsManager.OnOptionsClicked.RemoveListener(ShowMenuOptions);
+    }
+    
+    private void ShowMenuOptions()
+    {
+        optionsMenuDocument.rootVisualElement.style.display = DisplayStyle.Flex;
     }
 
-    private int FindCompositePart(InputAction action, string compositeName, string partName)
+    private void HideOptionsMenu()
+    {
+        optionsMenuDocument.rootVisualElement.style.display = DisplayStyle.None;
+    }
+
+    private void SaveOptions()
+    {
+        EventsManager.OnOptionsSave?.Invoke();
+        HideOptionsMenu();
+    }
+
+    private void RebindSimple(InputAction action, Button button)
+    {
+        int bindingIndex = 0;
+        Rebind(action, button, bindingIndex);
+    }
+
+    private void RebindComposite(InputAction action, Button button, string compositeName, string partName)
+    {
+        int bindingIndex = GetCompositeBindingIndex(action, compositeName, partName);
+        
+        Rebind(action, button, bindingIndex);
+    }
+
+    private int GetCompositeBindingIndex(InputAction action, string compositeName, string partName)
     {
         bool isInsideComposite = false;
+        int bindingIndex = -1;
         for (int index = 0; index < action.bindings.Count; index++)
         {
             var binding = action.bindings[index];
@@ -80,83 +138,38 @@ public class OptionsMenuController : MonoBehaviour
             if (isInsideComposite && binding.isPartOfComposite &&
                 binding.name.Equals(partName, StringComparison.OrdinalIgnoreCase))
             {
-                return index;
+                bindingIndex = index;
             }
+
         }
-
-        throw new Exception($"Composite {compositeName} with part {partName} not found");
+        return bindingIndex;
     }
 
-    private string GetDisplayName(InputAction action, string partName)
+    private void Rebind(InputAction action, Button button, int index)
     {
-        int index = FindCompositePart(action, "WASD", partName);
-        return action.GetBindingDisplayString(index);
-    }
+        previousButtonLabel = button.text;
+        button.text = "Press a key...";
+        button.SetEnabled(false);
 
-    private void OnEnable()
-    {
-        var root = optionsMenuDocument.rootVisualElement;
-        var backButton = root.Q<Button>("backButton");
-        backButton.clicked += HideOptionsMenu;
         
-        var saveButton = root.Q<Button>("saveButton");
-        saveButton.clicked += SaveOptions;
+        action.Disable();
 
-        // var moveUpDropdown = root.Q<DropdownField>("moveUpDropdown");
-        // moveUpDropdown.choices = new List<string>() { KeyCode.W.ToString(), KeyCode.UpArrow.ToString() };
-        // moveUpDropdown.value = moveUpDropdown.choices[0];
-
-        var moveUpButton = root.Q<Button>("moveUpButton");
-        moveUpButton.clicked += () =>
-        {
-            RebindButton(moveUpButton, move, "Up");
-        };
-        
-        var moveDownDropdown = root.Q<DropdownField>("moveDownDropdown");
-        moveDownDropdown.choices = new List<string>() { KeyCode.S.ToString(), KeyCode.DownArrow.ToString() };
-        moveDownDropdown.value = moveDownDropdown.choices[0];
-        
-        var moveLeftDropdown = root.Q<DropdownField>("moveLeftDropdown");
-        moveLeftDropdown.choices = new List<string>() { KeyCode.A.ToString(), KeyCode.LeftArrow.ToString() };
-        moveLeftDropdown.value = moveLeftDropdown.choices[0];
-        
-        var moveRightDropdown = root.Q<DropdownField>("moveRightDropdown");
-        moveRightDropdown.choices = new List<string>() { KeyCode.D.ToString(), KeyCode.RightArrow.ToString() };
-        moveRightDropdown.value = moveRightDropdown.choices[0];
-        
-        var interactAction = root.Q<DropdownField>("interactDropdown");
-        interactAction.choices = new List<string>() { KeyCode.Mouse0.ToString(), KeyCode.KeypadEnter.ToString() };
-        interactAction.value = interactAction.choices[0];
-        
-        var executeAction = root.Q<DropdownField>("executeDropdown");
-        executeAction.choices = new List<string>() { KeyCode.Mouse1.ToString(), KeyCode.Return.ToString() };
-        executeAction.value = executeAction.choices[0];
-        
-        // EventsManager.OnPauseGame.AddListener(SaveOptions);
-        EventsManager.OnOptionsClicked.AddListener(ShowMenuOptions);
-        // EventsManager.OnResumeGame.AddListener(ResumeGame);
-        HideOptionsMenu();
-    }
-
-    private void OnDisable()
-    {
-        EventsManager.OnOptionsClicked.RemoveListener(ShowMenuOptions);
-    }
-
-    private void ShowMenuOptions()
-    {
-        optionsMenuDocument.rootVisualElement.style.display = DisplayStyle.Flex;
-    }
-
-    private void HideOptionsMenu()
-    {
-        print("Hide Options Menu");
-        optionsMenuDocument.rootVisualElement.style.display = DisplayStyle.None;
-    }
-
-    private void SaveOptions()
-    {
-        EventsManager.OnOptionsSave?.Invoke();
-        HideOptionsMenu();
+        action.PerformInteractiveRebinding(index)
+            .WithCancelingThrough("<keyboard>/escape")
+            .OnCancel(op =>
+            {
+                button.text = previousButtonLabel;
+                button.SetEnabled(true);
+                op.Dispose();
+                action.Enable();
+            })
+            .OnComplete(op =>
+            {
+                button.text = action.bindings[index].ToDisplayString();
+                button.SetEnabled(true);
+                op.Dispose();
+                action.Enable();
+            })
+            .Start();
     }
 }

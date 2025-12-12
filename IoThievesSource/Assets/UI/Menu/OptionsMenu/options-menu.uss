@@ -55,25 +55,19 @@
     flex-direction: row;
     width: 100%;
     justify-content: space-around;
-    border-width: 2px;
-    border-color: red;
     /*align-self: flex-start;*/
 }
 
 .action-label {
     align-items: flex-start;
-    border-color: blue;
-    border-width: 2px;
     
 }
 
 .rebind-button {
     align-self: center;
     height: 80%;
-    width: 15%;
-    border-color: green;
-    border-width: 2px;
-    font-size: 52px;
+    width: 25%;
+    font-size: 36px;
 }
 
 .action-dropdown {
