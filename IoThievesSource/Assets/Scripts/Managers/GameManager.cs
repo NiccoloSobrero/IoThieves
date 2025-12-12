@@ -87,16 +87,15 @@ public class GameManager : MonoBehaviour
         Application.Quit();
 #endif
     }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    
+    public string LoadUserInputPreferences()
     {
-        
-    }
+        string userInputPreferences = "";
+        if (PlayerPrefs.HasKey("ActionsControl"))
+        {
+            userInputPreferences = PlayerPrefs.GetString("ActionsControl");
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return userInputPreferences;
     }
 }

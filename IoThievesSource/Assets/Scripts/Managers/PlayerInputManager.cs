@@ -48,12 +48,8 @@ namespace Managers
 
         private void LoadUserPreferences()
         {
-            if (PlayerPrefs.HasKey("ActionsControl"))
-            {
-                string userInputPreferences = PlayerPrefs.GetString("ActionsControl");
-                _actions.LoadBindingOverridesFromJson(userInputPreferences);
-                print("User input preferences loaded");
-            }
+            string userPreferences = GameManager.Instance.LoadUserInputPreferences();
+            _actions.LoadBindingOverridesFromJson(userPreferences);
         }
 
         private void OnEnable()
@@ -82,11 +78,13 @@ namespace Managers
             _actions.Dialogue.ContinueDialogue.performed += ContinueDialogue;
             
             SetContext(InputContext.Gameplay);
+            EventsManager.OnOptionsSave.AddListener(LoadUserPreferences);
         }
 
         private void OnDisable()
         {
             DisableAll();
+            EventsManager.OnOptionsSave.RemoveListener(LoadUserPreferences);
         }
 
         public void SetContext(InputContext context)
