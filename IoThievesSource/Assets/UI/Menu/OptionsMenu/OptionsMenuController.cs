@@ -31,6 +31,8 @@ public class OptionsMenuController : MonoBehaviour
 
         interact = gameplay.FindAction(CLICK_ACTION);
         execute = gameplay.FindAction(THROW_ACTION);
+
+        LoadUserInputPreferences();
     }
 
     private void OnEnable()
@@ -99,6 +101,7 @@ public class OptionsMenuController : MonoBehaviour
 
     private void SaveOptions()
     {
+        SaveActionsRebind();
         EventsManager.OnOptionsSave?.Invoke();
         HideOptionsMenu();
     }
@@ -171,5 +174,23 @@ public class OptionsMenuController : MonoBehaviour
                 action.Enable();
             })
             .Start();
+    }
+
+    private void SaveActionsRebind()
+    {
+        string rebinds = inputActions.SaveBindingOverridesAsJson();
+        PlayerPrefs.SetString("ActionsControl", rebinds);
+        PlayerPrefs.Save();
+        print("Saving...");
+    }
+
+    private void LoadUserInputPreferences()
+    {
+        if (PlayerPrefs.HasKey("ActionsControl"))
+        {
+            string userInputPreferences = PlayerPrefs.GetString("ActionsControl");
+            inputActions.LoadBindingOverridesFromJson(userInputPreferences);
+            print("User input preferences loaded");
+        }
     }
 }

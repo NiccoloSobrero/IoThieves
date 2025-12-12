@@ -43,6 +43,17 @@ namespace Managers
             }
             
             _actions = new PlayerInputActions();
+            LoadUserPreferences();
+        }
+
+        private void LoadUserPreferences()
+        {
+            if (PlayerPrefs.HasKey("ActionsControl"))
+            {
+                string userInputPreferences = PlayerPrefs.GetString("ActionsControl");
+                _actions.LoadBindingOverridesFromJson(userInputPreferences);
+                print("User input preferences loaded");
+            }
         }
 
         private void OnEnable()
