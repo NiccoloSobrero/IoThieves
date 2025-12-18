@@ -528,6 +528,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1432449041}
   holdPoint: {fileID: 1551089090}
+  characterAnimator: {fileID: 0}
   minPower: 3
   maxPower: 15
   powerStep: 1
@@ -10549,6 +10550,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cam: {fileID: 1432449041}
   holdPoint: {fileID: 445930501}
+  characterAnimator: {fileID: 16301516}
   minPower: 3
   maxPower: 15
   powerStep: 1
@@ -12338,7 +12340,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerThrower: {fileID: 1563278796}
-  pauseMenuController: {fileID: 2092398957}
 --- !u!4 &1763105331
 Transform:
   m_ObjectHideFlags: 0

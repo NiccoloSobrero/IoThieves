@@ -26,8 +26,6 @@ namespace Managers
         [Header("References")]
         [SerializeField] private PlayerThrower playerThrower;
 
-        [SerializeField] private PauseMenuController pauseMenuController;
-
         public Vector2 Move { get; private set; }
 
         private void Awake()
@@ -164,8 +162,6 @@ namespace Managers
 
         private void PauseGame(InputAction.CallbackContext context)
         {
-            // pauseMenuController.PauseMenu();
-            print("Executing pause");
             EventsManager.OnPauseGame?.Invoke();
         }
     }

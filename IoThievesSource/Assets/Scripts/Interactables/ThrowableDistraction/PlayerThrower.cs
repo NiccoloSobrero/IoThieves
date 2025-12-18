@@ -7,6 +7,7 @@ namespace Interactables.ThrowableDistraction
         [Header("References")] 
         [SerializeField] private Camera cam;
         [SerializeField] private Transform holdPoint;
+        [SerializeField] private Animator characterAnimator;
 
         [Header("Throw Settings")]
         [SerializeField] private float minPower = 3f;
@@ -75,6 +76,8 @@ namespace Interactables.ThrowableDistraction
 
             _heldThrowable.OnThrown();
             _heldThrowable.Rb.linearVelocity = initialVelocity;
+            
+            characterAnimator.SetTrigger("IsThrowing");
 
             _heldThrowable = null;
             HideTrajectory();
