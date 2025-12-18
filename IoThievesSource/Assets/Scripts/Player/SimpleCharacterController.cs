@@ -9,6 +9,7 @@ namespace Player
     {
         [Header("References")] 
         [SerializeField] private Transform graphics;
+        [SerializeField] private Animator characterAnimator;
         
         [Header("Settings")] 
         [SerializeField] private float moveSpeed = 5f;
@@ -52,10 +53,16 @@ namespace Player
                 moveDir = moveDir.normalized;
                 
                 _controller.Move(moveDir * (moveSpeed * Time.deltaTime));
+                
+                characterAnimator.SetBool("IsMoving", true);
             
                 float targetAngle = Mathf.Atan2(moveDir.x, moveDir.z) * Mathf.Rad2Deg;
                 float angle = Mathf.SmoothDampAngle(graphics.eulerAngles.y, targetAngle, ref _turnSmoothVelocity, turnSmoothTime);
                 graphics.rotation = Quaternion.Euler(0f, angle, 0f);
+            }
+            else
+            {
+                characterAnimator.SetBool("IsMoving", false);
             }
         }
 
