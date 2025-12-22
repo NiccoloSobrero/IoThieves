@@ -27,7 +27,7 @@ namespace AI.AI_States
 
             if (_hackedDevice is not null)
             {
-                _path = PathFinding.FindPath(FindNearestWaypoint(), _hackedDevice);
+                _path = PathFinding.FindPath(AIUtilities.FindNearestWaypoint(Npc.transform.position), _hackedDevice);
                 _destinationReached = false;
             }
             else
@@ -50,43 +50,6 @@ namespace AI.AI_States
             
             return hackedDevice;
         }
-
-        private Waypoint FindNearestWaypoint()
-        {
-            LayerMask mask = LayerMask.GetMask("Default");
-            
-            Waypoint[] wps = Object.FindObjectsByType<Waypoint>(
-                FindObjectsInactive.Exclude,
-                FindObjectsSortMode.None);
-           
-            float maxCheckDistance = 10f;
-            float bestDistance = Mathf.Infinity;
-            Waypoint bestWaypoint = null;
-           
-            foreach (Waypoint wp in wps)
-            { 
-                Vector3 dir = wp.transform.position - Npc.transform.position; 
-                float distance = dir.magnitude;
-
-                if (distance > maxCheckDistance)
-                    continue; 
-               
-                if (!Physics.Raycast(
-                        Npc.transform.position,
-                        dir.normalized,
-                        distance,
-                        mask))
-                { 
-                    if (distance < bestDistance)
-                    {
-                        bestDistance = distance;
-                        bestWaypoint = wp;
-                    }
-                }
-            }
-            
-            return bestWaypoint;
-        }
         
         public override void Execute()
         {
@@ -99,7 +62,7 @@ namespace AI.AI_States
                     _hackedDevice = FindHackedDevice();
                     if (_hackedDevice is not null)
                     {
-                        _path = PathFinding.FindPath(FindNearestWaypoint(), _hackedDevice);
+                        _path = PathFinding.FindPath(AIUtilities.FindNearestWaypoint(Npc.transform.position), _hackedDevice);
                         _destinationReached = false;
                     }
                     else Npc.PreviousState();
@@ -109,8 +72,7 @@ namespace AI.AI_States
             {
                 
                 Vector3 dir = _path[0].transform.position - Npc.transform.position;
-                Vector3 velocity = dir.normalized * (_speed * Time.deltaTime);
-                Npc.transform.position  += new Vector3(velocity.x, 0, velocity.z);
+                AIUtilities.MoveTarget(Npc.transform, dir, _speed);
                 
                 Vector3 forwardDir = Npc.transform.forward.normalized;
                 Vector3 lookDir = dir;
@@ -118,9 +80,7 @@ namespace AI.AI_States
                 if (dir.magnitude < _turningThreshold && _path.Count > 1)
                    lookDir = _path[1].transform.position - Npc.transform.position;
                     
-                float angle = Vector3.SignedAngle(forwardDir, lookDir, Vector3.up);
-                float rotateOf = angle * _angularSpeed * Time.deltaTime;
-                Npc.transform.Rotate(0,rotateOf,0);
+                AIUtilities.RotateTarget(Npc.transform, forwardDir, lookDir, _angularSpeed);
             
                 float distance = Vector3.Distance(Npc.transform.position, _path[0].transform.position);
                 if (distance < _nextWaypointThreshold)

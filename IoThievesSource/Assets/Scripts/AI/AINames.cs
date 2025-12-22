@@ -7,5 +7,6 @@ namespace AI
         Idle,
         DeviceHacked,
         NoiseHeardState,
+        PathCycling,
     }
 }

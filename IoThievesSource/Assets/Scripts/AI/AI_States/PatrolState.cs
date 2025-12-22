@@ -131,19 +131,14 @@ namespace AI.AI_States
             dir.Normalize();
 
             Vector3 forwardDir = Npc.transform.forward.normalized;
-            
-            float angle = Vector3.SignedAngle(forwardDir, dir, Vector3.up);
-            float angleMag = Mathf.Abs(angle);
+
+            float angleMag = AIUtilities.RotateTarget(Npc.transform, forwardDir, dir, _angularSpeed); 
             
             _isMoving = angleMag < _angularThreshold;
 
-            float rotateOf = angle * _angularSpeed * Time.deltaTime;
-            Npc.transform.Rotate(0,rotateOf,0);
-
             if (_isMoving)
             {
-                Vector3 velocity = dir * (_speed * Time.deltaTime);
-                Npc.transform.position  += new Vector3(velocity.x, 0, velocity.z);
+                AIUtilities.MoveTarget(Npc.transform, dir, _speed);
             }
 
             float distance = (_target.transform.position - Npc.transform.position).magnitude;

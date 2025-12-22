@@ -41,38 +41,8 @@ namespace AI.AI_States
         public override void Enter()
         {
             //Text : What's that -> Looking around animation??
-            LayerMask mask = LayerMask.GetMask("Default");
             
-            Waypoint[] wps = UnityEngine.Object.FindObjectsByType<Waypoint>(
-                FindObjectsInactive.Exclude,
-                FindObjectsSortMode.None);
-           
-            float maxCheckDistance = 20f;
-            float bestDistance = Mathf.Infinity;
-            Waypoint bestWaypoint = null;
-           
-            foreach (Waypoint wp in wps)
-            { 
-                Vector3 dir = wp.transform.position - Npc.transform.position; 
-                float distance = dir.magnitude;
-
-                if (distance > maxCheckDistance)
-                    continue; 
-               
-                if (!Physics.Raycast(
-                        Npc.transform.position,
-                        dir.normalized,
-                        distance,
-                        mask))
-                { 
-                    if (distance < bestDistance)
-                    {
-                        bestDistance = distance;
-                        bestWaypoint = wp;
-                    }
-                }
-            }
-            _destinationWaypoint = bestWaypoint;
+            _destinationWaypoint = AIUtilities.FindNearestWaypoint(Npc.transform.position);
             ComputeMiddlePoints();
             
             //Wait a second before it starts moving
@@ -103,18 +73,14 @@ namespace AI.AI_States
                 dir.Normalize();
 
                 Vector3 forwardDir = Npc.transform.forward.normalized;
-            
-                float angle = Vector3.SignedAngle(forwardDir, dir, Vector3.up);
-                float angleMag = Mathf.Abs(angle);
-            
+
+                float angleMag = AIUtilities.RotateTarget(Npc.transform, forwardDir, dir, _angularSpeed); 
+                
                 _isMoving = angleMag < _angularThreshold;
-                float rotateOf = angle * _angularSpeed * Time.deltaTime;
-                Npc.transform.Rotate(0,rotateOf,0);
 
                 if (_isMoving)
-                {
-                    Vector3 velocity = dir * (_speed * Time.deltaTime);
-                    Npc.transform.position  += new Vector3(velocity.x, 0, velocity.z);
+                { 
+                    AIUtilities.MoveTarget(Npc.transform, dir, _speed); 
                 }
 
                 float distance = (_nextDestination - Npc.transform.position).magnitude;
