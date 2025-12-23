@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Levels;
 using Managers;
 using Minigames.ScriptableObjects;
@@ -7,34 +8,33 @@ using UnityEngine.Events;
 
 namespace Interactables
 {
-    public class InteractToMinigames : MonoBehaviour, IInteractable
+    public class InteractToMinigames : Interactable
     {
         [SerializeField] private List<MinigameAndObjective> minigames = new();
         [SerializeField] private bool redoCompletedMinigameAfterReopen;
 
-        [SerializeField] private float maxDistanceToInteract;
         [SerializeField] private LayerMask playerLayer;
         
-        private readonly Collider[] _playerColliders = new Collider[1];
+        [SerializeField] private InteractableTriggerArea triggerArea;
 
         #region Events
         
         [HideInInspector] public UnityEvent onInteract;
 
         #endregion
-        
-        public void Interact()
-        {
-            if (Physics.OverlapSphereNonAlloc(
-                    gameObject.transform.position, 
-                    maxDistanceToInteract, 
-                    _playerColliders, 
-                    playerLayer) > 0)
-            {
-                MinigamesManager.Instance.SetMinigamesLoop(this, minigames);
 
-                onInteract?.Invoke();
-            }
+        private void Awake()
+        {
+            triggerArea.Init(this);
+        }
+
+        public override void Interact()
+        {
+            if (!triggerArea.IsPlayerInRange) return;
+            
+            MinigamesManager.Instance.SetMinigamesLoop(this, minigames);
+
+            onInteract?.Invoke();
         }
         
         public void TryRemovingMinigame(MinigameAndObjective minigameAndObjective)
@@ -42,12 +42,6 @@ namespace Interactables
             if (redoCompletedMinigameAfterReopen) return;
             
             minigames.Remove(minigameAndObjective);
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(gameObject.transform.position, maxDistanceToInteract);
         }
     }
 

@@ -6,15 +6,20 @@ using UnityEngine.UI;
 
 namespace Interactables
 {
-    public class InteractToCreateDistraction : MonoBehaviour, IInteractable
+    public class InteractToCreateDistraction : Interactable
     {
         [Header("Hackable Settings")]
         [SerializeField] private float timeToProduce;
         
-        [SerializeField] private float maxDistanceToInteract;
-        [SerializeField] private float maxDistanceToPickUp;
-        
         [SerializeField] private LayerMask playerLayer;
+        
+        [SerializeField] private InteractableTriggerArea hackTriggerArea;
+        [SerializeField] private InteractableTriggerArea interactTriggerArea;
+        
+        [Header("Outline Settings")]
+        [SerializeField] private MeshRenderer outlineRenderer;
+        [SerializeField] private Color hackableOutlineColor;
+        [SerializeField] private Color interactableOutlineColor;
         
         [Header("Throwable Settings")]
         [SerializeField] private GameObject distractionPrefab;
@@ -25,10 +30,8 @@ namespace Interactables
         [SerializeField] private Image fillImage;
         [SerializeField] private GameObject checkObj;
         
-        private readonly Collider[] _playerColliders = new Collider[1];
-        
         [HideInInspector] public bool canStartProduction = true;
-        private bool _hasCreatedDistraction = false;
+        private bool _hasCreatedDistraction;
 
         #region Events
 
@@ -41,47 +44,81 @@ namespace Interactables
             progressBillboard.SetActive(false);
             checkObj.SetActive(false);
             fillImage.fillAmount = 0;
+            
+            interactTriggerArea.Init(this);
+            hackTriggerArea.Init(this);
+
+            if (timeToProduce == 0)
+            {
+                SetOutlineColor(interactableOutlineColor);
+                
+                interactTriggerArea.Lock(false);
+                hackTriggerArea.Lock(true);
+            }
+            else
+            {
+                SetOutlineColor(hackableOutlineColor);
+                
+                hackTriggerArea.Lock(false);
+                interactTriggerArea.Lock(true);
+            }
         }
 
-        public void Interact()
+        public override void Interact()
         {
-            if (canStartProduction)
+            if (timeToProduce == 0 && interactTriggerArea.IsPlayerInRange && interactTriggerArea.PlayerObject != null)
             {
-                if (Physics.OverlapSphereNonAlloc(
-                        gameObject.transform.position, 
-                        maxDistanceToInteract, 
-                        _playerColliders, 
-                        playerLayer) > 0)
-                {
-                    StartCoroutine(ProduceDistraction(timeToProduce));
-                }
-            }
-            else if (_hasCreatedDistraction)
-            {
-                if (Physics.OverlapSphereNonAlloc(
-                        gameObject.transform.position,
-                        maxDistanceToPickUp,
-                        _playerColliders,
-                        playerLayer) > 0)
-                {
-                    PlayerThrower player = _playerColliders[0].GetComponent<PlayerThrower>();
+                PlayerThrower player = interactTriggerArea.PlayerObject.GetComponent<PlayerThrower>();
 
-                    if (player.TryPickUp(Instantiate(
+                if (player.TryPickUp(Instantiate(
                             distractionPrefab, 
                             gameObject.transform.position, 
                             Quaternion.identity).GetComponent<Throwable>(), 
                         attractionRange))
-                    {
-                        progressBillboard.SetActive(false);
-                        checkObj.SetActive(false);
-                        fillImage.fillAmount = 0;
-                        
-                        _hasCreatedDistraction = false;
-                        canStartProduction = true;
+                {
+                    _hasCreatedDistraction = false;
+                    canStartProduction = true;
 
-                        onPickUpThrowable?.Invoke();
-                    }
+                    onPickUpThrowable?.Invoke();
                 }
+            }
+            
+            if (canStartProduction && hackTriggerArea.IsPlayerInRange)
+            {
+                StartCoroutine(ProduceDistraction(timeToProduce));
+            }
+            else if (_hasCreatedDistraction && interactTriggerArea.IsPlayerInRange && interactTriggerArea.PlayerObject != null)
+            {
+                PlayerThrower player = interactTriggerArea.PlayerObject.GetComponent<PlayerThrower>();
+
+                if (player.TryPickUp(Instantiate(
+                            distractionPrefab, 
+                            gameObject.transform.position, 
+                            Quaternion.identity).GetComponent<Throwable>(), 
+                        attractionRange))
+                {
+                    progressBillboard.SetActive(false);
+                    checkObj.SetActive(false);
+                    fillImage.fillAmount = 0;
+                        
+                    _hasCreatedDistraction = false;
+                    canStartProduction = true;
+                    
+                    interactTriggerArea.Lock(true);
+                    hackTriggerArea.Lock(false);
+                    
+                    SetOutlineColor(hackableOutlineColor);
+
+                    onPickUpThrowable?.Invoke();
+                }
+            }
+        }
+
+        private void SetOutlineColor(Color color)
+        {
+            foreach (Material material in outlineRenderer.materials)
+            {
+                material.color = color;
             }
         }
 
@@ -105,8 +142,12 @@ namespace Interactables
             }
             
             checkObj.SetActive(true);
-            
             _hasCreatedDistraction = true;
+            
+            interactTriggerArea.Lock(false);
+            hackTriggerArea.Lock(true);
+            
+            SetOutlineColor(interactableOutlineColor);
         }
     }
 }

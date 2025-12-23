@@ -105,6 +105,7 @@ namespace Levels
         [SerializeField] private DialogueLinesScrObj tutorialDialogue12;
         [SerializeField] private GameObject endLevelTrigger;
         [SerializeField] private GameObject exitCollider;
+        [SerializeField] private GameObject lastHackableTriggerArea;
         
         private List<UnityAction> _steps = new();
         private Vector3 _lastValidPosition;
@@ -137,6 +138,8 @@ namespace Levels
             printerInteractableOutline.SetActive(false);
             pcInteractableOutline.SetActive(false);
             codePadInteractableOutline.SetActive(false);
+            
+            lastHackableTriggerArea.SetActive(false);
             
             _currentStep = 0;
             
@@ -343,6 +346,8 @@ namespace Levels
             playerController.MoveTowards(playerTargetPos.position);
             
             _lastValidPosition = playerTargetPos.position;
+            
+            lastHackableTriggerArea.SetActive(true);
         }
 
         private void Step_12()

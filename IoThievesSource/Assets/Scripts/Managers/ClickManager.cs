@@ -33,7 +33,7 @@ namespace Managers
 
             if (Physics.Raycast(ray, out RaycastHit hit, maxRayDistance, interactableLayer))
             {
-                if (hit.transform.TryGetComponent(out IInteractable interactable))
+                if (hit.transform.TryGetComponent(out Interactable interactable))
                 {
                     interactable.Interact();
                 }
