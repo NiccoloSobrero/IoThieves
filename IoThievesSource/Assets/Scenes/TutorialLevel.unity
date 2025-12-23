@@ -562,6 +562,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e39b1957d385641bd0f0688533321d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableType: 2
 --- !u!65 &82873006
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -581,8 +582,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.8666675, y: 0.98634577, z: 2.5002413}
-  m_Center: {x: -0.62855643, y: 0.72479475, z: 0.75012094}
+  m_Size: {x: 7.7743263, y: 0.98634577, z: 10.038055}
+  m_Center: {x: -3.5823905, y: 0.7247952, z: -3.0187747}
 --- !u!4 &82873007
 Transform:
   m_ObjectHideFlags: 0
@@ -2575,6 +2576,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e39b1957d385641bd0f0688533321d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableType: 1
 --- !u!65 &384239836
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3258,16 +3260,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693a4e6bd5db496c8ef7448633c3b444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineObject: {fileID: 0}
+  outlineRenderer: {fileID: 0}
   timeToProduce: 5
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
   hackTriggerArea: {fileID: 0}
   interactTriggerArea: {fileID: 0}
-  outlineRenderer: {fileID: 0}
-  hackableOutlineColor: {r: 0, g: 0, b: 0, a: 0}
-  interactableOutlineColor: {r: 0, g: 0, b: 0, a: 0}
   distractionPrefab: {fileID: 1667008392998234859, guid: babe0b1138ef9f9489677cd9f4a2f9ab, type: 3}
   attractionRange: 10
   progressBillboard: {fileID: 756938558}
@@ -4166,6 +4165,7 @@ MonoBehaviour:
   step0Trigger: {fileID: 1386180593}
   codePadInteractable: {fileID: 9141816028420799679}
   codePadInteractableOutline: {fileID: 767730883}
+  codePadInteractableTriggerArea: {fileID: 1775732755}
   targetMovementCurve:
     serializedVersion: 2
     m_Curve:
@@ -4194,6 +4194,7 @@ MonoBehaviour:
   timeStay: 1
   printerInteractable: {fileID: 5334037118958049722}
   printerInteractableOutline: {fileID: 1524715228}
+  printerInteractableTriggerArea: {fileID: 1869726056}
   tutorialDialogue2: {fileID: 11400000, guid: 20e82b2ba1c0e2a48bda2828efe27d39, type: 2}
   step2Trigger: {fileID: 2026347580}
   tutorialDialogue3: {fileID: 11400000, guid: 00a3986682e107a4e94ad7964f432ad6, type: 2}
@@ -6138,7 +6139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f6bec640f0eaca47844a8f15355055b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineObject: {fileID: 660356696}
+  outlineRenderer: {fileID: 660356698}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -8897,7 +8898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5db2ca8ca0914c4394d9147c98cac74c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineObject: {fileID: 0}
+  outlineRenderer: {fileID: 0}
   stunTrigger: {fileID: 1180834409}
   stunRadius: 10
   triggerArea: {fileID: 0}
@@ -10364,6 +10365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e39b1957d385641bd0f0688533321d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableType: 2
 --- !u!65 &1577240102
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11581,7 +11583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54130ef25e794b19b4206266ae532cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineObject: {fileID: 0}
+  outlineRenderer: {fileID: 0}
   minigames:
   - minigameScrObj: {fileID: 11400000, guid: 99ea6c1bfd11590439e0bad2e15efaf5, type: 2}
     objectiveScrObj: {fileID: 0}
@@ -12176,6 +12178,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e39b1957d385641bd0f0688533321d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableType: 1
 --- !u!65 &1775732756
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13221,6 +13224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e39b1957d385641bd0f0688533321d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactableType: 2
 --- !u!65 &1869726057
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13240,8 +13244,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 5.9518447, y: 5.478667, z: 2.1180549}
-  m_Center: {x: 1.5548586, y: 1.1367985, z: 0.55902785}
+  m_Size: {x: 19.317913, y: 25.21494, z: 2.1180549}
+  m_Center: {x: 5.4667006, y: -6.2042613, z: 0.55902785}
 --- !u!1 &1913028964
 GameObject:
   m_ObjectHideFlags: 0
@@ -27552,16 +27556,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 693a4e6bd5db496c8ef7448633c3b444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineObject: {fileID: 1524715228}
+  outlineRenderer: {fileID: 1524715232}
   timeToProduce: 3
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
   hackTriggerArea: {fileID: 1869726056}
   interactTriggerArea: {fileID: 384239835}
-  outlineRenderer: {fileID: 1524715232}
-  hackableOutlineColor: {r: 0.23499945, g: 0.8742138, b: 0.20618238, a: 1}
-  interactableOutlineColor: {r: 0, g: 0.7320547, b: 1, a: 1}
   distractionPrefab: {fileID: 1667008392998234859, guid: 309f89626e70fe140a7e756b4748a1b3, type: 3}
   attractionRange: 0
   progressBillboard: {fileID: 756938558}
@@ -35306,7 +35307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54130ef25e794b19b4206266ae532cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineObject: {fileID: 1471857135}
+  outlineRenderer: {fileID: 1471857139}
   minigames:
   - minigameScrObj: {fileID: 11400000, guid: 334a165d5b7d33a4ca361ced117a5cd5, type: 2}
     objectiveScrObj: {fileID: 0}
@@ -36611,7 +36612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54130ef25e794b19b4206266ae532cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineObject: {fileID: 767730883}
+  outlineRenderer: {fileID: 767730886}
   minigames:
   - minigameScrObj: {fileID: 11400000, guid: 99ea6c1bfd11590439e0bad2e15efaf5, type: 2}
     objectiveScrObj: {fileID: 0}

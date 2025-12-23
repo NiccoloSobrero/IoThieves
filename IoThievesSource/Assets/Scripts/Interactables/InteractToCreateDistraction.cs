@@ -16,11 +16,6 @@ namespace Interactables
         [SerializeField] private InteractableTriggerArea hackTriggerArea;
         [SerializeField] private InteractableTriggerArea interactTriggerArea;
         
-        [Header("Outline Settings")]
-        [SerializeField] private MeshRenderer outlineRenderer;
-        [SerializeField] private Color hackableOutlineColor;
-        [SerializeField] private Color interactableOutlineColor;
-        
         [Header("Throwable Settings")]
         [SerializeField] private GameObject distractionPrefab;
         [SerializeField] private float attractionRange;
@@ -47,21 +42,9 @@ namespace Interactables
             
             interactTriggerArea.Init(this);
             hackTriggerArea.Init(this);
-
-            if (timeToProduce == 0)
-            {
-                SetOutlineColor(interactableOutlineColor);
-                
-                interactTriggerArea.Lock(false);
-                hackTriggerArea.Lock(true);
-            }
-            else
-            {
-                SetOutlineColor(hackableOutlineColor);
-                
-                hackTriggerArea.Lock(false);
-                interactTriggerArea.Lock(true);
-            }
+            
+            hackTriggerArea.Lock(false);
+            interactTriggerArea.Lock(true);
         }
 
         public override void Interact()
@@ -106,19 +89,9 @@ namespace Interactables
                     
                     interactTriggerArea.Lock(true);
                     hackTriggerArea.Lock(false);
-                    
-                    SetOutlineColor(hackableOutlineColor);
 
                     onPickUpThrowable?.Invoke();
                 }
-            }
-        }
-
-        private void SetOutlineColor(Color color)
-        {
-            foreach (Material material in outlineRenderer.materials)
-            {
-                material.color = color;
             }
         }
 
@@ -144,10 +117,8 @@ namespace Interactables
             checkObj.SetActive(true);
             _hasCreatedDistraction = true;
             
-            interactTriggerArea.Lock(false);
             hackTriggerArea.Lock(true);
-            
-            SetOutlineColor(interactableOutlineColor);
+            interactTriggerArea.Lock(false);
         }
     }
 }

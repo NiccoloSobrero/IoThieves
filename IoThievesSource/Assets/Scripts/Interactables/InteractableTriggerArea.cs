@@ -5,6 +5,8 @@ namespace Interactables
     [RequireComponent(typeof(Collider))]
     public class InteractableTriggerArea : MonoBehaviour
     {
+        [SerializeField] private InteractableType interactableType;
+
         public bool IsPlayerInRange { get; private set; }
         public GameObject PlayerObject { get; private set; }
         
@@ -35,7 +37,7 @@ namespace Interactables
 
                 if (!_isLocked)
                 {
-                    _interactable.SetOutlineActive(true);
+                    _interactable.SetOutlineColor(interactableType);
                 }
             }
         }
@@ -49,14 +51,16 @@ namespace Interactables
 
                 if (!_isLocked)
                 {
-                    _interactable.SetOutlineActive(false);
+                    _interactable.SetOutlineColor(InteractableType.NotInteractable);
                 }
             }
         }
 
-        private void ManualUpdate()
+        public void ManualUpdate()
         {
-            _interactable.SetOutlineActive(IsPlayerInRange);
+            if (_isLocked) return;
+            
+            _interactable.SetOutlineColor(IsPlayerInRange ? interactableType : InteractableType.NotInteractable);
         }
     }
 }

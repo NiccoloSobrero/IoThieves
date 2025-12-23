@@ -36,6 +36,7 @@ namespace Levels
         [SerializeField] private GameObject step0Trigger;
         [SerializeField] private GameObject codePadInteractable;
         [SerializeField] private GameObject codePadInteractableOutline;
+        [SerializeField] private InteractableTriggerArea codePadInteractableTriggerArea;
         [SerializeField] private AnimationCurve targetMovementCurve;
         [SerializeField] private float timeToPan;
         [SerializeField] private float timeStay;
@@ -44,6 +45,7 @@ namespace Levels
         [Header("Step 1")]
         [SerializeField] private InteractToCreateDistraction printerInteractable;
         [SerializeField] private GameObject printerInteractableOutline;
+        [SerializeField] private InteractableTriggerArea printerInteractableTriggerArea;
 
         [Space]
         [Header("Step 2")]
@@ -219,6 +221,8 @@ namespace Levels
                 yield return null;
             }
             
+            codePadInteractableTriggerArea.ManualUpdate();
+            
             PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
         }
 
@@ -230,6 +234,7 @@ namespace Levels
             // Set up printer
             printerInteractable.gameObject.layer = (int)Mathf.Log(interactableLayer.value, 2);
             printerInteractableOutline.SetActive(true);
+            printerInteractableTriggerArea.ManualUpdate();
             printerInteractable.onPickUpThrowable.AddListener(NextStepOnPickUpThrowable);
             
             _lastValidPosition = playerTransform.position;
