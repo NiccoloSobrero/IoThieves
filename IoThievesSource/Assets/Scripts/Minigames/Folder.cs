@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Minigames
@@ -22,6 +23,20 @@ namespace Minigames
         private DesktopMinigame _desktopMinigame;
 
         private string _fileName;
+        
+        [SerializeField] private ButtonSelectionListener buttonSelectionListener;
+
+        private void OnEnable()
+        {
+            buttonSelectionListener.OnDeselected += OnDeselect;
+            buttonSelectionListener.OnSelected += OnSelect;
+        }
+
+        private void OnDisable()
+        {
+            buttonSelectionListener.OnDeselected -= OnDeselect;
+            buttonSelectionListener.OnSelected -= OnSelect;
+        }
 
         private void Update()
         {
@@ -48,14 +63,7 @@ namespace Minigames
             
             _desktopMinigame = desktopMinigame;
 
-            if (item.itemType == DesktopItemType.TargetFile)
-            {
-                label.text = "<b><i><color=red>" + _fileName;
-            }
-            else
-            {
-                label.text = _fileName;
-            }
+            TruncateLabel();
         }
 
         public void OnClick()
@@ -87,6 +95,57 @@ namespace Minigames
                         _desktopMinigame.OpenTargetFile(_fileName, _value, _documentSprite);
                         break;
                 }
+            }
+        }
+
+        private void OnSelect(BaseEventData eventData)
+        {
+            // Display full name
+            string fileName = "";
+            
+            if (_type == DesktopItemType.TargetFile)
+            {
+                fileName += "<b><i><color=red>";
+            }
+
+            fileName += _fileName;
+            
+            label.text = fileName;
+        }
+        
+        private void OnDeselect(BaseEventData eventData)
+        {
+            // Display truncated name
+            TruncateLabel();
+        }
+        
+        private void TruncateLabel()
+        {
+            string prefix = "";
+            
+            if (_type == DesktopItemType.TargetFile)
+            {
+                prefix = "<b><i><color=red>";
+            }
+            
+            label.text = prefix + _fileName;
+            label.ForceMeshUpdate();
+
+            float maxHeight = label.rectTransform.rect.height;
+
+            if (label.preferredHeight <= maxHeight)
+                return;
+
+            string truncated = _fileName;
+
+            while (truncated.Length > 0)
+            {
+                truncated = truncated.Substring(0, truncated.Length - 1);
+                label.text = prefix + truncated + "...";
+                label.ForceMeshUpdate();
+
+                if (label.preferredHeight <= maxHeight)
+                    break;
             }
         }
     }
