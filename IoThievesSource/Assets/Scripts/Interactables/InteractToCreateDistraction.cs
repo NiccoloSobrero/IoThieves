@@ -47,9 +47,6 @@ namespace Interactables
             
             hackTriggerArea.Lock(false);
             interactTriggerArea.Lock(true);
-            
-            // for testing
-            shakeAnimator.SetBool("IsShaking", true);
         }
 
         public override void Interact()
