@@ -16,6 +16,7 @@ namespace Interactables
         [SerializeField] private InteractableTriggerArea hackTriggerArea;
         [SerializeField] private InteractableTriggerArea interactTriggerArea;
         [SerializeField] private ParticleSystem smokeVFX;
+        [SerializeField] private Animator shakeAnimator;
         
         [Header("Throwable Settings")]
         [SerializeField] private GameObject distractionPrefab;
@@ -46,6 +47,9 @@ namespace Interactables
             
             hackTriggerArea.Lock(false);
             interactTriggerArea.Lock(true);
+            
+            // for testing
+            shakeAnimator.SetBool("IsShaking", true);
         }
 
         public override void Interact()
@@ -100,6 +104,7 @@ namespace Interactables
         {
             canStartProduction = false;
             smokeVFX.Play();
+            shakeAnimator.SetBool("IsShaking", true);
             
             progressBillboard.SetActive(true);
             checkObj.SetActive(false);
@@ -122,6 +127,7 @@ namespace Interactables
             hackTriggerArea.Lock(true);
             interactTriggerArea.Lock(false);
             smokeVFX.Stop();
+            shakeAnimator.SetBool("IsShaking", false);
         }
     }
 }
