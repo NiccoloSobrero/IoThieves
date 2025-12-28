@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d348bece777ee44ba7cd2abad7807a, type: 3}
+  m_Name: PC2_Desktop
+  m_EditorClassIdentifier: 
+  folderItems:
+  - itemName: Bin
+    itemType: 1
+    icon: {fileID: 21300000, guid: 38d0598254188db40aa537105f06b634, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 0}
+  - itemName: Chrome
+    itemType: 4
+    icon: {fileID: 21300000, guid: ffbe914fb5bc34a4b84ff47eb0e53355, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 0}
+  - itemName: Microsoft edge
+    itemType: 4
+    icon: {fileID: 21300000, guid: 127b1b62cff1bd645bf4b855ab6d1077, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 0}
+  - itemName: Teams
+    itemType: 4
+    icon: {fileID: 21300000, guid: 890ba54248dba304691953de4b4a4813, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 0}
+  - itemName: Word
+    itemType: 4
+    icon: {fileID: 21300000, guid: bd3a3f9553f9ded45acb60cab2d7381e, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 0}
+  - itemName: Excel
+    itemType: 4
+    icon: {fileID: 21300000, guid: 2cb2feec878da314aa2da1d1872c9eff, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 0}
+  - itemName: One Note
+    itemType: 4
+    icon: {fileID: 21300000, guid: 9307812858c6b5a49a04b2c2df499ec0, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 0}
+  - itemName: Powerpoint
+    itemType: 4
+    icon: {fileID: 21300000, guid: a6562f2275a5b274fa07126b96d98e6e, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 0}
+  - itemName: On & Off
+    itemType: 4
+    icon: {fileID: 21300000, guid: 66bf456b96257fc4582a90fb82c31841, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 0}

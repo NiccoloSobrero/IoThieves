@@ -19,6 +19,8 @@ namespace Interactables
             _interactable = interactable;
 
             _isLocked = false;
+            
+            ManualUpdate();
         }
 
         public void Lock(bool isLocked)

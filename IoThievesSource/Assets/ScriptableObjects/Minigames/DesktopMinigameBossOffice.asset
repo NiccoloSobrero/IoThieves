@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db79287188c7426da79166b1eabc440f, type: 3}
   m_Name: DesktopMinigameBossOffice
   m_EditorClassIdentifier: Assembly-CSharp:Minigames:DesktopMinigameScrObj
-  folderContentScrObj: {fileID: 11400000, guid: 073a0f57f14d4014fa6e55508ad76ced, type: 2}
+  folderContentScrObj: {fileID: 11400000, guid: 67a3fbc2a4db2844d8f8bbb1db5aac05, type: 2}
