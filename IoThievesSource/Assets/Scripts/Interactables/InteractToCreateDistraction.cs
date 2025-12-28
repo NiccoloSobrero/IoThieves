@@ -15,6 +15,9 @@ namespace Interactables
         
         [SerializeField] private InteractableTriggerArea hackTriggerArea;
         [SerializeField] private InteractableTriggerArea interactTriggerArea;
+        [SerializeField] private ParticleSystem smokeVFX;
+        [SerializeField] private Animator shakeAnimator;
+        [SerializeField] private AudioSource printAudioSource;
         
         [Header("Throwable Settings")]
         [SerializeField] private GameObject distractionPrefab;
@@ -98,6 +101,9 @@ namespace Interactables
         private IEnumerator ProduceDistraction(float productionTime)
         {
             canStartProduction = false;
+            smokeVFX.Play();
+            shakeAnimator.SetBool("IsShaking", true);
+            printAudioSource.Play();
             
             progressBillboard.SetActive(true);
             checkObj.SetActive(false);
@@ -119,6 +125,9 @@ namespace Interactables
             
             hackTriggerArea.Lock(true);
             interactTriggerArea.Lock(false);
+            smokeVFX.Stop();
+            shakeAnimator.SetBool("IsShaking", false);
+            printAudioSource.Stop();
         }
     }
 }
