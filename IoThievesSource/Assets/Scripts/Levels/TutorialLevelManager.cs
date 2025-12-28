@@ -39,7 +39,6 @@ namespace Levels
         [SerializeField] private InteractableTriggerArea codePadInteractableTriggerArea;
         [SerializeField] private AnimationCurve targetMovementCurve;
         [SerializeField] private float timeToPan;
-        [SerializeField] private float timeStay;
         
         [Space]
         [Header("Step 1")]
@@ -95,7 +94,9 @@ namespace Levels
         [SerializeField] private DialogueLinesScrObj tutorialDialogue11;
         [SerializeField] private Animator shuttersAnim;
         [SerializeField] private AttractableEnemy enemyCamera;
-        [SerializeField] private InteractToAttract hackableCube;
+        [SerializeField] private InteractToAttract hackableWasherInteractable;
+        [SerializeField] private GameObject hackableWasherOutline;
+        [SerializeField] private InteractableTriggerArea hackableWasherTriggerArea;
         [SerializeField] private Transform shutterCameraTransform;
 
         [SerializeField] private Transform playerTransform;
@@ -118,7 +119,21 @@ namespace Levels
         {
             Init();
         }
-        
+
+        private void OnEnable()
+        {
+            EventsManager.OnTriggerOnLineEnd.AddListener(NextObjective);
+            EventsManager.OnTriggerOnLineStart.AddListener(NextObjective);
+            EventsManager.OnTriggerOnContinueDialogue.AddListener(NextObjective);
+        }
+
+        private void OnDisable()
+        {
+            EventsManager.OnTriggerOnLineEnd.RemoveListener(NextObjective);
+            EventsManager.OnTriggerOnLineStart.RemoveListener(NextObjective);
+            EventsManager.OnTriggerOnContinueDialogue.RemoveListener(NextObjective);
+        }
+
         private void Start()
         {
             NextObjective();
@@ -135,11 +150,10 @@ namespace Levels
             endLevelTrigger.GetComponent<LevelTrigger>().Init(this);
             endLevelTrigger.SetActive(false);
             
-            hackableCube.gameObject.SetActive(false);
-            
             printerInteractableOutline.SetActive(false);
             pcInteractableOutline.SetActive(false);
             codePadInteractableOutline.SetActive(false);
+            hackableWasherOutline.SetActive(false);
             
             lastHackableTriggerArea.SetActive(false);
             
@@ -148,7 +162,7 @@ namespace Levels
             // Build steps
             _steps = new()
             {
-                Step_0, Step_1,
+                Step_0, Step_1, Step_1_2,
                 Step_2, Step_3,
                 Step_4, Step_5,
                 Step_6, Step_7,
@@ -170,9 +184,7 @@ namespace Levels
 
         private void Step_0()
         {
-            DialogueManager.Instance.onDialogueComplete.AddListener(NextStepOnDialogueCompleted);
-            
-            DialogueManager.Instance.SetDialogue(tutorialDialogue0, InputContext.Disabled);
+            DialogueManager.Instance.SetDialogue(tutorialDialogue0);
             DialogueManager.Instance.OpenDialogueWindow();
 
             step0Trigger.SetActive(true);
@@ -184,12 +196,21 @@ namespace Levels
         {
             PlayerInputManager.Instance.SetContext(InputContext.Disabled);
             
-            StartCoroutine(MoveCameraTo(codePadInteractable.transform.position, timeToPan, timeStay));
+            StartCoroutine(MoveCameraToTarget(codePadInteractable.transform.position, timeToPan));
             
             _lastValidPosition = playerTransform.position;
         }
 
-        private IEnumerator MoveCameraTo(Vector3 target, float panTime, float stayTime)
+        private void Step_1_2()
+        {
+            PlayerInputManager.Instance.SetContext(InputContext.Disabled);
+            
+            StartCoroutine(MoveCameraBack(playerTransform.position, timeToPan));
+            
+            _lastValidPosition = playerTransform.position;
+        }
+
+        private IEnumerator MoveCameraToTarget(Vector3 target, float panTime)
         {
             Vector3 targetPos = target;
             targetPos.y = cameraTarget.position.y;
@@ -209,9 +230,18 @@ namespace Levels
             codePadInteractable.layer = (int)Mathf.Log(interactableLayer.value, 2);
             codePadInteractableOutline.SetActive(true);
             
-            yield return new WaitForSeconds(stayTime);
+            codePadInteractableTriggerArea.ManualUpdate();
             
-            eval = 0f;
+            PlayerInputManager.Instance.SetContext(InputContext.Dialogue);
+        }
+        
+        private IEnumerator MoveCameraBack(Vector3 target, float panTime)
+        {
+            Vector3 targetPos = cameraTarget.position;
+
+            Vector3 finalPos = target;
+
+            float eval = 0f;
             
             while (eval < 1f)
             {
@@ -223,7 +253,7 @@ namespace Levels
             
             codePadInteractableTriggerArea.ManualUpdate();
             
-            PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
+            PlayerInputManager.Instance.SetContext(InputContext.Dialogue);
         }
 
         private void Step_2()
@@ -342,8 +372,10 @@ namespace Levels
             
             enemyCamera.MoveTowards(targetPos);
             
-            hackableCube.gameObject.SetActive(true);
-            hackableCube.onInteract.AddListener(NextStepOnHackableCubeInteract);
+            hackableWasherOutline.SetActive(true);
+            hackableWasherTriggerArea.ManualUpdate();
+            
+            hackableWasherInteractable.onInteract.AddListener(NextStepOnHackableWasherInteract);
 
             shuttersAnim.SetTrigger(Open);
             
@@ -451,9 +483,9 @@ namespace Levels
             NextObjective();
         }
 
-        private void NextStepOnHackableCubeInteract()
+        private void NextStepOnHackableWasherInteract()
         {
-            hackableCube.onInteract.RemoveListener(NextStepOnHackableCubeInteract);
+            hackableWasherInteractable.onInteract.RemoveListener(NextStepOnHackableWasherInteract);
             NextObjective();
         }
         

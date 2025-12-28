@@ -15,70 +15,93 @@ MonoBehaviour:
   dialogueLines:
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: 'Roger roger, hellooooo can you hear me? '
+    text: 'Test test, hellooooo can you hear me? '
+    tags: 
   - speakerName: ???
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
     text: . . .
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
     text: 'Alright, systems online. Welcome to the world, my creation.
 
       How
       do you feel?'
+    tags: 
   - speakerName: ???
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
     text: . . .
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: 7ca5486df83ebce4681cd89b1a1d718c, type: 3}
     text: No words, Uh? Did I miss something?
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: 4ab0fecf046fa7549b5e86ae6d70be77, type: 3}
     text: Oh, right! You don't have an AI yet. Let me  just try this...
+    tags: 
   - speakerName: Hatsune Miku
     icon: {fileID: 21300000, guid: f10cff0a88e161e439e2b7948dbfa623, type: 3}
     text: Po pi po pi po po pi po
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: ad771f752afefa244b5c465f7173d61b, type: 3}
     text: HATSUNE MIKU!?!?
+    tags: 
   - speakerName: Hacker
-    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    icon: {fileID: 21300000, guid: 4ab0fecf046fa7549b5e86ae6d70be77, type: 3}
     text: Wait wait wait wait wait! Nope, let me try this...
+    tags: 
   - speakerName: PIP
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
     text: Hey there, who are you? Where am I? Who am I? What's happening??
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
     text: 'Once again. Welcome to the world, my creation! '
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
     text: 'You are my Personal Infiltration Prototype robot.
 
       I think I can
       call you PIP, how does it sound?'
+    tags: 
   - speakerName: PIP
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
-    text: Cut Iit, where are you? Who are you?
+    text: Cut it, where are you? Who are you?
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
     text: "Right, I think I should give you some context. \nI'm an hacker, I built
       you remotely by hacking the super 3D printer behind you"
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
     text: You are in a basement somewhere in the city. I need you to take revenge
       on my boss. Can you help me, pleeeease?
+    tags: 
   - speakerName: PIP
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
     text: 'Ok, why not :\
 
       Do I really have a choice?'
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
     text: "Absolutely... not! :) \u2014now, you need to get out from there. \nLet\u2019s
       see if you can follow basic commands."
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: "See that marker up ahead? Move toward it. Consider this your first baby
-      step\u2026 well, robot step."
+    text: See that marker up ahead?
+    tags: 02000000
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: "Move towards it. Consider this your first baby step\u2026 well, robot
+      step."
+    tags: 
   - speakerName: PIP
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
     text: Please, don't...
+    tags: 03000000

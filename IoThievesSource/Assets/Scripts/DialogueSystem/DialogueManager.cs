@@ -1,4 +1,5 @@
 using System.Collections;
+using Events;
 using Managers;
 using TMPro;
 using UnityEngine;
@@ -25,6 +26,8 @@ namespace DialogueSystem
         private int _currentLine;
         private bool _completedTextGeneration;
         private bool _canSkipTextGeneration;
+
+        private bool _triggerOnContinueDialogue;
         
         private Coroutine _textGenerationCoroutine;
         private Coroutine _skipTextGenerationCoroutine;
@@ -62,6 +65,12 @@ namespace DialogueSystem
 
         public void GenerateNextLine()
         {
+            if (_triggerOnContinueDialogue)
+            {
+                EventsManager.OnTriggerOnContinueDialogue.Invoke();
+                _triggerOnContinueDialogue = false;
+            }
+            
             if (_completedTextGeneration)
             {
                 if (_currentLine < _dialogueLinesScrObj.dialogueLines.Length)
@@ -74,10 +83,21 @@ namespace DialogueSystem
                     textCompletedObj.SetActive(false);
 
                     _completedTextGeneration = false;
+
+                    if (_dialogueLinesScrObj.dialogueLines[_currentLine].tags
+                        .Contains(DialogueTag.TriggerOnContinueDialogue))
+                    {
+                        _triggerOnContinueDialogue = true;
+                    }
+
+                    if (_dialogueLinesScrObj.dialogueLines[_currentLine].tags.Contains(DialogueTag.TriggerOnLineStart))
+                    {
+                        EventsManager.OnTriggerOnLineStart.Invoke();
+                    }
                     
                     TryStoppingCoroutines();
 
-                    _textGenerationCoroutine = StartCoroutine(ShowWithDelay(CharactersDelay, dialogue.text.Length));
+                    _textGenerationCoroutine = StartCoroutine(ShowWithDelay(CharactersDelay, dialogue.text.Length, _currentLine));
                     _skipTextGenerationCoroutine = StartCoroutine(DelaySkipTextGeneration(SkipTextGenerationDelay));
 
                     _currentLine++;
@@ -93,7 +113,7 @@ namespace DialogueSystem
             }
         }
 
-        private IEnumerator ShowWithDelay(float letterDelay, int totalCharacters)
+        private IEnumerator ShowWithDelay(float letterDelay, int totalCharacters, int lineIndex)
         {
             int currentShownCharacters = 0;
 
@@ -103,6 +123,12 @@ namespace DialogueSystem
                 dialogue.maxVisibleCharacters = currentShownCharacters;
                 
                 yield return new WaitForSeconds(letterDelay);
+            }
+            
+            if (lineIndex < _dialogueLinesScrObj.dialogueLines.Length && 
+                _dialogueLinesScrObj.dialogueLines[lineIndex].tags.Contains(DialogueTag.TriggerOnLineEnd))
+            {
+                EventsManager.OnTriggerOnLineEnd.Invoke();
             }
             
             textCompletedObj.SetActive(true);
@@ -121,6 +147,12 @@ namespace DialogueSystem
             TryStoppingCoroutines();
             
             dialogue.maxVisibleCharacters = dialogue.text.Length;
+            
+            if (_currentLine < _dialogueLinesScrObj.dialogueLines.Length && 
+                _dialogueLinesScrObj.dialogueLines[_currentLine].tags.Contains(DialogueTag.TriggerOnLineEnd))
+            {
+                EventsManager.OnTriggerOnLineEnd.Invoke();
+            }
             
             textCompletedObj.SetActive(true);
             _completedTextGeneration = true;

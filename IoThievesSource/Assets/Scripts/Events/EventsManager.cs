@@ -48,5 +48,13 @@ namespace Events
         public static readonly UnityEvent OnFoundCodePadSolution = new();
 
         #endregion
+
+        #region Dialogue Events
+
+        public static readonly UnityEvent OnTriggerOnLineStart = new();
+        public static readonly UnityEvent OnTriggerOnLineEnd = new();
+        public static readonly UnityEvent OnTriggerOnContinueDialogue = new();
+
+        #endregion
     }
 }
