@@ -17,6 +17,7 @@ namespace Interactables
         [SerializeField] private InteractableTriggerArea interactTriggerArea;
         [SerializeField] private ParticleSystem smokeVFX;
         [SerializeField] private Animator shakeAnimator;
+        [SerializeField] private AudioSource printAudioSource;
         
         [Header("Throwable Settings")]
         [SerializeField] private GameObject distractionPrefab;
@@ -102,6 +103,7 @@ namespace Interactables
             canStartProduction = false;
             smokeVFX.Play();
             shakeAnimator.SetBool("IsShaking", true);
+            printAudioSource.Play();
             
             progressBillboard.SetActive(true);
             checkObj.SetActive(false);
@@ -125,6 +127,7 @@ namespace Interactables
             interactTriggerArea.Lock(false);
             smokeVFX.Stop();
             shakeAnimator.SetBool("IsShaking", false);
+            printAudioSource.Stop();
         }
     }
 }
