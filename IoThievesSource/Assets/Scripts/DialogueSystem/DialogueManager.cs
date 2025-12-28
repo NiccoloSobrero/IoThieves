@@ -65,14 +65,14 @@ namespace DialogueSystem
 
         public void GenerateNextLine()
         {
-            if (_triggerOnContinueDialogue)
-            {
-                EventsManager.OnTriggerOnContinueDialogue.Invoke();
-                _triggerOnContinueDialogue = false;
-            }
-            
             if (_completedTextGeneration)
             {
+                if (_triggerOnContinueDialogue)
+                {
+                    EventsManager.OnTriggerOnContinueDialogue.Invoke();
+                    _triggerOnContinueDialogue = false;
+                }
+                
                 if (_currentLine < _dialogueLinesScrObj.dialogueLines.Length)
                 {
                     dialogue.text = _dialogueLinesScrObj.dialogueLines[_currentLine].text;
