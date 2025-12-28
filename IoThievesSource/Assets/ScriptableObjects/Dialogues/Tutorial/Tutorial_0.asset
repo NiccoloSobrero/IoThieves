@@ -23,10 +23,8 @@ MonoBehaviour:
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: 'Alright, systems online. Welcome to the world, my creation.
-
-      How
-      do you feel?'
+    text: Alright, systems online. Welcome to the world, my creation. How do you
+      feel?
     tags: 
   - speakerName: ???
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
@@ -89,8 +87,8 @@ MonoBehaviour:
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: "Absolutely... not! :) \u2014now, you need to get out from there. \nLet\u2019s
-      see if you can follow basic commands."
+    text: "Absolutely... not! Now, you need to get out from there. \nLet\u2019s see
+      if you can follow basic commands."
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
