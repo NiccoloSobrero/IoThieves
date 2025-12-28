@@ -15,6 +15,7 @@ namespace Interactables
         
         [SerializeField] private InteractableTriggerArea hackTriggerArea;
         [SerializeField] private InteractableTriggerArea interactTriggerArea;
+        [SerializeField] private ParticleSystem smokeVFX;
         
         [Header("Throwable Settings")]
         [SerializeField] private GameObject distractionPrefab;
@@ -98,6 +99,7 @@ namespace Interactables
         private IEnumerator ProduceDistraction(float productionTime)
         {
             canStartProduction = false;
+            smokeVFX.Play();
             
             progressBillboard.SetActive(true);
             checkObj.SetActive(false);
@@ -119,6 +121,7 @@ namespace Interactables
             
             hackTriggerArea.Lock(true);
             interactTriggerArea.Lock(false);
+            smokeVFX.Stop();
         }
     }
 }
