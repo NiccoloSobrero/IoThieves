@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac8e97def1995d7438afb52f8e101d7b, type: 3}
-  m_Name: DesktopMinigame
+  m_Name: UnlockBossDoor
   m_EditorClassIdentifier: 
-  objectiveDescription: Find suspicious file(s) in a computer
+  objectiveDescription: Find the key of the Boss's office

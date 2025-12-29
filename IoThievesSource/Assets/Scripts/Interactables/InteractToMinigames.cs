@@ -45,7 +45,7 @@ namespace Interactables
         }
     }
 
-    [System.Serializable]
+    [Serializable]
     public class MinigameAndObjective
     {
         public MinigameScrObj minigameScrObj;
