@@ -1,5 +1,4 @@
-﻿using Interactables;
-using Levels;
+﻿using Levels;
 using UnityEngine;
 
 namespace Minigames.ScriptableObjects

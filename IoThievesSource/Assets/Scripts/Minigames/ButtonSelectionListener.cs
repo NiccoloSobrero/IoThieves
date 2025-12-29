@@ -2,18 +2,21 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class ButtonSelectionListener : MonoBehaviour, IDeselectHandler, ISelectHandler
+namespace Minigames
 {
-    public UnityAction<BaseEventData> OnDeselected;
-    public UnityAction<BaseEventData> OnSelected;
-
-    public void OnDeselect(BaseEventData eventData)
+    public class ButtonSelectionListener : MonoBehaviour, IDeselectHandler, ISelectHandler
     {
-        OnDeselected?.Invoke(eventData);
-    }
+        public UnityAction<BaseEventData> OnDeselected;
+        public UnityAction<BaseEventData> OnSelected;
 
-    public void OnSelect(BaseEventData eventData)
-    {
-        OnSelected?.Invoke(eventData);
+        public void OnDeselect(BaseEventData eventData)
+        {
+            OnDeselected?.Invoke(eventData);
+        }
+
+        public void OnSelect(BaseEventData eventData)
+        {
+            OnSelected?.Invoke(eventData);
+        }
     }
 }

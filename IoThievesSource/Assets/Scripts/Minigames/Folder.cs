@@ -94,6 +94,9 @@ namespace Minigames
                     case DesktopItemType.TargetFile:
                         _desktopMinigame.OpenTargetFile(_fileName, _value, _documentSprite);
                         break;
+                    case DesktopItemType.HrComplaint:
+                        _desktopMinigame.OpenComplaint();
+                        break;
                 }
             }
         }

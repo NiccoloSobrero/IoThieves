@@ -26,6 +26,8 @@ namespace Minigames
 
         [SerializeField] private GameObject openFileObj;
         [SerializeField] private DesktopNavFile desktopNavFile;
+
+        [SerializeField] private TypeWriteMinigame hrComplaintMinigame;
         
         private readonly List<string> _openPath = new();
         private readonly List<FolderContentScrObj> _pathScrObjs = new();
@@ -170,6 +172,13 @@ namespace Minigames
         public void OpenProgram()
         {
             Debug.Log("ERROR: can't open program");
+        }
+
+        public void OpenComplaint()
+        {
+            hrComplaintMinigame.gameObject.SetActive(true);
+            
+            hrComplaintMinigame.Init(_objective);
         }
 
         private void ClearChildren(Transform parent)
