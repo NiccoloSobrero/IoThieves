@@ -31,6 +31,9 @@ namespace AI
         public void ChangeState(AINames state)
         {
             AIState targetState = _stateFactory.GetState(state);
+            if (targetState == _currentState) //Only one instance of the same state is stored in the factory
+                return;
+            
             _currentState?.Exit();
             _previousState = _currentState;
             _currentState = targetState;
