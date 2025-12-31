@@ -9,6 +9,19 @@ namespace AI.NavigationAndWaypoints
     public class Waypoint : MonoBehaviour
     {
         [SerializeField] public List<Waypoint> neighbours;
+        private void OnDrawGizmos()
+        {
+            if (neighbours == null) return;
+    
+            Gizmos.color = Color.cyan;
+            foreach (Waypoint neighbor in neighbours)
+            {
+                if (neighbor != null)
+                {
+                    Gizmos.DrawLine(transform.position, neighbor.transform.position);
+                }
+            }
+        } 
    //     private Dictionary<Range, Waypoint> _waypoints =  new Dictionary<Range, Waypoint>();
    //     [SerializeField] private float reductionPerc = 18.0f;
   /*      private void Awake()
