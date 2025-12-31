@@ -20,7 +20,30 @@ namespace Minigames
 
             windowRect.sizeDelta = documentImageRect.sizeDelta + _windowSizeOffset;
             
+            TruncateLabel(fileName);
+        }
+        
+        private void TruncateLabel(string fileName)
+        {
             fileNameText.text = fileName;
+            fileNameText.ForceMeshUpdate();
+
+            float maxWidth = fileNameText.rectTransform.rect.width;
+
+            if (fileNameText.preferredWidth <= maxWidth)
+                return;
+
+            string truncated = fileName;
+
+            while (truncated.Length > 0)
+            {
+                truncated = truncated.Substring(0, truncated.Length - 1);
+                fileNameText.text = truncated + "...";
+                fileNameText.ForceMeshUpdate();
+
+                if (fileNameText.preferredWidth <= maxWidth)
+                    break;
+            }
         }
     }
 }

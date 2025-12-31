@@ -67,3 +67,9 @@ MonoBehaviour:
     value: 0
     documentSprite: {fileID: 0}
     folderContent: {fileID: 0}
+  - itemName: HR Complaint.exe
+    itemType: 5
+    icon: {fileID: 21300000, guid: b5aa5729f3d57f34c9416f1ecf56959f, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 0}

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
-namespace Minigames
+namespace Minigames.deprecated
 {
     public class AlignRotationMinigame : Minigame
     {

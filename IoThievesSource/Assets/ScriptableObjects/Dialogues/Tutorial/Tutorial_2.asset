@@ -15,16 +15,20 @@ MonoBehaviour:
   dialogueLines:
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: "Hold it! Camera at twelve o\u2019clock. That thing almost caught you."
+    text: "Hold up! Wait a minute. \nThere's a camera right there."
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
     text: "See the red area it\u2019s sweeping around? Stay out of that unless you
       want alarms blaring."
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
     text: "Alright, we\u2019ll need a distraction. Head over to that 3D printer in
       the corner."
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
     text: "Yeah, that chunky machine right there. Get close and I\u2019ll upload
       a blueprint for something noisy."
+    tags: 

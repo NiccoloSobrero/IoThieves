@@ -1,22 +1,43 @@
 using System.Collections.Generic;
+using Levels;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Minigames
 {
     public class TypeWriteMinigame : MonoBehaviour
     {
-        [SerializeField] private List<InputFieldManager> typingTargets;
+        [SerializeField] private List<TypeWriteSection> typingSections;
         
         private int _currentIndex;
+        
+        private LevelObjectiveScrObj _objective;
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                _currentIndex = (_currentIndex + 1) % typingTargets.Count;
+                typingSections[_currentIndex].OnDeselect(null);
                 
-                typingTargets[_currentIndex].inputField.Select();
+                _currentIndex = (_currentIndex + 1) % typingSections.Count;
+                
+                typingSections[_currentIndex].OnSelect(null);
             }
+        }
+
+        public void Init(LevelObjectiveScrObj objective)
+        {
+            _objective = objective;
+
+            foreach (TypeWriteSection typeWriteSection in typingSections)
+            {
+                typeWriteSection.Init();
+            }
+        }
+
+        public void Close()
+        {
+            _objective?.Complete();
         }
     }
 }

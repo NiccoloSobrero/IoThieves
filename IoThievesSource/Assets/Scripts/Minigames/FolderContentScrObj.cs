@@ -30,6 +30,7 @@ namespace Minigames
         FolderOnDesktop,
         File,
         TargetFile,
-        Program
+        Program,
+        HrComplaint
     }
 }
