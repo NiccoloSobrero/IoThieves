@@ -833,13 +833,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alertManager: {fileID: 3346137037427755614}
-  rayOrigin: {fileID: 3548101246771807000}
   detectionRange: 7
-  fieldOfView: 135
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 8
-  sphere: {fileID: 6714901335617416479}
 --- !u!1 &6979591427042212286
 GameObject:
   m_ObjectHideFlags: 0
