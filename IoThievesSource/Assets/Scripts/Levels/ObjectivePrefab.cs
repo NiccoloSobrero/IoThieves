@@ -31,6 +31,8 @@ namespace Levels
             boxImage.color = completedColor;
             checkImage.color = completedColor;
             objectiveDescription.color = completedColor;
+
+            objectiveDescription.text = "<s>" + objectiveDescription.text;
         }
     }
 }

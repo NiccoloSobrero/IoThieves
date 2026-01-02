@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Levels
 {
@@ -7,6 +8,8 @@ namespace Levels
         private TutorialLevelManager _levelManager;
 
         [SerializeField] private string enteringTag;
+
+        [HideInInspector] public UnityEvent onTriggerEnter;
 
         public void Init(TutorialLevelManager levelManager)
         {
@@ -18,6 +21,7 @@ namespace Levels
             if (other.CompareTag(enteringTag))
             {
                 _levelManager.NextObjective();
+                onTriggerEnter.Invoke();
             
                 gameObject.SetActive(false);
             }
