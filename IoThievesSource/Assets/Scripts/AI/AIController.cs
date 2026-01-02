@@ -27,7 +27,11 @@ namespace AI
         {
             _currentState?.Execute();
         }
-        
+
+        public AINames GetStartState()
+        {
+            return startState;
+        }
         public void ChangeState(AINames state)
         {
             AIState targetState = _stateFactory.GetState(state);

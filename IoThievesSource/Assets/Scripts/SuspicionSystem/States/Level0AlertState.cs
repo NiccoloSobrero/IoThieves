@@ -19,8 +19,9 @@ namespace SuspicionSystem.States
         {
             Debug.Log("Entered Level0AlertState");
             ctx.ShowAlertBillboard(false);
-            
-            ctx.EnemyAdapter.AIController.ChangeState(AINames.PathCycling);
+
+            AIController aiController = ctx.EnemyAdapter.AIController;
+            aiController.ChangeState(aiController.GetStartState());
         }
 
         public override void Exit(AlertManager ctx)
