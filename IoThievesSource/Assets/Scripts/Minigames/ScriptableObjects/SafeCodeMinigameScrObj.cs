@@ -1,5 +1,4 @@
-﻿using Levels;
-using Managers;
+﻿using Managers;
 using UnityEngine;
 
 namespace Minigames.ScriptableObjects
@@ -9,9 +8,9 @@ namespace Minigames.ScriptableObjects
     {
         public string targetPassword;
 
-        public override void InitMinigame(LevelObjectiveScrObj objectiveScrObj)
+        public override void InitMinigame()
         {
-            MinigamesManager.Instance.InitSafeCodeMinigame(targetPassword, objectiveScrObj);
+            MinigamesManager.Instance.InitSafeCodeMinigame(targetPassword);
         }
     }
 }

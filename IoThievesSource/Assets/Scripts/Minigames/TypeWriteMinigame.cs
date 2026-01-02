@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Levels;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace Minigames
 {
@@ -11,7 +10,7 @@ namespace Minigames
         
         private int _currentIndex;
         
-        private LevelObjectiveScrObj _objective;
+        // private LevelObjectiveScrObj _objective;
 
         private void Update()
         {
@@ -25,9 +24,9 @@ namespace Minigames
             }
         }
 
-        public void Init(LevelObjectiveScrObj objective)
+        public void Init()
         {
-            _objective = objective;
+            // _objective = objective;
 
             foreach (TypeWriteSection typeWriteSection in typingSections)
             {
@@ -35,9 +34,9 @@ namespace Minigames
             }
         }
 
-        public void Close()
+        public void Send()
         {
-            _objective?.Complete();
+            // _objective?.Complete();
         }
     }
 }

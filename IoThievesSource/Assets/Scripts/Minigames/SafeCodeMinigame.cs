@@ -21,8 +21,6 @@ namespace Minigames
         private int _typedPasswordLength;
         private StringBuilder _currentTypedPassword;
 
-        private LevelObjectiveScrObj _objective;
-
         #region Events
 
         [HideInInspector] public UnityEvent onGuessedPassword;
@@ -44,10 +42,8 @@ namespace Minigames
             EventsManager.OnFoundCodePadSolution.RemoveListener(() => _foundSolution = true);
         }
 
-        public void InitMinigame(string targetPassword, LevelObjectiveScrObj objective)
+        public void InitMinigame(string targetPassword)
         {
-            _objective = objective;
-            
             _targetPassword = targetPassword;
             _passwordLength = targetPassword.Length;
             _currentTypedPassword = new StringBuilder();
@@ -100,8 +96,6 @@ namespace Minigames
             yield return new WaitForSeconds(time);
             
             EventsManager.OnMinigameCompleted?.Invoke();
-            
-            _objective?.Complete();
             
             onGuessedPassword?.Invoke();
         }

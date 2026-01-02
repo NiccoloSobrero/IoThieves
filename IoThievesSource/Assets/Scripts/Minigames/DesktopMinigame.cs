@@ -40,7 +40,7 @@ namespace Minigames
 
         private bool _openedFirstFolder;
 
-        private LevelObjectiveScrObj _objective;
+        // private LevelObjectiveScrObj _objective;
         
         private readonly List<string> _targetFiles = new();
 
@@ -87,10 +87,10 @@ namespace Minigames
             }
         }
 
-        public void InitMinigame(FolderContentScrObj desktopScrObj, LevelObjectiveScrObj objective)
+        public void InitMinigame(FolderContentScrObj desktopScrObj)
         {
             _desktop = desktopScrObj;
-            _objective = objective;
+            // _objective = objective;
             
             folderObject.SetActive(false);
             openFileObj.SetActive(false);
@@ -161,7 +161,7 @@ namespace Minigames
         {
             if (_isCurrentOpenFileTarget)
             {
-                DownloadsManager.Instance.AddDownload(_currentOpenFileName, _currentOpenFileDownloadTime,  _isCurrentOpenFileTarget, _objective);
+                DownloadsManager.Instance.AddDownload(_currentOpenFileName, _currentOpenFileDownloadTime, _isCurrentOpenFileTarget);
             }
             else
             {
@@ -178,7 +178,7 @@ namespace Minigames
         {
             hrComplaintMinigame.gameObject.SetActive(true);
             
-            hrComplaintMinigame.Init(_objective);
+            hrComplaintMinigame.Init();
         }
 
         private void ClearChildren(Transform parent)

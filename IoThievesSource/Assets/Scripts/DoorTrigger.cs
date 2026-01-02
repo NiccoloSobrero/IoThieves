@@ -11,13 +11,19 @@ public class DoorTrigger : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private OpenType openType;
 
+    private bool _isEnabled = true;
+
     private void OnTriggerEnter(Collider other)
     {
+        if (!_isEnabled) return;
+        
         animator.SetBool(GetBoolParam(), true);
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (!_isEnabled) return;
+        
         animator.SetBool(GetBoolParam(), false);
     }
 
@@ -29,5 +35,10 @@ public class DoorTrigger : MonoBehaviour
             OpenType.OpenB => "Open_B",
             _ => ""
         };
+    }
+
+    public void SetEnabled(bool isEnabled)
+    {
+        _isEnabled = isEnabled;
     }
 }

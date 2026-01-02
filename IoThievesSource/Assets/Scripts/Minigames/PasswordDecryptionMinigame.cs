@@ -68,8 +68,6 @@ namespace Minigames
         private float _bootingTime = 3f;
 
         private bool _canCheckGuess;
-
-        private LevelObjectiveScrObj _objective;
         
         private void OnEnable()
         {
@@ -81,10 +79,8 @@ namespace Minigames
             EventsManager.OnClickDecryptPassword.RemoveListener(CheckSolution);
         }
 
-        public void InitMinigame(LevelObjectiveScrObj objective)
+        public void InitMinigame()
         {
-            _objective = objective;
-            
             // Init hearts
             _currentLeftAttempts = heartsObjects.Count;
 
@@ -148,7 +144,7 @@ namespace Minigames
                 {
                     Debug.Log("GAME OVER. Restarting Game.");
                     
-                    InitMinigame(_objective);
+                    InitMinigame();
                 }
             }
             else
@@ -166,8 +162,6 @@ namespace Minigames
             yield return new WaitForSeconds(time);
             
             EventsManager.OnMinigameCompleted?.Invoke();
-            
-            _objective?.Complete();
         }
 
         private LetterResult[] GetCorrectnessArray(string guess)

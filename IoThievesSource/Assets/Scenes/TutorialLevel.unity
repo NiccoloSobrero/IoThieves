@@ -28276,9 +28276,9 @@ MonoBehaviour:
     m_Bits: 8
   hackTriggerArea: {fileID: 1869726056}
   interactTriggerArea: {fileID: 384239835}
-  smokeVFX: {fileID: 0}
-  shakeAnimator: {fileID: 0}
-  printAudioSource: {fileID: 0}
+  smokeVFX: {fileID: 812174416}
+  shakeAnimator: {fileID: 5334037118958049724}
+  printAudioSource: {fileID: 5334037118958049725}
   distractionPrefab: {fileID: 1667008392998234859, guid: 309f89626e70fe140a7e756b4748a1b3, type: 3}
   attractionRange: 0
   progressBillboard: {fileID: 756938558}
@@ -34718,6 +34718,7 @@ MonoBehaviour:
   pathText: {fileID: 417513306272692986}
   openFileObj: {fileID: 5605222160748436350}
   desktopNavFile: {fileID: 8097976981123345069}
+  hrComplaintMinigame: {fileID: 0}
   onOpenFolderWithTarget:
     m_PersistentCalls:
       m_Calls: []
@@ -39034,10 +39035,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineRenderer: {fileID: 1471857139}
   minigames:
-  - minigameScrObj: {fileID: 11400000, guid: 334a165d5b7d33a4ca361ced117a5cd5, type: 2}
-    objectiveScrObj: {fileID: 0}
-  - minigameScrObj: {fileID: 11400000, guid: e2b151471f7a246448fb571fd18c766e, type: 2}
-    objectiveScrObj: {fileID: 0}
+  - {fileID: 11400000, guid: 334a165d5b7d33a4ca361ced117a5cd5, type: 2}
+  - {fileID: 11400000, guid: e2b151471f7a246448fb571fd18c766e, type: 2}
   redoCompletedMinigameAfterReopen: 1
   playerLayer:
     serializedVersion: 2
@@ -41009,8 +41008,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineRenderer: {fileID: 767730886}
   minigames:
-  - minigameScrObj: {fileID: 11400000, guid: 99ea6c1bfd11590439e0bad2e15efaf5, type: 2}
-    objectiveScrObj: {fileID: 0}
+  - {fileID: 11400000, guid: 99ea6c1bfd11590439e0bad2e15efaf5, type: 2}
   redoCompletedMinigameAfterReopen: 1
   playerLayer:
     serializedVersion: 2

@@ -7,9 +7,9 @@ namespace Minigames.ScriptableObjects
     [CreateAssetMenu(fileName = "PasswordDecryptionMinigame", menuName = "Minigames/Password decryption minigame")]
     public class PasswordDecryptionMinigameScrObj : MinigameScrObj
     {
-        public override void InitMinigame(LevelObjectiveScrObj objectiveScrObj)
+        public override void InitMinigame()
         {
-            MinigamesManager.Instance.InitPasswordDecryptionMinigame(objectiveScrObj);
+            MinigamesManager.Instance.InitPasswordDecryptionMinigame();
         }
     }
 }

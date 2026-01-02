@@ -90,7 +90,8 @@ namespace Levels
         [SerializeField] private DialogueLinesScrObj tutorialDialogue10;
         [SerializeField] private SafeCodeMinigame safeCodeMinigame;
 
-        [Space] [Header("Step 11")] 
+        [Space]
+        [Header("Step 11")] 
         [SerializeField] private DialogueLinesScrObj tutorialDialogue11;
         [SerializeField] private Animator shuttersAnim;
         [SerializeField] private AttractableEnemy enemyCamera;

@@ -9,9 +9,9 @@ namespace Minigames.ScriptableObjects
     {
         public FolderContentScrObj folderContentScrObj;
         
-        public override void InitMinigame(LevelObjectiveScrObj objectiveScrObj)
+        public override void InitMinigame()
         {
-            MinigamesManager.Instance.InitDesktopMinigame(folderContentScrObj, objectiveScrObj);
+            MinigamesManager.Instance.InitDesktopMinigame(folderContentScrObj);
         }
     }
 }

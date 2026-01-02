@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Levels;
+﻿using System.Collections.Generic;
 using Managers;
 using Minigames.ScriptableObjects;
 using UnityEngine;
@@ -10,7 +8,7 @@ namespace Interactables
 {
     public class InteractToMinigames : Interactable
     {
-        [SerializeField] private List<MinigameAndObjective> minigames = new();
+        [SerializeField] private List<MinigameScrObj> minigames = new();
         [SerializeField] private bool redoCompletedMinigameAfterReopen;
 
         [SerializeField] private LayerMask playerLayer;
@@ -37,18 +35,11 @@ namespace Interactables
             onInteract?.Invoke();
         }
         
-        public void TryRemovingMinigame(MinigameAndObjective minigameAndObjective)
+        public void TryRemovingMinigame(MinigameScrObj minigame)
         {
             if (redoCompletedMinigameAfterReopen) return;
             
-            minigames.Remove(minigameAndObjective);
+            minigames.Remove(minigame);
         }
-    }
-
-    [Serializable]
-    public class MinigameAndObjective
-    {
-        public MinigameScrObj minigameScrObj;
-        public LevelObjectiveScrObj objectiveScrObj; // Can be null
     }
 }
