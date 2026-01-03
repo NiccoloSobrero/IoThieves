@@ -7,9 +7,6 @@ namespace AI.AI_States
 {
     public class NoiseHeardState : AIState
     {
-        private float _speed = 2.0f;
-        private float _angularSpeed = 2f;
-        
         private Transform _throwedObject;
         private List<Waypoint> _path;
         private bool _destinationReached = false;
@@ -43,7 +40,7 @@ namespace AI.AI_States
                 Transform destination = (_path.Count > 0) ? _path[0].transform : _throwedObject;
                 
                 Vector3 dir = destination.position - Npc.transform.position;
-                AIUtilities.MoveTarget(Npc.transform, dir, _speed); 
+                AIUtilities.MoveTarget(Npc.transform, dir, Npc.NpcDatas.Speed); 
                 
                 Vector3 forwardDir = Npc.transform.forward.normalized;
                 Vector3 lookDir = dir;
@@ -52,7 +49,7 @@ namespace AI.AI_States
                    lookDir = _path[1].transform.position - Npc.transform.position;
 
                 lookDir.Normalize();
-                AIUtilities.RotateTarget(Npc.transform, forwardDir, lookDir, _angularSpeed);
+                AIUtilities.RotateTarget(Npc.transform, forwardDir, lookDir, Npc.NpcDatas.AngularSpeed);
             
                 float distance = Vector3.Distance(Npc.transform.position, destination.position);
                 if (distance < _nextWaypointThreshold)
@@ -74,7 +71,7 @@ namespace AI.AI_States
 
         public override void Exit()
         {
-            throw new System.NotImplementedException();
+           
         }
         
     }

@@ -7,12 +7,6 @@ namespace AI.AI_States
 {
     public class PathCyclingState : AIState
     {
-        
-        private float _speed = 1.0f;
-        private float _angularSpeed = 1.0f;
-        private float _distanceThreshold = 0.1f;
-        private float _angularThreshold = 30.0f;
-        
         private List<Waypoint> _path;
         private int _idx = 0;
         private Vector3 _targetPosition;
@@ -90,15 +84,15 @@ namespace AI.AI_States
             
             Vector3 forwardDir =  Npc.transform.forward.normalized;
             
-            float angleMag = AIUtilities.RotateTarget(Npc.transform, forwardDir, dir, _angularSpeed);
+            float angleMag = AIUtilities.RotateTarget(Npc.transform, forwardDir, dir, Npc.NpcDatas.AngularSpeed);
             
-            if(angleMag < _angularThreshold)
-                AIUtilities.MoveTarget(Npc.transform, dir, _speed);
+            if(angleMag < Npc.NpcDatas.AngularThreshold)
+                AIUtilities.MoveTarget(Npc.transform, dir, Npc.NpcDatas.Speed);
 
             
             float distance =  Vector3.Distance(Npc.transform.position, _targetPosition);
             
-            if (distance < _distanceThreshold)
+            if (distance < Npc.NpcDatas.DistanceThreshold)
             {
                NextWaypoint(); 
             }

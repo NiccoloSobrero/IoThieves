@@ -7,14 +7,11 @@ namespace AI.AI_States
 {
     public class DeviceHackedState : AIState
     {
-        private float _speed = 2.0f;
-        private float _angularSpeed = 2f;
         
         private PointOfInterest _hackedDevice;
         private List<Waypoint> _path;
         private bool _destinationReached = false;
 
-        private float _turningThreshold = 1.0f;
         private float _nextWaypointThreshold = 0.5f;
 
         private bool _solved = false;
@@ -72,15 +69,15 @@ namespace AI.AI_States
             {
                 
                 Vector3 dir = _path[0].transform.position - Npc.transform.position;
-                AIUtilities.MoveTarget(Npc.transform, dir, _speed);
+                AIUtilities.MoveTarget(Npc.transform, dir, Npc.NpcDatas.Speed);
                 
                 Vector3 forwardDir = Npc.transform.forward.normalized;
                 Vector3 lookDir = dir;
                 
-                if (dir.magnitude < _turningThreshold && _path.Count > 1)
+                if (dir.magnitude < Npc.NpcDatas.DistanceThreshold && _path.Count > 1)
                    lookDir = _path[1].transform.position - Npc.transform.position;
                     
-                AIUtilities.RotateTarget(Npc.transform, forwardDir, lookDir, _angularSpeed);
+                AIUtilities.RotateTarget(Npc.transform, forwardDir, lookDir, Npc.NpcDatas.AngularSpeed);
             
                 float distance = Vector3.Distance(Npc.transform.position, _path[0].transform.position);
                 if (distance < _nextWaypointThreshold)
