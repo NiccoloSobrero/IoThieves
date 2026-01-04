@@ -1,47 +1,82 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class MoveCamera : MonoBehaviour
 {
-    [SerializeField] private Transform bossHouseCameraTransform;
-    [SerializeField] private Transform hrOfficeCameraTransform;
-    [SerializeField] private Transform tutorialCameraTransform;
-
-    [SerializeField] private Transform mainCamera;
+    private Camera _mainCamera;
+    private Transform _mainCameraTransform;
+    private CameraProjectionBlender _cameraProjectionBlender;
     
-    private Transform _defaultCameraTransform;
+    [SerializeField] private Transform defaultCameraTransform;
+    
+    [SerializeField] private List<Transform> cameraTransforms;
+    private int _currentCameraIndex;
+
+    private bool _inOrthographicView;
 
     private void Awake()
     {
-        _defaultCameraTransform = mainCamera;
+        _mainCamera = Camera.main;
+        _currentCameraIndex = 0;
+        _inOrthographicView = true;
+
+        if (_mainCamera == null) return;
+        
+        _mainCameraTransform = _mainCamera.transform;
+        _cameraProjectionBlender = _mainCamera.GetComponent<CameraProjectionBlender>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.B))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            mainCamera.GetComponent<Camera>().orthographic = false;
-            StopAllCoroutines();
-            StartCoroutine(MoveCameraCoroutine(mainCamera, bossHouseCameraTransform));
+            if (_inOrthographicView)
+            {
+                _cameraProjectionBlender.Perspective();
+            }
+            else
+            {
+                _cameraProjectionBlender.Orthographic();
+            }
+            
+            _inOrthographicView = !_inOrthographicView;
         }
-        else if (Input.GetKeyDown(KeyCode.H))
+        
+        if (_inOrthographicView)
         {
-            mainCamera.GetComponent<Camera>().orthographic = false;
-            StopAllCoroutines();
-            StartCoroutine(MoveCameraCoroutine(mainCamera, hrOfficeCameraTransform));
+            if (Input.GetKeyDown(KeyCode.S))
+            {
+                _inOrthographicView = false;
+                StopAllCoroutines();
+                StartCoroutine(SetToPerspective());
+            }
         }
-        else if (Input.GetKeyDown(KeyCode.T))
+        else
         {
-            mainCamera.GetComponent<Camera>().orthographic = false;
-            StopAllCoroutines();
-            StartCoroutine(MoveCameraCoroutine(mainCamera, tutorialCameraTransform));
-        }
-        // Reset
-        else if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            mainCamera.GetComponent<Camera>().orthographic = true;
-            mainCamera.SetPositionAndRotation(_defaultCameraTransform.position, _defaultCameraTransform.rotation);
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                // Cycle backwards in the list
+                _currentCameraIndex = _currentCameraIndex - 1 < 0 ? cameraTransforms.Count - 1 : _currentCameraIndex - 1;
+            
+                StopAllCoroutines();
+                StartCoroutine(MoveCameraCoroutine(_mainCameraTransform, cameraTransforms[_currentCameraIndex]));
+            }
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                // Cycle forward in the list
+                _currentCameraIndex = (_currentCameraIndex + 1) % cameraTransforms.Count;
+            
+                StopAllCoroutines();
+                StartCoroutine(MoveCameraCoroutine(_mainCameraTransform, cameraTransforms[_currentCameraIndex]));
+            }
+            else if (Input.GetKeyDown(KeyCode.W))
+            {
+                _inOrthographicView = true;
+                StopAllCoroutines();
+                StartCoroutine(ResetToDefault());
+            }
         }
     }
     
@@ -60,11 +95,27 @@ public class MoveCamera : MonoBehaviour
             Vector3 newPos = Vector3.Slerp(startPos, endPos, eval);
             Quaternion newRot = Quaternion.Slerp(startRot, endRot, eval);
             
-            mainCamera.SetPositionAndRotation(newPos, newRot);
+            _mainCameraTransform.SetPositionAndRotation(newPos, newRot);
             
             eval += Time.deltaTime;
             
             yield return null;
         }
+    }
+    
+    private IEnumerator SetToPerspective()
+    {
+        _cameraProjectionBlender.Perspective();
+
+        yield return new WaitForSeconds(1f);
+        
+        yield return StartCoroutine(MoveCameraCoroutine(_mainCameraTransform, cameraTransforms[0]));
+    }
+    
+    private IEnumerator ResetToDefault()
+    {
+        yield return StartCoroutine(MoveCameraCoroutine(_mainCameraTransform, defaultCameraTransform));
+        
+        _cameraProjectionBlender.Orthographic();
     }
 }
