@@ -20,11 +20,10 @@ namespace AI
 
         private AIState _previousState;
 
-        private void Awake()
+        public void Initialize()
         {
             _stateFactory = new StateFactory(this);
             _previousState = _stateFactory.GetState(AINames.Idle);
-          //  ChangeState(startState);
         }
         
         private void Update()
