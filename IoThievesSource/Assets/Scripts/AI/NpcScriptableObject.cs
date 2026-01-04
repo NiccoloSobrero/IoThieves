@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using AI.NavigationAndWaypoints;
 using UnityEngine;
 
 namespace AI
@@ -13,7 +15,7 @@ namespace AI
       
       [SerializeField]private float _distanceThreshold;
       [SerializeField]private float _angularThreshold;
-        
+
         public float Speed
         {
             get => _speed;
