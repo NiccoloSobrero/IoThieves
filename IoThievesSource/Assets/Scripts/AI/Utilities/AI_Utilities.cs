@@ -23,20 +23,27 @@ namespace AI
                 float distance = dir.magnitude;
 
                 if (distance > maxCheckDistance)
-                    continue; 
-               
-                if (!Physics.Raycast(
+                    continue;
+
+                RaycastHit hit;
+                if(!Physics.Raycast(
                         position,
                         dir.normalized,
+                        out hit,
                         distance,
-                        mask))
-                { 
+                        mask, 
+                        QueryTriggerInteraction.Ignore))
+                {
                     if (distance < bestDistance)
                     {
                         bestDistance = distance;
                         bestWaypoint = wp;
                     }
                 }
+               /* else
+                {
+                    Debug.Log("There is" +hit.collider.gameObject.name+" in between the npc and the waypoint "+ wp.name);
+                }*/
             }
             
             return bestWaypoint;

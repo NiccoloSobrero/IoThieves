@@ -31,6 +31,7 @@ namespace AI.AI_States
                 _isMoving = true;
                 _idx = 0;
                 _targetPosition = _path[_idx].transform.position;
+                Debug.Log("Path is set");
             }
             catch (Exception e)
             {
@@ -58,20 +59,31 @@ namespace AI.AI_States
                 _idx = (_idx + 1)%_path.Count;
                 _targetPosition = _path[_idx].transform.position;
             }
-            Debug.Log(_targetPosition);
+            //Debug.Log(_targetPosition);
         }
         
         public override void Enter()
         {
-            if (Vector3.Distance(Npc.transform.position, _targetPosition) > 2.0f)   //If I am far from the path -> PathFind back to the path to follow
+            float distanceFromTarget = Vector3.Distance(Npc.transform.position, _targetPosition);
+            if (distanceFromTarget > 2.0f)   //If I am far from the path -> PathFind back to the path to follow
             {
-                Debug.Log("BACKPATH??");
                 back_to_path = true;
-                _backPath = PathFinding.FindPath(AIUtilities.FindNearestWaypoint(Npc.transform.position), _path[_idx]);
+                Waypoint target =  _path[_idx];
+                if(!Physics.Raycast(Npc.transform.position, _targetPosition - Npc.transform.position, 
+                       distanceFromTarget, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
+                {
+                    _backPath = new List<Waypoint>(){target};
+                }
+                else
+                {
+                    Waypoint start = AIUtilities.FindNearestWaypoint(Npc.transform.position);
+                    _backPath = PathFinding.FindPath(start, _path[_idx]);
+                }
                 
                 NextWaypoint();
             }
             //Else I am already near enough to my path
+            _isMoving = true;
         }
 
         public override void Execute()
@@ -81,7 +93,7 @@ namespace AI.AI_States
             
             Vector3 dir = _targetPosition - Npc.transform.position;
             dir.Normalize();
-            
+
             Vector3 forwardDir =  Npc.transform.forward.normalized;
             
             float angleMag = AIUtilities.RotateTarget(Npc.transform, forwardDir, dir, Npc.NpcDatas.AngularSpeed);
@@ -89,7 +101,6 @@ namespace AI.AI_States
             if(angleMag < Npc.NpcDatas.AngularThreshold)
                 AIUtilities.MoveTarget(Npc.transform, dir, Npc.NpcDatas.Speed);
 
-            
             float distance =  Vector3.Distance(Npc.transform.position, _targetPosition);
             
             if (distance < Npc.NpcDatas.DistanceThreshold)

@@ -12,3 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 813b0f7c7f7c425cbe417bc62a5eb5ef, type: 3}
   m_Name: BasicNpc
   m_EditorClassIdentifier: 
+  _speed: 1
+  _angularSpeed: 1
+  _alternativeSpeed: 2
+  _alternativeAngularSpeed: 2
+  _distanceThreshold: 0.3
+  _angularThreshold: 30
