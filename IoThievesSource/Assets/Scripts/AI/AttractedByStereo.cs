@@ -27,10 +27,12 @@ namespace AI
         {
             if (stereo.IsPlayingMusic)
             {
-                if(Vector3.Distance(transform.position, dancingPosition) > 0.1f)    //You must reach the dancing area
+                if(Vector3.Distance(transform.position, dancingPosition) > 0.1f){   //You must reach the dancing area
                     PlanMovement(dancingPosition);
+                }
                 else
                 {                                                                   //Alor on dance
+                    PlanRotation(DancingYRotation);
                     isDancing = true;
                     //DanceAnimation()
                 }
@@ -46,6 +48,10 @@ namespace AI
                 {
                     PlanMovement(startingPosition);
                 }               //Else idle
+                else
+                {
+                    PlanRotation(StartingYRotation);
+                }
             }
         }
 
@@ -65,6 +71,16 @@ namespace AI
                 AIUtilities.MoveTarget(transform, dir, data.Speed);
             }
         }
+
+        /*
+        private void PlanRotation(float angle)
+        {
+            if (Math.Abs(transform.rotation.y - angle) != 0)
+            {
+                
+            }
+        }
+        */
     }
     
 }
