@@ -17,8 +17,6 @@ namespace Interactables
         
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Entered Stun Trigger");
-            
             // if (other.gameObject.TryGetComponent<Enemy>(out var enemy))
             // {
             //     // Call function for stunning on Enemy

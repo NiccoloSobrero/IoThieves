@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Events;
-using Levels;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,24 +9,64 @@ namespace Minigames
     public class DesktopMinigame : MonoBehaviour
     {
         private const string DesktopPath = "C:\\Desktop";
-        
-        [Header("References")]
+
+        [SerializeField] private Canvas canvas;
+
+        [Header("Desktop")] 
+        [SerializeField] private GameObject desktopObj;
+        [SerializeField] private RectTransform desktopRect;
         [SerializeField] private Transform desktopFoldersParent;
-        
         [SerializeField] private GameObject folderPrefab;
         
+        private Vector2 _desktopLastPosition;
+        private Vector2 _desktopLastSize;
+        private bool _isDesktopMaximized;
+        
+        [Header("Folder")]
         [SerializeField] private GameObject folderObject;
+        [SerializeField] private RectTransform folderRect;
         [SerializeField] private Transform folderItemsParent;
+        [SerializeField] private RectTransform windowsToOpenRect; // Rect that contains all the windows that can be open in desktop
         
         [SerializeField] private GameObject folderIsEmptyObject;
         
         [SerializeField] private TextMeshProUGUI pathText;
         private RectTransform _pathTextRect;
+        
+        private Vector2 _folderLastPosition;
+        private Vector2 _folderLastSize;
+        private bool _isFolderMaximized;
+        
+        private bool _openedFirstFolder;
+        [SerializeField] private GameObject toolbarFolderObject;
 
+        [Header("Open File")]
         [SerializeField] private GameObject openFileObj;
+        [SerializeField] private RectTransform openFileRect;
         [SerializeField] private DesktopNavFile desktopNavFile;
-
+        
+        private Vector2 _openFileLastPosition;
+        private Vector2 _openFileLastSize;
+        private bool _isOpenFileMaximized;
+        
+        private bool _openedTextFile;
+        [SerializeField] private GameObject toolbarOpenItemObject;
+        
+        [Header("HR Complaint")]
+        [SerializeField] private GameObject hrComplaintObj;
+        [SerializeField] private RectTransform hrComplaintRect;
         [SerializeField] private TypeWriteMinigame hrComplaintMinigame;
+        
+        private Vector2 _hrComplaintLastPosition;
+        private Vector2 _hrComplaintLastSize;
+        private bool _isHrComplaintMaximized;
+        
+        private bool _openedHrComplaint;
+        [SerializeField] private GameObject toolbarHrComplaintObject;
+        
+        [Header("Toolbar")]
+        [SerializeField] private GameObject toolbarItemPrefab;
+        [SerializeField] private Transform toolbarItemParent;
         
         private readonly List<string> _openPath = new();
         private readonly List<FolderContentScrObj> _pathScrObjs = new();
@@ -37,13 +76,8 @@ namespace Minigames
         private bool _isCurrentOpenFileTarget;
         
         private FolderContentScrObj _desktop;
-
-        private bool _openedFirstFolder;
-
-        // private LevelObjectiveScrObj _objective;
         
         private readonly List<string> _targetFiles = new();
-
         
         #region Events
 
@@ -56,6 +90,24 @@ namespace Minigames
             _pathTextRect = pathText.gameObject.GetComponent<RectTransform>();
 
             _openedFirstFolder = false;
+            _openedTextFile = false;
+
+            // Initialize top bar handling variables
+            _desktopLastPosition = desktopRect.rect.position;
+            _desktopLastSize = desktopRect.rect.size;
+            _isDesktopMaximized = false;
+            
+            _folderLastPosition = folderRect.rect.position;
+            _folderLastSize = folderRect.rect.size;
+            _isFolderMaximized = false;
+            
+            _openFileLastPosition = openFileRect.rect.position;
+            _openFileLastSize = openFileRect.rect.size;
+            _isOpenFileMaximized = false;
+            
+            _hrComplaintLastPosition = hrComplaintRect.rect.position;
+            _hrComplaintLastSize = hrComplaintRect.rect.size;
+            _isHrComplaintMaximized = false;
         }
 
         private void GenerateFolder(FolderContentScrObj scrObj, Transform parent)
@@ -90,7 +142,6 @@ namespace Minigames
         public void InitMinigame(FolderContentScrObj desktopScrObj)
         {
             _desktop = desktopScrObj;
-            // _objective = objective;
             
             folderObject.SetActive(false);
             openFileObj.SetActive(false);
@@ -110,6 +161,7 @@ namespace Minigames
             if (_openedFirstFolder) return;
             
             folderObject.SetActive(true);
+            folderObject.transform.SetAsLastSibling();
             
             GenerateFolder(scrObj, folderItemsParent);
             
@@ -141,6 +193,9 @@ namespace Minigames
             
             // Set file graphics
             openFileObj.SetActive(true);
+            openFileObj.transform.SetAsLastSibling();
+
+            _openedTextFile = true;
         }
         
         public void OpenTargetFile(string fileName, float time, Sprite documentSprite)
@@ -155,6 +210,9 @@ namespace Minigames
             
             // Set file graphics
             openFileObj.SetActive(true);
+            openFileObj.transform.SetAsLastSibling();
+            
+            _openedTextFile = true;
         }
 
         public void DownloadFile()
@@ -176,9 +234,12 @@ namespace Minigames
 
         public void OpenComplaint()
         {
+            hrComplaintMinigame.transform.SetAsLastSibling();
             hrComplaintMinigame.gameObject.SetActive(true);
             
             hrComplaintMinigame.Init();
+
+            _openedHrComplaint = true;
         }
 
         private void ClearChildren(Transform parent)
@@ -298,6 +359,141 @@ namespace Minigames
             }
             
             EventsManager.OnMinigameCompleted?.Invoke();
+        }
+        
+        public void MinimizeWindow(GameObject window)
+        {
+            if (window == folderObject && _openedFirstFolder)
+            {
+                window.SetActive(false);
+            }
+            else if (window == openFileObj && _openedTextFile)
+            {
+                window.SetActive(false);
+            }
+            else if (window == hrComplaintObj && _openedHrComplaint)
+            {
+                window.SetActive(false);
+            }
+            else
+            {
+                Debug.LogWarning("Not implemented");
+            }
+        }
+
+        public void MaximizeOrRestoreWindow(GameObject window)
+        {
+            if (window == desktopObj)
+            {
+                if (_isDesktopMaximized)
+                {
+                    desktopRect.anchoredPosition = new Vector2(_desktopLastPosition.x, _desktopLastPosition.y);
+                    desktopRect.sizeDelta = new Vector2(_desktopLastSize.x, _desktopLastSize.y);
+                }
+                else
+                {
+                    _desktopLastPosition = desktopRect.anchoredPosition;
+                    _desktopLastSize = desktopRect.sizeDelta;
+                        
+                    desktopRect.anchoredPosition = Vector2.zero;
+                    desktopRect.sizeDelta = canvas.renderingDisplaySize;
+                }
+                    
+                _isDesktopMaximized = !_isDesktopMaximized;
+            }
+            else if (window == folderObject)
+            {
+                if (_isFolderMaximized)
+                {
+                    folderRect.anchoredPosition = new Vector2(_folderLastPosition.x, _folderLastPosition.y);
+                    folderRect.sizeDelta = new Vector2(_folderLastSize.x, _folderLastSize.y);
+                }
+                else
+                {
+                    _folderLastPosition = folderRect.anchoredPosition;
+                    _folderLastSize = folderRect.sizeDelta;
+                        
+                    folderRect.anchoredPosition = Vector2.zero;
+                    folderRect.sizeDelta = windowsToOpenRect.rect.size;
+                }
+                
+                _isFolderMaximized = !_isFolderMaximized;
+            }
+            else if (window == openFileObj)
+            {
+                if (_isOpenFileMaximized)
+                {
+                    openFileRect.anchoredPosition = new Vector2(_openFileLastPosition.x, _openFileLastPosition.y);
+                    openFileRect.sizeDelta = new Vector2(_openFileLastSize.x, _openFileLastSize.y);
+                }
+                else
+                {
+                    _openFileLastPosition = openFileRect.anchoredPosition;
+                    _openFileLastSize = openFileRect.sizeDelta;
+                        
+                    openFileRect.anchoredPosition = Vector2.zero;
+                    openFileRect.sizeDelta = windowsToOpenRect.rect.size;
+                }
+                    
+                _isOpenFileMaximized = !_isOpenFileMaximized;
+            }
+            else if (window == hrComplaintObj)
+            {
+                if (_isHrComplaintMaximized)
+                {
+                    hrComplaintRect.anchoredPosition = new Vector2(_hrComplaintLastPosition.x, _hrComplaintLastPosition.y);
+                    hrComplaintRect.sizeDelta = new Vector2(_hrComplaintLastSize.x, _hrComplaintLastSize.y);
+                }
+                else
+                {
+                    _hrComplaintLastPosition = hrComplaintRect.anchoredPosition;
+                    _hrComplaintLastSize = hrComplaintRect.sizeDelta;
+                        
+                    hrComplaintRect.anchoredPosition = Vector2.zero;
+                    hrComplaintRect.sizeDelta = windowsToOpenRect.rect.size;
+                }
+                    
+                _isHrComplaintMaximized = !_isHrComplaintMaximized;
+            }
+            else
+            {
+                Debug.LogWarning("Not implemented");
+            }
+        }
+
+        public void PopWindowBackUp(GameObject window)
+        {
+            if (window == folderObject && _openedFirstFolder)
+            {
+                window.transform.SetAsLastSibling();
+                window.SetActive(true);
+            }
+            else if (window == openFileObj && _openedTextFile)
+            {
+                window.transform.SetAsLastSibling();
+                window.SetActive(true);
+            }
+            else if (window == hrComplaintObj && _openedHrComplaint)
+            {
+                window.transform.SetAsLastSibling();
+                window.SetActive(true);
+            }
+            else
+            {
+                Debug.LogWarning("Not implemented");
+            }
+        }
+
+        public void CloseTextFile()
+        {
+            openFileObj.SetActive(false);
+            _openedTextFile = false;
+        }
+
+        public void CloseHrComplaint()
+        {
+            hrComplaintObj.SetActive(false);
+            _openedHrComplaint = false;
         }
     }
 }

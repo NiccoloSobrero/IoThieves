@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8e97def1995d7438afb52f8e101d7b, type: 3}
   m_Name: BossAddress
   m_EditorClassIdentifier: 
-  objectiveDescription: Find the Boss's home address in his pc
+  objectiveSteps:
+  - Go to the boss office
+  - Find the key to the door
+  - Find the address in the pc

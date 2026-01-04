@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Levels;
 using UnityEngine;
@@ -34,14 +35,55 @@ namespace UI
             newObjective.transform.SetAsFirstSibling();
             
             ObjectivePrefab objectiveUI = newObjective.GetComponent<ObjectivePrefab>();
-            objectiveUI.Initialize(objectiveScrObj.objectiveDescription);
+            objectiveUI.Initialize(objectiveScrObj.Init());
             
             _objectivesToUI.Add(new LevelObjectivesToUI(objectiveUI, objectiveScrObj));
             
             UpdateHeight();
         }
 
-        public void RemoveObjective(LevelObjectiveScrObj objectiveScrObj)
+        public void UpdateObjective(LevelObjectiveScrObj objectiveScrObj)
+        {
+            foreach (var objective in _objectivesToUI)
+            {
+                if (objective.ObjectiveScrObj == objectiveScrObj)
+                {
+                    string nextStep = objective.ObjectiveScrObj.NextStep(out bool noMoreSteps);
+
+                    if (noMoreSteps)
+                    {
+                        objective.ObjectiveUI.transform.SetAsLastSibling();
+                        StartCoroutine(StrikeTextCor(nextStep, objective, 0.03f));
+                    }
+                    else
+                    {
+                        objective.ObjectiveUI.transform.SetAsFirstSibling();
+                        objective.ObjectiveUI.UpdateText(nextStep);
+                    }
+                    
+                    return;
+                }
+            }
+        }
+
+        private IEnumerator StrikeTextCor(string text, LevelObjectivesToUI objectiveToUI, float delayPerChar)
+        {
+            string original = text;
+
+            for (int i = 1; i <= original.Length; i++)
+            {
+                string barred =
+                    "<s>" + original.Substring(0, i) + "</s>" +
+                    original.Substring(i);
+
+                objectiveToUI.ObjectiveUI.UpdateText(barred);
+                yield return new WaitForSeconds(delayPerChar);
+            }
+            
+            RemoveObjective(objectiveToUI.ObjectiveScrObj);
+        }
+
+        private void RemoveObjective(LevelObjectiveScrObj objectiveScrObj)
         {
             foreach (var objective in _objectivesToUI)
             {
