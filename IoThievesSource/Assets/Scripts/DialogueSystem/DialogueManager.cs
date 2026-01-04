@@ -22,6 +22,8 @@ namespace DialogueSystem
 
         private const float CharactersDelay = 0.01f;
         private const float SkipTextGenerationDelay = 0f;
+
+        private const string SpeakerPrefix = "C:\\Users\\";
         
         private int _currentLine;
         private bool _completedTextGeneration;
@@ -75,9 +77,9 @@ namespace DialogueSystem
                 
                 if (_currentLine < _dialogueLinesScrObj.dialogueLines.Length)
                 {
-                    dialogue.text = _dialogueLinesScrObj.dialogueLines[_currentLine].text;
+                    dialogue.text = "> " + _dialogueLinesScrObj.dialogueLines[_currentLine].text;
                     speakerIcon.sprite = _dialogueLinesScrObj.dialogueLines[_currentLine].icon;
-                    speakerName.text = _dialogueLinesScrObj.dialogueLines[_currentLine].speakerName;
+                    speakerName.text = SpeakerPrefix + _dialogueLinesScrObj.dialogueLines[_currentLine].speakerName.Replace(' ', '_') + ":";
 
                     dialogue.maxVisibleCharacters = 0;
                     textCompletedObj.SetActive(false);

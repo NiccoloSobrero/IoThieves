@@ -5,8 +5,8 @@ namespace Interactables
 {
     public class InteractToInvokeEvent : Interactable
     {
-        [HideInInspector] public UnityEvent onInteract;
         [SerializeField] private InteractableTriggerArea triggerArea;
+        [HideInInspector] public UnityEvent onInteract;
         
         private bool _isEnabled;
         

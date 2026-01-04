@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum OpenType
 {
@@ -11,18 +12,26 @@ public class DoorTrigger : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private OpenType openType;
 
-    private bool _isEnabled = true;
+    private bool _isLocked = false;
+
+    #region Events
+
+    [HideInInspector] public UnityEvent onTriggerEnterEvent;
+
+    #endregion
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!_isEnabled) return;
+        onTriggerEnterEvent.Invoke();
+        
+        if (_isLocked) return;
         
         animator.SetBool(GetBoolParam(), true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!_isEnabled) return;
+        if (_isLocked) return;
         
         animator.SetBool(GetBoolParam(), false);
     }
@@ -37,8 +46,8 @@ public class DoorTrigger : MonoBehaviour
         };
     }
 
-    public void SetEnabled(bool isEnabled)
+    public void SetLocked(bool locked)
     {
-        _isEnabled = isEnabled;
+        _isLocked = locked;
     }
 }

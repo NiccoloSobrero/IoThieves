@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using Levels;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Minigames
 {
@@ -9,8 +9,8 @@ namespace Minigames
         [SerializeField] private List<TypeWriteSection> typingSections;
         
         private int _currentIndex;
-        
-        // private LevelObjectiveScrObj _objective;
+
+        [HideInInspector] public UnityEvent onSendComplaint;
 
         private void Update()
         {
@@ -26,8 +26,6 @@ namespace Minigames
 
         public void Init()
         {
-            // _objective = objective;
-
             foreach (TypeWriteSection typeWriteSection in typingSections)
             {
                 typeWriteSection.Init();
@@ -36,7 +34,18 @@ namespace Minigames
 
         public void Send()
         {
-            // _objective?.Complete();
+            // Check correctness
+            foreach (var section in typingSections)
+            {
+                if (section.HasAnError())
+                {
+                    Debug.Log("The complaint has an error and cannot be sent.");
+                    return;
+                }
+            }
+            
+            // Invoke event
+            onSendComplaint.Invoke();
         }
     }
 }

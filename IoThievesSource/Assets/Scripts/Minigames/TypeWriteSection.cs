@@ -227,5 +227,18 @@ namespace Minigames
             _isSelected = false;
             caretHighlight.gameObject.SetActive(false);
         }
+
+        public bool HasAnError()
+        {
+            for (int i = 0; i < _correctAtIndex.Length; i++)
+            {
+                if (!_correctAtIndex[i])
+                {
+                    return true;
+                }
+            }
+            
+            return false;
+        }
     }
 }

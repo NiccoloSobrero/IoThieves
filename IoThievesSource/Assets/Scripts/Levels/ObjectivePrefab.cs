@@ -23,6 +23,11 @@ namespace Levels
             boxImage.color = uncompletedColor;
             objectiveDescription.color = uncompletedColor;
         }
+
+        public void UpdateText(string description)
+        {
+            objectiveDescription.text = description;
+        }
         
         public void SetCompleted()
         {
@@ -31,6 +36,8 @@ namespace Levels
             boxImage.color = completedColor;
             checkImage.color = completedColor;
             objectiveDescription.color = completedColor;
+
+            objectiveDescription.text = "<s>" + objectiveDescription.text;
         }
     }
 }

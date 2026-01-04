@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8e97def1995d7438afb52f8e101d7b, type: 3}
   m_Name: FileComplaint
   m_EditorClassIdentifier: 
-  objectiveDescription: File a complaint on your Boss
+  objectiveSteps:
+  - Find a pc with the program to write a complaint about your boss

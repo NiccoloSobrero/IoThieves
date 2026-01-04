@@ -8,6 +8,8 @@ namespace Interactables
 {
     public class InteractToCreateDistraction : Interactable
     {
+        private static readonly int IsShaking = Animator.StringToHash("IsShaking");
+
         [Header("Hackable Settings")]
         [SerializeField] private float timeToProduce;
         
@@ -102,7 +104,7 @@ namespace Interactables
         {
             canStartProduction = false;
             smokeVFX.Play();
-            shakeAnimator.SetBool("IsShaking", true);
+            shakeAnimator.SetBool(IsShaking, true);
             printAudioSource.Play();
             
             progressBillboard.SetActive(true);
@@ -126,7 +128,7 @@ namespace Interactables
             hackTriggerArea.Lock(true);
             interactTriggerArea.Lock(false);
             smokeVFX.Stop();
-            shakeAnimator.SetBool("IsShaking", false);
+            shakeAnimator.SetBool(IsShaking, false);
             printAudioSource.Stop();
         }
     }

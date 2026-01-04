@@ -142,13 +142,13 @@ namespace Levels
 
         private void Init()
         {
-            step0Trigger.GetComponent<LevelTrigger>().Init(this);
+            step0Trigger.GetComponent<TutorialLevelTrigger>().Init(this);
             step0Trigger.SetActive(false);
             
-            step2Trigger.GetComponent<LevelTrigger>().Init(this);
+            step2Trigger.GetComponent<TutorialLevelTrigger>().Init(this);
             step2Trigger.SetActive(false);
             
-            endLevelTrigger.GetComponent<LevelTrigger>().Init(this);
+            endLevelTrigger.GetComponent<TutorialLevelTrigger>().Init(this);
             endLevelTrigger.SetActive(false);
             
             printerInteractableOutline.SetActive(false);
@@ -401,8 +401,6 @@ namespace Levels
 
         private void EndLevel()
         {
-            Debug.Log("EndLevel");
-            // endLevelMenuController.ActivateEndLevelUI();
             EventsManager.OnEndLevel?.Invoke();
         }
 

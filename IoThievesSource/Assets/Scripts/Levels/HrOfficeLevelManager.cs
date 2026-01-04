@@ -1,5 +1,10 @@
+using System.Collections;
+using DialogueSystem;
+using Events;
 using Interactables;
+using Managers;
 using Minigames;
+using Minigames.ScriptableObjects;
 using UI;
 using UnityEngine;
 
@@ -11,63 +16,185 @@ namespace Levels
         [SerializeField] private LevelObjectivesUI levelObjectivesUI;
         
         [Header("Objectives")]
-        [SerializeField] private LevelObjectiveScrObj unlockBossDoor;
         [SerializeField] private LevelObjectiveScrObj getBossAddress;
         [SerializeField] private LevelObjectiveScrObj fileComplaint;
         [SerializeField] private LevelObjectiveScrObj getOut;
 
         [Header("Unlock door")]
         [SerializeField] private InteractToInvokeEvent keyInteractable;
+        [SerializeField] private DoorTrigger bossDoorTrigger;
+
+        [SerializeField] private DialogueLinesScrObj introDialogue;
+        [SerializeField] private Transform cameraTarget;
+        [SerializeField] private Transform playerTransform;
+        [SerializeField] private Transform bossOfficeCameraTarget;
+        [SerializeField] private AnimationCurve cameraMoveCurve;
+
+        [SerializeField] private DialogueLinesScrObj getKeyDialogue;
+        [SerializeField] private DialogueLinesScrObj obtainedKeyDialogue;
+
+        private const float CameraTimeToTarget = 1f;
         
         [Header("Get address")]
-        [SerializeField] private DoorTrigger bossDoorTrigger;
+        [SerializeField] private DesktopMinigame bossAddressMinigame;
+        [SerializeField] private MinigameScrObj bossDesktopNavigationMinigame;
         
         [Header("File complaint")]
-        [SerializeField] private DesktopMinigame desktopMinigame;
+        [SerializeField] private TypeWriteMinigame typeWriteMinigame;
+
+        [Header("Get out")] 
+        [SerializeField] private LevelTrigger endLevelTrigger;
+
+        private bool _completedFileComplaint;
+        private bool _obtainedBossAddress;
         
-        private void Awake()
+        /*
+         * Flow:
+         *      - Initial dialogues to explain the target is the boss office (Reference to HR complaint pc)
+         *      - Pan camera back and forth (camera move -> dialogues -> comes back -> more dialogues) like tutorial
+         *      - (Free movement)
+         *      - Entering the boss office's door trigger (locked) starts a new dialogue (FIND THE KEY)
+         *      - Obtain key
+         *      - Dialogue (go back to door)
+         *      - Open pc, download target file (Check for last dialogue set up)
+         *      - Complete hr complaint (could have been done before)
+         *      - Last dialogue (When both objective have been completed)
+         *      - Get out
+         */
+        
+        private void Start()
         {
             Init();
         }
 
         private void Init()
         {
-            bossDoorTrigger.SetEnabled(false);
-            keyInteractable.SetEnabled(true);
+            // Initialization
+            endLevelTrigger.gameObject.SetActive(false);
+
+            _completedFileComplaint = false;
+            _obtainedBossAddress = false;
             
-            keyInteractable.onInteract.AddListener(OnKeyInteract);
+            // First objectives set up
+            bossDoorTrigger.SetLocked(true);
+            keyInteractable.SetEnabled(false);
             
-            levelObjectivesUI.AddObjective(unlockBossDoor);
+            // Start dialogue
+            DialogueManager.Instance.SetDialogue(introDialogue);
+            DialogueManager.Instance.OpenDialogueWindow();
+            
+            EventsManager.OnTriggerOnContinueDialogue.AddListener(MoveCameraToBossOffice);
+        }
+
+        private void MoveCameraToBossOffice()
+        {
+            StartCoroutine(MoveCameraToCor(cameraTarget, bossOfficeCameraTarget));
+            
+            EventsManager.OnTriggerOnContinueDialogue.RemoveListener(MoveCameraToBossOffice);
+            
+            EventsManager.OnTriggerOnContinueDialogue.AddListener(MoveCameraBackToPlayer);
+        }
+
+        private void MoveCameraBackToPlayer()
+        {
+            StartCoroutine(MoveCameraToCor(cameraTarget, playerTransform));
+            
+            EventsManager.OnTriggerOnContinueDialogue.RemoveListener(MoveCameraBackToPlayer);
+            
+            // Add listener for writing the correct complaint
+            typeWriteMinigame.onSendComplaint.AddListener(OnComplaintSent);
+            
+            // Add listener for boss door trigger
+            bossDoorTrigger.onTriggerEnterEvent.AddListener(OnEnterBossDoorTrigger);
+            
+            levelObjectivesUI.AddObjective(getBossAddress);
             levelObjectivesUI.AddObjective(fileComplaint);
+        }
+
+        private IEnumerator MoveCameraToCor(Transform cameraFollow, Transform target)
+        {
+            PlayerInputManager.Instance.SetContext(InputContext.Disabled);
+            
+            // Lock axis y
+            Vector3 originalPos = cameraFollow.position;
+            Vector3 targetPos = target.position;
+
+            float eval = 0f;
+            while (eval < 1f)
+            {
+                cameraTarget.position = Vector3.Lerp(originalPos, targetPos, cameraMoveCurve.Evaluate(eval));
+                eval += Time.deltaTime / CameraTimeToTarget;
+                yield return null;
+            }
+            
+            PlayerInputManager.Instance.SetContext(InputContext.Dialogue);
+        }
+
+        private void OnEnterBossDoorTrigger()
+        {
+            levelObjectivesUI.UpdateObjective(getBossAddress);
+            bossDoorTrigger.onTriggerEnterEvent.RemoveListener(OnEnterBossDoorTrigger);
+            
+            DialogueManager.Instance.SetDialogue(getKeyDialogue);
+            DialogueManager.Instance.OpenDialogueWindow();
+            
+            keyInteractable.SetEnabled(true);
+            keyInteractable.onInteract.AddListener(OnKeyInteract);
         }
 
         private void OnKeyInteract()
         {
+            levelObjectivesUI.UpdateObjective(getBossAddress);
+            
             keyInteractable.SetEnabled(false);
             keyInteractable.onInteract.RemoveListener(OnKeyInteract);
             
-            bossDoorTrigger.SetEnabled(true);
+            bossDoorTrigger.SetLocked(false);
             
-            levelObjectivesUI.RemoveObjective(unlockBossDoor);
+            DialogueManager.Instance.SetDialogue(obtainedKeyDialogue);
+            DialogueManager.Instance.OpenDialogueWindow();
             
-            levelObjectivesUI.AddObjective(getBossAddress);
+            DownloadsManager.Instance.onDownloadTargetFile.AddListener(OnAddressDownloaded);
         }
 
         private void OnComplaintSent()
         {
-            levelObjectivesUI.RemoveObjective(fileComplaint);
+            typeWriteMinigame.onSendComplaint.RemoveListener(OnComplaintSent);
+            
+            levelObjectivesUI.UpdateObjective(fileComplaint);
+            _completedFileComplaint = true;
+
+            if (_obtainedBossAddress)
+            {
+                SetUpLastStep();
+            }
         }
 
         private void OnAddressDownloaded()
         {
-            levelObjectivesUI.RemoveObjective(getBossAddress);
+            levelObjectivesUI.UpdateObjective(getBossAddress);
             
+            DownloadsManager.Instance.onDownloadTargetFile.RemoveListener(OnAddressDownloaded);
+            _obtainedBossAddress = true;
+            
+            if (_completedFileComplaint)
+            {
+                SetUpLastStep();
+            }
+        }
+
+        private void SetUpLastStep()
+        {
             levelObjectivesUI.AddObjective(getOut);
+            
+            endLevelTrigger.gameObject.SetActive(true);
+            endLevelTrigger.onTriggerEnter.AddListener(OnGetOut);
         }
 
         private void OnGetOut()
         {
-            levelObjectivesUI.RemoveObjective(getOut);
+            levelObjectivesUI.UpdateObjective(getOut);
+            endLevelTrigger.onTriggerEnter.RemoveListener(OnGetOut);
             
             // End level
             

@@ -78,14 +78,33 @@ namespace Minigames
         
         private Vector2 ClampToBounds(Vector2 desiredAnchoredPos, RectTransform win, RectTransform bounds)
         {
-            var bRect = bounds.rect;
-            var wRect = win.rect;
+            // We clamp window.anchoredPosition, which is in win.parent local space
+            var parent = win.parent as RectTransform;
+            if (parent == null) return desiredAnchoredPos;
 
-            var pivot = win.pivot;
-            float left   = bRect.xMin + wRect.width  * (0f + pivot.x);
-            float right  = bRect.xMax - wRect.width  * (1f - pivot.x);
-            float bottom = bRect.yMin + wRect.height * (0f + pivot.y);
-            float top    = bRect.yMax - wRect.height * (1f - pivot.y);
+            // Get bounds corners in world, then convert to parent local space
+            Vector3[] corners = new Vector3[4];
+            bounds.GetWorldCorners(corners); // 0=BL,1=TL,2=TR,3=BR in world space
+
+            Vector2 bl = parent.InverseTransformPoint(corners[0]);
+            Vector2 tl = parent.InverseTransformPoint(corners[1]);
+            Vector2 tr = parent.InverseTransformPoint(corners[2]);
+            Vector2 br = parent.InverseTransformPoint(corners[3]);
+
+            float xMin = Mathf.Min(bl.x, tl.x, tr.x, br.x);
+            float xMax = Mathf.Max(bl.x, tl.x, tr.x, br.x);
+            float yMin = Mathf.Min(bl.y, tl.y, tr.y, br.y);
+            float yMax = Mathf.Max(bl.y, tl.y, tr.y, br.y);
+
+            // Window size in its own local space is fine (RectTransform rect is local size)
+            Rect wRect = win.rect;
+            Vector2 pivot = win.pivot;
+
+            // Clamp desired anchored position so the window stays fully inside bounds
+            float left   = xMin + wRect.width  * (0f + pivot.x);
+            float right  = xMax - wRect.width  * (1f - pivot.x);
+            float bottom = yMin + wRect.height * (0f + pivot.y);
+            float top    = yMax - wRect.height * (1f - pivot.y);
 
             float x = Mathf.Clamp(desiredAnchoredPos.x, left, right);
             float y = Mathf.Clamp(desiredAnchoredPos.y, bottom, top);

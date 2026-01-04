@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Levels;
 using UnityEngine;
@@ -7,12 +8,16 @@ namespace UI
 {
     public class LevelObjectivesUI : MonoBehaviour
     {
+        private static readonly int Open = Animator.StringToHash("Open");
         [SerializeField] private RectTransform windowRect;
         
         [SerializeField] private GameObject objectivePrefab;
         [SerializeField] private Transform objectiveParent;
         [SerializeField] private GridLayoutGroup gridLayout;
-        private const float YOffset = 70f;
+        [SerializeField] private Animator animator;
+        private bool _isOpened;
+        
+        private const float YOffset = 0f;
         
         private readonly List<LevelObjectivesToUI> _objectivesToUI = new();
         
@@ -27,23 +32,65 @@ namespace UI
             }
             
             GameObject newObjective = Instantiate(objectivePrefab, objectiveParent);
-            ObjectivePrefab objectiveUI = newObjective.GetComponent<ObjectivePrefab>();
-            objectiveUI.Initialize(objectiveScrObj.objectiveDescription);
+            newObjective.transform.SetAsFirstSibling();
             
-            _objectivesToUI.Add(new LevelObjectivesToUI(newObjective, objectiveScrObj));
+            ObjectivePrefab objectiveUI = newObjective.GetComponent<ObjectivePrefab>();
+            objectiveUI.Initialize(objectiveScrObj.Init());
+            
+            _objectivesToUI.Add(new LevelObjectivesToUI(objectiveUI, objectiveScrObj));
             
             UpdateHeight();
         }
 
-        public void RemoveObjective(LevelObjectiveScrObj objectiveScrObj)
+        public void UpdateObjective(LevelObjectiveScrObj objectiveScrObj)
         {
             foreach (var objective in _objectivesToUI)
             {
                 if (objective.ObjectiveScrObj == objectiveScrObj)
                 {
-                    Destroy(objective.ObjectiveUI);
+                    string nextStep = objective.ObjectiveScrObj.NextStep(out bool noMoreSteps);
+
+                    if (noMoreSteps)
+                    {
+                        objective.ObjectiveUI.transform.SetAsLastSibling();
+                        StartCoroutine(StrikeTextCor(nextStep, objective, 0.03f));
+                    }
+                    else
+                    {
+                        objective.ObjectiveUI.transform.SetAsFirstSibling();
+                        objective.ObjectiveUI.UpdateText(nextStep);
+                    }
                     
-                    _objectivesToUI.Remove(objective);
+                    return;
+                }
+            }
+        }
+
+        private IEnumerator StrikeTextCor(string text, LevelObjectivesToUI objectiveToUI, float delayPerChar)
+        {
+            string original = text;
+
+            for (int i = 1; i <= original.Length; i++)
+            {
+                string barred =
+                    "<s>" + original.Substring(0, i) + "</s>" +
+                    original.Substring(i);
+
+                objectiveToUI.ObjectiveUI.UpdateText(barred);
+                yield return new WaitForSeconds(delayPerChar);
+            }
+            
+            RemoveObjective(objectiveToUI.ObjectiveScrObj);
+        }
+
+        private void RemoveObjective(LevelObjectiveScrObj objectiveScrObj)
+        {
+            foreach (var objective in _objectivesToUI)
+            {
+                if (objective.ObjectiveScrObj == objectiveScrObj)
+                {
+                    objective.ObjectiveUI.transform.SetAsLastSibling();
+                    objective.ObjectiveUI.SetCompleted();
                     
                     UpdateHeight();
                     return;
@@ -53,18 +100,26 @@ namespace UI
 
         private void UpdateHeight()
         {
-            windowRect.sizeDelta = new Vector2(
-                windowRect.sizeDelta.x, 
-                _objectivesToUI.Count * gridLayout.cellSize.y + YOffset);
+            windowRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, _objectivesToUI.Count * gridLayout.cellSize.y + YOffset);
+            
+            objectiveParent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(
+                RectTransform.Axis.Vertical, _objectivesToUI.Count * gridLayout.cellSize.y);
+        }
+
+        public void OpenClose()
+        {
+            _isOpened = !_isOpened;
+            
+            animator.SetBool(Open, _isOpened);
         }
     }
 
     public class LevelObjectivesToUI
     {
-        public GameObject ObjectiveUI;
+        public ObjectivePrefab ObjectiveUI;
         public LevelObjectiveScrObj ObjectiveScrObj;
 
-        public LevelObjectivesToUI(GameObject objectiveUI, LevelObjectiveScrObj objectiveScrObj)
+        public LevelObjectivesToUI(ObjectivePrefab objectiveUI, LevelObjectiveScrObj objectiveScrObj)
         {
             ObjectiveUI = objectiveUI;
             ObjectiveScrObj = objectiveScrObj;

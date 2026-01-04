@@ -6,6 +6,8 @@ namespace Interactables
     public class InteractableTriggerArea : MonoBehaviour
     {
         [SerializeField] private InteractableType interactableType;
+        private bool IsObjective => interactableType is 
+            InteractableType.HackableObjective or InteractableType.InteractableObjective;
 
         public bool IsPlayerInRange { get; private set; }
         public GameObject PlayerObject { get; private set; }
@@ -39,7 +41,7 @@ namespace Interactables
 
                 if (!_isLocked)
                 {
-                    _interactable.SetOutlineColor(interactableType);
+                    _interactable.SetOutlineColor(interactableType, IsObjective);
                 }
             }
         }
@@ -53,7 +55,7 @@ namespace Interactables
 
                 if (!_isLocked)
                 {
-                    _interactable.SetOutlineColor(InteractableType.NotInteractable);
+                    _interactable.SetOutlineColor(InteractableType.NotInteractable, IsObjective);
                 }
             }
         }
@@ -62,7 +64,7 @@ namespace Interactables
         {
             if (_isLocked) return;
             
-            _interactable.SetOutlineColor(IsPlayerInRange ? interactableType : InteractableType.NotInteractable);
+            _interactable.SetOutlineColor(IsPlayerInRange ? interactableType : InteractableType.NotInteractable, IsObjective);
         }
     }
 }

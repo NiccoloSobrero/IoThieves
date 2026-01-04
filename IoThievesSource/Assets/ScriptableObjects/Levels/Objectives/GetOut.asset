@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac8e97def1995d7438afb52f8e101d7b, type: 3}
   m_Name: GetOut
   m_EditorClassIdentifier: 
-  objectiveDescription: Get out without beign noticed
+  objectiveSteps:
+  - Get out without being noticed
