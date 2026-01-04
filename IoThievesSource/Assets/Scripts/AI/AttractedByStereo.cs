@@ -32,7 +32,7 @@ namespace AI
                 }
                 else
                 {                                                                   //Alor on dance
-                    PlanRotation(DancingYRotation);
+                //    PlanRotation(DancingYRotation);
                     isDancing = true;
                     //DanceAnimation()
                 }
@@ -50,7 +50,7 @@ namespace AI
                 }               //Else idle
                 else
                 {
-                    PlanRotation(StartingYRotation);
+             //       PlanRotation(StartingYRotation);
                 }
             }
         }
