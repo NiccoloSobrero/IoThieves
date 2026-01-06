@@ -17,28 +17,36 @@ namespace AI
 
         private void Awake()
         {
-            StartingYRotation = transform.rotation.y;
-            DancingYRotation = stereo.transform.rotation.y;
+            StartingYRotation = Mathf.Atan2(transform.forward.x, transform.forward.z) * Mathf.Rad2Deg;
+            
+            var stereoDir = stereo.transform.position - dancingPosition;
+            DancingYRotation = Mathf.Atan2(stereoDir.x, stereoDir.z) * Mathf.Rad2Deg;
+            
+            Debug.Log("DancingYRotation : "+ DancingYRotation+"\nStartingYRotation : " + StartingYRotation);
             startingPosition = transform.position;
            dancingPosition.y =  transform.position.y;
+           
         }
 
         private void Update()
         {
             if (stereo.IsPlayingMusic)
             {
+                Debug.Log("Stereo? "+ stereo.IsPlayingMusic);
                 if(Vector3.Distance(transform.position, dancingPosition) > 0.1f){   //You must reach the dancing area
                     PlanMovement(dancingPosition);
                 }
                 else
                 {                                                                   //Alor on dance
-                //    PlanRotation(DancingYRotation);
+                    Debug.Log("rotate towards the stereo");
+                    PlanRotation(DancingYRotation);
                     isDancing = true;
                     //DanceAnimation()
                 }
             }
             else  // stereo is off
             {
+                Debug.Log("Stereo? "+ stereo.IsPlayingMusic);
                 if (isDancing)              //Stop dancing
                 {
                     isDancing = false;
@@ -47,10 +55,10 @@ namespace AI
                 if (Vector3.Distance(transform.position, startingPosition) > data.DistanceThreshold)        //reach the startingPosition
                 {
                     PlanMovement(startingPosition);
-                }               //Else idle
+                }              
                 else
                 {
-             //       PlanRotation(StartingYRotation);
+                    PlanRotation(StartingYRotation);
                 }
             }
         }
@@ -72,15 +80,17 @@ namespace AI
             }
         }
 
-        /*
+        
         private void PlanRotation(float angle)
         {
-            if (Math.Abs(transform.rotation.y - angle) != 0)
-            {
-                
-            }
+            if (Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.y, angle)) <= 1.0f)
+                return;
+            
+            float newY = Mathf.MoveTowardsAngle(transform.eulerAngles.y, angle, data.AngularSpeed* 50 * Time.deltaTime);
+            
+            transform.rotation = Quaternion.Euler(0, newY, 0);
         }
-        */
+        
     }
     
 }
