@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using AI.NavigationAndWaypoints;
+using UnityEditor.TerrainTools;
 using UnityEngine;
 
 namespace AI.AI_States
@@ -27,7 +28,12 @@ namespace AI.AI_States
 
             foreach (Waypoint neighbour in currentWaypoint.neighbours)
             {
-                if (!IsInRecentMovements(currentWaypoint, neighbour))
+                if (!IsInRecentMovements(currentWaypoint, neighbour) && 
+                    !Physics.Raycast(currentWaypoint.transform.position, 
+                        (neighbour.transform.position - currentWaypoint.transform.position).normalized, 
+                        Vector3.Distance(currentWaypoint.transform.position, neighbour.transform.position), 
+                        LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore)
+                    )
                 {
                     availableWaypoints.Add(neighbour);
                 }
