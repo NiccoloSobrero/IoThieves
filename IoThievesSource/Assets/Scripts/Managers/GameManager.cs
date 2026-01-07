@@ -1,11 +1,21 @@
-using System;
 using Events;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+public enum Level
+{
+    None,
+    Tutorial,
+    Level1,
+    Level2,
+    Level3
+}
+
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
+    
+    public Level currentLevel;
     
     private void Awake()
     {
@@ -48,6 +58,7 @@ public class GameManager : MonoBehaviour
         print("Starting Game");
 
         SceneManager.LoadScene("TutorialLevel");
+        currentLevel = Level.Tutorial;
     }
 
     private void SaveGame()

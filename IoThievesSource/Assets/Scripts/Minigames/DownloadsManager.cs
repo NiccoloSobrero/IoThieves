@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -18,9 +19,8 @@ namespace Minigames
             
         [SerializeField] private Animator downloadSectionAnimator;
         private bool _isSectionHidden;
-        
-        private readonly List<string> _downloadedFiles = new();
-        public List<string> DownloadedFiles => _downloadedFiles;
+
+        public DownloadedFile DownloadedFiles { get; } = new();
 
         #region Events
 
@@ -46,9 +46,9 @@ namespace Minigames
             _downloadProgressGrid = downloadProgressParent.GetComponent<GridLayoutGroup>();
         }
 
-        public void AddDownload(string filePath, float time, bool isTarget)
+        public void AddDownload(FileDetails fileDetails, float time)
         {
-            if (_downloadedFiles.Contains(filePath))
+            if (DownloadedFiles.Contains(fileDetails))
             {
                 return;
             }
@@ -57,9 +57,9 @@ namespace Minigames
             
             downloadSectionAnimator.SetBool(IsHidden, _isSectionHidden);
             
-            _downloadedFiles.Add(filePath);
+            DownloadedFiles.Add(fileDetails);
             
-            StartCoroutine(DownloadProgressCoroutine(filePath, time, isTarget));
+            StartCoroutine(DownloadProgressCoroutine(fileDetails.filePath, time, fileDetails.isTarget));
             
             UpdateContentHeight();
         }
@@ -105,6 +105,50 @@ namespace Minigames
                               _downloadProgressGrid.padding.top;
             
             rect.sizeDelta = new Vector2(rect.sizeDelta.x, newHeight);
+        }
+    }
+    
+    [Serializable]
+    public record FileDetails
+    {
+        public Level levelOfDownload;
+        public string filePath;
+        public Sprite documentSprite;
+        public bool isTarget;
+    
+        public FileDetails(Level levelOfDownload, string filePath, Sprite documentSprite, bool isTarget)
+        {
+            this.levelOfDownload = levelOfDownload;
+            this.filePath = filePath;
+            this.documentSprite = documentSprite;
+            this.isTarget = isTarget;
+        }
+    }
+
+    [Serializable]
+    public class DownloadedFile : List<FileDetails>
+    {
+        public int GetTargetFilesNumFromLevel(Level level)
+        {
+            int res = 0;
+            
+            foreach (var file in AsReadOnly())
+            {
+                if (file.levelOfDownload == level && file.isTarget)
+                {
+                    res++;
+                }
+            }
+
+            return res;
+        }
+
+        public void PrintList()
+        {
+            foreach (var file in AsReadOnly())
+            {
+                Debug.Log(file.levelOfDownload + ": " + file.filePath);
+            }
         }
     }
 }

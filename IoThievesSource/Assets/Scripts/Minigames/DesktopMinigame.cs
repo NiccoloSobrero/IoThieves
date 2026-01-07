@@ -10,7 +10,7 @@ namespace Minigames
     {
         private const string DesktopPath = "C:\\Desktop";
 
-        [SerializeField] private Canvas canvas;
+        private Canvas _canvas;
 
         [Header("Desktop")] 
         [SerializeField] private GameObject desktopObj;
@@ -71,13 +71,12 @@ namespace Minigames
         private readonly List<string> _openPath = new();
         private readonly List<FolderContentScrObj> _pathScrObjs = new();
 
-        private string _currentOpenFileName;
+        private FileDetails _currentOpenFile;
         private float _currentOpenFileDownloadTime;
-        private bool _isCurrentOpenFileTarget;
         
         private FolderContentScrObj _desktop;
         
-        private readonly List<string> _targetFiles = new();
+        private int _targetFilesNum;
         
         #region Events
 
@@ -88,6 +87,7 @@ namespace Minigames
         private void Awake()
         {
             _pathTextRect = pathText.gameObject.GetComponent<RectTransform>();
+            _canvas = GetComponentInParent<Canvas>();
 
             _openedFirstFolder = false;
             _openedTextFile = false;
@@ -148,8 +148,7 @@ namespace Minigames
             
             GenerateFolder(desktopScrObj, desktopFoldersParent);
             
-            _targetFiles.Clear();
-            ComputeTargetFilesList(_desktop, DesktopPath + "\\");
+            ComputeTargetFilesList(_desktop);
             
             ResetPathToDesktop();
             
@@ -184,10 +183,10 @@ namespace Minigames
         public void OpenFile(string fileName, float time, Sprite documentSprite)
         {
             string currentPath = GetCurrentPath();
+
+            _currentOpenFile = new FileDetails(GameManager.Instance.currentLevel, currentPath + fileName, documentSprite, false);
             
-            _currentOpenFileName = currentPath + fileName;
             _currentOpenFileDownloadTime = time;
-            _isCurrentOpenFileTarget = false;
             
             desktopNavFile.AdaptToImage(documentSprite, fileName);
             
@@ -202,9 +201,8 @@ namespace Minigames
         {
             string currentPath = GetCurrentPath();
             
-            _currentOpenFileName = currentPath + fileName;
+            _currentOpenFile = new FileDetails(GameManager.Instance.currentLevel, currentPath + fileName, documentSprite, true);
             _currentOpenFileDownloadTime = time;
-            _isCurrentOpenFileTarget = true;
             
             desktopNavFile.AdaptToImage(documentSprite, fileName);
             
@@ -217,14 +215,7 @@ namespace Minigames
 
         public void DownloadFile()
         {
-            if (_isCurrentOpenFileTarget)
-            {
-                DownloadsManager.Instance.AddDownload(_currentOpenFileName, _currentOpenFileDownloadTime, _isCurrentOpenFileTarget);
-            }
-            else
-            {
-                DownloadsManager.Instance.AddDownload(_currentOpenFileName, _currentOpenFileDownloadTime, _isCurrentOpenFileTarget);
-            }
+            DownloadsManager.Instance.AddDownload(_currentOpenFile, _currentOpenFileDownloadTime);
         }
         
         public void OpenProgram()
@@ -330,32 +321,31 @@ namespace Minigames
             return result;
         }
 
-        private void ComputeTargetFilesList(FolderContentScrObj folderContentScrObj, string currentPath)
+        private void ComputeTargetFilesList(FolderContentScrObj folderContentScrObj)
         {
+            _targetFilesNum = 0;
+            
             foreach (DesktopItem folderItem in folderContentScrObj.folderItems)
             {
                 if (folderItem.itemType == DesktopItemType.TargetFile)
                 {
-                    _targetFiles.Add(currentPath + folderItem.itemName);
+                    _targetFilesNum++;
                 }
                 else if (folderItem.itemType is DesktopItemType.FolderInFolder or DesktopItemType.FolderOnDesktop && 
                          folderItem.folderContent != null)
                 {
-                    ComputeTargetFilesList(folderItem.folderContent, currentPath + folderItem.itemName + "\\");
+                    ComputeTargetFilesList(folderItem.folderContent);
                 }
             }
         }
 
         public void CheckCompletion()
         {
-            List<string> downloadedFiles = DownloadsManager.Instance.DownloadedFiles;
+            DownloadedFile downloadedFiles = DownloadsManager.Instance.DownloadedFiles;
             
-            foreach (string targetFilePath in _targetFiles)
+            if (downloadedFiles.GetTargetFilesNumFromLevel(GameManager.Instance.currentLevel) < _targetFilesNum)
             {
-                if (!downloadedFiles.Contains(targetFilePath))
-                {
-                    return;
-                }
+                return;
             }
             
             EventsManager.OnMinigameCompleted?.Invoke();
@@ -396,7 +386,7 @@ namespace Minigames
                     _desktopLastSize = desktopRect.sizeDelta;
                         
                     desktopRect.anchoredPosition = Vector2.zero;
-                    desktopRect.sizeDelta = canvas.renderingDisplaySize;
+                    desktopRect.sizeDelta = _canvas.renderingDisplaySize;
                 }
                     
                 _isDesktopMaximized = !_isDesktopMaximized;

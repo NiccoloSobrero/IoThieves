@@ -17,7 +17,7 @@ namespace UI
         [SerializeField] private Animator animator;
         private bool _isOpened;
         
-        private const float YOffset = 0f;
+        private const float MaxHeight = 400f;
         
         private readonly List<LevelObjectivesToUI> _objectivesToUI = new();
         
@@ -100,10 +100,17 @@ namespace UI
 
         private void UpdateHeight()
         {
-            windowRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, _objectivesToUI.Count * gridLayout.cellSize.y + YOffset);
+            float newHeight = _objectivesToUI.Count * gridLayout.cellSize.y;
             
             objectiveParent.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(
-                RectTransform.Axis.Vertical, _objectivesToUI.Count * gridLayout.cellSize.y);
+                RectTransform.Axis.Vertical, newHeight);
+            
+            if (newHeight > MaxHeight)
+            {
+                newHeight = MaxHeight;
+            }
+            
+            windowRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newHeight);
         }
 
         public void OpenClose()

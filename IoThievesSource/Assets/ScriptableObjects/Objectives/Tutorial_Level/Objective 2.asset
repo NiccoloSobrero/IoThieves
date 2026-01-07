@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d07d37674ef36a4cb77c90be5e15691, type: 3}
-  m_Name: Level_0
+  m_Script: {fileID: 11500000, guid: ac8e97def1995d7438afb52f8e101d7b, type: 3}
+  m_Name: Objective 2
   m_EditorClassIdentifier: 
-  objectives: []
+  objectiveMainDescription: 
+  objectiveSteps:
+  - Find the code of the shutters in the PC and download the file

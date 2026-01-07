@@ -17,7 +17,15 @@ namespace Levels
     public class TutorialLevelManager : MonoBehaviour
     {
         private static readonly int Open = Animator.StringToHash("Open");
+
+        [Header("Objectives")] 
+        [SerializeField] private LevelObjectivesUI levelObjectivesUI;
+        [SerializeField] private LevelObjectiveScrObj objective1;
+        [SerializeField] private LevelObjectiveScrObj objective2;
+        [SerializeField] private LevelObjectiveScrObj objective3;
+        [SerializeField] private LevelObjectiveScrObj objective4;
         
+        [Header("Miscellaneous")]
         [SerializeField] private Transform cameraTarget;
         [SerializeField] private EndLevelMenuController endLevelMenuController;
         [SerializeField] private LayerMask interactableLayer;
@@ -191,6 +199,8 @@ namespace Levels
             step0Trigger.SetActive(true);
 
             _lastValidPosition = playerTransform.position;
+            
+            levelObjectivesUI.AddObjective(objective1);
         }
 
         private void Step_1()
@@ -269,6 +279,8 @@ namespace Levels
             printerInteractable.onPickUpThrowable.AddListener(NextStepOnPickUpThrowable);
             
             _lastValidPosition = playerTransform.position;
+            
+            levelObjectivesUI.UpdateObjective(objective1);
         }
 
         private void Step_3()
@@ -292,6 +304,8 @@ namespace Levels
             cctvAttractable.MoveTowards(step2Trigger.transform.position);
             
             _lastValidPosition = playerTransform.position;
+            
+            levelObjectivesUI.UpdateObjective(objective1);
         }
 
         private void Step_5()
@@ -302,6 +316,9 @@ namespace Levels
             DialogueManager.Instance.OpenDialogueWindow();
             
             _lastValidPosition = playerTransform.position;
+            
+            levelObjectivesUI.UpdateObjective(objective1);
+            levelObjectivesUI.AddObjective(objective2);
         }
 
         private void Step_6()
@@ -361,6 +378,9 @@ namespace Levels
             _lastValidPosition = playerTransform.position;
             
             EventsManager.OnFoundCodePadSolution.Invoke();
+            
+            levelObjectivesUI.UpdateObjective(objective2);
+            levelObjectivesUI.AddObjective(objective3);
         }
 
         private void Step_11()
@@ -386,6 +406,9 @@ namespace Levels
             _lastValidPosition = playerTargetPos.position;
             
             lastHackableTriggerArea.SetActive(true);
+            
+            levelObjectivesUI.UpdateObjective(objective3);
+            levelObjectivesUI.AddObjective(objective4);
         }
 
         private void Step_12()
@@ -397,6 +420,8 @@ namespace Levels
             exitCollider.SetActive(false);
             
             _lastValidPosition = playerTransform.position;
+            
+            levelObjectivesUI.UpdateObjective(objective4);
         }
 
         private void EndLevel()
