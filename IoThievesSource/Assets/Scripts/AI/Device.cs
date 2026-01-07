@@ -31,6 +31,9 @@ namespace AI
 
         public bool ResolveHack()
         {
+            if (!isHacked)
+                return true;
+            
             hackedValue += (1.0f/hackedTime)*Time.deltaTime;
             if (hackedValue >= 1)
             {

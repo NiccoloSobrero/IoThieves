@@ -1,3 +1,4 @@
+using Interactables;
 using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
