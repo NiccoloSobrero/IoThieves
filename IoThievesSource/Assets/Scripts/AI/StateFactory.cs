@@ -1,5 +1,6 @@
 using System;
 using AI.AI_States;
+using UnityEngine;
 
 namespace AI
 {
@@ -23,6 +24,7 @@ namespace AI
             
             public AIState GetState(AINames stateName)
             {
+                Debug.Log("GetState" + stateName);
                 switch (stateName)
                 {
                     case AINames.Idle : return idleState;

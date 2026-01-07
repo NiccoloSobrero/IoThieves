@@ -70,7 +70,7 @@ namespace SuspicionSystem
             GameOverState = new GameOverAlertState();
             
             Initialize();
-            
+            EnemyAdapter.AIController.Initialize(); 
             ChangeState(Level0State);
         }
 
@@ -115,6 +115,7 @@ namespace SuspicionSystem
 
         public void ChangeState(AlertState newState)
         {
+            Debug.Log(newState.ToString());
             if (newState == _currentState || newState == null) return;
 
             _currentState?.Exit(this);

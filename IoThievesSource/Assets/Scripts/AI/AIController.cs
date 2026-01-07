@@ -1,5 +1,6 @@
 using AI.AI_States;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace AI
 {
@@ -8,19 +9,21 @@ namespace AI
         [Header("AI Settings")]
         [SerializeField] private AINames startState;
         [SerializeField] private AIState _currentState;
+        [SerializeField] private NpcScriptableObject _NpcDatas;
         
         public AIState CurrentState => _currentState;
         
         private StateFactory _stateFactory;
         public StateFactory StateFactory => _stateFactory;
+        
+        public NpcScriptableObject NpcDatas => _NpcDatas;
 
         private AIState _previousState;
 
-        private void Awake()
+        public void Initialize()
         {
             _stateFactory = new StateFactory(this);
             _previousState = _stateFactory.GetState(AINames.Idle);
-          //  ChangeState(startState);
         }
         
         private void Update()

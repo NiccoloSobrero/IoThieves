@@ -13505,6 +13505,7 @@ GameObject:
   - component: {fileID: 1198328612}
   - component: {fileID: 1198328611}
   - component: {fileID: 1198328613}
+  - component: {fileID: 1198328614}
   m_Layer: 0
   m_Name: Waypoints
   m_TagString: Untagged
@@ -13543,7 +13544,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1198328610}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -13668,7 +13669,7 @@ Transform:
   - {fileID: 1114247651}
   - {fileID: 1359497018}
   - {fileID: 1808122320}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1653415906}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1198328613
 MonoBehaviour:
@@ -13688,6 +13689,20 @@ MonoBehaviour:
     m_Bits: 1
   maxConnectionDistance: 5
   debugMode: 1
+--- !u!114 &1198328614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1198328610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b04eff5783281624b837c36ba85575d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render: 1
+  gizmoColor: {r: 0.29376745, g: 1, b: 0, a: 1}
 --- !u!1 &1239373291
 GameObject:
   m_ObjectHideFlags: 0
@@ -16569,6 +16584,7 @@ Transform:
   m_Children:
   - {fileID: 543450651605126168}
   - {fileID: 2083275344}
+  - {fileID: 1198328612}
   - {fileID: 482815059}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -99777,4 +99793,3 @@ SceneRoots:
   - {fileID: 5567461326278544477}
   - {fileID: 512816331627908514}
   - {fileID: 1755919934}
-  - {fileID: 1198328612}

@@ -1,22 +1,18 @@
 using System.Collections.Generic;
 using AI.NavigationAndWaypoints;
+using UnityEditor.TerrainTools;
 using UnityEngine;
 
 namespace AI.AI_States
 {
     public class PatrolState : AIState
     {
-         private float _speed = 2.0f;
-         private float _angularSpeed = 2f;
          private bool _isMoving = true;
          private bool _isInteracting = false;
         
          private Waypoint _target;
          private Waypoint _lastWaypoint;
-         private float _threshold = 0.8f; 
-         private float _angularThreshold = 45.0f; //degrees
-
-        
+         
         private Queue<Movement> _recentMovements = new Queue<Movement>();
         private const int MaxMovementHistory = 15;
 
@@ -32,7 +28,12 @@ namespace AI.AI_States
 
             foreach (Waypoint neighbour in currentWaypoint.neighbours)
             {
-                if (!IsInRecentMovements(currentWaypoint, neighbour))
+                if (!IsInRecentMovements(currentWaypoint, neighbour) && 
+                    !Physics.Raycast(currentWaypoint.transform.position, 
+                        (neighbour.transform.position - currentWaypoint.transform.position).normalized, 
+                        Vector3.Distance(currentWaypoint.transform.position, neighbour.transform.position), 
+                        LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore)
+                    )
                 {
                     availableWaypoints.Add(neighbour);
                 }
@@ -132,18 +133,18 @@ namespace AI.AI_States
 
             Vector3 forwardDir = Npc.transform.forward.normalized;
 
-            float angleMag = AIUtilities.RotateTarget(Npc.transform, forwardDir, dir, _angularSpeed); 
+            float angleMag = AIUtilities.RotateTarget(Npc.transform, forwardDir, dir, Npc.NpcDatas.AngularSpeed); 
             
-            _isMoving = angleMag < _angularThreshold;
+            _isMoving = angleMag < Npc.NpcDatas.AngularThreshold;
 
             if (_isMoving)
             {
-                AIUtilities.MoveTarget(Npc.transform, dir, _speed);
+                AIUtilities.MoveTarget(Npc.transform, dir, Npc.NpcDatas.Speed);
             }
 
             float distance = (_target.transform.position - Npc.transform.position).magnitude;
             
-            if (distance < _threshold)
+            if (distance < Npc.NpcDatas.DistanceThreshold)
             {
                 if (_target is PointOfInterest poi)
                 {

@@ -7,23 +7,15 @@ namespace AI.AI_States
 {
     public class SuspiciousState : AIState
     {
-        private float _baseSpeed = 1.5f;
-        private float _baseAngularSpeed = 2f;
-        
         private bool _verySuspicious = false;
-        private float _verySuspiciousSpeed = 2.5f;
-        private float _verySuspiciousAngularSpeed = 3.0f;
         
         private float _speed = 1.50f;
         private float _angularSpeed = 2f;
         private bool _isMoving = true;
         
-        
         private Waypoint _destinationWaypoint;
         private Vector3 _nextDestination;
-        
-        private float _threshold = 0.3f; 
-        private float _angularThreshold = 30.0f; //degrees
+
         private float _minDistance = 1.5f;        //Below this distance no intermediate points will be added
         private Vector3[] _positions;
         private int _positionIndex = 0;
@@ -76,7 +68,7 @@ namespace AI.AI_States
 
                 float angleMag = AIUtilities.RotateTarget(Npc.transform, forwardDir, dir, _angularSpeed); 
                 
-                _isMoving = angleMag < _angularThreshold;
+                _isMoving = angleMag < Npc.NpcDatas.AngularThreshold;
 
                 if (_isMoving)
                 { 
@@ -85,7 +77,7 @@ namespace AI.AI_States
 
                 float distance = (_nextDestination - Npc.transform.position).magnitude;
             
-                if (distance < _threshold)
+                if (distance < Npc.NpcDatas.DistanceThreshold)
                 {
                     _midpointReached = true;
                     _isMoving = false;
@@ -104,14 +96,14 @@ namespace AI.AI_States
         {
             if (suspicious)
             {
-                _speed = _verySuspiciousSpeed;
-                _angularSpeed = _verySuspiciousAngularSpeed;
+                _speed = Npc.NpcDatas.AlternativeSpeed;
+                _angularSpeed = Npc.NpcDatas.AlternativeAngularSpeed;
                 _verySuspicious = true;
             }
             else
             {
-                _speed = _baseSpeed;
-                _angularSpeed = _baseAngularSpeed;
+                _speed = Npc.NpcDatas.Speed + 0.5f;
+                _angularSpeed = Npc.NpcDatas.AngularSpeed + 0.5f;
                 _verySuspicious = false;
             }
         }
