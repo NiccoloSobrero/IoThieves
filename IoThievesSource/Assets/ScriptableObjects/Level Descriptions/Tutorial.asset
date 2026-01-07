@@ -19,4 +19,4 @@ MonoBehaviour:
   - bypass-auth
   - dump-credentials
   - exit-clean
-  difficulty: 3
+  difficulty: 2

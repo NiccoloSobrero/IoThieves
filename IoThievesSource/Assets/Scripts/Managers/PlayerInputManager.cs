@@ -1,6 +1,5 @@
 using DialogueSystem;
 using Events;
-using Interactables.ThrowableDistraction;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,7 +9,8 @@ public enum InputContext
     Gameplay,
     Minigame,
     Dialogue,
-    Disabled
+    Disabled,
+    LevelSelection
 }
 
 namespace Managers
@@ -22,9 +22,6 @@ namespace Managers
         private PlayerInputActions _actions;
         private InputContext _currentContext = InputContext.None;
         public InputContext CurrentContext => _currentContext;
-
-        [Header("References")]
-        [SerializeField] private PlayerThrower playerThrower;
 
         public Vector2 Move { get; private set; }
 
@@ -41,6 +38,10 @@ namespace Managers
             }
             
             _actions = new PlayerInputActions();
+        }
+
+        private void Start()
+        {
             LoadUserPreferences();
         }
 
@@ -56,6 +57,7 @@ namespace Managers
             _actions.Minigame.Enable();
             _actions.Dialogue.Enable();
             _actions.Disabled.Enable();
+            _actions.LevelSelection.Enable();
         
             // Gameplay map
             _actions.Gameplay.Move.performed += OnMove;
@@ -70,10 +72,16 @@ namespace Managers
             _actions.Gameplay.Pause.performed += PauseGame;
             
             // Minigames map
-            _actions.Minigame.Click.canceled += OnMouseRelease;
+            
             
             // Dialogue map
             _actions.Dialogue.ContinueDialogue.performed += ContinueDialogue;
+            
+            // Level selection
+            _actions.LevelSelection.Next.performed += NextLevel;
+            _actions.LevelSelection.Previous.performed += PreviousLevel;
+            _actions.LevelSelection.Play.performed += PlayLevel;
+            _actions.LevelSelection.Exit.performed += ExitLevelSelection;
             
             SetContext(InputContext.Gameplay);
             EventsManager.OnOptionsSave.AddListener(LoadUserPreferences);
@@ -103,6 +111,9 @@ namespace Managers
                 case InputContext.Dialogue:
                     _actions.Dialogue.Enable();
                     break;
+                case InputContext.LevelSelection:
+                    _actions.LevelSelection.Enable();
+                    break;
                 case InputContext.Disabled:
                     _actions.Disabled.Enable();
                     break;
@@ -118,6 +129,7 @@ namespace Managers
             _actions.Minigame.Disable();
             _actions.Dialogue.Disable();
             _actions.Disabled.Disable();
+            _actions.LevelSelection.Disable();
         }
 
         private void OnMove(InputAction.CallbackContext context)
@@ -134,25 +146,20 @@ namespace Managers
         {
             EventsManager.OnPointerClickInWorld?.Invoke(Input.mousePosition);
         }
-
-        private void OnMouseRelease(InputAction.CallbackContext context)
-        {
-            // MinigamesManager.Instance.CheckCompletion();
-        }
-
+        
         private void ThrowDistraction(InputAction.CallbackContext context)
         {
-            playerThrower.Throw();
+            EventsManager.OnThrow.Invoke();
         }
 
         private void IncreaseThrowDistance(InputAction.CallbackContext context)
         {
-            playerThrower.IncreaseThrowDistance();
+            EventsManager.OnIncreaseThrowDistance.Invoke();
         }
         
         private void DecreaseThrowDistance(InputAction.CallbackContext context)
         {
-            playerThrower.DecreaseThrowDistance();
+            EventsManager.OnDecreaseThrowDistance.Invoke();
         }
         
         private void ContinueDialogue(InputAction.CallbackContext context)
@@ -163,6 +170,26 @@ namespace Managers
         private void PauseGame(InputAction.CallbackContext context)
         {
             EventsManager.OnPauseGame?.Invoke();
+        }
+
+        private void PreviousLevel(InputAction.CallbackContext context)
+        {
+            LevelSelectorManager.Instance.PreviousLevel();
+        }
+        
+        private void NextLevel(InputAction.CallbackContext context)
+        {
+            LevelSelectorManager.Instance.NextLevel();
+        }
+
+        private void PlayLevel(InputAction.CallbackContext context)
+        {
+            EventsManager.OnPlayLevel.Invoke(LevelSelectorManager.Instance.CurrentSelectedLevel);
+        }
+
+        private void ExitLevelSelection(InputAction.CallbackContext context)
+        {
+            LevelSelectorManager.Instance.BackToMainMenu();
         }
     }
 }

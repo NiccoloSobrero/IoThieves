@@ -6,7 +6,7 @@ namespace Managers
     [CreateAssetMenu(fileName = "Level Description", menuName = "LevelDescription")]
     public class LevelDescriptionScrObj : ScriptableObject
     {
-        public int levelNumber;
+        public Level levelNumber;
         public string levelName;
         public string levelDescription;
         public List<string> levelObjectives;

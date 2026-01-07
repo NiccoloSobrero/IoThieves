@@ -7363,7 +7363,7 @@ RectTransform:
   m_Father: {fileID: 1537859177}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -8283,7 +8283,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 600}
+  m_SizeDelta: {x: 0, y: 900}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1001 &519747510
 PrefabInstance:
@@ -11220,12 +11220,12 @@ GameObject:
   - component: {fileID: 653963637}
   - component: {fileID: 653963636}
   m_Layer: 5
-  m_Name: LevelDescription
+  m_Name: LevelDetails
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &653963635
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11247,7 +11247,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
   m_AnchoredPosition: {x: -50, y: 0}
-  m_SizeDelta: {x: 1000, y: 600}
+  m_SizeDelta: {x: 1000, y: 900}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &653963636
 MonoBehaviour:
@@ -11262,13 +11262,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Content: {fileID: 516021953}
-  m_Horizontal: 1
+  m_Horizontal: 0
   m_Vertical: 1
   m_MovementType: 1
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 4
   m_Viewport: {fileID: 653963635}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1627756960}
@@ -23405,6 +23405,50 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f12876fdabb2e74cae0a8705414b444, type: 3}
+--- !u!1 &1356738318
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1356738320}
+  - component: {fileID: 1356738319}
+  m_Layer: 0
+  m_Name: PlayerInputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1356738319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356738318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46ad5e1d4af29e44aacd2d6f7053b210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1356738320
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356738318}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1360265232
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31291,9 +31335,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 224478dee3a95f94b8e0492b4f91c3e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelDescription: {fileID: 833191766}
+  defaultCameraTransform: {fileID: 2101090029}
+  cameraTransforms:
+  - {fileID: 244461936}
+  - {fileID: 3252810065219015815}
+  - {fileID: 4671559961636009994}
+  levelDetailsObj: {fileID: 653963634}
+  descriptionText: {fileID: 833191766}
   contentRect: {fileID: 516021953}
-  levelScr: {fileID: 11400000, guid: 2ae38d49d3a8c0144ad25dcda65f34e8, type: 2}
+  levelsScriptableObjects:
+  - {fileID: 11400000, guid: 2ae38d49d3a8c0144ad25dcda65f34e8, type: 2}
+  - {fileID: 11400000, guid: 8334f50ecc935f94aba7eeb22306433c, type: 2}
+  - {fileID: 11400000, guid: 974aff0c0dbc99a4e82fcf0e4fb7fad3, type: 2}
 --- !u!4 &1853857422
 Transform:
   m_ObjectHideFlags: 0
@@ -36028,23 +36081,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.00000023841858, y: -0.013851911, z: 1.4690866}
     m_Extent: {x: 0.2863958, y: 0.21308643, z: 0.20473814}
   m_DirtyAABB: 0
---- !u!114 &391086363628015436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2298136752845405626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84d4b57f8be24764f90f55284e8daf13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultCameraTransform: {fileID: 2101090029}
-  cameraTransforms:
-  - {fileID: 244461936}
-  - {fileID: 3252810065219015815}
-  - {fileID: 4671559961636009994}
 --- !u!1 &401649500922273843
 GameObject:
   m_ObjectHideFlags: 0
@@ -36446,23 +36482,6 @@ GameObject:
   - component: {fileID: 8209290538011068390}
   m_Layer: 3
   m_Name: DEF_Arm2.L
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &2298136752845405626
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4116174383310069057}
-  - component: {fileID: 391086363628015436}
-  m_Layer: 0
-  m_Name: MoveCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37064,21 +37083,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4116174383310069057
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2298136752845405626}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4217215383103553949
 GameObject:
   m_ObjectHideFlags: 0
@@ -38503,7 +38507,7 @@ SceneRoots:
   - {fileID: 1702434628}
   - {fileID: 7080877285815020318}
   - {fileID: 4948643906547279239}
-  - {fileID: 4116174383310069057}
   - {fileID: 37597826}
   - {fileID: 1638945795}
   - {fileID: 1853857422}
+  - {fileID: 1356738320}

@@ -948,6 +948,116 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ""id"": ""7024a3bc-7dcc-4360-b59d-0bfaa35c01e6"",
             ""actions"": [],
             ""bindings"": []
+        },
+        {
+            ""name"": ""LevelSelection"",
+            ""id"": ""774e35a2-8bf3-45a1-a1a9-1a27517d4d5c"",
+            ""actions"": [
+                {
+                    ""name"": ""Previous"",
+                    ""type"": ""Button"",
+                    ""id"": ""6fe5bfa9-055f-415c-ad8c-83d68a29f9ec"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Next"",
+                    ""type"": ""Button"",
+                    ""id"": ""5d43beb3-6a22-4f4f-9ade-1cb0f7ea1fac"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Play"",
+                    ""type"": ""Button"",
+                    ""id"": ""f43a363d-dff5-4e89-82ee-bef3c2c5d10c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""59597a61-9695-404c-a821-43975c47f241"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""51b567f2-c254-41b4-b1b7-94c3a4c71b4d"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Previous"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67d117bd-2003-4213-a456-33419fb64630"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Previous"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ccda1efe-7e25-4d5b-a9d4-aa441bc57520"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""caefcb17-5bba-4090-99d5-297e1c0fde73"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Next"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7b72b74-a219-448c-abcb-350b6ae99816"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Play"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""199570be-c497-4407-8a13-0c20fea544b0"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -1040,6 +1150,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Dialogue_ContinueDialogue = m_Dialogue.FindAction("ContinueDialogue", throwIfNotFound: true);
         // Disabled
         m_Disabled = asset.FindActionMap("Disabled", throwIfNotFound: true);
+        // LevelSelection
+        m_LevelSelection = asset.FindActionMap("LevelSelection", throwIfNotFound: true);
+        m_LevelSelection_Previous = m_LevelSelection.FindAction("Previous", throwIfNotFound: true);
+        m_LevelSelection_Next = m_LevelSelection.FindAction("Next", throwIfNotFound: true);
+        m_LevelSelection_Play = m_LevelSelection.FindAction("Play", throwIfNotFound: true);
+        m_LevelSelection_Exit = m_LevelSelection.FindAction("Exit", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -1048,6 +1164,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Minigame.enabled, "This will cause a leak and performance issues, PlayerInputActions.Minigame.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Dialogue.enabled, "This will cause a leak and performance issues, PlayerInputActions.Dialogue.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Disabled.enabled, "This will cause a leak and performance issues, PlayerInputActions.Disabled.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_LevelSelection.enabled, "This will cause a leak and performance issues, PlayerInputActions.LevelSelection.Disable() has not been called.");
     }
 
     /// <summary>
@@ -1668,6 +1785,135 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     /// Provides a new <see cref="DisabledActions" /> instance referencing this action map.
     /// </summary>
     public DisabledActions @Disabled => new DisabledActions(this);
+
+    // LevelSelection
+    private readonly InputActionMap m_LevelSelection;
+    private List<ILevelSelectionActions> m_LevelSelectionActionsCallbackInterfaces = new List<ILevelSelectionActions>();
+    private readonly InputAction m_LevelSelection_Previous;
+    private readonly InputAction m_LevelSelection_Next;
+    private readonly InputAction m_LevelSelection_Play;
+    private readonly InputAction m_LevelSelection_Exit;
+    /// <summary>
+    /// Provides access to input actions defined in input action map "LevelSelection".
+    /// </summary>
+    public struct LevelSelectionActions
+    {
+        private @PlayerInputActions m_Wrapper;
+
+        /// <summary>
+        /// Construct a new instance of the input action map wrapper class.
+        /// </summary>
+        public LevelSelectionActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "LevelSelection/Previous".
+        /// </summary>
+        public InputAction @Previous => m_Wrapper.m_LevelSelection_Previous;
+        /// <summary>
+        /// Provides access to the underlying input action "LevelSelection/Next".
+        /// </summary>
+        public InputAction @Next => m_Wrapper.m_LevelSelection_Next;
+        /// <summary>
+        /// Provides access to the underlying input action "LevelSelection/Play".
+        /// </summary>
+        public InputAction @Play => m_Wrapper.m_LevelSelection_Play;
+        /// <summary>
+        /// Provides access to the underlying input action "LevelSelection/Exit".
+        /// </summary>
+        public InputAction @Exit => m_Wrapper.m_LevelSelection_Exit;
+        /// <summary>
+        /// Provides access to the underlying input action map instance.
+        /// </summary>
+        public InputActionMap Get() { return m_Wrapper.m_LevelSelection; }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
+        public void Enable() { Get().Enable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
+        public void Disable() { Get().Disable(); }
+        /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
+        public bool enabled => Get().enabled;
+        /// <summary>
+        /// Implicitly converts an <see ref="LevelSelectionActions" /> to an <see ref="InputActionMap" /> instance.
+        /// </summary>
+        public static implicit operator InputActionMap(LevelSelectionActions set) { return set.Get(); }
+        /// <summary>
+        /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <param name="instance">Callback instance.</param>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
+        /// </remarks>
+        /// <seealso cref="LevelSelectionActions" />
+        public void AddCallbacks(ILevelSelectionActions instance)
+        {
+            if (instance == null || m_Wrapper.m_LevelSelectionActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_LevelSelectionActionsCallbackInterfaces.Add(instance);
+            @Previous.started += instance.OnPrevious;
+            @Previous.performed += instance.OnPrevious;
+            @Previous.canceled += instance.OnPrevious;
+            @Next.started += instance.OnNext;
+            @Next.performed += instance.OnNext;
+            @Next.canceled += instance.OnNext;
+            @Play.started += instance.OnPlay;
+            @Play.performed += instance.OnPlay;
+            @Play.canceled += instance.OnPlay;
+            @Exit.started += instance.OnExit;
+            @Exit.performed += instance.OnExit;
+            @Exit.canceled += instance.OnExit;
+        }
+
+        /// <summary>
+        /// Removes <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
+        /// </summary>
+        /// <remarks>
+        /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
+        /// </remarks>
+        /// <seealso cref="LevelSelectionActions" />
+        private void UnregisterCallbacks(ILevelSelectionActions instance)
+        {
+            @Previous.started -= instance.OnPrevious;
+            @Previous.performed -= instance.OnPrevious;
+            @Previous.canceled -= instance.OnPrevious;
+            @Next.started -= instance.OnNext;
+            @Next.performed -= instance.OnNext;
+            @Next.canceled -= instance.OnNext;
+            @Play.started -= instance.OnPlay;
+            @Play.performed -= instance.OnPlay;
+            @Play.canceled -= instance.OnPlay;
+            @Exit.started -= instance.OnExit;
+            @Exit.performed -= instance.OnExit;
+            @Exit.canceled -= instance.OnExit;
+        }
+
+        /// <summary>
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="LevelSelectionActions.UnregisterCallbacks(ILevelSelectionActions)" />.
+        /// </summary>
+        /// <seealso cref="LevelSelectionActions.UnregisterCallbacks(ILevelSelectionActions)" />
+        public void RemoveCallbacks(ILevelSelectionActions instance)
+        {
+            if (m_Wrapper.m_LevelSelectionActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        /// <summary>
+        /// Replaces all existing callback instances and previously registered input action callbacks associated with them with callbacks provided via <param cref="instance" />.
+        /// </summary>
+        /// <remarks>
+        /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
+        /// </remarks>
+        /// <seealso cref="LevelSelectionActions.AddCallbacks(ILevelSelectionActions)" />
+        /// <seealso cref="LevelSelectionActions.RemoveCallbacks(ILevelSelectionActions)" />
+        /// <seealso cref="LevelSelectionActions.UnregisterCallbacks(ILevelSelectionActions)" />
+        public void SetCallbacks(ILevelSelectionActions instance)
+        {
+            foreach (var item in m_Wrapper.m_LevelSelectionActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_LevelSelectionActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    /// <summary>
+    /// Provides a new <see cref="LevelSelectionActions" /> instance referencing this action map.
+    /// </summary>
+    public LevelSelectionActions @LevelSelection => new LevelSelectionActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     /// <summary>
     /// Provides access to the input control scheme.
@@ -1897,5 +2143,41 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     /// <seealso cref="DisabledActions.RemoveCallbacks(IDisabledActions)" />
     public interface IDisabledActions
     {
+    }
+    /// <summary>
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "LevelSelection" which allows adding and removing callbacks.
+    /// </summary>
+    /// <seealso cref="LevelSelectionActions.AddCallbacks(ILevelSelectionActions)" />
+    /// <seealso cref="LevelSelectionActions.RemoveCallbacks(ILevelSelectionActions)" />
+    public interface ILevelSelectionActions
+    {
+        /// <summary>
+        /// Method invoked when associated input action "Previous" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPrevious(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Next" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnNext(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Play" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnPlay(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Exit" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnExit(InputAction.CallbackContext context);
     }
 }

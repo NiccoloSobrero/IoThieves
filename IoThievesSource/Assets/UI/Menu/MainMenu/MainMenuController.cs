@@ -1,5 +1,5 @@
+using System;
 using Events;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 public class MainMenuController : MenuController
@@ -11,12 +11,26 @@ public class MainMenuController : MenuController
         var root = menuDocument.rootVisualElement;
         var playButton = root.Q<Button>("playButton");
         playButton.clicked += PlayGame;
+        
+        EventsManager.OnBackToMainMenu.AddListener(EnableObject);
+    }
+
+    private void OnDisable()
+    {
+        EventsManager.OnBackToMainMenu.RemoveListener(EnableObject);
     }
 
     private void PlayGame()
     {
         // Go to next scene (Level 1)
-        EventsManager.OnStartGame?.Invoke();
+        EventsManager.OnEnterLevelSelection?.Invoke();
+        
+        gameObject.SetActive(false);
+    }
+    
+    private void EnableObject()
+    {
+        gameObject.SetActive(true);
     }
     
 }

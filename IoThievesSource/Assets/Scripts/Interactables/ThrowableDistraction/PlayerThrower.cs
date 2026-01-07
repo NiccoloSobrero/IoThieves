@@ -1,9 +1,12 @@
-﻿using UnityEngine;
+﻿using Events;
+using UnityEngine;
 
 namespace Interactables.ThrowableDistraction
 {
     public class PlayerThrower : MonoBehaviour
     {
+        private static readonly int IsThrowing = Animator.StringToHash("IsThrowing");
+
         [Header("References")] 
         [SerializeField] private Camera cam;
         [SerializeField] private Transform holdPoint;
@@ -42,6 +45,20 @@ namespace Interactables.ThrowableDistraction
             lineRenderer.positionCount = 0;
         }
 
+        private void OnEnable()
+        {
+            EventsManager.OnThrow.AddListener(Throw);
+            EventsManager.OnIncreaseThrowDistance.AddListener(IncreaseThrowDistance);
+            EventsManager.OnDecreaseThrowDistance.AddListener(DecreaseThrowDistance);
+        }
+
+        private void OnDisable()
+        {
+            EventsManager.OnThrow.RemoveListener(Throw);
+            EventsManager.OnIncreaseThrowDistance.RemoveListener(IncreaseThrowDistance);
+            EventsManager.OnDecreaseThrowDistance.RemoveListener(DecreaseThrowDistance);
+        }
+
         private void Update()
         {
             if (!IsHolding)
@@ -77,7 +94,7 @@ namespace Interactables.ThrowableDistraction
             _heldThrowable.OnThrown();
             _heldThrowable.Rb.linearVelocity = initialVelocity;
             
-            characterAnimator.SetTrigger("IsThrowing");
+            characterAnimator.SetTrigger(IsThrowing);
 
             _heldThrowable = null;
             HideTrajectory();

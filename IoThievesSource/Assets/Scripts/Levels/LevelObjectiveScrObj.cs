@@ -7,9 +7,6 @@ namespace Levels
     public class LevelObjectiveScrObj : ScriptableObject
     {
         [TextArea(3, 5)]
-        public string objectiveMainDescription;
-        
-        [TextArea(3, 5)]
         public List<string> objectiveSteps = new();
 
         private int _currentStep;

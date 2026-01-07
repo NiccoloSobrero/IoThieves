@@ -1,3 +1,4 @@
+using Managers;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -31,7 +32,9 @@ namespace Events
         
         
         # region UI Events
-        public static readonly UnityEvent OnStartGame = new();
+        public static readonly UnityEvent<Level> OnPlayLevel = new();
+        public static readonly UnityEvent OnBackToMainMenu = new();
+        public static readonly UnityEvent OnEnterLevelSelection = new();
         public static readonly UnityEvent OnSaveGame = new();
         public static readonly UnityEvent OnPauseGame = new();
         public static readonly UnityEvent OnResumeGame = new();
@@ -54,6 +57,14 @@ namespace Events
         public static readonly UnityEvent OnTriggerOnLineStart = new();
         public static readonly UnityEvent OnTriggerOnLineEnd = new();
         public static readonly UnityEvent OnTriggerOnContinueDialogue = new();
+
+        #endregion
+
+        #region Player Thrower Events
+
+        public static readonly UnityEvent OnThrow = new();
+        public static readonly UnityEvent OnIncreaseThrowDistance = new();
+        public static readonly UnityEvent OnDecreaseThrowDistance = new();
 
         #endregion
     }

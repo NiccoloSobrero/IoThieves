@@ -2,111 +2,137 @@ using Events;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum Level
+namespace Managers
 {
-    None,
-    Tutorial,
-    Level1,
-    Level2,
-    Level3
-}
-
-public class GameManager : MonoBehaviour
-{
-    public static GameManager Instance;
-    
-    public Level currentLevel;
-    
-    private void Awake()
+    public enum Level
     {
-        if (Instance == null)
+        None = -1,
+        Tutorial = 0,
+        Level1 = 1,
+        Level2 = 2,
+        Level3 = 3
+    }
+
+    public class GameManager : MonoBehaviour
+    {
+        public static GameManager Instance;
+    
+        public Level currentLevel;
+    
+        private void Awake()
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            if (Instance == null)
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
-        else
+
+        private void OnEnable()
         {
-            Destroy(gameObject);
+            EventsManager.OnPlayLevel.AddListener(PlayLevel);
+            EventsManager.OnEnterLevelSelection.AddListener(EnterLevelSelection);
+            EventsManager.OnSaveGame.AddListener(SaveGame);
+            EventsManager.OnPauseGame.AddListener(PauseGame);
+            EventsManager.OnResumeGame.AddListener(ResumeGame);
+            EventsManager.OnQuitGame.AddListener(QuitGame);
+            EventsManager.OnOptionsClicked.AddListener(OpenOptions);
+            EventsManager.OnRestartGame.AddListener(RestartGame);
         }
-    }
 
-    private void OnEnable()
-    {
-        EventsManager.OnStartGame.AddListener(StartGame);
-        EventsManager.OnSaveGame.AddListener(SaveGame);
-        EventsManager.OnPauseGame.AddListener(PauseGame);
-        EventsManager.OnResumeGame.AddListener(ResumeGame);
-        EventsManager.OnQuitGame.AddListener(QuitGame);
-        EventsManager.OnOptionsClicked.AddListener(OpenOptions);
-        EventsManager.OnRestartGame.AddListener(RestartGame);
-    }
+        private void OnDisable()
+        {
+            EventsManager.OnPlayLevel.RemoveListener(PlayLevel);
+            EventsManager.OnEnterLevelSelection.RemoveListener(EnterLevelSelection);
+            EventsManager.OnSaveGame.RemoveListener(SaveGame);
+            EventsManager.OnPauseGame.RemoveListener(PauseGame);
+            EventsManager.OnResumeGame.RemoveListener(ResumeGame);
+            EventsManager.OnQuitGame.RemoveListener(QuitGame);
+            EventsManager.OnOptionsClicked.RemoveListener(OpenOptions);
+            EventsManager.OnRestartGame.RemoveListener(RestartGame);
+        }
 
-    private void OnDisable()
-    {
-        EventsManager.OnStartGame.RemoveListener(StartGame);
-        EventsManager.OnSaveGame.RemoveListener(SaveGame);
-        EventsManager.OnPauseGame.RemoveListener(PauseGame);
-        EventsManager.OnResumeGame.RemoveListener(ResumeGame);
-        EventsManager.OnQuitGame.RemoveListener(QuitGame);
-        EventsManager.OnOptionsClicked.RemoveListener(OpenOptions);
-        EventsManager.OnRestartGame.RemoveListener(RestartGame);
-    }
+        private void PlayLevel(Level level)
+        {
+            currentLevel = level;
+            
+            switch (level)
+            {
+                case Level.Tutorial:
+                    SceneManager.LoadScene("TutorialLevel");
+                    break;
+                case Level.Level1:
+                    SceneManager.LoadScene("HR_Level1");
+                    break;
+                case Level.Level2:
+                    SceneManager.LoadScene("Boss_House_Level2");
+                    break;
+                case Level.Level3:
+                    SceneManager.LoadScene("TutorialLevel");
+                    break;
+                case Level.None:
+                default:
+                    Debug.LogWarning($"Unknown Level {level}");
+                    break;
+            }
+        }
+        
+        private void EnterLevelSelection()
+        {
+            LevelSelectorManager.Instance.EnterLevelSelection();
+        }
 
-    private void StartGame()
-    {
-        // load correct level
-        print("Starting Game");
-
-        SceneManager.LoadScene("TutorialLevel");
-        currentLevel = Level.Tutorial;
-    }
-
-    private void SaveGame()
-    {
-        // useful if we want to show some loading screen or some feedback to the player
-        print("Saving Game");
-    }
+        private void SaveGame()
+        {
+            // useful if we want to show some loading screen or some feedback to the player
+            print("Saving Game");
+        }
     
-    private void PauseGame()
-    {
-        print("Pausing Game in GameManager");
-        Time.timeScale = 0f;
-    }
+        private void PauseGame()
+        {
+            print("Pausing Game in GameManager");
+            Time.timeScale = 0f;
+        }
 
-    private void ResumeGame()
-    {
-        print("Resuming Game in GameManager");
-        Time.timeScale = 1f;
-    }
+        private void ResumeGame()
+        {
+            print("Resuming Game in GameManager");
+            Time.timeScale = 1f;
+        }
 
-    private void RestartGame()
-    {
-        print("Restarting Game");
-    }
+        private void RestartGame()
+        {
+            print("Restarting Game");
+        }
 
-    private void OpenOptions()
-    {
-        print("Opening Options");
-    }
+        private void OpenOptions()
+        {
+            print("Opening Options");
+        }
     
-    private void QuitGame()
-    {
-        print("Quitting Game");
+        private void QuitGame()
+        {
+            print("Quitting Game");
 # if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+            UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
 #endif
-    }
-    
-    public string LoadUserInputPreferences()
-    {
-        string userInputPreferences = "";
-        if (PlayerPrefs.HasKey("ActionsControl"))
-        {
-            userInputPreferences = PlayerPrefs.GetString("ActionsControl");
         }
+    
+        public string LoadUserInputPreferences()
+        {
+            string userInputPreferences = "";
+            if (PlayerPrefs.HasKey("ActionsControl"))
+            {
+                userInputPreferences = PlayerPrefs.GetString("ActionsControl");
+            }
 
-        return userInputPreferences;
+            return userInputPreferences;
+        }
     }
 }
