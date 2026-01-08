@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d348bece777ee44ba7cd2abad7807a, type: 3}
+  m_Name: My stuff
+  m_EditorClassIdentifier: 
+  folderItems:
+  - itemName: do NOT delete
+    itemType: 2
+    icon: {fileID: 21300000, guid: 9a2bba3510d96ca47ad45ba79e13d177, type: 3}
+    value: 0
+    documentSprite: {fileID: 21300000, guid: d99bcfae89eaf1d439fbb82cf3cc601f, type: 3}
+    folderContent: {fileID: 0}
+  - itemName: Do not open
+    itemType: 0
+    icon: {fileID: 21300000, guid: 1639ba3893f587d40a83d8c5c225ba32, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 11400000, guid: dcb14bf989e6ec34ebf261cd09919ec5, type: 2}

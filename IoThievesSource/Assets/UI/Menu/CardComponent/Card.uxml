@@ -6,7 +6,9 @@
                 <ui:Label name="cardTitle" text="Document" class="card-title" />
             </ui:VisualElement>
             <ui:VisualElement name="cardDescriptionContainer" class="card-description-container">
-                <ui:Label name="cardDescription" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." class="card-description" />
+                <!-- <ui:Label name="cardDescription" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." class="card-description" /> -->
+                <ui:VisualElement name="cardDescription" class="card-description" />
+                <ui:Image name="cardImage" class="card-description" />
             </ui:VisualElement>
         </ui:Button>
     </ui:VisualElement>

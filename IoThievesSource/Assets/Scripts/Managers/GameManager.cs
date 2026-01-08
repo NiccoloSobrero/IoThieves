@@ -18,6 +18,20 @@ namespace Managers
         public static GameManager Instance;
     
         public Level currentLevel;
+
+        private LevelSelectorManager _levelSelectorManager;
+        public LevelSelectorManager LevelSelectorManager
+        {
+            get
+            {
+                if (_levelSelectorManager == null)
+                {
+                    _levelSelectorManager = FindFirstObjectByType<LevelSelectorManager>();
+                }
+                
+                return _levelSelectorManager;
+            }
+        }
     
         private void Awake()
         {
@@ -43,6 +57,8 @@ namespace Managers
             EventsManager.OnOptionsClicked.AddListener(OpenOptions);
             EventsManager.OnRestartGame.AddListener(RestartGame);
             EventsManager.OnGameOverTriggered.AddListener(GameOver);
+            EventsManager.OnNextLevel.AddListener(GoToNextLevel);
+            EventsManager.OnBackToMainMenu.AddListener(GoToMainMenu);
         }
 
         private void OnDisable()
@@ -56,6 +72,8 @@ namespace Managers
             EventsManager.OnOptionsClicked.RemoveListener(OpenOptions);
             EventsManager.OnRestartGame.RemoveListener(RestartGame);
             EventsManager.OnGameOverTriggered.RemoveListener(GameOver);
+            EventsManager.OnNextLevel.RemoveListener(GoToNextLevel);
+            EventsManager.OnBackToMainMenu.RemoveListener(GoToMainMenu);
         }
 
         private void PlayLevel(Level level)
@@ -85,7 +103,7 @@ namespace Managers
         
         private void EnterLevelSelection()
         {
-            LevelSelectorManager.Instance.EnterLevelSelection();
+            LevelSelectorManager.EnterLevelSelection();
         }
 
         private void SaveGame()
@@ -129,6 +147,18 @@ namespace Managers
 #else
         Application.Quit();
 #endif
+        }
+
+        private void GoToMainMenu()
+        {
+            SceneManager.LoadScene("MainMenu");
+            // EnterLevelSelection();
+        }
+
+        private void GoToNextLevel()
+        {
+            currentLevel++;
+            PlayLevel(currentLevel);
         }
     
         public string LoadUserInputPreferences()

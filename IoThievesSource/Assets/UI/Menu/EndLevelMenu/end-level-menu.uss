@@ -5,13 +5,19 @@
 }
 
 .end-level-menu-cards-container {
-    /*border-color: black;*/
-    /*border-width: 2px;*/
     flex-direction: row;
+    flex-wrap: wrap;
+
     width: 100%;
     height: 75%;
+
+    justify-content: space-evenly;
+    padding: 20px;
+}
+
+.buttons-container {
+    flex-direction: row;
     justify-content: space-around;
-    align-items: stretch;
 }
 
 .quit-button {
