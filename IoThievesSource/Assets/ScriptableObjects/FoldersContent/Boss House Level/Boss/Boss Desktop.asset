@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8d348bece777ee44ba7cd2abad7807a, type: 3}
+  m_Name: Boss Desktop
+  m_EditorClassIdentifier: 
+  folderItems:
+  - itemName: Bin
+    itemType: 1
+    icon: {fileID: 21300000, guid: 38d0598254188db40aa537105f06b634, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 0}
+  - itemName: Chrome
+    itemType: 4
+    icon: {fileID: 21300000, guid: ffbe914fb5bc34a4b84ff47eb0e53355, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 0}
+  - itemName: Microsoft Edge
+    itemType: 4
+    icon: {fileID: 21300000, guid: 127b1b62cff1bd645bf4b855ab6d1077, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 0}
+  - itemName: Beta Tester
+    itemType: 4
+    icon: {fileID: 21300000, guid: 0b10e14fc4142404398f5f0eff1498e2, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 0}
+  - itemName: Minecraft
+    itemType: 4
+    icon: {fileID: 21300000, guid: 181dc49b338e8104796c740c960c6c60, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 0}
+  - itemName: My stuff
+    itemType: 1
+    icon: {fileID: 21300000, guid: 1639ba3893f587d40a83d8c5c225ba32, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 11400000, guid: 31b814b107e88c44e9149808733bf7b5, type: 2}
