@@ -8,7 +8,6 @@ public class TerminalMainMenu : MonoBehaviour
     private UIDocument uiDocument;
 
     private ScrollView _output;
-    private VisualElement _inputLine;
     private VisualElement _caret;
     private VisualElement _inputContainer;
     private Label _inputLabel;
@@ -18,15 +17,22 @@ public class TerminalMainMenu : MonoBehaviour
 
     private bool _caretVisible = true;
     private float _blinkTimer = 0f;
+    
+    private bool _hasStartedScanning = false;
+    private float _scannerTimer = 0f;
+    private float _scanCharTypingDelay = 0.1f;
+    private int _scanIndex = 0;
+    private string _scannerInput = null;
+    
+    private const string iothievesScan = "iothieves --scan";
 
     void OnEnable()
     {
         var root = uiDocument.rootVisualElement;
 
         _output = root.Q<ScrollView>("terminalOutput");
-        _inputLine = root.Q<VisualElement>("inputLine");
         
-        _inputContainer = _inputLine.Q<VisualElement>("inputContainer");
+        _inputContainer = root.Q<VisualElement>("inputContainer");
         _inputLabel = _inputContainer.Q<Label>("inputText");
 
         _caret = new VisualElement();
@@ -47,23 +53,85 @@ public class TerminalMainMenu : MonoBehaviour
 
         UpdateCaretPosition();
 
-        PrintLine("IoThieves OS v0.9");
-        PrintLine("Type 'help' to list commands");
+        // PrintLine("IoThieves v0.1.2");
+        // PrintLine("Copyright (c) 2025 by IoTeam");
+        // PrintLine("Polimi Game Collective");
+        //
+        // PrintLine("Type 'help' to list commands");
+        StartScanning(iothievesScan);
     }
 
     void Update()
     {
         _blinkTimer += Time.unscaledDeltaTime;
+        _scannerTimer += Time.unscaledDeltaTime;
         if (_blinkTimer >= 0.5f)
         {
             _blinkTimer = 0f;
             _caretVisible = !_caretVisible;
             _caret.style.opacity = _caretVisible ? 1f : 0f;
         }
+
+        if (!_hasStartedScanning) return;
+        if (_scannerTimer >= _scanCharTypingDelay)
+        {
+            _scannerTimer = 0f;
+
+            if (_scanIndex < _scannerInput.Length)
+            {
+                InsertCharacter(_scannerInput[_scanIndex]);
+                _scanIndex++;
+            }
+            else
+            {
+                _hasStartedScanning = false;
+                PrintLine($"iothieves@kali:~$ {iothievesScan}");
+                
+                _scannerInput = string.Empty;
+                
+                _currentInput = string.Empty;
+                _caretIndex = 0;
+                _inputLabel.text = string.Empty;
+                UpdateCaretPosition();
+                
+                PrintLine("IoThieves v0.1.2");
+                PrintLine("Copyright (c) 2025 by IoTeam");
+                PrintLine("Polimi Game Collective");
+                
+                PrintLine("Type 'help' to list commands");
+            }
+        }
+    }
+
+    private void StartScanning(string text)
+    {
+        _scannerInput = text;
+        _scanIndex = 0;
+        _scannerTimer = 0f;
+        _hasStartedScanning = true;
+        
+        _currentInput = string.Empty;
+        _caretIndex = 0;
+        _inputLabel.text = string.Empty;
+        UpdateCaretPosition();
+    }
+
+    private void InsertCharacter(char character)
+    {
+        _currentInput = _currentInput.Insert(_caretIndex, character.ToString());
+        _caretIndex++;
+        
+        _inputLabel.text = _currentInput;
+        UpdateCaretPosition();
     }
 
     private void OnKeyDown(KeyDownEvent evt)
     {
+        if (_hasStartedScanning)
+        {
+            evt.StopPropagation();
+            return;
+        }
         bool textChanged = false;
 
         if (evt.keyCode == KeyCode.Backspace)
