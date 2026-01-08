@@ -178,22 +178,22 @@ namespace Managers
 
         private void PreviousLevel(InputAction.CallbackContext context)
         {
-            LevelSelectorManager.Instance.PreviousLevel();
+            GameManager.Instance.LevelSelectorManager.PreviousLevel();
         }
         
         private void NextLevel(InputAction.CallbackContext context)
         {
-            LevelSelectorManager.Instance.NextLevel();
+            GameManager.Instance.LevelSelectorManager.NextLevel();
         }
 
         private void PlayLevel(InputAction.CallbackContext context)
         {
-            EventsManager.OnPlayLevel.Invoke(LevelSelectorManager.Instance.CurrentSelectedLevel);
+            EventsManager.OnPlayLevel.Invoke(GameManager.Instance.LevelSelectorManager.CurrentSelectedLevel);
         }
 
         private void ExitLevelSelection(InputAction.CallbackContext context)
         {
-            LevelSelectorManager.Instance.BackToMainMenu();
+            GameManager.Instance.LevelSelectorManager.BackToMainMenu();
         }
     }
 }

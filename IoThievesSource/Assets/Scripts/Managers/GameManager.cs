@@ -18,6 +18,20 @@ namespace Managers
         public static GameManager Instance;
     
         public Level currentLevel;
+
+        private LevelSelectorManager _levelSelectorManager;
+        public LevelSelectorManager LevelSelectorManager
+        {
+            get
+            {
+                if (_levelSelectorManager == null)
+                {
+                    _levelSelectorManager = FindFirstObjectByType<LevelSelectorManager>();
+                }
+                
+                return _levelSelectorManager;
+            }
+        }
     
         private void Awake()
         {
@@ -87,7 +101,7 @@ namespace Managers
         
         private void EnterLevelSelection()
         {
-            LevelSelectorManager.Instance.EnterLevelSelection();
+            LevelSelectorManager.EnterLevelSelection();
         }
 
         private void SaveGame()

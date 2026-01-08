@@ -8,8 +8,6 @@ namespace Managers
 {
     public class LevelSelectorManager : MonoBehaviour
     {
-        public static LevelSelectorManager Instance;
-        
         [Header("Camera movement")]
         [SerializeField] private Transform defaultCameraTransform;
     
@@ -38,16 +36,6 @@ namespace Managers
 
         private void Awake()
         {
-            if (Instance == null)
-            {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-            
             _mainCamera = Camera.main;
             _currentLevelIndex = 0;
             _inOrthographicView = true;
