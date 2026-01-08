@@ -36,7 +36,11 @@ namespace Enemy
         
         [Header("Shape")]
         [SerializeField][Range(1f, 360f)] private float angle = 90f;
+        public float Angle => angle;
+        
         [SerializeField] private float radius = 8f;
+        public float Radius => radius;
+        
         [SerializeField][Range(3, 256)] private int segments = 20;
         [SerializeField] private Material fovMaterial;
 

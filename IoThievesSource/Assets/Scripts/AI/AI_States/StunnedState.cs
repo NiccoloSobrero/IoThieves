@@ -40,7 +40,7 @@ namespace AI.AI_States
             
             //Npc.enemyAdapter.NpcTriggerConeOfDeath.gameObject.SetActive(active);
             Npc.enemyAdapter.NpcTrigger.StartCoroutine(coroutineName);
-            Npc.enemyAdapter.NpcTriggerConeOfDeath.StartCoroutine(coroutineName);
+            // Npc.enemyAdapter.NpcTriggerConeOfDeath.StartCoroutine(coroutineName);
             //Npc.enemyAdapter.NpcTrigger.gameObject.SetActive(active);
         }
 

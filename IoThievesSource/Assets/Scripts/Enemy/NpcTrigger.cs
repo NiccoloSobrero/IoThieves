@@ -8,12 +8,36 @@ namespace Enemy
     {
         [Header("References")] [SerializeField]
         private AlertManager alertManager;
+        [SerializeField] private EnemyFOVMesh enemyFov;
 
-        [Header("Sphere")] [SerializeField] private float detectionRange;
+        [Header("Sphere")] 
+        [SerializeField] private float detectionRange;
+
+        [Header("Player check")] 
+        [SerializeField] [Min(0.1f)] private float timeBetweenChecks = 0.25f;
+        [SerializeField] private Transform rayOrigin;
+        
+        private Transform _playerTransform;
+        private bool _playerInRange;
+        private float _timer;
 
         private void Awake()
         {
             SetDetectionSphere();
+        }
+
+        private void Update()
+        {
+            if (_playerInRange)
+            {
+                _timer += Time.deltaTime;
+                
+                if (_timer >= timeBetweenChecks)
+                {
+                    _timer = 0f;
+                    CheckForPlayerInRange();
+                }
+            }
         }
 
         private void SetDetectionSphere()
@@ -26,6 +50,10 @@ namespace Enemy
             if (other.CompareTag("Player"))
             {
                 alertManager.SetAlertedState(true);
+
+                _playerTransform = other.transform;
+                _playerInRange = true;
+                _timer = 0f;
             }
         }
 
@@ -34,6 +62,29 @@ namespace Enemy
             if (other.CompareTag("Player"))
             {
                 alertManager.SetAlertedState(false);
+                
+                _playerInRange = false;
+            }
+        }
+
+        private void CheckForPlayerInRange()
+        {
+            if (Vector3.Angle(_playerTransform.position - transform.position, transform.forward) > enemyFov.Angle / 2)
+            {
+                return;
+            }
+
+            // Compute direction to player
+            Vector3 direction = _playerTransform.position - transform.position;
+            direction.y = 0f;
+            direction.Normalize();
+            
+            if (Physics.Raycast(rayOrigin.position,
+                    direction,
+                    enemyFov.Radius,
+                    LayerMask.GetMask("Player")))
+            {
+                alertManager.ChangeState(alertManager.GameOverState);
             }
         }
 
