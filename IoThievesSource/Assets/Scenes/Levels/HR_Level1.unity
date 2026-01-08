@@ -690,8 +690,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.0794516, y: 1, z: 2.8000631}
-  m_Center: {x: 0.62869406, y: 0, z: -0.5040231}
+  m_Size: {x: 3.6342945, y: 1, z: 2.9689283}
+  m_Center: {x: 0.90611553, y: 0, z: -0.5884557}
 --- !u!1 &154037566
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,7 +1191,7 @@ Transform:
   m_GameObject: {fileID: 256537758}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.037, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -46244,7 +46244,7 @@ GameObject:
   - component: {fileID: 6384768470792410194}
   - component: {fileID: 6384768470792410196}
   - component: {fileID: 6384768470792410195}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Computer Monitor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47626,7 +47626,7 @@ GameObject:
   - component: {fileID: 2675832802629721820}
   - component: {fileID: 7929629344429968994}
   - component: {fileID: 7929629344429968993}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Computer Monitor.017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52989,7 +52989,7 @@ GameObject:
   - component: {fileID: 8548780676955671211}
   - component: {fileID: 8678251074689175898}
   - component: {fileID: 8678251074689175897}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Computer Monitor.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -58779,7 +58779,7 @@ GameObject:
   - component: {fileID: 4877319368141313090}
   - component: {fileID: 9105205702035209920}
   - component: {fileID: 9105205702035209919}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Computer Monitor.019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -75728,7 +75728,7 @@ GameObject:
   - component: {fileID: 8474653842484821270}
   - component: {fileID: 8526533521019603159}
   - component: {fileID: 8526533521019603158}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Computer Monitor.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80396,7 +80396,7 @@ GameObject:
   - component: {fileID: 3309470108664140654}
   - component: {fileID: 4854352193065990607}
   - component: {fileID: 4854352193065990606}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Computer Monitor.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100352,7 +100352,7 @@ Transform:
   m_GameObject: {fileID: 3376350639766640406}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.267988, y: 1.26528, z: -9.163606}
+  m_LocalPosition: {x: -4.267988, y: 1.309, z: -9.163606}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -120121,7 +120121,7 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
-  triggerArea: {fileID: 0}
+  triggerArea: {fileID: 1691609796}
   onInteract:
     m_PersistentCalls:
       m_Calls: []
