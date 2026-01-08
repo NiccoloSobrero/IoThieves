@@ -32,10 +32,10 @@
 }
 
 .input-container {
-    position: relative;        /* anchor caret */
-    flex-grow: 1;              /* take remaining space */
+    position: relative;
+    flex-grow: 1;
     flex-shrink: 1;
-    min-width: 0;              /* IMPORTANT: prevent overflow bugs */
+    min-width: 0;
     /*border-color: yellow;*/
     /*border-width: 2px;*/
     height: 100%;
