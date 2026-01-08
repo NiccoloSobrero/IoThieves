@@ -18,8 +18,8 @@ public class EndLevelMenuController : MonoBehaviour
     private void OnEnable()
     {
         var root = menuDocument.rootVisualElement;
-        var quitButton = root.Q<Button>("quitButton");
-        quitButton.clicked += QuitGame;
+        var mainMenuButton = root.Q<Button>("mainMenuButton");
+        mainMenuButton.clicked += GoToMainMenu;
         var nextLevelButton = root.Q<Button>("nextLevelButton");
         nextLevelButton.clicked += GoToNextLevel;
         endLevelMenuContainerVisualElement = root.Q<VisualElement>("endLevelMenuCardsContainer");
@@ -43,10 +43,10 @@ public class EndLevelMenuController : MonoBehaviour
         // }
     }
     
-    private void QuitGame()
+    private void GoToMainMenu()
     {
         HideEndLevelMenu();
-        EventsManager.OnQuitGame?.Invoke();
+        EventsManager.OnBackToMainMenu?.Invoke();
     }
 
     private void GoToNextLevel()

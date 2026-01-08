@@ -7,7 +7,7 @@
         
         <ui:VisualElement name="buttonsContainer" class="buttons-container">
             <ui:Button name="nextLevelButton" class="menu-button quit-button" text="Next" />
-            <ui:Button name="quitButton" class="menu-button quit-button" text="Quit" />
+            <ui:Button name="mainMenuButton" class="menu-button quit-button" text="Main Menu" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
