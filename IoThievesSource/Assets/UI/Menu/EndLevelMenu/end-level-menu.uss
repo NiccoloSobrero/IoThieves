@@ -15,6 +15,11 @@
     padding: 20px;
 }
 
+.buttons-container {
+    flex-direction: row;
+    justify-content: space-around;
+}
+
 .quit-button {
     align-self: center;
     width: 15%;

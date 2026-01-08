@@ -21,6 +21,7 @@ namespace Managers
         
         private PlayerInputActions _actions;
         private InputContext _currentContext = InputContext.None;
+        private bool _isInitialized = false;
         public InputContext CurrentContext => _currentContext;
 
         public Vector2 Move { get; private set; }
@@ -35,7 +36,9 @@ namespace Managers
             else
             {
                 Destroy(gameObject);
+                return;
             }
+            _isInitialized = true;
             
             _actions = new PlayerInputActions();
         }
@@ -89,6 +92,7 @@ namespace Managers
 
         private void OnDisable()
         {
+            if (!_isInitialized) return;
             DisableAll();
             EventsManager.OnOptionsSave.RemoveListener(LoadUserPreferences);
         }

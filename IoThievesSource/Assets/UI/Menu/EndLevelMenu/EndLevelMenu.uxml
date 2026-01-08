@@ -5,7 +5,9 @@
         <ui:Label name="endLevelTitle" text="Level Completed" class="menu-title" />
         <ui:VisualElement name="endLevelMenuCardsContainer" class="end-level-menu-cards-container" />
         
-        <ui:Button name="quitButton" class="menu-button quit-button" text="Quit" />
-        
+        <ui:VisualElement name="buttonsContainer" class="buttons-container">
+            <ui:Button name="nextLevelButton" class="menu-button quit-button" text="Next" />
+            <ui:Button name="quitButton" class="menu-button quit-button" text="Quit" />
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

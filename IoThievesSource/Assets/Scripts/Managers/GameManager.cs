@@ -42,6 +42,7 @@ namespace Managers
             EventsManager.OnQuitGame.AddListener(QuitGame);
             EventsManager.OnOptionsClicked.AddListener(OpenOptions);
             EventsManager.OnRestartGame.AddListener(RestartGame);
+            EventsManager.OnNextLevel.AddListener(GoToHomepage);
         }
 
         private void OnDisable()
@@ -54,6 +55,7 @@ namespace Managers
             EventsManager.OnQuitGame.RemoveListener(QuitGame);
             EventsManager.OnOptionsClicked.RemoveListener(OpenOptions);
             EventsManager.OnRestartGame.RemoveListener(RestartGame);
+            EventsManager.OnNextLevel.RemoveListener(GoToHomepage);
         }
 
         private void PlayLevel(Level level)
@@ -122,6 +124,12 @@ namespace Managers
 #else
         Application.Quit();
 #endif
+        }
+
+        private void GoToHomepage()
+        {
+            SceneManager.LoadScene("MainMenu");
+            EnterLevelSelection();
         }
     
         public string LoadUserInputPreferences()
