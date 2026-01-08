@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Enemy
 {
-    public class NpcTrigger_Cone : MonoBehaviour
+    public class NpcTriggerConeOfDeath : MonoBehaviour
     {
         [Header("References")]
         [SerializeField] private AlertManager alertManager;
@@ -24,20 +24,22 @@ namespace Enemy
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player") 
-                && IsVisible(other)) 
-                
+                && IsVisible(other))
+
             {
-                alertManager.SetAlertedState(true);
+                alertManager.ChangeState(alertManager.GameOverState);
+                //alertManager.SetAlertedState(true);
             }
         }
 
+        /*
         private void OnTriggerExit(Collider other)
         {
             if (other.CompareTag("Player"))
             {
                 alertManager.SetAlertedState(false);
             }
-        }
+        }*/
 
         private bool IsVisible(Collider other)
         {
