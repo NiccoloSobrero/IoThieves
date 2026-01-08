@@ -26401,7 +26401,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1551799430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26451,10 +26451,38 @@ MonoBehaviour:
   menuDocument: {fileID: 1551799430}
   documentCardTemplate: {fileID: 9197481963319205126, guid: cc0b7a2cc641a456bbe92c7d536f5c47, type: 3}
   documents:
-  - "Questo \xE8 il primo documento di prova. Questo \xE8 il primo documento di prova"
-  - "Questo \xE8 il secondo documento di prova. Questo \xE8 il secondo documento
-    di prova"
-  - "Questo \xE8 il terzo documento di prova. Questo \xE8 il terzo documento di prova"
+  - levelOfDownload: 0
+    filePath: Prova 1
+    documentSprite: {fileID: 21300000, guid: 9825c72b4878ca2428f7585e5fd446ac, type: 3}
+    isTarget: 0
+  - levelOfDownload: 0
+    filePath: Prova 2
+    documentSprite: {fileID: 21300000, guid: 8f51ea9535261384c99df41e554a91aa, type: 3}
+    isTarget: 0
+  - levelOfDownload: 0
+    filePath: Prova 3
+    documentSprite: {fileID: 21300000, guid: 610059bb10012904fa06264e8cadcec9, type: 3}
+    isTarget: 0
+  - levelOfDownload: 0
+    filePath: Prova 3
+    documentSprite: {fileID: 21300000, guid: 610059bb10012904fa06264e8cadcec9, type: 3}
+    isTarget: 0
+  - levelOfDownload: 0
+    filePath: Prova 3
+    documentSprite: {fileID: 21300000, guid: 610059bb10012904fa06264e8cadcec9, type: 3}
+    isTarget: 0
+  - levelOfDownload: 0
+    filePath: Prova 3
+    documentSprite: {fileID: 21300000, guid: 610059bb10012904fa06264e8cadcec9, type: 3}
+    isTarget: 0
+  - levelOfDownload: 0
+    filePath: Prova 3
+    documentSprite: {fileID: 21300000, guid: 610059bb10012904fa06264e8cadcec9, type: 3}
+    isTarget: 0
+  - levelOfDownload: 0
+    filePath: Prova 3
+    documentSprite: {fileID: 21300000, guid: 610059bb10012904fa06264e8cadcec9, type: 3}
+    isTarget: 0
 --- !u!4 &1554354150 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2b0671c89b483b54aaee2106e74ab0d6, type: 3}

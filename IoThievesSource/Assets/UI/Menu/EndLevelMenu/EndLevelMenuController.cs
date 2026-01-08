@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Events;
 using Minigames;
@@ -12,7 +11,7 @@ public class EndLevelMenuController : MonoBehaviour
     [SerializeField]
     private VisualTreeAsset documentCardTemplate;
     // [SerializeField]
-    // private List<string> documents = new List<string>();
+    // private List<FileDetails> documents = new List<FileDetails>();
     
     private VisualElement endLevelMenuContainerVisualElement;
 
@@ -25,63 +24,22 @@ public class EndLevelMenuController : MonoBehaviour
         UpdateUI();
         EventsManager.OnEndLevel.AddListener(ShowEndLevelMenu);
     }
-    
-    // private void OnEnable()
-    // {
-    //     var root = menuDocument.rootVisualElement;
-    //
-    //     root.RegisterCallback<GeometryChangedEvent>(evt =>
-    //     {
-    //         endLevelMenuContainerVisualElement = root.Q<VisualElement>("endLevelMenuCardsContainer");
-    //
-    //         var quitButton = root.Q<Button>("quitButton");
-    //         if (quitButton != null)
-    //             quitButton.clicked += QuitGame;
-    //
-    //         UpdateUI();
-    //     });
-    // }
-
 
     private void UpdateUI()
     {
         if (documentCardTemplate == null)
             return;
         menuDocument.rootVisualElement.style.display = DisplayStyle.None;
+        // foreach (FileDetails document in documents)
+        // {
+        //     var documentButtonInstance = documentCardTemplate.Instantiate();
+        //     var nameLabel =  documentButtonInstance.Q<Label>("cardTitle");
+        //     nameLabel.text = document.filePath;
+        //     var image = documentButtonInstance.Q<Image>("cardImage");
+        //     image.sprite = document.documentSprite;
+        //     endLevelMenuContainerVisualElement.Add(documentButtonInstance);
+        // }
     }
-    
-    // private void UpdateUI()
-    // {
-    //     if (documentCardTemplate == null)
-    //     {
-    //         Debug.LogError("Card Template is NULL!");
-    //         return;
-    //     }
-    //
-    //     if (endLevelMenuContainerVisualElement == null)
-    //     {
-    //         Debug.LogError("Container is NULL!");
-    //         return;
-    //     }
-    //     
-    //     endLevelMenuContainerVisualElement.Clear();
-    //
-    //     foreach (string document in documents)
-    //     {
-    //         var documentButtonInstance = documentCardTemplate.Instantiate();
-    //         if (documentButtonInstance == null)
-    //         {
-    //             Debug.LogError("Instantiate() returned NULL!");
-    //             return;
-    //         }
-    //
-    //         var nameLabel = documentButtonInstance.Q<Label>("cardDescription");
-    //         nameLabel.text = document;
-    //
-    //         endLevelMenuContainerVisualElement.Add(documentButtonInstance);
-    //     }
-    // }
-
     
     private void QuitGame()
     {
@@ -105,47 +63,5 @@ public class EndLevelMenuController : MonoBehaviour
         
         menuDocument.rootVisualElement.style.display = DisplayStyle.Flex;
     }
-
-    // public void ActivateEndLevelUI()
-    // {
-    //     menuDocument.enabled = true;
-    // }
-    
-    // public void ActivateEndLevelUI()
-    // {
-    //     menuDocument.enabled = true;
-    //
-    //     var root = menuDocument.rootVisualElement;
-    //     if (root == null)
-    //     {
-    //         // UIDocument not ready yet, delay until root exists
-    //         StartCoroutine(WaitForRootAndInitialize());
-    //     }
-    //     else
-    //     {
-    //         InitializeEndLevelUI(root);
-    //     }
-    // }
-
-    // private System.Collections.IEnumerator WaitForRootAndInitialize()
-    // {
-    //     // Wait until rootVisualElement is ready
-    //     while (menuDocument.rootVisualElement == null)
-    //         yield return null;
-    //
-    //     InitializeEndLevelUI(menuDocument.rootVisualElement);
-    // }
-    //
-    // private void InitializeEndLevelUI(VisualElement root)
-    // {
-    //     endLevelMenuContainerVisualElement = root.Q<VisualElement>("endLevelMenuCardsContainer");
-    //
-    //     var quitButton = root.Q<Button>("quitButton");
-    //     if (quitButton != null)
-    //         quitButton.clicked += QuitGame;
-    //
-    //     UpdateUI();
-    // }
-
     
 }
