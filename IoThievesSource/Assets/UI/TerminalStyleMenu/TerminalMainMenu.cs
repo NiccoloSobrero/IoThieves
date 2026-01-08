@@ -1,4 +1,5 @@
 using System;
+using Events;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -24,7 +25,7 @@ public class TerminalMainMenu : MonoBehaviour
     private int _scanIndex = 0;
     private string _scannerInput = null;
     
-    private const string iothievesScan = "iothieves --scan 192.168.200.0/24";
+    private const string IothievesScan = "iothieves --scan 192.168.200.0/24";
     
     private Label _loadingLabel;
     private float _loadingProgress = 0f;
@@ -65,7 +66,7 @@ public class TerminalMainMenu : MonoBehaviour
         // PrintLine("Polimi Game Collective");
         //
         // PrintLine("Type 'help' to list commands");
-        StartScanning(iothievesScan);
+        StartScanning(IothievesScan);
     }
 
     void Update()
@@ -79,69 +80,9 @@ public class TerminalMainMenu : MonoBehaviour
         }
         
         _scannerTimer += Time.unscaledDeltaTime;
-        if (_hasStartedScanning && _scannerTimer >= _scanCharTypingDelay)
-        {
-            _scannerTimer = 0f;
+        Scan();
 
-            if (_scanIndex < _scannerInput.Length)
-            {
-                InsertCharacter(_scannerInput[_scanIndex]);
-                _scanIndex++;
-            }
-            else
-            {
-                _hasStartedScanning = false;
-                PrintLine($"iothieves@kali:~$ {iothievesScan}");
-                
-                StartLoading();
-                
-                _scannerInput = string.Empty;
-                
-                _currentInput = string.Empty;
-                _caretIndex = 0;
-                _inputLabel.text = string.Empty;
-                UpdateCaretPosition();
-                
-                // PrintLine("IoThieves v0.1.2");
-                // PrintLine("Copyright (c) 2025 by IoTeam");
-                // PrintLine("Polimi Game Collective");
-                //
-                // PrintLine("Type 'help' to list commands");
-            }
-        }
-
-        if (!_isLoading) return;
-        
-        print("loading");
-        
-        _loadingProgress += Time.unscaledDeltaTime * _loadingSpeed;
-        _loadingProgress = Mathf.Clamp01(_loadingProgress);
-
-        UpdateLoadingBarText();
-
-        if (_loadingProgress >= 1f)
-        {
-            _isLoading = false;
-            PrintLine("IoThieves v0.1.2");
-            PrintLine("Copyright (c) 2025 by IoTeam");
-            PrintLine("Polimi Game Collective");
-            PrintLine("");
-
-            _loadingLabel.text = "[####################] 100%";
-            
-            PrintLine("");
-            
-            PrintLine("[OK] Scan completed.");
-            PrintLine("42 vulnerable devices found.");
-            PrintLine("12 XSS vulnerabilities found.");
-            PrintLine("20 SQL injection vulnerabilities found.");
-            PrintLine("10 Binary exploitation vulnerabilities found.");
-            PrintLine("42 devices exploited.");
-            
-            PrintLine("");
-            
-            PrintLine("Type 'help' to list commands");
-        }
+        Load();
     }
 
     private void StartScanning(string text)
@@ -157,6 +98,38 @@ public class TerminalMainMenu : MonoBehaviour
         UpdateCaretPosition();
     }
 
+    private void Scan()
+    {
+        if (_hasStartedScanning && _scannerTimer >= _scanCharTypingDelay)
+        {
+            _scannerTimer = 0f;
+
+            if (_scanIndex < _scannerInput.Length)
+            {
+                InsertCharacter(_scannerInput[_scanIndex]);
+                _scanIndex++;
+            }
+            else
+            {
+                _hasStartedScanning = false;
+                PrintLine($"iothieves@kali:~$ {IothievesScan}");
+                PrintLine("");
+                PrintLine("IoThieves v0.1.2");
+                PrintLine("Copyright (c) 2025 by IoTeam");
+                PrintLine("Polimi Game Collective");
+                
+                StartLoading();
+                
+                _scannerInput = string.Empty;
+                
+                _currentInput = string.Empty;
+                _caretIndex = 0;
+                _inputLabel.text = string.Empty;
+                UpdateCaretPosition();
+            }
+        }
+    }
+
     private void StartLoading()
     {
         _loadingProgress = 0f;
@@ -168,6 +141,40 @@ public class TerminalMainMenu : MonoBehaviour
         
         _output.Add(_loadingLabel);
         _output.ScrollTo(_loadingLabel);
+    }
+
+    private void Load()
+    {
+        if (!_isLoading) return;
+        
+        _loadingProgress += Time.unscaledDeltaTime * _loadingSpeed;
+        _loadingProgress = Mathf.Clamp01(_loadingProgress);
+
+        UpdateLoadingBarText();
+
+        if (_loadingProgress >= 1f)
+        {
+            _isLoading = false;
+            // PrintLine("IoThieves v0.1.2");
+            // PrintLine("Copyright (c) 2025 by IoTeam");
+            // PrintLine("Polimi Game Collective");
+            PrintLine("");
+
+            _loadingLabel.text = "[####################] 100%";
+            
+            PrintLine("");
+            
+            PrintLine("[OK] Scan completed.");
+            PrintLine("42 vulnerable devices found.");
+            PrintLine("12 XSS vulnerabilities found.");
+            PrintLine("20 SQL injection vulnerabilities found.");
+            PrintLine("10 Binary exploitation vulnerabilities found.");
+            PrintLine("42 devices exploited.");
+            
+            PrintLine("");
+            
+            PrintLine("Type 'iothieves --help' to list commands");
+        }
     }
 
     private void UpdateLoadingBarText()
@@ -274,18 +281,24 @@ public class TerminalMainMenu : MonoBehaviour
     {
         switch (cmd.ToLower())
         {
-            case "help":
-                PrintLine("Available commands: start, exit");
+            case "iothieves --help":
+                PrintLine("Available commands: iothieves --start, iothieves --options, iothieves --exit");
                 break;
-            case "start":
-                PrintLine("Starting hack sequence...");
+            case "iothieves --start":
+                PrintLine("Connection established...");
+                EventsManager.OnEnterLevelSelection?.Invoke();
+                gameObject.SetActive(false);
                 break;
-            case "exit":
+            case "iothieves --options":
+                PrintLine("Customization session started...");
+                EventsManager.OnOptionsClicked?.Invoke();
+                break;
+            case "iothieves --exit":
                 PrintLine("Shutting down...");
-                Application.Quit();
+                EventsManager.OnQuitGame?.Invoke();
                 break;
             default:
-                PrintLine($"Command not found: {cmd}");
+                PrintLine($"bash: {cmd}: command not found");
                 break;
         }
     }
