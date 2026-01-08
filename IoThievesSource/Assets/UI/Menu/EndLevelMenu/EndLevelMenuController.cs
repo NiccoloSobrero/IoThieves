@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Events;
+using Minigames;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -10,8 +11,8 @@ public class EndLevelMenuController : MonoBehaviour
     protected UIDocument menuDocument;
     [SerializeField]
     private VisualTreeAsset documentCardTemplate;
-    [SerializeField]
-    private List<string> documents = new List<string>();
+    // [SerializeField]
+    // private List<string> documents = new List<string>();
     
     private VisualElement endLevelMenuContainerVisualElement;
 
@@ -46,13 +47,6 @@ public class EndLevelMenuController : MonoBehaviour
     {
         if (documentCardTemplate == null)
             return;
-        foreach (string document in documents)
-        {
-            var documentButtonInstance = documentCardTemplate.Instantiate();
-            var nameLabel =  documentButtonInstance.Q<Label>("cardDescription");
-            nameLabel.text = document;
-            endLevelMenuContainerVisualElement.Add(documentButtonInstance);
-        }
         menuDocument.rootVisualElement.style.display = DisplayStyle.None;
     }
     
@@ -98,6 +92,17 @@ public class EndLevelMenuController : MonoBehaviour
     private void ShowEndLevelMenu()
     {
         print("Showing End Level");
+        
+        foreach (FileDetails document in DownloadsManager.Instance.DownloadedFiles)
+        {
+            var documentButtonInstance = documentCardTemplate.Instantiate();
+            var nameLabel =  documentButtonInstance.Q<Label>("cardTitle");
+            nameLabel.text = document.filePath;
+            var image = documentButtonInstance.Q<Image>("cardImage");
+            image.sprite = document.documentSprite;
+            endLevelMenuContainerVisualElement.Add(documentButtonInstance);
+        }
+        
         menuDocument.rootVisualElement.style.display = DisplayStyle.Flex;
     }
 
