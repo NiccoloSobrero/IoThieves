@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using AI;
+using UnityEngine;
 
 namespace Interactables
 {
@@ -17,10 +18,11 @@ namespace Interactables
         
         private void OnTriggerEnter(Collider other)
         {
-            // if (other.gameObject.TryGetComponent<Enemy>(out var enemy))
-            // {
-            //     // Call function for stunning on Enemy
-            // }
+             if (other.gameObject.TryGetComponent<AIController>(out var enemy))
+             {
+                 enemy.ChangeState(AINames.StunnedState);
+                 // Call function for stunning on Enemy
+             }
         }
     }
 }

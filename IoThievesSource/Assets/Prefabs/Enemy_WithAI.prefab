@@ -653,6 +653,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npc: {fileID: -996625976428397906}
   alertManager: {fileID: 3346137037427755614}
+  SphereFOV: {fileID: 1101995406142850608}
+  ConeOfDeath: {fileID: 4251657075257737783}
 --- !u!114 &-996625976428397906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,6 +669,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startState: 0
   _NpcDatas: {fileID: 11400000, guid: d0919ccfc129a8641b53174e97264d32, type: 2}
+  enemyAdapter: {fileID: 2574360286532377722}
+  Stun: 0
 --- !u!1 &4945581270845159002
 GameObject:
   m_ObjectHideFlags: 0
@@ -1131,7 +1135,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 2e9f5a4f695e9a546b575fffc607c9cf, type: 2}
     - target: {fileID: 919132149155446097, guid: fcfb38ec7567b3f468a343d7f569e1b3, type: 3}
       propertyPath: m_Name
-      value: FOV
+      value: FOV_DeathCone
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
