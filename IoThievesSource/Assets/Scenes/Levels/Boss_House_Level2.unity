@@ -15532,7 +15532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76832e0ced66436ba32e05a725b61d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: b016363a83261824d828a9259497df4d, type: 2}
   startingPosition: {x: -11.97, y: 0, z: -2.46}
   dancingPosition: {x: -10.052, y: 0, z: -2.916}
   stereo: {fileID: 8906773801021057829}
@@ -18258,7 +18258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76832e0ced66436ba32e05a725b61d3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: b016363a83261824d828a9259497df4d, type: 2}
   startingPosition: {x: -9.97, y: 0, z: -5.04}
   dancingPosition: {x: -8.72, y: 0, z: -4.75}
   stereo: {fileID: 8906773801021057829}
