@@ -33,8 +33,6 @@ public class TerminalEndLevelMenu : TerminalMenu
         {
             command = cmd.Substring(0, 3);
             fileName = cmd.Substring(3).Trim();
-            print("file: " + fileName);
-            print(cmd);
         }
         string detectCmd = command == string.Empty ? cmd : command;
         switch (detectCmd.ToLower())
