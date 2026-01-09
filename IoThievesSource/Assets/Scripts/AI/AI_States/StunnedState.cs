@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Enemy;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace AI.AI_States
@@ -15,7 +16,8 @@ namespace AI.AI_States
         public override void Enter()
         {
             elapsedTime = 0;
-            //DisableFovs
+            //DisableFovsD
+            Debug.Log("ORCODEDDIO MI HANNO STUNNATO");
             OnAndOffFovs(false);
             
         }
