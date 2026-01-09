@@ -1008,8 +1008,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.0794516, y: 1, z: 2.8000631}
-  m_Center: {x: 0.62869406, y: 0, z: -0.5040231}
+  m_Size: {x: 3.0794516, y: 1, z: 5.252605}
+  m_Center: {x: 0.62869406, y: 0, z: -1.9495013}
 --- !u!1 &222144470
 GameObject:
   m_ObjectHideFlags: 0
@@ -2538,8 +2538,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.0794516, y: 1, z: 2.8000631}
-  m_Center: {x: 0.62869406, y: 0, z: -0.5040231}
+  m_Size: {x: 3.0794516, y: 1, z: 5.2565804}
+  m_Center: {x: 0.62869406, y: 0, z: 0.6905117}
 --- !u!1 &490271988
 GameObject:
   m_ObjectHideFlags: 0
@@ -15232,8 +15232,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.0794516, y: 1, z: 2.8000631}
-  m_Center: {x: 0.62869406, y: 0, z: -0.5040231}
+  m_Size: {x: 3.0794516, y: 1, z: 5.284299}
+  m_Center: {x: 0.62869406, y: 0, z: 0.7380948}
 --- !u!1 &955163567
 GameObject:
   m_ObjectHideFlags: 0
@@ -32078,8 +32078,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.0794516, y: 1, z: 2.8000631}
-  m_Center: {x: 0.62869406, y: 0, z: -0.5040231}
+  m_Size: {x: 3.0794516, y: 1, z: 5.595656}
+  m_Center: {x: 0.62869406, y: 0, z: 0.89377373}
 --- !u!1 &1431647463
 GameObject:
   m_ObjectHideFlags: 0
@@ -32598,8 +32598,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.0794516, y: 1, z: 2.8000631}
-  m_Center: {x: 0.62869406, y: 0, z: -0.5040231}
+  m_Size: {x: 3.0794516, y: 1, z: 5.1739187}
+  m_Center: {x: 0.62869406, y: 0, z: -1.6034336}
 --- !u!1 &1529817467
 GameObject:
   m_ObjectHideFlags: 0
@@ -33576,8 +33576,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.0794516, y: 1, z: 2.8000631}
-  m_Center: {x: 0.62869406, y: 0, z: -0.5040231}
+  m_Size: {x: 3.0794516, y: 1, z: 5.5209217}
+  m_Center: {x: 0.62869406, y: 0, z: -1.8644524}
 --- !u!1 &1693590587
 GameObject:
   m_ObjectHideFlags: 0
@@ -150645,7 +150645,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineRenderer: {fileID: 147638707}
   minigames:
-  - {fileID: 11400000, guid: 79962d9374a08fa42b4bde656f362ac0, type: 2}
+  - {fileID: 11400000, guid: efb280a581a394145b9e50877da8582f, type: 2}
   redoCompletedMinigameAfterReopen: 1
   playerLayer:
     serializedVersion: 2

@@ -15,16 +15,18 @@ MonoBehaviour:
   dialogueLines:
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: 'Test test, hellooooo can you hear me? '
+    text: 'Alright, systems online...
+
+      HELLOOOOOOOO CAN YOU HEAR ME?????'
     tags: 
   - speakerName: ???
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
-    text: . . .
+    text: '. . . '
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: Alright, systems online. Welcome to the world, my creation. How do you
-      feel?
+    text: "Welcome to the world, my litle creation. How do you feel? \nAre you ready
+      for a very incredible adventure???"
     tags: 
   - speakerName: ???
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
@@ -32,42 +34,37 @@ MonoBehaviour:
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: 7ca5486df83ebce4681cd89b1a1d718c, type: 3}
-    text: No words, Uh? Did I miss something?
+    text: No words, uh? Why are you so silent? **Did I miss something?**
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: 4ab0fecf046fa7549b5e86ae6d70be77, type: 3}
-    text: Oh, right! You don't have an AI yet. Let me  just try this...
+    text: "Oh, right! You're just a scrap of metal right now, I don't give you an
+      AI yet. \nLet me try this one... Done! How do you feel?"
     tags: 
   - speakerName: Hatsune Miku
     icon: {fileID: 21300000, guid: f10cff0a88e161e439e2b7948dbfa623, type: 3}
-    text: Po pi po pi po po pi po
+    text: "Mikuday\u014D"
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: ad771f752afefa244b5c465f7173d61b, type: 3}
     text: HATSUNE MIKU!?!?
     tags: 
   - speakerName: Hacker
-    icon: {fileID: 21300000, guid: 4ab0fecf046fa7549b5e86ae6d70be77, type: 3}
-    text: Wait wait wait wait wait! Nope, let me try this...
+    icon: {fileID: 21300000, guid: fe04ed84c31596644b94bfaa49ee0e33, type: 3}
+    text: Nope, wrong AI! Let me try this one instead...
     tags: 
   - speakerName: PIP
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
-    text: Hey there, who are you? Where am I? Who am I? What's happening??
+    text: Woah! Who are you? Where am I? WHO am I? What's happening??
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: 'Once again. Welcome to the world, my creation! '
-    tags: 
-  - speakerName: Hacker
-    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: 'You are my Personal Infiltration Prototype robot.
-
-      I think I can
-      call you PIP, how does it sound?'
+    text: "Once again. Welcome to the world, my little creation! \nYou are PIP, aka
+      my <i>Personal Infiltration Prototype</i> robot. It fits you, doesn't it?"
     tags: 
   - speakerName: PIP
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
-    text: Cut it, where are you? Who are you?
+    text: Cut it, where  am I? Who are you?
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
@@ -87,19 +84,25 @@ MonoBehaviour:
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: "Absolutely... not! Now, you need to get out from there. \nLet\u2019s see
-      if you can follow basic commands."
+    text: "Absolutely... not :) \nNow, you need to get out from there. \nLet\u2019s
+      see if you can follow basic commands."
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: See that marker up ahead?
+    text: See that marked keypad up ahead?
     tags: 02000000
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: "Move towards it. Consider this your first baby step\u2026 well, robot
-      step."
+    text: 'Move towards it. It''s the only way to exit.
+
+      Use < <b>W, A, S,
+      D</b> > to move'
     tags: 
   - speakerName: PIP
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
-    text: Please, don't...
+    text: What the hell is "W A S D" ??
+    tags: 00000000
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: Trust me, you know what it is
     tags: 03000000

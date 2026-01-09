@@ -14,21 +14,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueLines:
   - speakerName: Hacker
-    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: "Hold up! Wait a minute. \nThere's a camera right there."
+    icon: {fileID: 21300000, guid: ad771f752afefa244b5c465f7173d61b, type: 3}
+    text: 'Hold up! See the red area?
+
+      There''s a camera over there.'
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: "See the red area it\u2019s sweeping around? Stay out of that unless you
-      want alarms blaring."
+    text: 'Stay out of that unless you want alarms blaring.
+
+      I think it''s
+      the model that is triggered by loud noises.'
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: "Alright, we\u2019ll need a distraction. Head over to that 3D printer in
-      the corner."
+    text: We need a distraction. Head over to that 3D printer in the corner.
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: "Yeah, that chunky machine right there. Get close and I\u2019ll upload
-      a blueprint for something noisy."
+    text: "Yeah, that chunky machine right there. \nIt's marked in <color=green>
+      green </color>, so if you click on it I can hack it remotely."
+    tags: 
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: 'I''ll upload a blueprint for something noisy.
+
+      When it finish, get
+      close to it to pick up the item.
+
+'
+    tags: 
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: If the printer is marked in <color=red> red </color> it means you're too
+      distant, so be sure to be close enough to make the outline <color=blue> blue
+      </color> to make it interactable
+    tags: 
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: if you're colorblind, well... good luck :)
     tags: 

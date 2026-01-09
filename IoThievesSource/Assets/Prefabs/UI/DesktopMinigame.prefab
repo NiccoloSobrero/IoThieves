@@ -2156,10 +2156,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Managers.MinigamesManager, Assembly-CSharp
-        m_MethodName: CloseMinigameWindow
-        m_Mode: 1
+      - m_Target: {fileID: 3481334442683732109}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3874,7 +3874,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae0400c6e98b9a43b064d156d7dee43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
   desktopObj: {fileID: 3481334442683732109}
   desktopRect: {fileID: 4377635382364824127}
   desktopFoldersParent: {fileID: 2149940065439707511}
@@ -9745,10 +9744,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Managers.MinigamesManager, Assembly-CSharp
-        m_MethodName: CloseMinigameWindow
-        m_Mode: 1
+      - m_Target: {fileID: 3481334442683732109}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
