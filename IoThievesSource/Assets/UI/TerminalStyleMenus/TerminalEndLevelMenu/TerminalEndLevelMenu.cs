@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using Events;
 using Managers;
 using Minigames;
@@ -41,7 +42,9 @@ public class TerminalEndLevelMenu : TerminalMenu
             case "ls":
                 PrintLine("Printing all the available documents:");
                 PrintLine("");
-                foreach (FileDetails document in DownloadsManager.Instance.DownloadedFiles)
+                print("current level: " + GameManager.Instance.currentLevel);
+                foreach (FileDetails document in DownloadsManager.Instance.DownloadedFiles
+                             .Where(file => file.levelOfDownload == GameManager.Instance.currentLevel))
                 {
                     PrintLine(document.filePath);
                 }
