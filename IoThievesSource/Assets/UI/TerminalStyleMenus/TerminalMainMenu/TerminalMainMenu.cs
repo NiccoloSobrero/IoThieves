@@ -108,6 +108,10 @@ public class TerminalMainMenu : TerminalMenu
             PrintLine("");
             
             PrintLine("Type 'iothieves --help' to list commands");
+            
+            PrintLine("");
+            
+            PrintLine("Click anywhere to start hacking...");
         }
     }
 

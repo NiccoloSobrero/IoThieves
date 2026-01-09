@@ -1,13 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Events;
 using Managers;
 using Minigames;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class TerminalEndLevelMenu : TerminalMenu
 {
+    // for testing purposes
+    // [SerializeField]
+    // private List<FileDetails> _downloadedFile = new List<FileDetails>();
     
     protected override void OnMenuEnabled()
     {
@@ -22,7 +27,17 @@ public class TerminalEndLevelMenu : TerminalMenu
 
     protected override void ProcessCommand(string cmd)
     {
-        switch (cmd.ToLower())
+        string command = string.Empty;
+        string fileName = string.Empty;
+        if (cmd.Length > 2 && cmd.Contains("cat"))
+        {
+            command = cmd.Substring(0, 3);
+            fileName = cmd.Substring(3).Trim();
+            print("file: " + fileName);
+            print(cmd);
+        }
+        string detectCmd = command == string.Empty ? cmd : command;
+        switch (detectCmd.ToLower())
         {
             case "iothieves --help":
                 PrintLine("Available commands: ls, cat [FILENAME], iothieves --scan --next-target, iothieves --return, iothieves --exit");
@@ -46,11 +61,26 @@ public class TerminalEndLevelMenu : TerminalMenu
                 foreach (FileDetails document in DownloadsManager.Instance.DownloadedFiles
                              .Where(file => file.levelOfDownload == GameManager.Instance.currentLevel))
                 {
+                // foreach (FileDetails document in _downloadedFile)
+                // {
                     PrintLine(document.FileName);
                 }
                 break;
             case "cat":
-                PrintLine("Open the specified document");
+                PrintLine("Open the specified document: " + fileName);
+                foreach (FileDetails document in DownloadsManager.Instance.DownloadedFiles
+                             .Where(file => file.levelOfDownload == GameManager.Instance.currentLevel))
+                {
+                // foreach (FileDetails document in _downloadedFile)
+                // {
+                    if (document.FileName == fileName)
+                    {
+                        Image image = new Image();
+                        image.sprite = document.documentSprite;
+                        image.AddToClassList("image");
+                        _output.Add(image);
+                    }
+                }
                 break;
             default:
                 PrintLine($"bash: {cmd}: command not found");

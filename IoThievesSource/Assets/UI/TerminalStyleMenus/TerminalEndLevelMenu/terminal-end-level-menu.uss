@@ -67,4 +67,9 @@
     background-color: #33ff33;
 }
 
+.image {
+    width: 80%;
+    height: 80%;
+}
+
 
