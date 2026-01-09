@@ -8501,6 +8501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57f661e7e574006b9925a901111c169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ttl: 1
 --- !u!65 &724864480
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -20940,6 +20941,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c57f661e7e574006b9925a901111c169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ttl: 1
 --- !u!135 &1155057709
 SphereCollider:
   m_ObjectHideFlags: 0

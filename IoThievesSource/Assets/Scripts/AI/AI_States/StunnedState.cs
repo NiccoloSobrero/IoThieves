@@ -17,7 +17,7 @@ namespace AI.AI_States
         {
             elapsedTime = 0;
             //DisableFovsD
-            Debug.Log("ORCODEDDIO MI HANNO STUNNATO");
+            Debug.Log("StunnedEnemy");
             OnAndOffFovs(false);
             
         }
