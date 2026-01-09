@@ -1315,6 +1315,10 @@ PrefabInstance:
       propertyPath: startState
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 4251657075257737783, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4776055317198135101, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_LightProbeUsage
       value: 1
@@ -1322,6 +1326,26 @@ PrefabInstance:
     - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_Name
       value: Enemy_AtTheEntrance
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912339954262484050, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.991365
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912339954262484050, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.13113183
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912339954262484050, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912339954262484050, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912339954262484050, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8569817063494681188, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_LocalScale.x

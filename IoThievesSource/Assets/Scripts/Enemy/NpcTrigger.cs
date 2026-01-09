@@ -42,14 +42,15 @@ namespace Enemy
 
         private void SetDetectionSphere()
         {
+            detectionRange = enemyFov.Radius * 2.6f;
             transform.localScale = new Vector3(detectionRange, detectionRange, detectionRange);
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
+            if (other.CompareTag("Player") )
             {
-                alertManager.SetAlertedState(true);
+                //alertManager.SetAlertedState(true);
 
                 _playerTransform = other.transform;
                 _playerInRange = true;
@@ -61,7 +62,7 @@ namespace Enemy
         {
             if (other.CompareTag("Player"))
             {
-                alertManager.SetAlertedState(false);
+               // alertManager.SetAlertedState(false);
                 
                 _playerInRange = false;
             }
@@ -79,10 +80,10 @@ namespace Enemy
             direction.y = 0f;
             direction.Normalize();
             
-            if (Physics.Raycast(rayOrigin.position,
+            if (!Physics.Raycast(rayOrigin.position,
                     direction,
                     enemyFov.Radius,
-                    LayerMask.GetMask("Player")))
+                    LayerMask.GetMask("Default") , QueryTriggerInteraction.Ignore))
             {
                 alertManager.ChangeState(alertManager.GameOverState);
             }
