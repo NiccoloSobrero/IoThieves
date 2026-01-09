@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Managers;
 using UnityEngine;
 using UnityEngine.Events;
@@ -116,6 +117,8 @@ namespace Minigames
         public string filePath;
         public Sprite documentSprite;
         public bool isTarget;
+        
+        public string FileName => Path.GetFileName(filePath);
     
         public FileDetails(Level levelOfDownload, string filePath, Sprite documentSprite, bool isTarget)
         {

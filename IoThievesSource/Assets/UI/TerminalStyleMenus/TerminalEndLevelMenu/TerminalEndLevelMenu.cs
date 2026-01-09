@@ -46,7 +46,7 @@ public class TerminalEndLevelMenu : TerminalMenu
                 foreach (FileDetails document in DownloadsManager.Instance.DownloadedFiles
                              .Where(file => file.levelOfDownload == GameManager.Instance.currentLevel))
                 {
-                    PrintLine(document.filePath);
+                    PrintLine(document.FileName);
                 }
                 break;
             case "cat":
