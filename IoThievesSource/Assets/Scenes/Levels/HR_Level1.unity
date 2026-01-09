@@ -1315,6 +1315,10 @@ PrefabInstance:
       propertyPath: startState
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 2302087526449798971, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: detectionRange
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4251657075257737783, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_Enabled
       value: 0
