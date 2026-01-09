@@ -389,6 +389,23 @@ namespace Minigames
                     desktopRect.anchoredPosition = Vector2.zero;
                     desktopRect.sizeDelta = _canvas.renderingDisplaySize;
                 }
+                
+                // Maximize other windows if they were maximized
+                if (_isFolderMaximized)
+                {
+                    folderRect.anchoredPosition = Vector2.zero;
+                    folderRect.sizeDelta = windowsToOpenRect.rect.size;
+                }
+                if (_isOpenFileMaximized)
+                {
+                    openFileRect.anchoredPosition = Vector2.zero;
+                    openFileRect.sizeDelta = windowsToOpenRect.rect.size;
+                }
+                if (_isHrComplaintMaximized)
+                {
+                    hrComplaintRect.anchoredPosition = Vector2.zero;
+                    hrComplaintRect.sizeDelta = windowsToOpenRect.rect.size;
+                }
                     
                 _isDesktopMaximized = !_isDesktopMaximized;
             }
