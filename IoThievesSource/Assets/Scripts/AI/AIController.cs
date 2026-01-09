@@ -10,6 +10,14 @@ namespace AI
         [SerializeField] private AINames startState;
         [SerializeField] private AIState _currentState;
         [SerializeField] private NpcScriptableObject _NpcDatas;
+
+        
+        public EnemyAdapter enemyAdapter;
+
+        #region DebugVariables
+        [Header("Debug Variables")]
+        public bool Stun = false;
+        #endregion
         
         public AIState CurrentState => _currentState;
         
@@ -28,6 +36,11 @@ namespace AI
         
         private void Update()
         {
+            if (Stun)
+            {
+                ChangeState(AINames.StunnedState);
+                Stun = false; 
+            }
             _currentState?.Execute();
         }
 
@@ -35,8 +48,12 @@ namespace AI
         {
             return startState;
         }
+        
         public void ChangeState(AINames state)
         {
+            if (CurrentState is StunnedState)
+                return;
+            
             AIState targetState = _stateFactory.GetState(state);
             if (targetState == _currentState) //Only one instance of the same state is stored in the factory
                 return;

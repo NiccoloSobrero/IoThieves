@@ -56,6 +56,7 @@ namespace Managers
             EventsManager.OnQuitGame.AddListener(QuitGame);
             EventsManager.OnOptionsClicked.AddListener(OpenOptions);
             EventsManager.OnRestartGame.AddListener(RestartGame);
+            EventsManager.OnGameOverTriggered.AddListener(GameOver);
             EventsManager.OnNextLevel.AddListener(GoToNextLevel);
             EventsManager.OnBackToMainMenu.AddListener(GoToMainMenu);
         }
@@ -70,6 +71,7 @@ namespace Managers
             EventsManager.OnQuitGame.RemoveListener(QuitGame);
             EventsManager.OnOptionsClicked.RemoveListener(OpenOptions);
             EventsManager.OnRestartGame.RemoveListener(RestartGame);
+            EventsManager.OnGameOverTriggered.RemoveListener(GameOver);
             EventsManager.OnNextLevel.RemoveListener(GoToNextLevel);
             EventsManager.OnBackToMainMenu.RemoveListener(GoToMainMenu);
         }
@@ -125,6 +127,11 @@ namespace Managers
         private void RestartGame()
         {
             print("Restarting Game");
+        }
+
+        private void GameOver()
+        {
+            print("Game Over");
         }
 
         private void OpenOptions()

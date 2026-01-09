@@ -15,6 +15,8 @@ namespace Interactables.ThrowableDistraction
         private const int MaxAttractableEnemies = 10;
         private readonly Collider[] _enemies = new Collider[MaxAttractableEnemies];
 
+        [SerializeField] private GameObject _stunTrigger;
+
         private void Awake()
         {
             _rb = GetComponent<Rigidbody>();
@@ -46,6 +48,8 @@ namespace Interactables.ThrowableDistraction
         protected virtual void HandleCollision()
         {
             Vector3 collisionPos = gameObject.transform.position;
+            
+           Instantiate(_stunTrigger, collisionPos, Quaternion.identity); 
             
             int size = Physics.OverlapSphereNonAlloc(gameObject.transform.position, _attractionRange, _enemies, enemyLayer);
 

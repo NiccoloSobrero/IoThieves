@@ -12,6 +12,7 @@ namespace AI
             private DeviceHackedState deviceHackedState;
             private NoiseHeardState noiseHeardState;
             private PathCyclingState pathCyclingState; 
+            private StunnedState stunnedState;
             public StateFactory(AIController controller)
             {
                 idleState = new IdleState(controller);
@@ -20,6 +21,7 @@ namespace AI
                 deviceHackedState = new DeviceHackedState(controller);
                 noiseHeardState =  new NoiseHeardState(controller);
                 pathCyclingState = new PathCyclingState(controller) ; 
+                stunnedState = new StunnedState(controller);
             }
             
             public AIState GetState(AINames stateName)
@@ -33,6 +35,7 @@ namespace AI
                     case AINames.DeviceHacked: return deviceHackedState;
                     case AINames.NoiseHeardState : return noiseHeardState;
                     case AINames.PathCycling : return pathCyclingState;
+                    case AINames.StunnedState : return stunnedState;
                     default: throw new ArgumentException($"Invalid state name: {stateName}.");
                 }
             }

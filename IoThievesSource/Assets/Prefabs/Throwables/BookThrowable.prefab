@@ -153,3 +153,4 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 128
+  _stunTrigger: {fileID: 3527231264625419858, guid: 4d02fbf5e79100a4fa2bbbf49cd46fe5, type: 3}

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.NetworkInformation;
 using AI.NavigationAndWaypoints;
+using Interactables;
 using UnityEngine;
 
 namespace AI.AI_States
@@ -8,7 +10,7 @@ namespace AI.AI_States
     public class DeviceHackedState : AIState
     {
         
-        private PointOfInterest _hackedDevice;
+        private List<PointOfInterest> _hackedDevices = new  List<PointOfInterest>();
         private List<Waypoint> _path;
         private bool _destinationReached = false;
 
@@ -20,46 +22,34 @@ namespace AI.AI_States
 
         public override void Enter()
         {
+            /*
             _hackedDevice = FindHackedDevice();
-
-            if (_hackedDevice is not null)
+            */
+            if (_hackedDevices.Count > 0) 
             {
-                _path = PathFinding.FindPath(AIUtilities.FindNearestWaypoint(Npc.transform.position), _hackedDevice);
+                _path = PathFinding.FindPath(AIUtilities.FindNearestWaypoint(Npc.transform.position), _hackedDevices[0]);
                 _destinationReached = false;
             }
+            /*
             else
                 Npc.PreviousState();
+                */
         }
 
-        private PointOfInterest FindHackedDevice()
-        {
-            PointOfInterest[] hackedObjects = Object.FindObjectsByType<PointOfInterest>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
-            
-            PointOfInterest hackedDevice = null;
-            foreach (PointOfInterest poi in hackedObjects)
-            {
-                if(poi.AssignedDevice is null)
-                    continue;
-                
-                if (poi.AssignedDevice.isHacked)
-                    hackedDevice = poi;
-            }
-            
-            return hackedDevice;
-        }
+        
+      
         
         public override void Execute()
         {
             if (_destinationReached)     //Resolve the reached device
             {
-                _solved = _hackedDevice.AssignedDevice.ResolveHack();
-
+                _solved = _hackedDevices[0].AssignedDevice.ResolveHack();
+                _hackedDevices.RemoveAt(0);
                 if (_solved)
                 {
-                    _hackedDevice = FindHackedDevice();
-                    if (_hackedDevice is not null)
+                    if (_hackedDevices.Count > 0)
                     {
-                        _path = PathFinding.FindPath(AIUtilities.FindNearestWaypoint(Npc.transform.position), _hackedDevice);
+                        _path = PathFinding.FindPath(AIUtilities.FindNearestWaypoint(Npc.transform.position), _hackedDevices[0]);
                         _destinationReached = false;
                     }
                     else Npc.PreviousState();
@@ -85,7 +75,7 @@ namespace AI.AI_States
                     Waypoint reached = _path[0];
                     _path.RemoveAt(0);
 
-                    if (reached.Equals(_hackedDevice))
+                    if (reached.Equals(_hackedDevices))
                     {
                         _destinationReached = true;
                     }
@@ -95,6 +85,11 @@ namespace AI.AI_States
         
         public override void Exit()
         {
+        }
+
+        public void SetDevice(PointOfInterest pointOfInterest)
+        {
+            _hackedDevices.Append(pointOfInterest);
         }
     }
 }

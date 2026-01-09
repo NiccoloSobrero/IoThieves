@@ -19,7 +19,7 @@ namespace AI.AI_States
         private float _minDistance = 1.5f;        //Below this distance no intermediate points will be added
         private Vector3[] _positions;
         private int _positionIndex = 0;
-        private float _radius = 0.5f;
+        private float _radius = 0.3f;
 
         private float _waitedTime = 0;
         private float _waitingTime;
