@@ -157,6 +157,23 @@ public abstract class TerminalMenu : MonoBehaviour
         _output.Add(label);
         _output.ScrollTo(label);
     }
+    
+    protected void PrintColumns(string left, string right)
+    {
+        VisualElement row = new VisualElement();
+        row.AddToClassList("row");
+        
+        Label leftLabel = new Label(left);
+        leftLabel.AddToClassList("left-col");
+        Label rightLabel = new Label(right);
+        rightLabel.AddToClassList("right-col");
+        
+        row.Add(leftLabel);
+        row.Add(rightLabel);
+        
+        _output.Add(row);
+        _output.ScrollTo(row);
+    }
 
     protected abstract void ProcessCommand(string cmd);
 }

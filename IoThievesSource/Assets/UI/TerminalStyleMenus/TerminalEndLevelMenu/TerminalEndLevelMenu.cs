@@ -37,18 +37,23 @@ public class TerminalEndLevelMenu : TerminalMenu
         string detectCmd = command == string.Empty ? cmd : command;
         switch (detectCmd.ToLower())
         {
-            case "iothieves --help":
-                PrintLine("Available commands: ls, cat [FILENAME], iothieves --scan --next-target, iothieves --return, iothieves --exit");
+            case "help":
+                PrintLine("Available commands:");
+                PrintColumns(" ls", "list all files");
+                PrintColumns(" cat [FILENAME]", "open file specified by [FILENAME]");
+                PrintColumns(" scan --next-target", "go to next level");
+                PrintColumns(" cd ..", "return to main menu");
+                PrintColumns(" quit", "quit game");
                 break;
-            case "iothieves --scan --next-target":
+            case "scan --next-target":
                 PrintLine("Exploiting next target...");
                 EventsManager.OnNextLevel?.Invoke();
                 break;
-            case "iothieves --return":
+            case "cd ..":
                 PrintLine("Going to main menu...");
                 EventsManager.OnBackToMainMenu?.Invoke();
                 break;
-            case "iothieves --exit":
+            case "exit":
                 PrintLine("Shutting down...");
                 EventsManager.OnQuitGame?.Invoke();
                 break;
@@ -99,7 +104,13 @@ public class TerminalEndLevelMenu : TerminalMenu
         PrintLine("Polimi Game Collective");
         PrintLine("");
         
-        PrintLine("Type 'iothieves --help' to list commands");
+        // PrintLine("Type 'iothieves --help' to list commands");
+        PrintLine("Available commands:");
+        PrintLine("     ls                   list all files");
+        PrintLine("     cat [FILENAME]       open file specified by [FILENAME]");
+        PrintLine("     scan --next-target   go to next level");
+        PrintLine("     cd ..                return to main menu");
+        PrintLine("     quit                 quit game");
     }
     
     private void HideEndLevelMenu()
