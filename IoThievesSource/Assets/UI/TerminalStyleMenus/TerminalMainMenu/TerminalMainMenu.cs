@@ -2,6 +2,7 @@ using System;
 using Events;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class TerminalMainMenu : TerminalMenu
 {
@@ -37,7 +38,8 @@ public class TerminalMainMenu : TerminalMenu
 
     private void Scan()
     {
-        if (_hasStartedScanning && _scannerTimer >= _scanCharTypingDelay)
+        float delay = Random.Range(_scanCharTypingDelay[0], _scanCharTypingDelay[1]);
+        if (_hasStartedScanning && _scannerTimer >= delay)
         {
             _scannerTimer = 0f;
 
