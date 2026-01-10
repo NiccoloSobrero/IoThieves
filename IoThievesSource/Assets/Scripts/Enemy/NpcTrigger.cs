@@ -1,4 +1,5 @@
 using System.Collections;
+using System.IO;
 using SuspicionSystem;
 using UnityEngine;
 
@@ -30,6 +31,7 @@ namespace Enemy
         {
             if (_playerInRange)
             {
+                //print("Player in range");
                 _timer += Time.deltaTime;
                 
                 if (_timer >= timeBetweenChecks)
@@ -52,6 +54,7 @@ namespace Enemy
             {
                 //alertManager.SetAlertedState(true);
 
+                //print("Entered Player");
                 _playerTransform = other.transform;
                 _playerInRange = true;
                 _timer = 0f;
@@ -63,8 +66,9 @@ namespace Enemy
             if (other.CompareTag("Player"))
             {
                // alertManager.SetAlertedState(false);
-                
+                //print("Exited Player");
                 _playerInRange = false;
+                _playerTransform = null; //************
             }
         }
 
@@ -74,17 +78,20 @@ namespace Enemy
             {
                 return;
             }
+            //print("Checking for PlayerInCone");
 
             // Compute direction to player
             Vector3 direction = _playerTransform.position - transform.position;
+            float castDistance = direction.magnitude;
             direction.y = 0f;
             direction.Normalize();
-            
+             
             if (!Physics.Raycast(rayOrigin.position,
                     direction,
-                    enemyFov.Radius,
+                    castDistance,
                     LayerMask.GetMask("Default") , QueryTriggerInteraction.Ignore))
             {
+                print("DEVO TRIGGERARE GAME OVER");
                 alertManager.ChangeState(alertManager.GameOverState);
             }
         }

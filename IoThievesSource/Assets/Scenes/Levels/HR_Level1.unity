@@ -1327,26 +1327,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_AtTheEntrance
       objectReference: {fileID: 0}
-    - target: {fileID: 5912339954262484050, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.991365
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912339954262484050, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.13113183
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912339954262484050, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912339954262484050, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5912339954262484050, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8569817063494681188, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.75
@@ -1403,7 +1383,8 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4251657075257737783, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -8522,6 +8503,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ceadee1c51859448c6419e2aadd911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  samplingTime: 0.2
+  elapsed: 0.2
+  _radius: 0
 --- !u!1 &725937896
 GameObject:
   m_ObjectHideFlags: 0
@@ -20435,7 +20419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineRenderer: {fileID: 1017819948}
-  stunTrigger: {fileID: 0}
+  stunTrigger: {fileID: 1155057708}
   smokeVFX: {fileID: 1325645694}
   stunTime: 5
   triggerArea: {fileID: 2128553138}
@@ -20940,6 +20924,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ceadee1c51859448c6419e2aadd911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  samplingTime: 0.2
+  elapsed: 0.2
+  _radius: 0
 --- !u!65 &1155057709
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -124061,7 +124048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineRenderer: {fileID: 2052292481}
-  stunTrigger: {fileID: 0}
+  stunTrigger: {fileID: 724864481}
   smokeVFX: {fileID: 616604116}
   stunTime: 5
   triggerArea: {fileID: 154037568}
