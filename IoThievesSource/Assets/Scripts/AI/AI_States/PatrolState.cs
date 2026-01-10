@@ -1,13 +1,15 @@
+using System;
 using System.Collections.Generic;
 using AI.NavigationAndWaypoints;
-using UnityEditor.TerrainTools;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace AI.AI_States
 {
     public class PatrolState : AIState
     {
-         private bool _isMoving = true;
+         private bool _isMoving = true; 
+        
          private bool _isInteracting = false;
         
          private Waypoint _target;
@@ -16,7 +18,18 @@ namespace AI.AI_States
         private Queue<Movement> _recentMovements = new Queue<Movement>();
         private const int MaxMovementHistory = 15;
 
+        private bool IsMoving
+        {
+            get => _isMoving;
+            set
+            {
+                if (value == _isMoving) return;
 
+                _isMoving = value;
+                RaiseOnWalkingVarChanged(_isMoving); 
+            }
+        }
+        
         public PatrolState(AIController npc) : base(npc){}
 
         public Waypoint ChooseNextWaypoint(Waypoint currentWaypoint)
@@ -135,9 +148,10 @@ namespace AI.AI_States
 
             float angleMag = AIUtilities.RotateTarget(Npc.transform, forwardDir, dir, Npc.NpcDatas.AngularSpeed); 
             
-            _isMoving = angleMag < Npc.NpcDatas.AngularThreshold;
+            IsMoving = angleMag < Npc.NpcDatas.AngularThreshold;
+            Npc.enemyAdapter.AnimationController.SetWalking(IsMoving);
 
-            if (_isMoving)
+            if (IsMoving)
             {
                 AIUtilities.MoveTarget(Npc.transform, dir, Npc.NpcDatas.Speed);
             }
@@ -148,16 +162,15 @@ namespace AI.AI_States
             {
                 if (_target is PointOfInterest poi)
                 {
-                    _isMoving = false;
+                    IsMoving = false;
                     _isInteracting = !poi.AssignedDevice.Interact();
                 }
 
                 if (!_isInteracting)
                 {
                     _target = ChooseNextWaypoint(_target);
-                    _isMoving = true;
+                    IsMoving = true;
                 }
-                
             }
         }
 

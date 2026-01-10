@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using AI.NavigationAndWaypoints;
+using NUnit.Framework;
 using UnityEngine;
 
 namespace AI.AI_States
@@ -10,10 +11,22 @@ namespace AI.AI_States
         private List<Waypoint> _path;
         private int _idx = 0;
         private Vector3 _targetPosition;
-        private bool _isPath = false;
+        //private bool _isPath = false;
         private bool _isMoving = false;
         private bool back_to_path = false;
         private List<Waypoint> _backPath;
+
+        private bool IsMoving
+        {
+            get => _isMoving;
+            set
+            {
+                if (_isMoving == value) return;
+                
+                _isMoving = value;
+                RaiseOnWalkingVarChanged(_isMoving);
+            } 
+        }
 
         public PathCyclingState(AIController npc) : base(npc)
         {
@@ -28,7 +41,7 @@ namespace AI.AI_States
                 List<Waypoint> path = Npc.GetComponent<PathToFollow>().GetPath();
                 if (path is null || path.Count == 0) return;
                 _path = path;
-                _isMoving = true;
+                IsMoving = true;
                 _idx = 0;
                 _targetPosition = _path[_idx].transform.position;
                 Debug.Log("Path is set");
@@ -83,12 +96,12 @@ namespace AI.AI_States
                 NextWaypoint();
             }
             //Else I am already near enough to my path
-            _isMoving = true;
+            IsMoving = true;
         }
 
         public override void Execute()
         {
-            if (!_isMoving)
+            if (!IsMoving)
                 return;
             
             Vector3 dir = _targetPosition - Npc.transform.position;

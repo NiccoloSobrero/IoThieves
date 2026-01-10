@@ -28,6 +28,18 @@ namespace AI.AI_States
         
         private Queue<Waypoint> _recentMovements = new Queue<Waypoint>();
         private const int MaxMovementHistory = 15;
+        
+        private bool IsMoving
+        {
+            get => _isMoving;
+            set
+            {
+                if (value == _isMoving) return;
+
+                _isMoving = value;
+                RaiseOnWalkingVarChanged(_isMoving); 
+            }
+        }
         public SuspiciousState(AIController npc) : base(npc) {}
 
         public override void Enter()
@@ -39,7 +51,7 @@ namespace AI.AI_States
             
             //Wait a second before it starts moving
             _midpointReached = true;
-            _isMoving = false;
+            IsMoving = false;
             _waitingTime = Random.value * MaxWaitingTime; //Random waiting time up to 3 seconds
         }
         
@@ -56,7 +68,7 @@ namespace AI.AI_States
                     _midpointReached = false;
                     _waitedTime = 0;
                     NextDestination();
-                    _isMoving = true;
+                    IsMoving = true;
                 }
             }
             else
@@ -68,9 +80,9 @@ namespace AI.AI_States
 
                 float angleMag = AIUtilities.RotateTarget(Npc.transform, forwardDir, dir, _angularSpeed); 
                 
-                _isMoving = angleMag < Npc.NpcDatas.AngularThreshold;
+                IsMoving = angleMag < Npc.NpcDatas.AngularThreshold;
 
-                if (_isMoving)
+                if (IsMoving)
                 { 
                     AIUtilities.MoveTarget(Npc.transform, dir, _speed); 
                 }
@@ -80,7 +92,7 @@ namespace AI.AI_States
                 if (distance < Npc.NpcDatas.DistanceThreshold)
                 {
                     _midpointReached = true;
-                    _isMoving = false;
+                    IsMoving = false;
                     _waitingTime = Random.value * MaxWaitingTime * (_verySuspicious ? 0.5f : 1.0f); //Random waiting time up to 3 seconds (halved if verySuspicious)
                 }
             }

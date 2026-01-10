@@ -1,4 +1,6 @@
+using System;
 using AI.AI_States;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -10,7 +12,8 @@ namespace AI
         [SerializeField] private AINames startState;
         [SerializeField] private AIState _currentState;
         [SerializeField] private NpcScriptableObject _NpcDatas;
-
+        public event Action<AIState> OnStateChanged; 
+        public event Action<AIState> BeforeStateChanged; 
         
         public EnemyAdapter enemyAdapter;
 
@@ -19,8 +22,21 @@ namespace AI
         public bool Stun = false;
         #endregion
         
-        public AIState CurrentState => _currentState;
-        
+        //public AIState CurrentState => _currentState;
+
+        public AIState CurrentState
+        {
+            get => _currentState;
+            set
+            {
+                if (_currentState == value) return;
+                
+                BeforeStateChanged?.Invoke(_currentState);
+                _currentState = value;
+                OnStateChanged?.Invoke(_currentState);
+            }
+        }
+
         private StateFactory _stateFactory;
         public StateFactory StateFactory => _stateFactory;
         

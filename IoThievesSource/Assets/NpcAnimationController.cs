@@ -1,27 +1,35 @@
+using System;
+using AI;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
 public class NpcAnimationController : MonoBehaviour
 {
-    [SerializeField] private Animator animator;    
-    [SerializeField] private AnimationClip dance;
-    [SerializeField] private bool danceB;
-    [SerializeField] private bool moveB;
-    [SerializeField] private AnimationClip move;
+    private static readonly int IsWalking = Animator.StringToHash("isWalking");
+    //private static readonly int IsIdle = Animat
+    [SerializeField] private Animator animator;
+    [SerializeField] private EnemyAdapter enemyAdapter;
+    private AIController _aiController;
+    
     void Start()
     {
-        animator = GetComponent<Animator>();
-        AnimationClip[] clips = animator.runtimeAnimatorController.animationClips;
-        RuntimeAnimatorController controller = animator.runtimeAnimatorController;
-        foreach (AnimationClip clip in clips)
-        {
-            print(clip.name);
-        }
-       
+        _aiController = GetComponent<AIController>();
+        _aiController.OnStateChanged += StateChanged;
+        _aiController.BeforeStateChanged += StateAboutToChange;
+    }
+    
+    void StateChanged(AIState state)
+    {
+        state.OnWalkingVarChanged += SetWalking;
+    }
+    
+    void StateAboutToChange(AIState state)
+    {
+        state.OnWalkingVarChanged -= SetWalking;
     }
 
-    void Update()
+    public void SetWalking(bool isWalking)
     {
-            
+        animator.SetBool(IsWalking, isWalking);
+        animator.SetBool("isWalking", isWalking);
     }
 }

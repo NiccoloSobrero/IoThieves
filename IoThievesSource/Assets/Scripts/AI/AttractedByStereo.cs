@@ -14,6 +14,18 @@ namespace AI
         [SerializeField] private bool isDancing = false;
         [SerializeField] private float StartingYRotation;
         [SerializeField] private float DancingYRotation;
+        private bool _isMoving = false;
+
+        public bool IsMoving
+        {
+            get => _isMoving;
+            set
+            {
+                if (_isMoving == value) return;
+                _isMoving = value;
+                //DevoInvocareL'Evento nell'animator
+            }
+        }
 
         private void Awake()
         {
@@ -32,13 +44,15 @@ namespace AI
         {
             if (stereo.IsPlayingMusic)
             {
-                Debug.Log("Stereo? "+ stereo.IsPlayingMusic);
+                //Debug.Log("Stereo? "+ stereo.IsPlayingMusic);
                 if(Vector3.Distance(transform.position, dancingPosition) > 0.1f){   //You must reach the dancing area
+                    IsMoving = true;
                     PlanMovement(dancingPosition);
                 }
                 else
                 {                                                                   //Alor on dance
                     Debug.Log("rotate towards the stereo");
+                    IsMoving = false;
                     PlanRotation(DancingYRotation);
                     isDancing = true;
                     //DanceAnimation()
@@ -46,7 +60,7 @@ namespace AI
             }
             else  // stereo is off
             {
-                Debug.Log("Stereo? "+ stereo.IsPlayingMusic);
+                //Debug.Log("Stereo? "+ stereo.IsPlayingMusic);
                 if (isDancing)              //Stop dancing
                 {
                     isDancing = false;
@@ -54,10 +68,12 @@ namespace AI
 
                 if (Vector3.Distance(transform.position, startingPosition) > data.DistanceThreshold)        //reach the startingPosition
                 {
+                    IsMoving = true;
                     PlanMovement(startingPosition);
                 }              
                 else
                 {
+                    IsMoving = false;
                     PlanRotation(StartingYRotation);
                 }
             }

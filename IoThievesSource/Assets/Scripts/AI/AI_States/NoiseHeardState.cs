@@ -15,6 +15,17 @@ namespace AI.AI_States
         private float _nextWaypointThreshold = 0.5f;
         private float _throwedObjectSurroundings = 0.3f;
 
+        private bool DestinationReached 
+        {
+            get => _destinationReached;
+            set
+            {
+                if(_destinationReached == value) return;
+                
+                _destinationReached = value;
+                RaiseOnWalkingVarChanged(!_destinationReached);
+            }
+        }
         public NoiseHeardState(AIController npc) : base(npc) {}
 
         public override void Enter()
@@ -24,12 +35,12 @@ namespace AI.AI_States
             Waypoint nearestWaypoint = AIUtilities.FindNearestWaypoint(Npc.transform.position);
             
             _path = PathFinding.FindPath(nearestWaypoint, nearestObj);
-            _destinationReached = false;
+            DestinationReached = false;
         }
 
         public override void Execute()
         {
-            if (_destinationReached)     
+            if (DestinationReached)     
             {
                 //lookAround animation
                 Debug.Log("Destination Reached");
@@ -62,7 +73,7 @@ namespace AI.AI_States
 
                     if (Vector3.Distance(reached.position , _throwedObject.position) < _throwedObjectSurroundings && _path.Count == 0)
                     {
-                        _destinationReached = true;
+                        DestinationReached = true;
                     }
                 }
             }

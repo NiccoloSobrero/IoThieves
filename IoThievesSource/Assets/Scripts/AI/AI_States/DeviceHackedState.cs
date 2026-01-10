@@ -14,6 +14,18 @@ namespace AI.AI_States
         private List<Waypoint> _path;
         private bool _destinationReached = false;
 
+        private bool DestinationReached 
+        {
+            get => _destinationReached;
+            set
+            {
+                if(_destinationReached == value) return;
+                
+                _destinationReached = value;
+                RaiseOnWalkingVarChanged(!_destinationReached);
+            }
+        }
+
         private float _nextWaypointThreshold = 0.5f;
 
         private bool _solved = false;
@@ -22,26 +34,16 @@ namespace AI.AI_States
 
         public override void Enter()
         {
-            /*
-            _hackedDevice = FindHackedDevice();
-            */
             if (_hackedDevices.Count > 0) 
             {
                 _path = PathFinding.FindPath(AIUtilities.FindNearestWaypoint(Npc.transform.position), _hackedDevices[0]);
-                _destinationReached = false;
+                DestinationReached = false;
             }
-            /*
-            else
-                Npc.PreviousState();
-                */
         }
-
-        
-      
         
         public override void Execute()
         {
-            if (_destinationReached)     //Resolve the reached device
+            if (DestinationReached)     //Resolve the reached device
             {
                 _solved = _hackedDevices[0].AssignedDevice.ResolveHack();
                 _hackedDevices.RemoveAt(0);
@@ -50,7 +52,7 @@ namespace AI.AI_States
                     if (_hackedDevices.Count > 0)
                     {
                         _path = PathFinding.FindPath(AIUtilities.FindNearestWaypoint(Npc.transform.position), _hackedDevices[0]);
-                        _destinationReached = false;
+                        DestinationReached = false;
                     }
                     else Npc.PreviousState();
                 }
@@ -77,7 +79,7 @@ namespace AI.AI_States
 
                     if (reached.Equals(_hackedDevices))
                     {
-                        _destinationReached = true;
+                        DestinationReached = true;
                     }
                 }
             }
