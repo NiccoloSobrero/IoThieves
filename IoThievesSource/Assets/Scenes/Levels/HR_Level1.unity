@@ -8466,7 +8466,7 @@ GameObject:
   m_Component:
   - component: {fileID: 724864478}
   - component: {fileID: 724864480}
-  - component: {fileID: 724864479}
+  - component: {fileID: 724864481}
   m_Layer: 9
   m_Name: StunTrigger
   m_TagString: Untagged
@@ -8489,19 +8489,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5754694688926819987}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &724864479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 724864477}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57f661e7e574006b9925a901111c169, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ttl: 1
 --- !u!65 &724864480
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8523,6 +8510,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.1628299, y: 1, z: 2.224754}
   m_Center: {x: -0.10856032, y: 0, z: -0.04841268}
+--- !u!114 &724864481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 724864477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27ceadee1c51859448c6419e2aadd911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &725937896
 GameObject:
   m_ObjectHideFlags: 0
@@ -20436,7 +20435,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineRenderer: {fileID: 1017819948}
-  stunTrigger: {fileID: 1155057708}
+  stunTrigger: {fileID: 0}
   smokeVFX: {fileID: 1325645694}
   stunTime: 5
   triggerArea: {fileID: 2128553138}
@@ -20938,12 +20937,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1155057706}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c57f661e7e574006b9925a901111c169, type: 3}
+  m_Script: {fileID: 11500000, guid: 27ceadee1c51859448c6419e2aadd911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ttl: 1
---- !u!135 &1155057709
-SphereCollider:
+--- !u!65 &1155057709
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -20961,8 +20959,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.1628299, y: 1, z: 2.224754}
+  m_Center: {x: -0.10856032, y: 0, z: -0.04841268}
 --- !u!1 &1173162070
 GameObject:
   m_ObjectHideFlags: 0
@@ -124063,7 +124061,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineRenderer: {fileID: 2052292481}
-  stunTrigger: {fileID: 724864479}
+  stunTrigger: {fileID: 0}
   smokeVFX: {fileID: 616604116}
   stunTime: 5
   triggerArea: {fileID: 154037568}
