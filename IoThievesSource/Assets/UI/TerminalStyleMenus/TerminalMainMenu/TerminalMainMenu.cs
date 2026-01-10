@@ -51,13 +51,14 @@ public class TerminalMainMenu : TerminalMenu
                 _hasStartedScanning = false;
                 PrintLine($"iothieves@kali:~$ {IothievesScan}");
                 PrintLine("");
-                PrintLine("IoThieves v0.1.2");
+                // PrintLine("IoThieves v0.1.2");
+                PrintBanner(Utility.IoThievesArt);
                 PrintLine("Copyright (c) 2025");
-                PrintColumns("Architect:", "Daniel Bonardi");
-                PrintColumns("UI:", "Emanuele Sapio");
-                PrintColumns("Designer:", "Matilde Sobberi");
                 PrintColumns("Team Leader:", "Niccoló Sobrero");
+                PrintColumns("Designer:", "Matilde Sobberi");
+                PrintColumns("Architect:", "Daniel Bonardi");
                 PrintColumns("AI:", "Federico Tabellini");
+                PrintColumns("UI:", "Emanuele Sapio");
                 
                 PrintLine("Polimi Game Collective");
                 
@@ -115,10 +116,10 @@ public class TerminalMainMenu : TerminalMenu
             
             // PrintLine("Type 'help' to list commands");
             PrintLine("Available commands:");
-            PrintColumns(" start", "start game");
-            PrintColumns(" help", "list all available commands");
-            PrintColumns(" options", "settings [Not Available]");
-            PrintColumns(" quit", "quit game");
+            PrintLine(" start       start game");
+            PrintLine(" help        list all available commands");
+            PrintLine(" options     settings [Not Available]");
+            PrintLine(" quit        quit game");
             
             PrintLine("");
             
@@ -151,6 +152,7 @@ public class TerminalMainMenu : TerminalMenu
             case "help":
                 PrintLine("Available commands:");
                 PrintLine("start            start game");
+                PrintLine("help             list all available commands");
                 PrintLine("options          settings [Not Available]");
                 PrintLine("quit             quit game");
                 break;
@@ -163,7 +165,7 @@ public class TerminalMainMenu : TerminalMenu
                 PrintLine("Customization session started...");
                 EventsManager.OnOptionsClicked?.Invoke();
                 break;
-            case "exit":
+            case "quit":
                 PrintLine("Shutting down...");
                 EventsManager.OnQuitGame?.Invoke();
                 break;

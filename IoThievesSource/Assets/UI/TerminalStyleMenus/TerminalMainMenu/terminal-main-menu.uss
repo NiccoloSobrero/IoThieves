@@ -108,4 +108,12 @@
     display: none;
 }
 
+.terminal-banner {
+    -unity-font-definition: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf"); /* or another monospace font */
+    font-size: 14px; /* adjust to fit your container */
+    color: #00FF00;  /* terminal green */
+    white-space: unset; /* preserve spaces exactly */
+}
+
+
 

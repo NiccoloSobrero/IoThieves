@@ -158,6 +158,13 @@ public abstract class TerminalMenu : MonoBehaviour
         _output.ScrollTo(label);
     }
     
+    protected void PrintBanner(string banner)
+    {
+        Label label = new Label(banner);
+        label.AddToClassList("terminal-banner");
+        _output.Add(label);
+    }
+    
     protected void PrintColumns(string left, string right)
     {
         VisualElement row = new VisualElement();

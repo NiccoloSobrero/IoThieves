@@ -53,7 +53,7 @@ public class TerminalEndLevelMenu : TerminalMenu
                 PrintLine("Going to main menu...");
                 EventsManager.OnBackToMainMenu?.Invoke();
                 break;
-            case "exit":
+            case "quit":
                 PrintLine("Shutting down...");
                 EventsManager.OnQuitGame?.Invoke();
                 break;
@@ -100,8 +100,9 @@ public class TerminalEndLevelMenu : TerminalMenu
         
         PrintLine("");
         PrintLine("IoThieves v0.1.2");
-        PrintLine("Copyright (c) 2025 by IoTeam");
-        PrintLine("Polimi Game Collective");
+        PrintLine("Copyright (c) 2025");
+        // PrintLine("Polimi Game Collective");
+        PrintBanner(Utility.LevelCompletedArt);
         PrintLine("");
         
         // PrintLine("Type 'iothieves --help' to list commands");
