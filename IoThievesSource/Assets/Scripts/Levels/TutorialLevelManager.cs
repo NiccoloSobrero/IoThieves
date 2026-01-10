@@ -47,6 +47,8 @@ namespace Levels
         [SerializeField] private InteractableTriggerArea codePadInteractableTriggerArea;
         [SerializeField] private AnimationCurve targetMovementCurve;
         [SerializeField] private float timeToPan;
+        [SerializeField] private AudioManager audioManager;
+        [SerializeField] private AudioPlayerUI audioPlayerUI;
         
         [Space]
         [Header("Step 1")]
@@ -150,6 +152,8 @@ namespace Levels
 
         private void Init()
         {
+            audioPlayerUI.gameObject.SetActive(false);
+            
             step0Trigger.GetComponent<TutorialLevelTrigger>().Init(this);
             step0Trigger.SetActive(false);
             
@@ -171,7 +175,7 @@ namespace Levels
             // Build steps
             _steps = new()
             {
-                Step_0, Step_1, Step_1_2,
+                Step_0, Step_1, Step_1_2, Step_1_3,
                 Step_2, Step_3,
                 Step_4, Step_5,
                 Step_6, Step_7,
@@ -265,6 +269,14 @@ namespace Levels
             codePadInteractableTriggerArea.ManualUpdate();
             
             PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
+        }
+        
+        private void Step_1_3()
+        {
+            audioManager.Play();
+            audioPlayerUI.gameObject.SetActive(true);
+            
+            audioPlayerUI.SetOpen(true);
         }
 
         private void Step_2()

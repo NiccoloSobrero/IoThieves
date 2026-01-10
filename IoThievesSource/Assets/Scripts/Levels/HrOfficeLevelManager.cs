@@ -42,7 +42,8 @@ namespace Levels
         [Header("File complaint")]
         [SerializeField] private TypeWriteMinigame typeWriteMinigame;
 
-        [Header("Get out")] 
+        [Header("Get out")]
+        [SerializeField] private DialogueLinesScrObj exitDialogue;
         [SerializeField] private LevelTrigger endLevelTrigger;
 
         private bool _completedFileComplaint;
@@ -107,8 +108,15 @@ namespace Levels
             // Add listener for boss door trigger
             bossDoorTrigger.onTriggerEnterEvent.AddListener(OnEnterBossDoorTrigger);
             
+            EventsManager.OnTriggerOnLineStart.AddListener(ShowFirstObjectives);
+        }
+        
+        private void ShowFirstObjectives()
+        {
             levelObjectivesUI.AddObjective(getBossAddress);
             levelObjectivesUI.AddObjective(fileComplaint);
+            
+            EventsManager.OnTriggerOnLineStart.RemoveListener(ShowFirstObjectives);
         }
 
         private IEnumerator MoveCameraToCor(Transform cameraFollow, Transform target)
@@ -189,6 +197,9 @@ namespace Levels
             
             endLevelTrigger.gameObject.SetActive(true);
             endLevelTrigger.onTriggerEnter.AddListener(OnGetOut);
+            
+            DialogueManager.Instance.SetDialogue(exitDialogue);
+            DialogueManager.Instance.OpenDialogueWindow();
         }
 
         private void OnGetOut()

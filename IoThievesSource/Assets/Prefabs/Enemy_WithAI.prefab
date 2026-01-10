@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3766216939390440942}
   - component: {fileID: 8815612906611303125}
   - component: {fileID: 3020483684397697886}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7300021351094850133}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Alert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2266928094965777046}
   - component: {fileID: 6371106478593720155}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: QuestionMark_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 2764688949154139611}
   - component: {fileID: 1453571345930536824}
   - component: {fileID: 5063885508952272140}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BillboardCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 8010653392504225706}
   - component: {fileID: 4612128562482907879}
   - component: {fileID: 7121399477152114760}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Borders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3528129834598787999}
   - component: {fileID: 2113508935762611}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ExclamationMark_Bar_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 7503103427044424747}
   - component: {fileID: 2510341666654401413}
   - component: {fileID: 7098223373304660499}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 7917590030762947642}
   - component: {fileID: 1778796904094798908}
   - component: {fileID: 8564034500925691780}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -558,7 +558,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7810159985789411016}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -591,7 +591,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1657448364397553986}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SuspicionSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -626,7 +626,7 @@ GameObject:
   - component: {fileID: 3346137037427755614}
   - component: {fileID: 2574360286532377722}
   - component: {fileID: -996625976428397906}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy_WithAI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 4209329345240200588}
   - component: {fileID: 1730396302846624056}
   - component: {fileID: 1838535260398341053}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -786,7 +786,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9032351452925609046}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ConeOfDeath
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -823,7 +823,7 @@ GameObject:
   - component: {fileID: 6279253201920660375}
   - component: {fileID: 3254335394328133252}
   - component: {fileID: 2302087526449798971}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FOV_SuspicionSphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -946,7 +946,7 @@ GameObject:
   - component: {fileID: 8991199193121710037}
   - component: {fileID: 8085368516138081469}
   - component: {fileID: 1101995406142850608}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FOV_Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1068,7 +1068,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3548101246771807000}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RayOrigin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1102,7 +1102,7 @@ GameObject:
   - component: {fileID: 5246760813774231191}
   - component: {fileID: 6863724868310895443}
   - component: {fileID: 4206319699196671944}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1210,7 +1210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5299629062407245711}
   - component: {fileID: 6924928530132457139}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ExclamationMark_Bar_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1330,6 +1330,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: fcfb38ec7567b3f468a343d7f569e1b3, type: 3}
       propertyPath: m_Name
       value: FOV_DeathCone
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: fcfb38ec7567b3f468a343d7f569e1b3, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

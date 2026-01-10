@@ -9,6 +9,8 @@ namespace Minigames
     [RequireComponent(typeof(ButtonSelectionListener), typeof(Button))]
     public class TypeWriteSection : MonoBehaviour
     {
+        private TypeWriteMinigame _minigame;
+        
         [Header("UI")]
         [SerializeField] private TMP_Text targetText;
         [SerializeField] private Image caretHighlight;
@@ -56,8 +58,10 @@ namespace Minigames
             _buttonSelectionListener.OnDeselected -= OnDeselect;
         }
 
-        public void Init()
+        public void Init(TypeWriteMinigame minigame)
         {
+            _minigame = minigame;
+            
             textToType = textToType.Replace("\r\n", "\n").Replace("\r", "\n");
 
             caretHighlight.color = _caretBg;
@@ -115,6 +119,12 @@ namespace Minigames
 
             _index++;
             Render();
+
+            if (_index >= textToType.Length && !HasTooManyErrors())
+            {
+                // Text was completed
+                StartCoroutine(_minigame.NextSection());
+            }
         }
 
         private void HandleBackspace()
@@ -228,17 +238,19 @@ namespace Minigames
             caretHighlight.gameObject.SetActive(false);
         }
 
-        public bool HasAnError()
+        public bool HasTooManyErrors()
         {
+            int errorCount = 0;
+            
             for (int i = 0; i < _correctAtIndex.Length; i++)
             {
                 if (!_correctAtIndex[i])
                 {
-                    return true;
+                    errorCount++;
                 }
             }
             
-            return false;
+            return errorCount > _correctAtIndex.Length * 0.1f;
         }
     }
 }

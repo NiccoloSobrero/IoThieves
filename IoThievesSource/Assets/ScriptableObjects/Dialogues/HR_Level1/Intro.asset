@@ -75,7 +75,7 @@ MonoBehaviour:
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
     text: Don't worry, I'll write every step you need in the list :)
-    tags: 
+    tags: 02000000
   - speakerName: PIP
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
     text: Nobody ever told you you're excessively chatty?

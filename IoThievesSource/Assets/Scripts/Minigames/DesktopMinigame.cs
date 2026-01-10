@@ -79,6 +79,8 @@ namespace Minigames
         
         private int _targetFilesNum;
         
+        private bool _isHrComplaintMinigameInitialized;
+        
         #region Events
 
         [HideInInspector] public UnityEvent onOpenFolderWithTarget;
@@ -89,6 +91,8 @@ namespace Minigames
         {
             _pathTextRect = pathText.gameObject.GetComponent<RectTransform>();
             _canvas = GetComponentInParent<Canvas>();
+
+            _isHrComplaintMinigameInitialized = false;
 
             _openedFirstFolder = false;
             _openedTextFile = false;
@@ -228,8 +232,12 @@ namespace Minigames
         {
             hrComplaintMinigame.transform.SetAsLastSibling();
             hrComplaintMinigame.gameObject.SetActive(true);
-            
-            hrComplaintMinigame.Init();
+
+            if (!_isHrComplaintMinigameInitialized)
+            {
+                hrComplaintMinigame.Init();
+                _isHrComplaintMinigameInitialized = true;
+            }
 
             _openedHrComplaint = true;
         }

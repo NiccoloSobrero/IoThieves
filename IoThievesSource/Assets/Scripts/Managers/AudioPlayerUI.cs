@@ -7,6 +7,8 @@ namespace Managers
 {
     public class AudioPlayerUI : MonoBehaviour
     {
+        private static readonly int Open = Animator.StringToHash("Open");
+
         [Header("UI")]
         [SerializeField] private TMP_Text songTitleText;
         [SerializeField] private Image coverImage;
@@ -21,13 +23,17 @@ namespace Managers
         
         [SerializeField] private float volumePopUpDuration = 2f;
         
+        private Animator _anim;
+        
         private Coroutine _volumePopUpCoroutine;
+        private bool _isOpen;
 
         public int MaxVolume => volumeBoxesParent.childCount;
 
         private void Awake()
         {
             volumePopUpCanvasGroup.alpha = 0f;
+            _anim = GetComponent<Animator>();
         }
 
         public void UpdateSong(string songName, Sprite cover)
@@ -71,6 +77,18 @@ namespace Managers
             }
             
             volumePopUpCanvasGroup.alpha = 0f;
+        }
+
+        public void SetOpen(bool isOpen)
+        {
+            _isOpen = isOpen;
+            _anim.SetBool(Open, _isOpen);
+        }
+        
+        public void OpenClose()
+        {
+            _isOpen = !_isOpen;
+            _anim.SetBool(Open, _isOpen);
         }
     }
 }

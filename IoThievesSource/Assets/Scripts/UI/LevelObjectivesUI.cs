@@ -66,6 +66,8 @@ namespace UI
                         objective.ObjectiveUI.UpdateText(nextStep);
                     }
                     
+                    Debug.Log("Updated objective");
+                    
                     AutoOpen();
                     
                     return;
@@ -79,6 +81,7 @@ namespace UI
             {
                 StopCoroutine(_autoCloseCoroutine);
                 _autoCloseCoroutine = StartCoroutine(AutoCloseCoroutine());
+                
                 return;
             }
             
@@ -92,7 +95,8 @@ namespace UI
         private IEnumerator AutoCloseCoroutine()
         {
             yield return new WaitForSeconds(AutoCloseDelay);
-            
+
+            _autoCloseCoroutine = null;
             _isOpened = false;
             animator.SetBool(Open, _isOpened);
         }
