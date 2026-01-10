@@ -135,15 +135,6 @@ public class TerminalMainMenu : TerminalMenu
         string bar = "[" + new string('#', loaded) + new string(' ', empty) + $"] {(int)(_loadingProgress * 100)}%";
         _loadingLabel.text = bar;
     }
-
-    private void InsertCharacter(char character)
-    {
-        _currentInput = _currentInput.Insert(_caretIndex, character.ToString());
-        _caretIndex++;
-        
-        _inputLabel.text = _currentInput;
-        UpdateCaretPosition();
-    }
     
     protected override void ProcessCommand(string cmd)
     {

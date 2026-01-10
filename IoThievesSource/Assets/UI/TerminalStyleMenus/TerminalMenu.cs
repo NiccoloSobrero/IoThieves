@@ -5,6 +5,14 @@ public abstract class TerminalMenu : MonoBehaviour
 {
     [SerializeField]
     protected UIDocument uiDocument;
+    [SerializeField]
+    protected AudioSource _typingAudioSource;
+    [SerializeField]
+    protected AudioClip[] _typingAudioClips;
+    [SerializeField]
+    protected AudioClip _backspaceClip;
+    [SerializeField]
+    protected AudioClip _enterClip;
 
     protected ScrollView _output;
     protected VisualElement _caret;
@@ -88,6 +96,7 @@ public abstract class TerminalMenu : MonoBehaviour
 
         if (evt.keyCode == KeyCode.Backspace)
         {
+            _typingAudioSource.PlayOneShot(_backspaceClip, 0.5f);
             if (_caretIndex > 0)
             {
                 _currentInput = _currentInput.Remove(_caretIndex - 1, 1);
@@ -98,10 +107,12 @@ public abstract class TerminalMenu : MonoBehaviour
         else if (evt.keyCode == KeyCode.LeftArrow)
         {
             _caretIndex = Mathf.Max(0, _caretIndex - 1);
+            PlaySFX();
         }
         else if (evt.keyCode == KeyCode.RightArrow)
         {
             _caretIndex = Mathf.Min(_currentInput.Length, _caretIndex + 1);
+            PlaySFX();
         }
         else if (evt.keyCode == KeyCode.Return)
         {
@@ -114,11 +125,13 @@ public abstract class TerminalMenu : MonoBehaviour
             _currentInput = string.Empty;
             _caretIndex = 0;
             textChanged = true;
+            _typingAudioSource.PlayOneShot(_enterClip, 0.5f);
         }
         else if (!char.IsControl(evt.character))
         {
-            _currentInput = _currentInput.Insert(_caretIndex, evt.character.ToString());
-            _caretIndex++;
+            // _currentInput = _currentInput.Insert(_caretIndex, evt.character.ToString());
+            // _caretIndex++;
+            InsertCharacter(evt.character);
             textChanged = true;
         }
 
@@ -129,6 +142,17 @@ public abstract class TerminalMenu : MonoBehaviour
 
         UpdateCaretPosition();
         evt.StopPropagation();
+    }
+    
+    protected void InsertCharacter(char character)
+    {
+        _currentInput = _currentInput.Insert(_caretIndex, character.ToString());
+        _caretIndex++;
+        
+        _inputLabel.text = _currentInput;
+        UpdateCaretPosition();
+
+        PlaySFX();
     }
     
     protected void UpdateCaretPosition()
@@ -180,6 +204,17 @@ public abstract class TerminalMenu : MonoBehaviour
         
         _output.Add(row);
         _output.ScrollTo(row);
+    }
+
+    protected void PlaySFX()
+    {
+        if (_typingAudioSource == null || _typingAudioClips == null || _typingAudioClips.Length == 0)
+        {
+            return;
+        }
+        
+        AudioClip clip = _typingAudioClips[Random.Range(0, _typingAudioClips.Length)];
+        _typingAudioSource.PlayOneShot(clip, 0.6f);
     }
 
     protected abstract void ProcessCommand(string cmd);
