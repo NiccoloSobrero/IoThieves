@@ -189,7 +189,7 @@ namespace Minigames
             
             _currentOpenFileDownloadTime = time;
             
-            desktopNavFile.AdaptToImage(documentSprite, fileName);
+            desktopNavFile.AdaptToImage(documentSprite, fileName, windowsToOpenRect);
             
             // Set file graphics
             openFileObj.SetActive(true);
@@ -205,7 +205,7 @@ namespace Minigames
             _currentOpenFile = new FileDetails(GameManager.Instance.currentLevel, currentPath + fileName, documentSprite, true);
             _currentOpenFileDownloadTime = time;
             
-            desktopNavFile.AdaptToImage(documentSprite, fileName);
+            desktopNavFile.AdaptToImage(documentSprite, fileName, windowsToOpenRect);
             
             // Set file graphics
             openFileObj.SetActive(true);
@@ -400,6 +400,8 @@ namespace Minigames
                 {
                     openFileRect.anchoredPosition = Vector2.zero;
                     openFileRect.sizeDelta = windowsToOpenRect.rect.size;
+                    
+                    desktopNavFile.RefreshDimensions();
                 }
                 if (_isHrComplaintMaximized)
                 {
@@ -444,6 +446,8 @@ namespace Minigames
                 }
                     
                 _isOpenFileMaximized = !_isOpenFileMaximized;
+                
+                desktopNavFile.RefreshDimensions();
             }
             else if (window == hrComplaintObj)
             {
