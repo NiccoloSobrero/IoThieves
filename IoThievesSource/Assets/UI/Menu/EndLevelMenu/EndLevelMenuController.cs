@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Events;
 using Minigames;
@@ -24,7 +25,7 @@ public class EndLevelMenuController : MonoBehaviour
         nextLevelButton.clicked += GoToNextLevel;
         endLevelMenuContainerVisualElement = root.Q<VisualElement>("endLevelMenuCardsContainer");
         UpdateUI();
-        EventsManager.OnEndLevel.AddListener(ShowEndLevelMenu);
+        // EventsManager.OnEndLevel.AddListener(ShowEndLevelMenu);
     }
 
     private void UpdateUI()

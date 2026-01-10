@@ -197,6 +197,7 @@ namespace Levels
             endLevelTrigger.onTriggerEnter.RemoveListener(OnGetOut);
             
             // End level
+            EventsManager.OnEndLevel?.Invoke();
             
         }
     }
