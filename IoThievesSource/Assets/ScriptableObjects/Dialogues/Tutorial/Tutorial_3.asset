@@ -28,8 +28,6 @@ MonoBehaviour:
     tags: 
   - speakerName: PIP
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
-    text: 'Again, what the hell are you talking about with "click, scroll wheel"
-      an so on.
-
-      Are you playing a videogame?'
+    text: Again, what the hell are you talking about with "click, scroll wheel" an
+      so on.\nAre you playing a videogame?
     tags: 

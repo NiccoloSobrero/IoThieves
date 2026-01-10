@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueLines:
   - speakerName: Hacker
-    icon: {fileID: 21300000, guid: fe04ed84c31596644b94bfaa49ee0e33, type: 3}
-    text: Nice! The camera is locked onto the decoy. Now you can go.
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: Nice! The camera is looking away. Now you can go.
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: "Move to the objective while it\u2019s distracted."
+    text: "Move to the keypad while it\u2019s distracted."
     tags: 

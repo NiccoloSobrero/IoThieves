@@ -15,17 +15,68 @@ MonoBehaviour:
   dialogueLines:
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: Go get the boss address
-    tags: 03000000
-  - speakerName: Hacker
-    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: That's the office
+    text: Ayoooo! It's me again :)\nDid you miss me?
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: And remember file a complaint
+    text: Now, this is where I worked, before my stupid boss fired me. \nYou are
+      now in the HR offices, where my ex-Boss usually works.
+    tags: 
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: ad771f752afefa244b5c465f7173d61b, type: 3}
+    text: He has to pay for firing me, I only have done the very tiny <i>insignificant</i>
+      mistake of deleting the production database, nothing SO serious :(
+    tags: 
+  - speakerName: PIP
+    icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
+    text: You what???
+    tags: 
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: Anyway, let's focus! We need to <u>find his home address</u>.
     tags: 03000000
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: Just don't get caught
+    text: See the office right there? There's his workstation.
+    tags: 
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: Maybe he saved his address inside his computer, we need to check.
+    tags: 03000000
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: But be careful! Although it's friday evening, there are some people inside
+      the offices. If they see you, it's <color=red>GAME OVER</color>.
+    tags: 
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: 'Just some tips: you can dodge them, but if you are too close they may
+      hear you, then became suspicious and start patrolling around.'
+    tags: 
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: 4ab0fecf046fa7549b5e86ae6d70be77, type: 3}
+    text: OR, you can stun your "enemies" by clicking the AC when they are below
+      it, or throw something in their face (without being notice, of course)
+    tags: 
+  - speakerName: PIP
+    icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
+    text: Ah yes, some violence >:)
+    tags: 
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: 5ff570c2964bbe748bf7be2ffcc8bd95, type: 3}
+    text: Also, while you're here, maybe you can <u>file a complaint on him</u>.
+      It could be fun eheh!
+    tags: 
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: 4ab0fecf046fa7549b5e86ae6d70be77, type: 3}
+    text: I think there's a program to do so in one of the other computers around
+      here. You need to find it!
+    tags: 
+  - speakerName: Hacker
+    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    text: Don't worry, I'll write every step you need in the list :)
+    tags: 
+  - speakerName: PIP
+    icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
+    text: Nobody ever told you you're excessively chatty?
     tags: 

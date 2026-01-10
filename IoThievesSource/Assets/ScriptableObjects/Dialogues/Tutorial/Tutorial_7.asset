@@ -19,8 +19,6 @@ MonoBehaviour:
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: 'Try cliking one of these words and see what you get.
-
-      The password
-      must be one of them.'
+    text: Try cliking one of these words and see what you get.\nThe password must
+      be one of them.
     tags: 
