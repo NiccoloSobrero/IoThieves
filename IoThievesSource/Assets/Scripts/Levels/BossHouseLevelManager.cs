@@ -50,7 +50,7 @@ namespace Levels
         
         [Header("Exit level")]
         [SerializeField] private DialogueLinesScrObj onExitLevelDialogue;
-        [SerializeField] private DoorTrigger exitDoorTrigger;
+        [SerializeField] private InteractToInvokeEvent carExitInteractable;
 
         /*
          * Flow:
@@ -77,7 +77,7 @@ namespace Levels
             
             cupInteractable.SetEnabled(false);
             
-            exitDoorTrigger.SetLocked(true);
+            carExitInteractable.SetEnabled(false);
         }
 
         private void Start()
@@ -88,7 +88,7 @@ namespace Levels
         private void Intro()
         {
             // Show dialogue
-            DialogueManager.Instance.SetDialogue(introDialogue);
+            DialogueManager.Instance.SetDialogue(introDialogue, InputContext.Disabled);
             DialogueManager.Instance.OpenDialogueWindow();
             
             // Set up next step
@@ -233,6 +233,29 @@ namespace Levels
             DialogueManager.Instance.OpenDialogueWindow();
             
             // Set up next step
+            carExitInteractable.SetEnabled(true);
+            carExitInteractable.onInteract.AddListener(OnInteractWithCarExit);
+        }
+
+        private void OnInteractWithCarExit()
+        {
+            // Remove previous listener
+            carExitInteractable.onInteract.RemoveListener(OnInteractWithCarExit);
+
+            // Show dialogue
+            DialogueManager.Instance.SetDialogue(onExitLevelDialogue);
+            DialogueManager.Instance.OpenDialogueWindow();
+
+            // Level complete logic can be added here
+            DialogueManager.Instance.onDialogueComplete.AddListener(OnLevelComplete);
+        }
+
+        private void OnLevelComplete()
+        {
+            // Remove previous listener
+            DialogueManager.Instance.onDialogueComplete.RemoveListener(OnLevelComplete);
+
+            // End level
             
         }
     }
