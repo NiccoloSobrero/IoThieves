@@ -19,7 +19,12 @@ namespace DialogueSystem
         [SerializeField] private TextMeshProUGUI speakerName;
         [SerializeField] private Image speakerIcon;
         [SerializeField] private GameObject textCompletedObj;
+        [SerializeField] private AudioSource sfxSource;
+        [SerializeField] private AudioClip letterSfx;
+        [SerializeField, Range(0f, 1f)] private float letterVolume = 0.4f;
 
+        [SerializeField] private int MAXC = 4;
+        
         private const float CharactersDelay = 0.01f;
         private const float SkipTextGenerationDelay = 0f;
 
@@ -119,10 +124,22 @@ namespace DialogueSystem
         {
             int currentShownCharacters = 0;
 
+            int counter = 0 ; 
             while (currentShownCharacters < totalCharacters)
             {
                 currentShownCharacters++;
+                counter++;
                 dialogue.maxVisibleCharacters = currentShownCharacters;
+                
+                if (letterSfx != null && sfxSource != null && currentShownCharacters - 1 < dialogue.text.Length)
+                {
+                    char c = dialogue.text[currentShownCharacters - 1];
+                    if (!char.IsWhiteSpace(c) && counter >= MAXC)
+                    {
+                        sfxSource.PlayOneShot(letterSfx, letterVolume);
+                        counter = 0;
+                    }
+                }
                 
                 yield return new WaitForSeconds(letterDelay);
             }

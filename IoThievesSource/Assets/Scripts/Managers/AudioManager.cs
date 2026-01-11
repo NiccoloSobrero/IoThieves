@@ -177,7 +177,7 @@ namespace Managers
             if (musicSource == null) return;
             
             audioPlayerUI.UpdateVolume(_currentVolume);
-            musicSource.volume = Mathf.Clamp01(volume01);
+            musicSource.volume = Mathf.Clamp01(volume01 * 0.5f);
         }
 
         // ---------- Helpers for UI formatting ----------

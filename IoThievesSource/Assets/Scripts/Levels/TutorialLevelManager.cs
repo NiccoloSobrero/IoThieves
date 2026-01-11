@@ -155,8 +155,6 @@ namespace Levels
 
             _lastValidPosition = playerTransform.position;
             
-            levelObjectivesUI.AddObjective(objective1);
-            
             EventsManager.OnTriggerOnLineStart.AddListener(MoveCameraToCodePad);
         }
         
@@ -183,7 +181,7 @@ namespace Levels
             
             _lastValidPosition = playerTransform.position;
             
-            EventsManager.OnTriggerOnLineStart.AddListener(OpenAudioPlayerUI);
+            EventsManager.OnTriggerOnContinueDialogue.AddListener(OpenAudioPlayerUI);
         }
         
         private IEnumerator MoveCameraToTarget(Vector3 target, float panTime)
@@ -234,7 +232,9 @@ namespace Levels
         
         private void OpenAudioPlayerUI()
         {
-            EventsManager.OnTriggerOnLineStart.RemoveListener(OpenAudioPlayerUI);
+            EventsManager.OnTriggerOnContinueDialogue.RemoveListener(OpenAudioPlayerUI);
+            
+            levelObjectivesUI.AddObjective(objective1);
             
             audioManager.Play();
             audioPlayerUI.gameObject.SetActive(true);
