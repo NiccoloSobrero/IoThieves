@@ -1,4 +1,5 @@
-﻿using AI;
+﻿using System;
+using AI;
 using AI.AI_States;
 using UnityEngine;
 
@@ -19,8 +20,16 @@ namespace SuspicionSystem.States
         
         public override void Enter(AlertManager ctx)
         {
-            AIState sus = ctx.EnemyAdapter.AIController.StateFactory.GetState(AINames.Suspicious);
-            ((SuspiciousState) sus).VerySuspicious(true);
+            try
+            {
+                AIState sus = ctx.EnemyAdapter.AIController.StateFactory.GetState(AINames.Suspicious);
+                ((SuspiciousState)sus).VerySuspicious(true);
+            }
+            catch(Exception e)
+            {
+               Debug.LogException(e); 
+            }
+            
             
             Debug.Log("Entered Level2AlertState");
         }

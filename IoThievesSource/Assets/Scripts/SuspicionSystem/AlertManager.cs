@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using AI;
 using SuspicionSystem.States;
@@ -70,7 +71,15 @@ namespace SuspicionSystem
             GameOverState = new GameOverAlertState();
             
             Initialize();
-            EnemyAdapter.AIController.Initialize(); 
+            try
+            {
+                EnemyAdapter.AIController.Initialize();
+            }
+            catch (Exception e)
+            {
+                print("No AIController found");
+            }
+            
             ChangeState(Level0State);
         }
 
