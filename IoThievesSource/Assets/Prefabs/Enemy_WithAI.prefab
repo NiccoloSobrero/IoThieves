@@ -994,6 +994,10 @@ PrefabInstance:
       value: ConeOfDeath
       objectReference: {fileID: 0}
     - target: {fileID: 1418596984419265338, guid: b11884beb7cf79043ac518b5fcc4c3a2, type: 3}
+      propertyPath: radius
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1418596984419265338, guid: b11884beb7cf79043ac518b5fcc4c3a2, type: 3}
       propertyPath: fovMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 2e9f5a4f695e9a546b575fffc607c9cf, type: 2}

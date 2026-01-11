@@ -11441,6 +11441,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5884590623567349909, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: radius
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5998737358564386977, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_Avatar
       value: 
@@ -27728,8 +27732,6 @@ MonoBehaviour:
   textCompletedObj: {fileID: 1752225077}
   sfxSource: {fileID: 0}
   letterSfx: {fileID: 0}
-  letterVolume: 0.4
-  MAXC: 4
   onDialogueComplete:
     m_PersistentCalls:
       m_Calls: []
