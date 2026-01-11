@@ -6,6 +6,8 @@ namespace Interactables
     public class InteractToInvokeEvent : Interactable
     {
         [SerializeField] private InteractableTriggerArea triggerArea;
+        [SerializeField] private bool disappearOnInteract;
+        
         [HideInInspector] public UnityEvent onInteract;
         
         private bool _isEnabled;
@@ -22,6 +24,11 @@ namespace Interactables
             if (triggerArea.IsPlayerInRange && triggerArea.PlayerObject != null)
             {
                 onInteract.Invoke();
+                
+                if (disappearOnInteract)
+                {
+                    gameObject.SetActive(false);
+                }
             }
         }
 
