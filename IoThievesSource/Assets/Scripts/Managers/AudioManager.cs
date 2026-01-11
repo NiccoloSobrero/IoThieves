@@ -46,6 +46,7 @@ namespace Managers
         private float _uiUpdateTimer;
 
         private int _currentVolume = 5;
+        private const float VolumeMult = 0.25f;
 
         private void Reset()
         {
@@ -103,7 +104,7 @@ namespace Managers
             if (musicSource.clip == null) return;
 
             musicSource.Play();
-            musicSource.volume = Mathf.Clamp01(_currentVolume / (float)audioPlayerUI.MaxVolume);
+            musicSource.volume = Mathf.Clamp01(_currentVolume / (float)audioPlayerUI.MaxVolume * VolumeMult);
         }
 
         public void Pause()
@@ -177,7 +178,7 @@ namespace Managers
             if (musicSource == null) return;
             
             audioPlayerUI.UpdateVolume(_currentVolume);
-            musicSource.volume = Mathf.Clamp01(volume01 * 0.5f);
+            musicSource.volume = Mathf.Clamp01(volume01 * VolumeMult);
         }
 
         // ---------- Helpers for UI formatting ----------
