@@ -806,7 +806,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49c054e1b55af3e4ba94b35ba381680f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints: []
+  waypoints:
+  - {fileID: 1347349471}
+  - {fileID: 253724628}
+  - {fileID: 1747601177}
+  - {fileID: 253724628}
 --- !u!1 &173867813
 GameObject:
   m_ObjectHideFlags: 0
@@ -5279,6 +5283,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_WithAI (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5998737358564386977, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_Avatar
       value: 
@@ -6348,7 +6356,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -996625976428397906, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: startState
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1017898127553881293, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: enemyFov

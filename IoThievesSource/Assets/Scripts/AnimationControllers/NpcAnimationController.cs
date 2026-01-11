@@ -11,7 +11,7 @@ public class NpcAnimationController : MonoBehaviour
     [SerializeField] private EnemyAdapter enemyAdapter;
     private AIController _aiController;
     
-    void Start()
+    public void Initialize()
     {
         _aiController = GetComponent<AIController>();
         _aiController.OnStateChanged += StateChanged;

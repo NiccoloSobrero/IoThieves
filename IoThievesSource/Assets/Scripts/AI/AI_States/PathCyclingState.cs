@@ -30,6 +30,7 @@ namespace AI.AI_States
 
         public PathCyclingState(AIController npc) : base(npc)
         {
+           
             SetPath();
         }
         
@@ -38,13 +39,15 @@ namespace AI.AI_States
         {
             try
             {
-                List<Waypoint> path = Npc.GetComponent<PathToFollow>().GetPath();
+                PathToFollow ptf = Npc.GetComponent<PathToFollow>();
+                //if (ptf is null) return;
+                
+                List<Waypoint> path = ptf.GetPath();
                 if (path is null || path.Count == 0) return;
                 _path = path;
-                IsMoving = true;
+                //IsMoving = true;
                 _idx = 0;
                 _targetPosition = _path[_idx].transform.position;
-                Debug.Log("Path is set");
             }
             catch (Exception e)
             {
@@ -95,7 +98,7 @@ namespace AI.AI_States
                 
                 NextWaypoint();
             }
-            //Else I am already near enough to my path
+            
             IsMoving = true;
         }
 

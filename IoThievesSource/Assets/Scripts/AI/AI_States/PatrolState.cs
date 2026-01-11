@@ -8,7 +8,7 @@ namespace AI.AI_States
 {
     public class PatrolState : AIState
     {
-         private bool _isMoving = true; 
+         private bool _isMoving = false; 
         
          private bool _isInteracting = false;
         

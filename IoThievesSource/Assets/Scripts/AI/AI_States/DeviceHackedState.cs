@@ -12,7 +12,7 @@ namespace AI.AI_States
         
         private List<PointOfInterest> _hackedDevices = new  List<PointOfInterest>();
         private List<Waypoint> _path;
-        private bool _destinationReached = false;
+        private bool _destinationReached = true;
 
         private bool DestinationReached 
         {
@@ -22,7 +22,7 @@ namespace AI.AI_States
                 if(_destinationReached == value) return;
                 
                 _destinationReached = value;
-                RaiseOnWalkingVarChanged(!_destinationReached);
+                RaiseOnWalkingVarChanged(!_destinationReached); //if destination is reached --> no need to walk else -->  you need to walk
             }
         }
 
@@ -46,9 +46,9 @@ namespace AI.AI_States
             if (DestinationReached)     //Resolve the reached device
             {
                 _solved = _hackedDevices[0].AssignedDevice.ResolveHack();
-                _hackedDevices.RemoveAt(0);
                 if (_solved)
                 {
+                    _hackedDevices.RemoveAt(0);
                     if (_hackedDevices.Count > 0)
                     {
                         _path = PathFinding.FindPath(AIUtilities.FindNearestWaypoint(Npc.transform.position), _hackedDevices[0]);
@@ -77,7 +77,7 @@ namespace AI.AI_States
                     Waypoint reached = _path[0];
                     _path.RemoveAt(0);
 
-                    if (reached.Equals(_hackedDevices))
+                    if (reached.Equals(_hackedDevices[0]))
                     {
                         DestinationReached = true;
                     }
@@ -91,7 +91,7 @@ namespace AI.AI_States
 
         public void SetDevice(PointOfInterest pointOfInterest)
         {
-            _hackedDevices.Append(pointOfInterest);
+            _hackedDevices.Add(pointOfInterest);
         }
     }
 }

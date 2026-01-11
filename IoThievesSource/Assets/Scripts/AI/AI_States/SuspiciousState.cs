@@ -11,7 +11,7 @@ namespace AI.AI_States
         
         private float _speed = 1.50f;
         private float _angularSpeed = 2f;
-        private bool _isMoving = true;
+        private bool _isMoving = false;
         
         private Waypoint _destinationWaypoint;
         private Vector3 _nextDestination;
@@ -40,6 +40,7 @@ namespace AI.AI_States
                 RaiseOnWalkingVarChanged(_isMoving); 
             }
         }
+        
         public SuspiciousState(AIController npc) : base(npc) {}
 
         public override void Enter()
@@ -51,7 +52,7 @@ namespace AI.AI_States
             
             //Wait a second before it starts moving
             _midpointReached = true;
-            IsMoving = false;
+            //IsMoving = false;
             _waitingTime = Random.value * MaxWaitingTime; //Random waiting time up to 3 seconds
         }
         

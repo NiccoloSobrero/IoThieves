@@ -10,7 +10,7 @@ namespace AI
     {
         [Header("AI Settings")]
         [SerializeField] private AINames startState;
-        [SerializeField] private AIState _currentState;
+        [SerializeField] private AIState _currentState = null;
         [SerializeField] private NpcScriptableObject _NpcDatas;
         public event Action<AIState> OnStateChanged; 
         public event Action<AIState> BeforeStateChanged; 
@@ -22,7 +22,6 @@ namespace AI
         public bool Stun = false;
         #endregion
         
-        //public AIState CurrentState => _currentState;
 
         public AIState CurrentState
         {
@@ -48,6 +47,8 @@ namespace AI
         {
             _stateFactory = new StateFactory(this);
             _previousState = _stateFactory.GetState(AINames.Idle);
+            CurrentState = _stateFactory.GetState(AINames.Idle);
+            enemyAdapter.AnimationController.Initialize();
         }
         
         private void Update()
@@ -57,7 +58,7 @@ namespace AI
                 ChangeState(AINames.StunnedState);
                 Stun = false; 
             }
-            _currentState?.Execute();
+            CurrentState?.Execute();
         }
 
         public AINames GetStartState()
@@ -71,20 +72,20 @@ namespace AI
                 return;
             
             AIState targetState = _stateFactory.GetState(state);
-            if (targetState == _currentState) //Only one instance of the same state is stored in the factory
+            if (targetState == CurrentState) //Only one instance of the same state is stored in the factory
                 return;
             
-            _currentState?.Exit();
-            _previousState = _currentState;
-            _currentState = targetState;
-            _currentState?.Enter();
+            CurrentState?.Exit();
+            _previousState = CurrentState;
+            CurrentState = targetState;
+            CurrentState?.Enter();
         }
 
         public void PreviousState()
         {
-           _currentState?.Exit();
-           (_currentState, _previousState) = (_previousState, _currentState);
-           _currentState?.Enter();
+           CurrentState?.Exit();
+           (CurrentState, _previousState) = (_previousState, CurrentState);
+           CurrentState?.Enter();
         }
         
     }
