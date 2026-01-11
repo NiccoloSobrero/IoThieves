@@ -1,12 +1,13 @@
+using AnimationControllers;
 using Enemy;
 using SuspicionSystem;
 using UnityEngine;
 
 namespace AI
 {
-    [RequireComponent(typeof(AIController))]
+   // [RequireComponent(typeof(AIController))]
     [RequireComponent(typeof(AlertManager))]
-    [RequireComponent(typeof(NpcAnimationController))]
+    //[RequireComponent(typeof(NpcAnimationController))]
     public class EnemyAdapter : MonoBehaviour
     {
         [SerializeField] private AIController npc;

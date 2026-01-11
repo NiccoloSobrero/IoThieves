@@ -1,4 +1,5 @@
-﻿using AI;
+﻿using System;
+using AI;
 using UnityEngine;
 
 namespace SuspicionSystem.States
@@ -20,8 +21,17 @@ namespace SuspicionSystem.States
             Debug.Log("Entered Level0AlertState");
             ctx.ShowAlertBillboard(false);
 
-            AIController aiController = ctx.EnemyAdapter.AIController;
-            aiController.ChangeState(aiController.GetStartState());
+            try
+            {
+                AIController aiController = ctx.EnemyAdapter.AIController;
+                aiController.ChangeState(aiController.GetStartState());
+            }
+            catch (NullReferenceException e)
+            {
+                Debug.Log(ctx.gameObject.name + " HAS NO AI CONTROLLER");
+                //Debug.LogException(e);
+            }
+            
         }
 
         public override void Exit(AlertManager ctx)

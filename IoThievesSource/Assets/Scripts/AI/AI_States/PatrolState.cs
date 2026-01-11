@@ -104,6 +104,7 @@ namespace AI.AI_States
                 }
             }
 
+            
             Waypoint[] wps = UnityEngine.Object.FindObjectsByType<Waypoint>(
                FindObjectsInactive.Exclude,
                FindObjectsSortMode.None);
@@ -124,7 +125,7 @@ namespace AI.AI_States
                        Npc.transform.position,
                        dir.normalized,
                        distance,
-                       mask))
+                       mask, QueryTriggerInteraction.Ignore))
                 { 
                     if (distance < bestDistance)
                     {
@@ -159,13 +160,15 @@ namespace AI.AI_States
             float distance = (_target.transform.position - Npc.transform.position).magnitude;
             
             if (distance < Npc.NpcDatas.DistanceThreshold)
-            {
+            { 
+                /*
                 if (_target is PointOfInterest poi)
                 {
                     IsMoving = false;
                     _isInteracting = !poi.AssignedDevice.Interact();
                 }
-
+                */
+                
                 if (!_isInteracting)
                 {
                     _target = ChooseNextWaypoint(_target);

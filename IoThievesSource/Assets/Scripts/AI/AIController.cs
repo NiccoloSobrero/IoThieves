@@ -53,6 +53,7 @@ namespace AI
         
         private void Update()
         {
+            //print(gameObject.name + ": Update the "+ _currentState.GetType().Name);
             if (Stun)
             {
                 ChangeState(AINames.StunnedState);

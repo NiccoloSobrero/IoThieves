@@ -30,7 +30,6 @@ namespace AI.AI_States
 
         public PathCyclingState(AIController npc) : base(npc)
         {
-           
             SetPath();
         }
         
@@ -40,7 +39,11 @@ namespace AI.AI_States
             try
             {
                 PathToFollow ptf = Npc.GetComponent<PathToFollow>();
-                //if (ptf is null) return;
+                if (ptf is null)
+                {
+                    Debug.Log("There is no path to follow");
+                    return;
+                }
                 
                 List<Waypoint> path = ptf.GetPath();
                 if (path is null || path.Count == 0) return;

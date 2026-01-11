@@ -1,40 +1,42 @@
-using System;
 using AI;
 using UnityEngine;
 
-public class NpcAnimationController : MonoBehaviour
+namespace AnimationControllers
 {
-    private static readonly int IsWalking = Animator.StringToHash("isWalking");
-    private static readonly int IsStunned = Animator.StringToHash("isStunned");
-    //private static readonly int IsIdle = Animat
-    [SerializeField] private Animator animator;
-    [SerializeField] private EnemyAdapter enemyAdapter;
-    private AIController _aiController;
-    
-    public void Initialize()
+    public class NpcAnimationController : MonoBehaviour
     {
-        _aiController = GetComponent<AIController>();
-        _aiController.OnStateChanged += StateChanged;
-        _aiController.BeforeStateChanged += StateAboutToChange;
-    }
+        private static readonly int IsWalking = Animator.StringToHash("isWalking");
+        private static readonly int IsStunned = Animator.StringToHash("isStunned");
+        //private static readonly int IsIdle = Animat
+        [SerializeField] private Animator animator;
+        [SerializeField] private EnemyAdapter enemyAdapter;
+        private AIController _aiController;
     
-    void StateChanged(AIState state)
-    {
-        state.OnWalkingVarChanged += SetWalking;
-    }
+        public void Initialize()
+        {
+            _aiController = enemyAdapter.AIController;
+            _aiController.OnStateChanged += StateChanged;
+            _aiController.BeforeStateChanged += StateAboutToChange;
+        }
     
-    void StateAboutToChange(AIState state)
-    {
-        state.OnWalkingVarChanged -= SetWalking;
-    }
+        void StateChanged(AIState state)
+        {
+            state.OnWalkingVarChanged += SetWalking;
+        }
+    
+        void StateAboutToChange(AIState state)
+        {
+            state.OnWalkingVarChanged -= SetWalking;
+        }
 
-    public void SetWalking(bool value)
-    {
-        animator.SetBool(IsWalking, value);
-    }
+        public void SetWalking(bool value)
+        {
+            animator.SetBool(IsWalking, value);
+        }
 
-    public void SetStunned(bool value)
-    {
-       animator.SetBool(IsStunned, value); 
+        public void SetStunned(bool value)
+        {
+            animator.SetBool(IsStunned, value); 
+        }
     }
 }
