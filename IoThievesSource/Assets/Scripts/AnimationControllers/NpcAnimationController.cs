@@ -5,6 +5,7 @@ using UnityEngine;
 public class NpcAnimationController : MonoBehaviour
 {
     private static readonly int IsWalking = Animator.StringToHash("isWalking");
+    private static readonly int IsStunned = Animator.StringToHash("isStunned");
     //private static readonly int IsIdle = Animat
     [SerializeField] private Animator animator;
     [SerializeField] private EnemyAdapter enemyAdapter;
@@ -27,9 +28,13 @@ public class NpcAnimationController : MonoBehaviour
         state.OnWalkingVarChanged -= SetWalking;
     }
 
-    public void SetWalking(bool isWalking)
+    public void SetWalking(bool value)
     {
-        animator.SetBool(IsWalking, isWalking);
-        animator.SetBool("isWalking", isWalking);
+        animator.SetBool(IsWalking, value);
+    }
+
+    public void SetStunned(bool value)
+    {
+       animator.SetBool(IsStunned, value); 
     }
 }

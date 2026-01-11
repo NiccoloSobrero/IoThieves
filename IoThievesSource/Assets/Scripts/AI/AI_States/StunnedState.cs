@@ -15,6 +15,7 @@ namespace AI.AI_States
 
         public override void Enter()
         {
+            Npc.enemyAdapter.AnimationController.SetStunned(true);
             elapsedTime = 0;
             //DisableFovsD
             Debug.Log("StunnedEnemy");
@@ -33,6 +34,7 @@ namespace AI.AI_States
 
         public override void Exit()
         {
+            Npc.enemyAdapter.AnimationController.SetStunned(false);
             OnAndOffFovs(true);
         }
 
