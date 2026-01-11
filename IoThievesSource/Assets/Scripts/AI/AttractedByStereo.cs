@@ -1,5 +1,6 @@
 using System;
 using Interactables;
+using JetBrains.Annotations;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,6 +8,9 @@ namespace AI
 {
     public class AttractedByStereo : MonoBehaviour
     {
+        public event Action<bool> OnMovementVarChanged;
+        public event Action<bool> OnDancingVarChanged;
+        
         [SerializeField] private NpcScriptableObject data;
         [SerializeField] private Vector3 startingPosition;
         [SerializeField] private Vector3 dancingPosition;
@@ -15,15 +19,27 @@ namespace AI
         [SerializeField] private float StartingYRotation;
         [SerializeField] private float DancingYRotation;
         private bool _isMoving = false;
-
-        public bool IsMoving
+        
+        private bool IsMoving
         {
             get => _isMoving;
             set
             {
                 if (_isMoving == value) return;
                 _isMoving = value;
-                //DevoInvocareL'Evento nell'animator
+                OnMovementVarChanged?.Invoke(_isMoving); 
+            }
+        }
+
+        private bool IsDancing
+        {
+            get => isDancing;
+            set
+            {
+                if (isDancing == value) return;
+                
+                isDancing = value;
+                OnDancingVarChanged?.Invoke(isDancing);
             }
         }
 
@@ -54,16 +70,16 @@ namespace AI
                     Debug.Log("rotate towards the stereo");
                     IsMoving = false;
                     PlanRotation(DancingYRotation);
-                    isDancing = true;
+                    IsDancing = true;
                     //DanceAnimation()
                 }
             }
             else  // stereo is off
             {
                 //Debug.Log("Stereo? "+ stereo.IsPlayingMusic);
-                if (isDancing)              //Stop dancing
+                if (IsDancing)              //Stop dancing
                 {
-                    isDancing = false;
+                    IsDancing = false;
                 }
 
                 if (Vector3.Distance(transform.position, startingPosition) > data.DistanceThreshold)        //reach the startingPosition
@@ -88,9 +104,9 @@ namespace AI
 
             float angleMag = AIUtilities.RotateTarget(transform, forwardDir, dir, data.AngularSpeed); 
             
-            bool _isMoving = angleMag < data.AngularThreshold;
+            IsMoving = angleMag < data.AngularThreshold;
 
-            if (_isMoving)
+            if (IsMoving)
             {
                 AIUtilities.MoveTarget(transform, dir, data.Speed);
             }
