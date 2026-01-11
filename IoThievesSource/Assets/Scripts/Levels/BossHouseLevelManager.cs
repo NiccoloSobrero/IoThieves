@@ -1,8 +1,12 @@
 using System.Collections;
+using AI;
+using AI.AI_States;
+using AI.NavigationAndWaypoints;
 using DialogueSystem;
 using Events;
 using Interactables;
 using Managers;
+using Minigames;
 using UI;
 using UnityEngine;
 
@@ -26,18 +30,27 @@ namespace Levels
         
         private const float CameraTimeToTarget = 1f;
         
-        [Header("Other steps")]
-        [SerializeField] private DoorTrigger bossRoomDoorTrigger;
+        [Header("Boss room door trigger")]
         [SerializeField] private DialogueLinesScrObj onArriveAtDoorDialogue;
+        [SerializeField] private DoorTrigger bossRoomDoorTrigger;
         
-        [SerializeField] private InteractToInvokeEvent laxativesInteractable;
+        [Header("Find laxatives")]
         [SerializeField] private DialogueLinesScrObj onFoundLaxativesDialogue;
+        [SerializeField] private InteractToInvokeEvent laxativesInteractable;
         
+        [Header("Put laxatives in cup")]
         [SerializeField] private InteractToInvokeEvent cupInteractable;
+        [SerializeField] private AIController bossAIController;
+        [SerializeField] private Waypoint cupWaypoint;
+        [SerializeField] private Waypoint toiletWaypoint;
+        [SerializeField] private float bossTimeToDrink = 5f;
         
+        [Header("Download chat logs")]
         [SerializeField] private DialogueLinesScrObj onChatDownloadDialogue;
         
+        [Header("Exit level")]
         [SerializeField] private DialogueLinesScrObj onExitLevelDialogue;
+        [SerializeField] private DoorTrigger exitDoorTrigger;
 
         /*
          * Flow:
@@ -63,6 +76,8 @@ namespace Levels
             laxativesInteractable.SetEnabled(false);
             
             cupInteractable.SetEnabled(false);
+            
+            exitDoorTrigger.SetLocked(true);
         }
 
         private void Start()
@@ -163,11 +178,59 @@ namespace Levels
 
         private void OnInteractWithCup()
         {
+            StartCoroutine(OnInteractWithCupCor());
+        }
+        
+        private IEnumerator OnInteractWithCupCor()
+        {
             // Remove previous listener
             cupInteractable.onInteract.RemoveListener(OnInteractWithCup);
             
             // Execute action
+            bossAIController.ChangeState(AINames.GoToDestination);
+
+            if (bossAIController.CurrentState is GoToDestination bossStateGtd)
+            {
+                bossStateGtd.SetDestination(cupWaypoint);
+            }
             
+            // Wait for boss to reach cup
+            yield return new WaitUntil(() => Vector3.Distance(bossAIController.transform.position, cupWaypoint.transform.position) < 1f);
+            
+            // Wait for the boss to drink
+            bossAIController.ChangeState(AINames.Idle);
+            yield return new WaitForSeconds(bossTimeToDrink);
+            
+            // Unlock boss room door
+            bossRoomDoorTrigger.SetLocked(false);
+            
+            // Make boss go to toilet
+            bossAIController.ChangeState(AINames.GoToDestination);
+            bossStateGtd = bossAIController.CurrentState as GoToDestination;
+            
+            if (bossStateGtd != null)
+            {
+                bossStateGtd.SetDestination(toiletWaypoint);
+            }
+            
+            // Wait for boss to reach toilet
+            yield return new WaitUntil(() => Vector3.Distance(bossAIController.transform.position, toiletWaypoint.transform.position) < 1f);
+            
+            // Set boss stunned in toilet
+            bossAIController.ChangeState(AINames.StunnedState);
+            
+            // Set up next step
+            DownloadsManager.Instance.onDownloadTargetFile.AddListener(OnAddressDownloaded);
+        }
+        
+        private void OnAddressDownloaded()
+        {
+            // Remove previous listener
+            DownloadsManager.Instance.onDownloadTargetFile.RemoveListener(OnAddressDownloaded);
+            
+            // Show dialogue
+            DialogueManager.Instance.SetDialogue(onChatDownloadDialogue, PlayerInputManager.Instance.CurrentContext);
+            DialogueManager.Instance.OpenDialogueWindow();
             
             // Set up next step
             
