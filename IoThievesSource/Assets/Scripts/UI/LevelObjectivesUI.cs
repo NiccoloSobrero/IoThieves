@@ -66,8 +66,6 @@ namespace UI
                         objective.ObjectiveUI.UpdateText(nextStep);
                     }
                     
-                    Debug.Log("Updated objective");
-                    
                     AutoOpen();
                     
                     return;

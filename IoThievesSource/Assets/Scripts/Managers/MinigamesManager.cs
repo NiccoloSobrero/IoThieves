@@ -27,8 +27,7 @@ namespace Managers
 
         #region Events
 
-        [HideInInspector] public UnityEvent<MinigameScrObj> onDesktopMinigameOpened;
-        [HideInInspector] public UnityEvent<MinigameScrObj> onPasswordDecryptionMinigameOpened;
+        [HideInInspector] public UnityEvent onMinigameOpened;
 
         #endregion
 
@@ -71,8 +70,7 @@ namespace Managers
             {
                 _currentMinigame.InitMinigame();
 
-                onDesktopMinigameOpened?.Invoke(_currentMinigame);
-                onPasswordDecryptionMinigameOpened?.Invoke(_currentMinigame);
+                onMinigameOpened?.Invoke();
             }
             else
             {

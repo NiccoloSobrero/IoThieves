@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using DialogueSystem;
 using Enemy;
 using Events;
@@ -10,7 +9,6 @@ using Minigames.ScriptableObjects;
 using Player;
 using UI;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Levels
 {
@@ -41,7 +39,7 @@ namespace Levels
         
         [Header("Step 0")]
         [SerializeField] private DialogueLinesScrObj tutorialDialogue0;
-        [SerializeField] private GameObject step0Trigger;
+        [SerializeField] private LevelTrigger step0LevelTrigger;
         [SerializeField] private GameObject codePadInteractable;
         [SerializeField] private GameObject codePadInteractableOutline;
         [SerializeField] private InteractableTriggerArea codePadInteractableTriggerArea;
@@ -59,7 +57,7 @@ namespace Levels
         [Space]
         [Header("Step 2")]
         [SerializeField] private DialogueLinesScrObj tutorialDialogue2;
-        [SerializeField] private GameObject step2Trigger;
+        [SerializeField] private LevelTrigger step2LevelTrigger;
         
         [Space]
         [Header("Step 3")]
@@ -117,51 +115,30 @@ namespace Levels
         [Space]
         [Header("Step 12")]
         [SerializeField] private DialogueLinesScrObj tutorialDialogue12;
-        [SerializeField] private GameObject endLevelTrigger;
+        [SerializeField] private LevelTrigger endGameLevelTrigger;
         [SerializeField] private GameObject exitCollider;
         [SerializeField] private GameObject lastHackableTriggerArea;
         
-        private List<UnityAction> _steps = new();
         private Vector3 _lastValidPosition;
         
-        private int _currentStep;
-
         private void Awake()
         {
             Init();
         }
 
-        private void OnEnable()
-        {
-            EventsManager.OnTriggerOnLineEnd.AddListener(NextObjective);
-            EventsManager.OnTriggerOnLineStart.AddListener(NextObjective);
-            EventsManager.OnTriggerOnContinueDialogue.AddListener(NextObjective);
-        }
-
-        private void OnDisable()
-        {
-            EventsManager.OnTriggerOnLineEnd.RemoveListener(NextObjective);
-            EventsManager.OnTriggerOnLineStart.RemoveListener(NextObjective);
-            EventsManager.OnTriggerOnContinueDialogue.RemoveListener(NextObjective);
-        }
-
         private void Start()
         {
-            NextObjective();
+            SetUp();
         }
 
         private void Init()
         {
             audioPlayerUI.gameObject.SetActive(false);
             
-            step0Trigger.GetComponent<TutorialLevelTrigger>().Init(this);
-            step0Trigger.SetActive(false);
-            
-            step2Trigger.GetComponent<TutorialLevelTrigger>().Init(this);
-            step2Trigger.SetActive(false);
-            
-            endLevelTrigger.GetComponent<TutorialLevelTrigger>().Init(this);
-            endLevelTrigger.SetActive(false);
+            // Disable all level triggers and outlines
+            step0LevelTrigger.gameObject.SetActive(false);
+            step2LevelTrigger.gameObject.SetActive(false);
+            endGameLevelTrigger.gameObject.SetActive(false);
             
             printerInteractableOutline.SetActive(false);
             pcInteractableOutline.SetActive(false);
@@ -169,62 +146,46 @@ namespace Levels
             hackableWasherOutline.SetActive(false);
             
             lastHackableTriggerArea.SetActive(false);
-            
-            _currentStep = 0;
-            
-            // Build steps
-            _steps = new()
-            {
-                Step_0, Step_1, Step_1_2, Step_1_3,
-                Step_2, Step_3,
-                Step_4, Step_5,
-                Step_6, Step_7,
-                Step_8, Step_9,
-                Step_10, Step_11,
-                Step_12, EndLevel
-            };
-        }
-        
-        public void NextObjective()
-        {
-            if (_currentStep < _steps.Count)
-            {
-                _steps[_currentStep].Invoke();
-
-                _currentStep++;
-            }
         }
 
-        private void Step_0()
+        private void SetUp()
         {
             DialogueManager.Instance.SetDialogue(tutorialDialogue0);
             DialogueManager.Instance.OpenDialogueWindow();
 
-            step0Trigger.SetActive(true);
-
             _lastValidPosition = playerTransform.position;
             
             levelObjectivesUI.AddObjective(objective1);
+            
+            EventsManager.OnTriggerOnLineStart.AddListener(MoveCameraToCodePad);
         }
-
-        private void Step_1()
+        
+        private void MoveCameraToCodePad()
         {
+            EventsManager.OnTriggerOnLineStart.RemoveListener(MoveCameraToCodePad);
+            
             PlayerInputManager.Instance.SetContext(InputContext.Disabled);
             
             StartCoroutine(MoveCameraToTarget(codePadInteractable.transform.position, timeToPan));
             
             _lastValidPosition = playerTransform.position;
+            
+            EventsManager.OnTriggerOnContinueDialogue.AddListener(MoveCameraBackToPlayer);
         }
-
-        private void Step_1_2()
+        
+        private void MoveCameraBackToPlayer()
         {
+            EventsManager.OnTriggerOnContinueDialogue.RemoveListener(MoveCameraBackToPlayer);
+            
             PlayerInputManager.Instance.SetContext(InputContext.Disabled);
             
             StartCoroutine(MoveCameraBack(playerTransform.position, timeToPan));
             
             _lastValidPosition = playerTransform.position;
+            
+            EventsManager.OnTriggerOnLineStart.AddListener(OpenAudioPlayerUI);
         }
-
+        
         private IEnumerator MoveCameraToTarget(Vector3 target, float panTime)
         {
             Vector3 targetPos = target;
@@ -271,16 +232,24 @@ namespace Levels
             PlayerInputManager.Instance.SetContext(InputContext.Dialogue);
         }
         
-        private void Step_1_3()
+        private void OpenAudioPlayerUI()
         {
+            EventsManager.OnTriggerOnLineStart.RemoveListener(OpenAudioPlayerUI);
+            
             audioManager.Play();
             audioPlayerUI.gameObject.SetActive(true);
             
             audioPlayerUI.SetOpen(true);
+            
+            // Enable trigger for next step
+            step0LevelTrigger.gameObject.SetActive(true);
+            step0LevelTrigger.onTriggerEnter.AddListener(OnStep2TriggerEnter);
         }
-
-        private void Step_2()
+        
+        private void OnStep2TriggerEnter()
         {
+            step2LevelTrigger.onTriggerEnter.RemoveListener(OnStep2TriggerEnter);
+            
             DialogueManager.Instance.SetDialogue(tutorialDialogue2);
             DialogueManager.Instance.OpenDialogueWindow();
             
@@ -288,41 +257,49 @@ namespace Levels
             printerInteractable.gameObject.layer = (int)Mathf.Log(interactableLayer.value, 2);
             printerInteractableOutline.SetActive(true);
             printerInteractableTriggerArea.ManualUpdate();
-            printerInteractable.onPickUpThrowable.AddListener(NextStepOnPickUpThrowable);
+            printerInteractable.onPickUpThrowable.AddListener(OnPickUpThrowable);
             
             _lastValidPosition = playerTransform.position;
             
             levelObjectivesUI.UpdateObjective(objective1);
         }
-
-        private void Step_3()
+        
+        private void OnPickUpThrowable()
         {
+            printerInteractable.onPickUpThrowable.RemoveListener(OnPickUpThrowable);
+            
             DialogueManager.Instance.SetDialogue(tutorialDialogue3);
             DialogueManager.Instance.OpenDialogueWindow();
             
-            step2Trigger.SetActive(true);
+            step2LevelTrigger.gameObject.SetActive(true);
             
             _lastValidPosition = playerTransform.position;
+            
+            step2LevelTrigger.onTriggerEnter.AddListener(OnThrowableTriggerEnter);
         }
-
-        private void Step_4()
+        
+        private void OnThrowableTriggerEnter()
         {
+            step2LevelTrigger.onTriggerEnter.RemoveListener(OnThrowableTriggerEnter);
+            
             DialogueManager.Instance.SetDialogue(tutorialDialogue4);
             DialogueManager.Instance.OpenDialogueWindow();
             
-            codePadMinigame.onInteract.AddListener(NextStepOnCodePadInteract);
+            codePadMinigame.onInteract.AddListener(OnCodePadInteract);
             
             // Move cctv
-            cctvAttractable.MoveTowards(step2Trigger.transform.position);
+            cctvAttractable.MoveTowards(step2LevelTrigger.transform.position);
             
             _lastValidPosition = playerTransform.position;
             
             levelObjectivesUI.UpdateObjective(objective1);
         }
 
-        private void Step_5()
+        private void OnCodePadInteract()
         {
-            DialogueManager.Instance.onDialogueComplete.AddListener(NextStepOnDialogueCompleted);
+            codePadMinigame.onInteract.RemoveListener(OnCodePadInteract);
+            
+            DialogueManager.Instance.onDialogueComplete.AddListener(OnCodePadDialogueComplete);
             
             DialogueManager.Instance.SetDialogue(tutorialDialogue5);
             DialogueManager.Instance.OpenDialogueWindow();
@@ -332,9 +309,11 @@ namespace Levels
             levelObjectivesUI.UpdateObjective(objective1);
             levelObjectivesUI.AddObjective(objective2);
         }
-
-        private void Step_6()
+        
+        private void OnCodePadDialogueComplete()
         {
+            DialogueManager.Instance.onDialogueComplete.RemoveListener(OnCodePadDialogueComplete);
+            
             // Close Pad password minigame and highlight pc and disable code pad minigame
             codePadMinigame.gameObject.layer = (int)Mathf.Log(defaultLayer.value, 2);
             codePadInteractableOutline.SetActive(false);
@@ -344,48 +323,57 @@ namespace Levels
             
             // Set up pc minigame to activate next objective when opening each minigame
             // Then set up desktop navigation minigame to display last dialogue
-            MinigamesManager.Instance.onDesktopMinigameOpened.AddListener(OnDesktopMinigameOpened);
-            MinigamesManager.Instance.onPasswordDecryptionMinigameOpened.AddListener(OnPasswordDecryptionMinigameOpen);
-            
-            desktopMinigame.onOpenFolderWithTarget.AddListener(NextStepOnOpenFolderWithTarget);
+            MinigamesManager.Instance.onMinigameOpened.AddListener(OnPasswordDecryptionMinigameOpen);
             
             _lastValidPosition = playerTransform.position;
         }
-        
-        private void Step_7()
+
+        private void OnPasswordDecryptionMinigameOpen()
         {
+            MinigamesManager.Instance.onMinigameOpened.RemoveListener(OnPasswordDecryptionMinigameOpen);
+            
             DialogueManager.Instance.SetDialogue(tutorialDialogue7, InputContext.Minigame);
             DialogueManager.Instance.OpenDialogueWindow();
             
             _lastValidPosition = playerTransform.position;
+            
+            MinigamesManager.Instance.onMinigameOpened.AddListener(OnDesktopMinigameOpened);
         }
 
-        private void Step_8()
+        private void OnDesktopMinigameOpened()
         {
+            MinigamesManager.Instance.onMinigameOpened.RemoveListener(OnDesktopMinigameOpened);
+            
             DialogueManager.Instance.SetDialogue(tutorialDialogue8, InputContext.Minigame);
             DialogueManager.Instance.OpenDialogueWindow();
             
             _lastValidPosition = playerTransform.position;
+            
+            desktopMinigame.onOpenFolderWithTarget.AddListener(OnOpenFileWithTarget);
         }
-
-        private void Step_9()
+        
+        private void OnOpenFileWithTarget()
         {
+            desktopMinigame.onOpenFolderWithTarget.RemoveListener(OnOpenFileWithTarget);
+            
             DialogueManager.Instance.SetDialogue(tutorialDialogue9, InputContext.Minigame);
             DialogueManager.Instance.OpenDialogueWindow();
             
-            DownloadsManager.Instance.onDownloadTargetFile.AddListener(NextStepOnDownloadTargetFile);
-            
             _lastValidPosition = playerTransform.position;
+            
+            DownloadsManager.Instance.onDownloadTargetFile.AddListener(OnDownloadTargetFile);
         }
-        
-        private void Step_10()
+
+        private void OnDownloadTargetFile()
         {
+            DownloadsManager.Instance.onDownloadTargetFile.RemoveListener(OnDownloadTargetFile);
+            
             DialogueManager.Instance.SetDialogue(tutorialDialogue10, PlayerInputManager.Instance.CurrentContext);
             DialogueManager.Instance.OpenDialogueWindow();
             
             codePadInteractable.layer = (int)Mathf.Log(interactableLayer.value, 2);
             codePadInteractableOutline.SetActive(true);
-            safeCodeMinigame.onGuessedPassword.AddListener(NextStepOnSafeMinigamePasswordGuessed);
+            safeCodeMinigame.onGuessedPassword.AddListener(OnCodePadPasswordGuessed);
             
             _lastValidPosition = playerTransform.position;
             
@@ -395,8 +383,10 @@ namespace Levels
             levelObjectivesUI.AddObjective(objective3);
         }
 
-        private void Step_11()
+        private void OnCodePadPasswordGuessed()
         {
+            safeCodeMinigame.onGuessedPassword.RemoveListener(OnCodePadPasswordGuessed);
+            
             DialogueManager.Instance.SetDialogue(tutorialDialogue11);
             DialogueManager.Instance.OpenDialogueWindow();
 
@@ -408,7 +398,7 @@ namespace Levels
             hackableWasherOutline.SetActive(true);
             hackableWasherTriggerArea.ManualUpdate();
             
-            hackableWasherInteractable.onInteract.AddListener(NextStepOnHackableWasherInteract);
+            hackableWasherInteractable.onInteract.AddListener(OnHackableWasherInteract);
 
             shuttersAnim.SetTrigger(Open);
             
@@ -423,12 +413,16 @@ namespace Levels
             levelObjectivesUI.AddObjective(objective4);
         }
 
-        private void Step_12()
+        private void OnHackableWasherInteract()
         {
+            hackableWasherInteractable.onInteract.RemoveListener(OnHackableWasherInteract);
+            
             DialogueManager.Instance.SetDialogue(tutorialDialogue12);
             DialogueManager.Instance.OpenDialogueWindow();
             
-            endLevelTrigger.SetActive(true);
+            endGameLevelTrigger.gameObject.SetActive(true);
+            endGameLevelTrigger.onTriggerEnter.AddListener(EndLevel);
+            
             exitCollider.SetActive(false);
             
             _lastValidPosition = playerTransform.position;
@@ -438,6 +432,8 @@ namespace Levels
 
         private void EndLevel()
         {
+            endGameLevelTrigger.onTriggerEnter.RemoveListener(EndLevel);
+            
             EventsManager.OnEndLevel?.Invoke();
         }
 
@@ -462,69 +458,5 @@ namespace Levels
             DialogueManager.Instance.SetDialogue(onStepReset);
             DialogueManager.Instance.OpenDialogueWindow();
         }
-
-        #region Event Callbacks
-
-        private void NextStepOnDialogueCompleted()
-        {
-            DialogueManager.Instance.onDialogueComplete.RemoveListener(NextStepOnDialogueCompleted);
-            NextObjective();
-        }
-
-        private void NextStepOnPickUpThrowable()
-        {
-            printerInteractable.onPickUpThrowable.RemoveListener(NextStepOnPickUpThrowable);
-            NextObjective();
-        }
-
-        private void NextStepOnCodePadInteract()
-        {
-            codePadMinigame.onInteract.RemoveListener(NextStepOnCodePadInteract);
-            NextObjective();
-        }
-        
-        private void OnDesktopMinigameOpened(MinigameScrObj opened)
-        {
-            if (opened == desktopNavigationMinigame)
-            {
-                MinigamesManager.Instance.onDesktopMinigameOpened.RemoveListener(OnDesktopMinigameOpened);
-                NextObjective();
-            }
-        }
-
-        private void OnPasswordDecryptionMinigameOpen(MinigameScrObj opened)
-        {
-            if (opened == passwordDecryptionMinigame)
-            {
-                MinigamesManager.Instance.onPasswordDecryptionMinigameOpened.RemoveListener(OnPasswordDecryptionMinigameOpen);
-                NextObjective();
-            }
-        }
-
-        private void NextStepOnOpenFolderWithTarget()
-        {
-            desktopMinigame.onOpenFolderWithTarget.RemoveListener(NextStepOnOpenFolderWithTarget);
-            NextObjective();
-        }
-
-        private void NextStepOnDownloadTargetFile()
-        {
-            DownloadsManager.Instance.onDownloadTargetFile.RemoveListener(NextStepOnDownloadTargetFile);
-            NextObjective();
-        }
-
-        private void NextStepOnSafeMinigamePasswordGuessed()
-        {
-            safeCodeMinigame.onGuessedPassword.RemoveListener(NextStepOnSafeMinigamePasswordGuessed);
-            NextObjective();
-        }
-
-        private void NextStepOnHackableWasherInteract()
-        {
-            hackableWasherInteractable.onInteract.RemoveListener(NextStepOnHackableWasherInteract);
-            NextObjective();
-        }
-        
-        #endregion
     }
 }
