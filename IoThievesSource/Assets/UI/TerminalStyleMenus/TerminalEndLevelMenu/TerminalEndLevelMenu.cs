@@ -112,6 +112,10 @@ public class TerminalEndLevelMenu : TerminalMenu
         PrintLine("     scan --next-target   go to next level");
         PrintLine("     cd ..                return to main menu");
         PrintLine("     quit                 quit game");
+        
+        PrintLine("");
+            
+        PrintLine("Click anywhere to start hacking...");
     }
     
     private void HideEndLevelMenu()

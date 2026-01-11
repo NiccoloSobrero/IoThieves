@@ -36,6 +36,10 @@ public class TerminalGameOverMenu : TerminalMenu
         PrintLine(" cd ..           return to main menu");
         // PrintLine(" options         settings [Not Available]");
         PrintLine(" quit            quit game");
+        
+        PrintLine("");
+            
+        PrintLine("Click anywhere to start hacking...");
     }
 
     private void HideGameOverMenu()
