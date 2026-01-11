@@ -24,12 +24,13 @@ MonoBehaviour:
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: ad771f752afefa244b5c465f7173d61b, type: 3}
-    text: He has to pay for firing me, I only have done the very tiny <i>insignificant</i>
-      mistake of deleting the production database, nothing SO serious :(
+    text: 'He has to pay for firing me: when he found out I knew that he was having
+      an affair with someone, and he <i>deleted</i> the production database and blamed
+      me for everything :('
     tags: 
   - speakerName: PIP
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
-    text: You what???
+    text: 'Such a dramatic tea... sorry, not interested : /'
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
