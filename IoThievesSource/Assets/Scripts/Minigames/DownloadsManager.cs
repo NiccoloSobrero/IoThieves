@@ -118,7 +118,7 @@ namespace Minigames
         public Sprite documentSprite;
         public bool isTarget;
         
-        public string FileName => Path.GetFileName(filePath);
+        public string FileName => Path.GetFileName(filePath.Replace('\\', '/'));
     
         public FileDetails(Level levelOfDownload, string filePath, Sprite documentSprite, bool isTarget)
         {
