@@ -1133,6 +1133,10 @@ PrefabInstance:
       propertyPath: alertManager
       value: 
       objectReference: {fileID: 3346137037427755614}
+    - target: {fileID: 5478263120894315082, guid: bfea2d44aae289545b9126fe07c37ae3, type: 3}
+      propertyPath: raycastOrigin
+      value: 
+      objectReference: {fileID: 3548101246771807000}
     - target: {fileID: 9078622970237325981, guid: bfea2d44aae289545b9126fe07c37ae3, type: 3}
       propertyPath: m_Name
       value: SuspicionSphere
