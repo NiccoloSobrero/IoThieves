@@ -8,6 +8,7 @@ namespace AI
         DeviceHacked,
         NoiseHeardState,
         PathCycling,
-        StunnedState
+        StunnedState,
+        GoToDestination
     }
 }

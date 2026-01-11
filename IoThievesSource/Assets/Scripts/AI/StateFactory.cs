@@ -13,6 +13,7 @@ namespace AI
             private NoiseHeardState noiseHeardState;
             private PathCyclingState pathCyclingState; 
             private StunnedState stunnedState;
+            private GoToDestination goToDestination;
             public StateFactory(AIController controller)
             {
                 idleState = new IdleState(controller);
@@ -22,6 +23,7 @@ namespace AI
                 noiseHeardState =  new NoiseHeardState(controller);
                 pathCyclingState = new PathCyclingState(controller) ; 
                 stunnedState = new StunnedState(controller);
+                goToDestination = new GoToDestination(controller);
             }
             
             public AIState GetState(AINames stateName)
@@ -36,6 +38,7 @@ namespace AI
                     case AINames.NoiseHeardState : return noiseHeardState;
                     case AINames.PathCycling : return pathCyclingState;
                     case AINames.StunnedState : return stunnedState;
+                    case AINames.GoToDestination: return goToDestination;
                     default: throw new ArgumentException($"Invalid state name: {stateName}.");
                 }
             }

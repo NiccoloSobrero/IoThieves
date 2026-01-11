@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using AI.AI_States;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -69,8 +70,11 @@ namespace AI
         
         public void ChangeState(AINames state)
         {
-            if (CurrentState is StunnedState)
+            if (CurrentState is (StunnedState or GoToDestination))
+            {
+                print("Non cambio stato poichè sono stunnato oppure sto andando in un punto specifico e davvero non mi posso fermare");
                 return;
+            }
             
             AIState targetState = _stateFactory.GetState(state);
             if (targetState == CurrentState) //Only one instance of the same state is stored in the factory
