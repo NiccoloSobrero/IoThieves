@@ -15,11 +15,19 @@ MonoBehaviour:
   dialogueLines:
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: And... done.
+    text: 'And... done. '
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
     text: Throw the distraction in that blue area over there.
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
     text: Try fixing the distance of the throw with the scroll wheel, aim and throw
       with right click.
+    tags: 
+  - speakerName: PIP
+    icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
+    text: Again, what the hell are you talking about with "click, scroll wheel" an
+      so on.\nAre you playing a videogame?
+    tags: 

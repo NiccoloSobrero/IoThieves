@@ -106,7 +106,7 @@ namespace Minigames
             // Display full name
             string fileName = "";
             
-            if (_type == DesktopItemType.TargetFile)
+            if (_type == DesktopItemType.TargetFile || _type == DesktopItemType.HrComplaint)
             {
                 fileName += "<b><i><color=red>";
             }
@@ -126,7 +126,7 @@ namespace Minigames
         {
             string prefix = "";
             
-            if (_type == DesktopItemType.TargetFile)
+            if (_type == DesktopItemType.TargetFile || _type == DesktopItemType.HrComplaint)
             {
                 prefix = "<b><i><color=red>";
             }

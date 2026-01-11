@@ -15,7 +15,7 @@ namespace Enemy
         [SerializeField] private float detectionRange;
 
         [Header("Player check")] 
-        [SerializeField] [Min(0.1f)] private float timeBetweenChecks = 0.25f;
+        [SerializeField] [Min(0.1f)] private float timeBetweenChecks = 0.1f;
         [SerializeField] private Transform rayOrigin;
         
         private Transform _playerTransform;

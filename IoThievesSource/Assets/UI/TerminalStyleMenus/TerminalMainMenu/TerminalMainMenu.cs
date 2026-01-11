@@ -2,6 +2,7 @@ using System;
 using Events;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class TerminalMainMenu : TerminalMenu
 {
@@ -9,7 +10,7 @@ public class TerminalMainMenu : TerminalMenu
     private Label _loadingLabel;
     private float _loadingProgress = 0f;
     private int _loadingBarLength = 20;
-    private float _loadingSpeed = 0.1f;
+    private float _loadingSpeed = 0.3f;
 
     protected override void OnMenuEnabled()
     {
@@ -37,7 +38,8 @@ public class TerminalMainMenu : TerminalMenu
 
     private void Scan()
     {
-        if (_hasStartedScanning && _scannerTimer >= _scanCharTypingDelay)
+        float delay = Random.Range(_scanCharTypingDelay[0], _scanCharTypingDelay[1]);
+        if (_hasStartedScanning && _scannerTimer >= delay)
         {
             _scannerTimer = 0f;
 
@@ -51,8 +53,15 @@ public class TerminalMainMenu : TerminalMenu
                 _hasStartedScanning = false;
                 PrintLine($"iothieves@kali:~$ {IothievesScan}");
                 PrintLine("");
-                PrintLine("IoThieves v0.1.2");
-                PrintLine("Copyright (c) 2025 by IoTeam");
+                // PrintLine("IoThieves v0.1.2");
+                PrintBanner(Utility.IoThievesArt);
+                PrintLine("Copyright (c) 2025");
+                PrintColumns("Team Leader:", "Niccoló Sobrero");
+                PrintColumns("Designer:", "Matilde Sobberi");
+                PrintColumns("Architect:", "Daniel Bonardi");
+                PrintColumns("AI:", "Federico Tabellini");
+                PrintColumns("UI:", "Emanuele Sapio");
+                
                 PrintLine("Polimi Game Collective");
                 
                 StartLoading();
@@ -89,7 +98,7 @@ public class TerminalMainMenu : TerminalMenu
 
         UpdateLoadingBarText();
 
-        if (_loadingProgress >= 1f)
+        if (_loadingProgress >= 0.7f)
         {
             _isLoading = false;
             PrintLine("");
@@ -100,14 +109,23 @@ public class TerminalMainMenu : TerminalMenu
             
             PrintLine("[OK] Scan completed.");
             PrintLine("42 vulnerable devices found.");
-            PrintLine("12 XSS vulnerabilities found.");
-            PrintLine("20 SQL injection vulnerabilities found.");
-            PrintLine("10 Binary exploitation vulnerabilities found.");
+            PrintLine(" - 12 XSS vulnerabilities found.");
+            PrintLine(" - 20 SQL injection vulnerabilities found.");
+            PrintLine(" - 10 Binary exploitation vulnerabilities found.");
             PrintLine("42 devices exploited.");
             
             PrintLine("");
             
-            PrintLine("Type 'iothieves --help' to list commands");
+            // PrintLine("Type 'help' to list commands");
+            PrintLine("Available commands:");
+            PrintLine(" start       start game");
+            PrintLine(" help        list all available commands");
+            PrintLine(" options     settings [Not Available]");
+            PrintLine(" quit        quit game");
+            
+            PrintLine("");
+            
+            PrintLine("Click anywhere to start hacking...");
         }
     }
 
@@ -119,33 +137,28 @@ public class TerminalMainMenu : TerminalMenu
         string bar = "[" + new string('#', loaded) + new string(' ', empty) + $"] {(int)(_loadingProgress * 100)}%";
         _loadingLabel.text = bar;
     }
-
-    private void InsertCharacter(char character)
-    {
-        _currentInput = _currentInput.Insert(_caretIndex, character.ToString());
-        _caretIndex++;
-        
-        _inputLabel.text = _currentInput;
-        UpdateCaretPosition();
-    }
     
     protected override void ProcessCommand(string cmd)
     {
         switch (cmd.ToLower())
         {
-            case "iothieves --help":
-                PrintLine("Available commands: iothieves --start, iothieves --options, iothieves --exit");
+            case "help":
+                PrintLine("Available commands:");
+                PrintLine("start            start game");
+                PrintLine("help             list all available commands");
+                PrintLine("options          settings [Not Available]");
+                PrintLine("quit             quit game");
                 break;
-            case "iothieves --start":
+            case "start":
                 PrintLine("Connection established...");
                 EventsManager.OnEnterLevelSelection?.Invoke();
                 gameObject.SetActive(false);
                 break;
-            case "iothieves --options":
+            case "options":
                 PrintLine("Customization session started...");
                 EventsManager.OnOptionsClicked?.Invoke();
                 break;
-            case "iothieves --exit":
+            case "quit":
                 PrintLine("Shutting down...");
                 EventsManager.OnQuitGame?.Invoke();
                 break;

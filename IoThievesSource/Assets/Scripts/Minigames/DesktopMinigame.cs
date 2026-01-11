@@ -79,6 +79,8 @@ namespace Minigames
         
         private int _targetFilesNum;
         
+        private bool _isHrComplaintMinigameInitialized;
+        
         #region Events
 
         [HideInInspector] public UnityEvent onOpenFolderWithTarget;
@@ -89,6 +91,8 @@ namespace Minigames
         {
             _pathTextRect = pathText.gameObject.GetComponent<RectTransform>();
             _canvas = GetComponentInParent<Canvas>();
+
+            _isHrComplaintMinigameInitialized = false;
 
             _openedFirstFolder = false;
             _openedTextFile = false;
@@ -189,7 +193,7 @@ namespace Minigames
             
             _currentOpenFileDownloadTime = time;
             
-            desktopNavFile.AdaptToImage(documentSprite, fileName);
+            desktopNavFile.AdaptToImage(documentSprite, fileName, windowsToOpenRect);
             
             // Set file graphics
             openFileObj.SetActive(true);
@@ -205,7 +209,7 @@ namespace Minigames
             _currentOpenFile = new FileDetails(GameManager.Instance.currentLevel, currentPath + fileName, documentSprite, true);
             _currentOpenFileDownloadTime = time;
             
-            desktopNavFile.AdaptToImage(documentSprite, fileName);
+            desktopNavFile.AdaptToImage(documentSprite, fileName, windowsToOpenRect);
             
             // Set file graphics
             openFileObj.SetActive(true);
@@ -228,8 +232,12 @@ namespace Minigames
         {
             hrComplaintMinigame.transform.SetAsLastSibling();
             hrComplaintMinigame.gameObject.SetActive(true);
-            
-            hrComplaintMinigame.Init();
+
+            if (!_isHrComplaintMinigameInitialized)
+            {
+                hrComplaintMinigame.Init();
+                _isHrComplaintMinigameInitialized = true;
+            }
 
             _openedHrComplaint = true;
         }
@@ -389,6 +397,25 @@ namespace Minigames
                     desktopRect.anchoredPosition = Vector2.zero;
                     desktopRect.sizeDelta = _canvas.renderingDisplaySize;
                 }
+                
+                // Maximize other windows if they were maximized
+                if (_isFolderMaximized)
+                {
+                    folderRect.anchoredPosition = Vector2.zero;
+                    folderRect.sizeDelta = windowsToOpenRect.rect.size;
+                }
+                if (_isOpenFileMaximized)
+                {
+                    openFileRect.anchoredPosition = Vector2.zero;
+                    openFileRect.sizeDelta = windowsToOpenRect.rect.size;
+                    
+                    desktopNavFile.RefreshDimensions();
+                }
+                if (_isHrComplaintMaximized)
+                {
+                    hrComplaintRect.anchoredPosition = Vector2.zero;
+                    hrComplaintRect.sizeDelta = windowsToOpenRect.rect.size;
+                }
                     
                 _isDesktopMaximized = !_isDesktopMaximized;
             }
@@ -427,6 +454,8 @@ namespace Minigames
                 }
                     
                 _isOpenFileMaximized = !_isOpenFileMaximized;
+                
+                desktopNavFile.RefreshDimensions();
             }
             else if (window == hrComplaintObj)
             {

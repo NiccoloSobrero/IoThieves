@@ -67,4 +67,34 @@
     background-color: #33ff33;
 }
 
+.image {
+    width: 80%;
+    height: 80%;
+}
+
+.terminal-banner {
+    -unity-font-definition: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf"); /* or another monospace font */
+    font-size: 14px; /* adjust to fit your container */
+    color: #00FF00;  /* terminal green */
+    white-space: unset; /* preserve spaces exactly */
+}
+
+.row {
+    flex-direction: row;
+}
+
+.left-col {
+    width: 260px;
+    color: #33ff33;
+    font-size: 24px;
+    -unity-font-definition: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf");
+}
+
+.right-col {
+    flex-grow: 1;
+    color: #33ff33;
+    font-size: 24px;
+    -unity-font-definition: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf");
+}
+
 

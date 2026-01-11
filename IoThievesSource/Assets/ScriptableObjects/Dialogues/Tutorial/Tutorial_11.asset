@@ -14,12 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueLines:
   - speakerName: Hacker
-    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
+    icon: {fileID: 21300000, guid: ad771f752afefa244b5c465f7173d61b, type: 3}
     text: Woah! Careful the camera is attracted by the noise of the shutters.
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
     text: We need to find something to distract it.
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: Let me try to hack that cube over there. It might make enough noise to
-      attract the camera.
+    text: Look, there's a washing machine right there! Let me try to hack it. It
+      might make enough noise to attract the camera.
+    tags: 

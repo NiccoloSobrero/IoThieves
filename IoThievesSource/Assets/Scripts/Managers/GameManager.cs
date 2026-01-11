@@ -127,6 +127,7 @@ namespace Managers
         private void RestartGame()
         {
             print("Restarting Game");
+            PlayLevel(currentLevel);
         }
 
         private void GameOver()

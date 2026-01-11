@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueLines:
   - speakerName: Hacker
-    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: Hmmm... this device needs a password to unlock, but it's way to old for
-      me to hack.
+    icon: {fileID: 21300000, guid: 7ca5486df83ebce4681cd89b1a1d718c, type: 3}
+    text: What the hell is that? I can't hack this piece of garbage.
+    tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: Let's see if the computer has some information.
+    text: Let's see if the computer behind you contains the password to unlock the
+      garage door.
+    tags: 

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueLines:
   - speakerName: Hacker
-    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: Now we can go back to the code pad and try our luck.
+    icon: {fileID: 21300000, guid: 5f410904bef2ad7449d9b04a332fba22, type: 3}
+    text: Now we can go back to the keypad and try our luck.
+    tags: 

@@ -21,6 +21,9 @@ namespace UI
         
         private readonly List<LevelObjectivesToUI> _objectivesToUI = new();
         
+        private const float AutoCloseDelay = 5f;
+        private Coroutine _autoCloseCoroutine;
+        
         public void AddObjective(LevelObjectiveScrObj objectiveScrObj)
         {
             foreach (var objective in _objectivesToUI)
@@ -38,6 +41,8 @@ namespace UI
             objectiveUI.Initialize(objectiveScrObj.Init());
             
             _objectivesToUI.Add(new LevelObjectivesToUI(objectiveUI, objectiveScrObj));
+
+            AutoOpen();
             
             UpdateHeight();
         }
@@ -61,9 +66,37 @@ namespace UI
                         objective.ObjectiveUI.UpdateText(nextStep);
                     }
                     
+                    AutoOpen();
+                    
                     return;
                 }
             }
+        }
+
+        private void AutoOpen()
+        {
+            if (_autoCloseCoroutine != null)
+            {
+                StopCoroutine(_autoCloseCoroutine);
+                _autoCloseCoroutine = StartCoroutine(AutoCloseCoroutine());
+                
+                return;
+            }
+            
+            if (_isOpened) return;
+            
+            _isOpened = true;
+            animator.SetBool(Open, _isOpened);
+            _autoCloseCoroutine = StartCoroutine(AutoCloseCoroutine());
+        }
+
+        private IEnumerator AutoCloseCoroutine()
+        {
+            yield return new WaitForSeconds(AutoCloseDelay);
+
+            _autoCloseCoroutine = null;
+            _isOpened = false;
+            animator.SetBool(Open, _isOpened);
         }
 
         private IEnumerator StrikeTextCor(string text, LevelObjectivesToUI objectiveToUI, float delayPerChar)
@@ -115,6 +148,11 @@ namespace UI
 
         public void OpenClose()
         {
+            if (_autoCloseCoroutine != null)
+            {
+                StopCoroutine(_autoCloseCoroutine);
+            }
+            
             _isOpened = !_isOpened;
             
             animator.SetBool(Open, _isOpened);

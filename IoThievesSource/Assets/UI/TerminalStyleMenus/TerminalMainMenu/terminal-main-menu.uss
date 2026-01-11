@@ -27,7 +27,8 @@
     color: #33ff33;
     margin-right: 6px;
     font-size: 24px;
-    -unity-font: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf");
+    /*-unity-font: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf");*/
+    -unity-font-definition: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf");
     /*border-color: lime;*/
     /*border-width: 2px;*/
 }
@@ -43,7 +44,8 @@
 }
 
 .input-text {
-    -unity-font: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf");
+    /*-unity-font: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf");*/
+    -unity-font-definition: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf");
     font-size: 24px;
     color: #33ff33;
     background-color: transparent;
@@ -66,5 +68,52 @@
     margin-top: 10px;
     background-color: #33ff33;
 }
+
+.row {
+    flex-direction: row;
+}
+
+.left-col {
+    width: 260px;
+    color: #33ff33;
+    font-size: 24px;
+    -unity-font-definition: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf");
+}
+
+.right-col {
+    flex-grow: 1;
+    color: #33ff33;
+    font-size: 24px;
+    -unity-font-definition: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf");
+}
+
+.unity-base-slider__dragger {
+    background-color: #a3a3a2;
+    border-radius: 12px;
+}
+
+.unity-base-slider__traker {
+    background-color: #313131;
+}
+
+.unity-base-slider__dragger-border {
+    border-radius: 12px;
+}
+
+.unity-scroller__high-button {
+    display: none;
+}
+
+.unity-scroller__low-button {
+    display: none;
+}
+
+.terminal-banner {
+    -unity-font-definition: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf"); /* or another monospace font */
+    font-size: 14px; /* adjust to fit your container */
+    color: #00FF00;  /* terminal green */
+    white-space: unset; /* preserve spaces exactly */
+}
+
 
 

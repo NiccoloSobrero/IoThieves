@@ -98,7 +98,7 @@ namespace AI.Utilities
             foreach (Waypoint wp in allWaypoints)
             {
                 wp.neighbours.Clear();
-                EditorUtility.SetDirty(wp);
+                // EditorUtility.SetDirty(wp);
             }
         
             Debug.Log($"Cleared all connections for {allWaypoints.Length} waypoints.");

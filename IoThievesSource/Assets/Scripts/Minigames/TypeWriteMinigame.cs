@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,24 +12,13 @@ namespace Minigames
         private int _currentIndex;
 
         [HideInInspector] public UnityEvent onSendComplaint;
-
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Tab))
-            {
-                typingSections[_currentIndex].OnDeselect(null);
-                
-                _currentIndex = (_currentIndex + 1) % typingSections.Count;
-                
-                typingSections[_currentIndex].OnSelect(null);
-            }
-        }
+        // [SerializeField] public GameObject errorObj;
 
         public void Init()
         {
             foreach (TypeWriteSection typeWriteSection in typingSections)
             {
-                typeWriteSection.Init();
+                typeWriteSection.Init(this);
             }
         }
 
@@ -37,15 +27,31 @@ namespace Minigames
             // Check correctness
             foreach (var section in typingSections)
             {
-                if (section.HasAnError())
+                if (section.HasTooManyErrors())
                 {
                     Debug.Log("The complaint has an error and cannot be sent.");
+                    // errorObj.SetActive(true);
                     return;
                 }
             }
             
             // Invoke event
             onSendComplaint.Invoke();
+            
+            gameObject.SetActive(false);
+        }
+        
+        public IEnumerator NextSection()
+        {
+            yield return new WaitForEndOfFrame();
+            
+            typingSections[_currentIndex].OnDeselect(null);
+            
+            _currentIndex++;
+            if (_currentIndex < typingSections.Count)
+            {
+                typingSections[_currentIndex].OnSelect(null);
+            }
         }
     }
 }
