@@ -44,7 +44,7 @@ namespace Enemy
 
         private void SetDetectionSphere()
         {
-            detectionRange = enemyFov.Radius * 2.6f;
+            detectionRange = enemyFov.Radius * 1.95f;
             transform.localScale = new Vector3(detectionRange, detectionRange, detectionRange);
         }
 
