@@ -197,7 +197,7 @@ namespace Levels
 
         private void Step_0()
         {
-            DialogueManager.Instance.SetDialogue(tutorialDialogue0, InputContext.Disabled);
+            DialogueManager.Instance.SetDialogue(tutorialDialogue0);
             DialogueManager.Instance.OpenDialogueWindow();
 
             step0Trigger.SetActive(true);
@@ -268,7 +268,7 @@ namespace Levels
             
             codePadInteractableTriggerArea.ManualUpdate();
             
-            PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
+            PlayerInputManager.Instance.SetContext(InputContext.Dialogue);
         }
         
         private void Step_1_3()
