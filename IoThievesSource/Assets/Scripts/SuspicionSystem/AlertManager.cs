@@ -74,10 +74,10 @@ namespace SuspicionSystem
             try
             {
                 EnemyAdapter.AIController.Initialize();
+                //print(gameObject.name + "AIController initialized");
             }
             catch (Exception e)
             {
-                print("No AIController found");
             }
             
             ChangeState(Level0State);

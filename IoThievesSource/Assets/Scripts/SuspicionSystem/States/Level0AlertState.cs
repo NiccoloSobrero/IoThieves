@@ -28,7 +28,8 @@ namespace SuspicionSystem.States
             }
             catch (NullReferenceException e)
             {
-                Debug.LogException(e);
+                Debug.Log(ctx.gameObject.name + " HAS NO AI CONTROLLER");
+                //Debug.LogException(e);
             }
             
         }
