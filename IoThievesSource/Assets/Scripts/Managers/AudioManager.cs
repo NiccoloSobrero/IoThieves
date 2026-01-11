@@ -64,6 +64,7 @@ namespace Managers
             }
 
             musicSource.playOnAwake = false;
+            musicSource.volume = Mathf.Clamp01(_currentVolume / (float)audioPlayerUI.MaxVolume * VolumeMult);
         }
 
         private void Start()
