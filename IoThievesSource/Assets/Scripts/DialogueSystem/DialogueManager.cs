@@ -21,9 +21,12 @@ namespace DialogueSystem
         [SerializeField] private GameObject textCompletedObj;
         [SerializeField] private AudioSource sfxSource;
         [SerializeField] private AudioClip letterSfx;
-        [SerializeField, Range(0f, 1f)] private float letterVolume = 0.4f;
 
-        [SerializeField] private int MAXC = 4;
+        private const int MaxSoundChar = 4;
+        private const int MinSoundChar = 3;
+        
+        private const float MaxLetterVolume = 0.3f;
+        private const float MinLetterVolume = 0.2f;
         
         private const float CharactersDelay = 0.01f;
         private const float SkipTextGenerationDelay = 0f;
@@ -124,20 +127,26 @@ namespace DialogueSystem
         {
             int currentShownCharacters = 0;
 
-            int counter = 0 ; 
+            int counter = 0;
+            int currentCharSoundLimit = Random.Range(MinSoundChar, MaxSoundChar + 1);
+            float letterVolume = Random.Range(MinLetterVolume, MaxLetterVolume);
+            
             while (currentShownCharacters < totalCharacters)
             {
                 currentShownCharacters++;
                 counter++;
                 dialogue.maxVisibleCharacters = currentShownCharacters;
                 
-                if (letterSfx != null && sfxSource != null && currentShownCharacters - 1 < dialogue.text.Length)
+                if (currentShownCharacters - 1 < dialogue.text.Length)
                 {
                     char c = dialogue.text[currentShownCharacters - 1];
-                    if (!char.IsWhiteSpace(c) && counter >= MAXC)
+                    if (!char.IsWhiteSpace(c) && counter >= currentCharSoundLimit)
                     {
                         sfxSource.PlayOneShot(letterSfx, letterVolume);
+                        
                         counter = 0;
+                        currentCharSoundLimit = Random.Range(MinSoundChar, MaxSoundChar + 1);
+                        letterVolume = Random.Range(MinLetterVolume, MaxLetterVolume);
                     }
                 }
                 

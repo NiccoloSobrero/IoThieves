@@ -677,6 +677,7 @@ MonoBehaviour:
   npc: {fileID: -996625976428397906}
   alertManager: {fileID: 3346137037427755614}
   SphereFOV: {fileID: 1101995406142850608}
+  fovMesh: {fileID: 5884590623567349909}
   animationController: {fileID: 6032443908299983884}
 --- !u!114 &-996625976428397906
 MonoBehaviour:
@@ -1058,6 +1059,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1bc3e519ca7b76d4db93cf1e0beb77d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5884590623567349909 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1418596984419265338, guid: b11884beb7cf79043ac518b5fcc4c3a2, type: 3}
+  m_PrefabInstance: {fileID: 4757381816503215023}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790b0d6b347bcc04a9edf1677b47516d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &9032351452925609046 stripped

@@ -13,6 +13,7 @@ namespace AI
         [SerializeField] private AIController npc;
         [SerializeField] private AlertManager alertManager;
         [SerializeField] private NpcTrigger SphereFOV;
+        [SerializeField] private EnemyFOVMesh fovMesh;
 
         [SerializeField] private NpcAnimationController animationController;
         // [SerializeField] private NpcTriggerConeOfDeath ConeOfDeath;  
@@ -20,6 +21,7 @@ namespace AI
         public AlertManager AlertManager => alertManager;
         public AIController AIController => npc;
         public NpcTrigger NpcTrigger => SphereFOV;
+        public EnemyFOVMesh FovMesh => fovMesh;
         // public NpcTriggerConeOfDeath NpcTriggerConeOfDeath => ConeOfDeath;
         public NpcAnimationController AnimationController => animationController;
     }

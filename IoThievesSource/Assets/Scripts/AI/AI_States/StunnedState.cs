@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using Enemy;
-using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 namespace AI.AI_States
@@ -19,6 +16,9 @@ namespace AI.AI_States
             elapsedTime = 0;
             //DisableFovsD
             Debug.Log("StunnedEnemy");
+            Npc.enemyAdapter.FovMesh.gameObject.SetActive(false);
+            Npc.enemyAdapter.AlertManager.ShowAlertBillboard(false);
+            Npc.enemyAdapter.AlertManager.enabled = false;
             OnAndOffFovs(false);
             
         }
@@ -35,6 +35,9 @@ namespace AI.AI_States
         public override void Exit()
         {
             Npc.enemyAdapter.AnimationController.SetStunned(false);
+            Npc.enemyAdapter.FovMesh.gameObject.SetActive(true);
+            Npc.enemyAdapter.AlertManager.ShowAlertBillboard(true);
+            Npc.enemyAdapter.AlertManager.enabled = true;
             OnAndOffFovs(true);
         }
 

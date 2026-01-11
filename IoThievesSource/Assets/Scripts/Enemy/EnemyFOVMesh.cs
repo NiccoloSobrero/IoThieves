@@ -57,6 +57,8 @@ namespace Enemy
         private Mesh _mesh;
         private float _t;
 
+        private bool _isVisible = true;
+
         private void Awake()
         {
             _mesh = new Mesh { name = "Enemy_FOV_Pie" };
@@ -68,12 +70,15 @@ namespace Enemy
 
         private void LateUpdate()
         {
+            if (!_isVisible)
+                return;
+            
             if (updateEveryFrame)
             {
                 Rebuild();
                 return;
             }
-
+            
             _t += Time.deltaTime;
             if (_t >= updateInterval)
             {
@@ -195,6 +200,19 @@ namespace Enemy
             float rad = globalAngleDeg * Mathf.Deg2Rad;
             return new Vector3(Mathf.Sin(rad), 0f, Mathf.Cos(rad));
         }
+        
+        public void SetVisible(bool visible)
+        {
+            _isVisible = visible;
 
+            if (visible)
+            {
+                Rebuild();
+            }
+            else
+            {
+                _mesh.Clear();
+            }
+        }
     }
 }
