@@ -1473,6 +1473,10 @@ PrefabInstance:
       propertyPath: timeBetweenChecks
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 3548101246771807000, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4251657075257737783, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -1484,6 +1488,14 @@ PrefabInstance:
     - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_Name
       value: Enemy_AtTheEntrance
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884590623567349909, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: angle
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912339954262484050, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 5998737358564386977, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_Avatar
@@ -2062,9 +2074,17 @@ PrefabInstance:
       propertyPath: timeBetweenChecks
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 3548101246771807000, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_Name
       value: Enemy_NearTheWindows
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884590623567349909, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: angle
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 5912339954262484050, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_LocalScale.x
@@ -2080,7 +2100,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5912339954262484050, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.1
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 5912339954262484050, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -8405,8 +8425,8 @@ Transform:
   m_GameObject: {fileID: 628407304}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.6, z: 1.5}
+  m_LocalPosition: {x: -0.005, y: 0.02, z: 0}
+  m_LocalScale: {x: 1.075, y: 1.6, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2049250909181045035}
@@ -22079,8 +22099,8 @@ Transform:
   m_GameObject: {fileID: 1204493687}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
+  m_LocalPosition: {x: 0, y: -0.015, z: 0}
+  m_LocalScale: {x: 1.15, y: 1.15, z: 1.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 3085936385613711831}
@@ -34517,9 +34537,21 @@ PrefabInstance:
       propertyPath: timeBetweenChecks
       value: 0.25
       objectReference: {fileID: 0}
+    - target: {fileID: 3548101246771807000, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_Name
       value: Enemy_NearTheDoors
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884590623567349909, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: angle
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 5912339954262484050, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 5998737358564386977, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_Avatar

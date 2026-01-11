@@ -808,7 +808,7 @@ Transform:
   m_GameObject: {fileID: 6979591427042212286}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.85, z: 0}
+  m_LocalPosition: {x: 0, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -984,10 +984,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8569817063494681188}
     m_Modifications:
+    - target: {fileID: 1155529904762750973, guid: b11884beb7cf79043ac518b5fcc4c3a2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 1189267757218570869, guid: b11884beb7cf79043ac518b5fcc4c3a2, type: 3}
       propertyPath: m_Name
       value: ConeOfDeath
       objectReference: {fileID: 0}
+    - target: {fileID: 1418596984419265338, guid: b11884beb7cf79043ac518b5fcc4c3a2, type: 3}
+      propertyPath: fovMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 2e9f5a4f695e9a546b575fffc607c9cf, type: 2}
     - target: {fileID: 4565742117867939833, guid: b11884beb7cf79043ac518b5fcc4c3a2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
