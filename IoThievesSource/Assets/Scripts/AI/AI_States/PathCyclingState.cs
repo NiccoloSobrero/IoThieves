@@ -11,7 +11,7 @@ namespace AI.AI_States
         private List<Waypoint> _path;
         private int _idx = 0;
         private Vector3 _targetPosition;
-        //private bool _isPath = false;
+        private bool _hasPath = false;
         private bool _isMoving = false;
         private bool back_to_path = false;
         private List<Waypoint> _backPath;
@@ -44,8 +44,9 @@ namespace AI.AI_States
                 
                 List<Waypoint> path = ptf.GetPath();
                 if (path is null || path.Count == 0) return;
+                
                 _path = path;
-                //IsMoving = true;
+                _hasPath = true; 
                 _idx = 0;
                 _targetPosition = _path[_idx].transform.position;
             }
@@ -104,7 +105,7 @@ namespace AI.AI_States
 
         public override void Execute()
         {
-            if (!IsMoving)
+            if (!_hasPath)
                 return;
             
             Vector3 dir = _targetPosition - Npc.transform.position;
@@ -114,7 +115,8 @@ namespace AI.AI_States
             
             float angleMag = AIUtilities.RotateTarget(Npc.transform, forwardDir, dir, Npc.NpcDatas.AngularSpeed);
             
-            if(angleMag < Npc.NpcDatas.AngularThreshold)
+            IsMoving = angleMag < Npc.NpcDatas.AngularThreshold;
+            if(IsMoving)
                 AIUtilities.MoveTarget(Npc.transform, dir, Npc.NpcDatas.Speed);
 
             float distance =  Vector3.Distance(Npc.transform.position, _targetPosition);
