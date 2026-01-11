@@ -47,9 +47,10 @@ namespace Minigames
             
             typingSections[_currentIndex].OnDeselect(null);
             
-            _currentIndex++;
-            if (_currentIndex < typingSections.Count)
+           
+            if (_currentIndex + 1 < typingSections.Count)
             {
+                _currentIndex++;
                 typingSections[_currentIndex].OnSelect(null);
             }
         }
