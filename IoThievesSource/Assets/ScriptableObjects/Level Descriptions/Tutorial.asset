@@ -16,7 +16,7 @@ MonoBehaviour:
   levelName: suburban house
   levelDescription: Find a way to escape the garage
   levelObjectives:
-  - bypass-auth
-  - dump-credentials
-  - exit-clean
+  - Find the code pad password
+  - Distract the camera
+  - Get out of the garage
   difficulty: 2

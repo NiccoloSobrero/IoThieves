@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Level_2
   m_EditorClassIdentifier: 
   levelNumber: 2
-  levelName: suburban house
-  levelDescription: Find a way to escape the garage
+  levelName: rich district house
+  levelDescription: Find something incriminating on your ex boss
   levelObjectives:
-  - bypass-auth
-  - dump-credentials
-  - exit-clean
-  difficulty: 7
+  - Find a way of entering the boss' room
+  - Download some incriminating evidence
+  - Get out
+  difficulty: 10
