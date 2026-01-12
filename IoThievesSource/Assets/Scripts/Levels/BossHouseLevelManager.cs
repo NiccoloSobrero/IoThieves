@@ -129,6 +129,9 @@ namespace Levels
             yield return StartCoroutine(MoveCameraToCor(cameraFollowTransform, playerTransform));
             PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
             
+            // Update objectives
+            levelObjectivesUI.AddObjective(findChatLogs);
+            
             // Set up next step
             bossRoomDoorTrigger.onTriggerEnterEvent.AddListener(OnEnterBossRoomDoorTrigger);
         }
@@ -157,6 +160,9 @@ namespace Levels
             DialogueManager.Instance.SetDialogue(onArriveAtDoorDialogue);
             DialogueManager.Instance.OpenDialogueWindow();
             
+            // Update objectives
+            levelObjectivesUI.UpdateObjective(findChatLogs);
+            
             // Set up next step
             laxativesInteractable.SetEnabled(true);
             laxativesInteractable.onInteract.AddListener(OnInteractWithLaxatives);
@@ -170,6 +176,9 @@ namespace Levels
             // Show dialogue
             DialogueManager.Instance.SetDialogue(onFoundLaxativesDialogue);
             DialogueManager.Instance.OpenDialogueWindow();
+            
+            // Update objectives
+            levelObjectivesUI.UpdateObjective(findChatLogs);
             
             // Set up next step
             cupInteractable.SetEnabled(true);
@@ -185,6 +194,9 @@ namespace Levels
         {
             // Remove previous listener
             cupInteractable.onInteract.RemoveListener(OnInteractWithCup);
+            
+            // Update objectives
+            levelObjectivesUI.UpdateObjective(findChatLogs);
             
             // Execute action
             bossAIController.ChangeState(AINames.GoToDestination);
@@ -232,6 +244,9 @@ namespace Levels
             DialogueManager.Instance.SetDialogue(onChatDownloadDialogue, PlayerInputManager.Instance.CurrentContext);
             DialogueManager.Instance.OpenDialogueWindow();
             
+            // Update objectives
+            levelObjectivesUI.UpdateObjective(findChatLogs);
+            
             // Set up next step
             carExitInteractable.SetEnabled(true);
             carExitInteractable.onInteract.AddListener(OnInteractWithCarExit);
@@ -245,6 +260,9 @@ namespace Levels
             // Show dialogue
             DialogueManager.Instance.SetDialogue(onExitLevelDialogue);
             DialogueManager.Instance.OpenDialogueWindow();
+            
+            // Update objectives
+            levelObjectivesUI.UpdateObjective(findChatLogs);
 
             // Level complete logic can be added here
             DialogueManager.Instance.onDialogueComplete.AddListener(OnLevelComplete);

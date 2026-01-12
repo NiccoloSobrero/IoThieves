@@ -1,9 +1,6 @@
 using System;
-using System.Collections.Generic;
 using AI.AI_States;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace AI
 {
@@ -11,7 +8,7 @@ namespace AI
     {
         [Header("AI Settings")]
         [SerializeField] private AINames startState;
-        [SerializeField] private AIState _currentState = null;
+        private AIState _currentState = null;
         [SerializeField] private NpcScriptableObject _NpcDatas;
         public event Action<AIState> OnStateChanged; 
         public event Action<AIState> BeforeStateChanged; 

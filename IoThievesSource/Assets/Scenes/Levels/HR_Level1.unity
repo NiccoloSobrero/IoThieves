@@ -14104,8 +14104,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   samplingTime: 0.2
-  elapsed: 0.2
-  _radius: 0
+  radius: 3
 --- !u!1 &725937896
 GameObject:
   m_ObjectHideFlags: 0
@@ -22204,8 +22203,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   samplingTime: 0.2
-  elapsed: 0.2
-  _radius: 0
+  radius: 3
 --- !u!65 &1155057709
 BoxCollider:
   m_ObjectHideFlags: 0
