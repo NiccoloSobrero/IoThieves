@@ -1,6 +1,4 @@
-using AI;
 using SuspicionSystem;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace Enemy
