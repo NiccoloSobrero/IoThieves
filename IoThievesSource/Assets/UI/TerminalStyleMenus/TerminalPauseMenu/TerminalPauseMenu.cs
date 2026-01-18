@@ -37,6 +37,7 @@ public class TerminalPauseMenu : TerminalMenu
                 PrintLine("Available commands:");
                 PrintColumns(" resume", "resume game");
                 PrintColumns(" bindings", "print all bindings");
+                PrintColumns(" bind [move-up, move-down, move-left, move-right, click, throw]", "change button binding");
                 PrintColumns(" cd ..", "return to main menu");
                 PrintColumns(" quit", "quit game");
                 break;
@@ -90,11 +91,11 @@ public class TerminalPauseMenu : TerminalMenu
         
         // PrintLine("Type 'iothieves --help' to list commands");
         PrintLine("Available commands:");
-        PrintLine("     resume               resume game");
-        PrintLine("     bindings             print all bindings");
-        PrintLine("     bind [move.up]       change button binding");
-        PrintLine("     cd ..                return to main menu");
-        PrintLine("     quit                 quit game");
+        PrintLine("     resume                                                                  resume game");
+        PrintLine("     bindings                                                                print all bindings");
+        PrintLine("     bind [move-up, move-down, move-left, move-right, click, throw]          change button binding");
+        PrintLine("     cd ..                                                                   return to main menu");
+        PrintLine("     quit                                                                    quit game");
         
         PrintLine("");
             
@@ -110,7 +111,7 @@ public class TerminalPauseMenu : TerminalMenu
 
     private void HandleBindCommand(string cmd)
     {
-        // example: bind move.up
+        // example: bind move-up
         string[] parts = cmd.Split(' ');
 
         if (parts.Length != 2)
@@ -134,6 +135,12 @@ public class TerminalPauseMenu : TerminalMenu
         } else if (action == "move-right")
         {
             GetIndexAndStartRebind(Utility.GameplayAction, Utility.MoveAction, Utility.RightAction, HandleBindResult);
+        } else if (action == "click")
+        {
+            StartSimpleRebind(Utility.GameplayAction, Utility.ClickAction, action, HandleBindResult);
+        } else if (action == "throw")
+        {
+            StartSimpleRebind(Utility.GameplayAction, Utility.ThrowAction, action, HandleBindResult);
         }
     }
 
@@ -141,6 +148,11 @@ public class TerminalPauseMenu : TerminalMenu
     {
         int index = GetCompositeIndex(actionName, part);
         StartRebind(actionMap, actionName, index, action, part);
+    }
+
+    private void StartSimpleRebind(string actionMap, string actionName, string part, Action<string, string> action)
+    {
+        StartRebind(actionMap, actionName, 0, action, part);
     }
     
     private void HandleBindResult(string result, string partAction)

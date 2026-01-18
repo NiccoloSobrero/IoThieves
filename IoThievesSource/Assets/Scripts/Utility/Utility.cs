@@ -55,7 +55,7 @@ $$/       $$$$$$$/  $$$$$$/  $$$$$$$/   $$$$$$$/
     public static readonly string GameplayAction = "Gameplay";
     public static readonly string MoveAction = "Move";
     public static readonly string ClickAction = "Click";
-    public static readonly string ThrowAction = "Move";
+    public static readonly string ThrowAction = "Throw";
     public static readonly string WasdAction = "WASD";
     public static readonly string UpAction = "Up";
     public static readonly string DownAction = "Down";
