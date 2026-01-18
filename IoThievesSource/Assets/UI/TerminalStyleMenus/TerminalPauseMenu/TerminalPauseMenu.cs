@@ -150,59 +150,75 @@ public class TerminalPauseMenu : TerminalMenu
 
         if (action == "move.up")
         {
-            int index = GetCompositeIndex("Move", "Up");
-        
-            Debug.Log($"[Rebind] Binding index = {index}");
-            StartRebind(
-                "Gameplay",
-                "Move",
-                index,
-                result =>
-                {
-                    Debug.Log($"Bound move.up to {result}");
-                    PrintLine($"Bound move.up to {result}");
-                });
+            // int index = GetCompositeIndex("Move", "Up");
+            //
+            // Debug.Log($"[Rebind] Binding index = {index}");
+            // StartRebind(
+            //     "Gameplay",
+            //     "Move",
+            //     index,
+            //     result =>
+            //     {
+            //         Debug.Log($"Bound move.up to {result}");
+            //         PrintLine($"Bound move.up to {result}");
+            //     });
+            GetIndexAndStartRebind("Gameplay", "Move", "Up", HandleBindResult);
             // RebindComposite(move, WASD_ACTION, "Up");
         } else if (action == "move.down") {
-            int index = GetCompositeIndex("Move", "Down");
-        
-            Debug.Log($"[Rebind] Binding index = {index}");
-            StartRebind(
-                "Gameplay",
-                "Move",
-                index,
-                result =>
-                {
-                    Debug.Log($"Bound move.down to {result}");
-                    PrintLine($"Bound move.down to {result}");
-                });
+            // int index = GetCompositeIndex("Move", "Down");
+            //
+            // Debug.Log($"[Rebind] Binding index = {index}");
+            // StartRebind(
+            //     "Gameplay",
+            //     "Move",
+            //     index,
+            //     result =>
+            //     {
+            //         Debug.Log($"Bound move.down to {result}");
+            //         PrintLine($"Bound move.down to {result}");
+            //     });
+            GetIndexAndStartRebind("Gameplay", "Move", "Down", HandleBindResult);
         } else if (action == "move.left")
         {
-            int index = GetCompositeIndex("Move", "Left");
-            Debug.Log($"[Rebind] Binding index = {index}");
-            StartRebind(
-                "Gameplay",
-                "Move",
-                index,
-                result =>
-                {
-                    Debug.Log($"Bound move.down to {result}");
-                    PrintLine($"Bound move.down to {result}");
-                });
+            // int index = GetCompositeIndex("Move", "Left");
+            // Debug.Log($"[Rebind] Binding index = {index}");
+            // StartRebind(
+            //     "Gameplay",
+            //     "Move",
+            //     index,
+            //     result =>
+            //     {
+            //         Debug.Log($"Bound move.down to {result}");
+            //         PrintLine($"Bound move.down to {result}");
+            //     });
+            GetIndexAndStartRebind("Gameplay", "Move", "Left", HandleBindResult);
         } else if (action == "move.right")
         {
-            int index = GetCompositeIndex("Move", "Right");
-            Debug.Log($"[Rebind] Binding index = {index}");
-            StartRebind(
-                "Gameplay",
-                "Move",
-                index,
-                result =>
-                {
-                    Debug.Log($"Bound move.down to {result}");
-                    PrintLine($"Bound move.down to {result}");
-                });
+            // int index = GetCompositeIndex("Move", "Right");
+            // Debug.Log($"[Rebind] Binding index = {index}");
+            // StartRebind(
+            //     "Gameplay",
+            //     "Move",
+            //     index,
+            //     result =>
+            //     {
+            //         Debug.Log($"Bound move.down to {result}");
+            //         PrintLine($"Bound move.down to {result}");
+            //     });
+            GetIndexAndStartRebind("Gameplay", "Move", "Right", HandleBindResult);
         }
+    }
+
+    private void GetIndexAndStartRebind(string actionMap, string actionName, string part, Action<string> action)
+    {
+        int index = GetCompositeIndex(actionName, part);
+        StartRebind(actionMap, actionName, index, action);
+    }
+    
+    private void HandleBindResult(string result)
+    {
+        Debug.Log($"Bound move.down to {result}");
+        PrintLine($"Bound move.down to {result}");
     }
     
     public void StartRebind(
