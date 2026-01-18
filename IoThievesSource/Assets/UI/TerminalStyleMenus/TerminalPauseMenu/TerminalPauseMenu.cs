@@ -10,31 +10,6 @@ using PlayerInputManager = Managers.PlayerInputManager;
 public class TerminalPauseMenu : TerminalMenu
 {
     [SerializeField] private InputActionAsset inputActions;
-    
-    // private InputAction _currentAction;
-    private int _bindingIndex;
-    // private Action<string> _onComplete;
-    
-    private InputAction move;
-    private InputAction interact;
-    private InputAction execute;
-    
-    private readonly string MOVE_ACTION = "Move";
-    private readonly string CLICK_ACTION = "Click";
-    private readonly string THROW_ACTION = "Throw";
-    private readonly string WASD_ACTION = "WASD";
-
-    private void Awake()
-    {
-        var gameplay = inputActions.FindActionMap("Gameplay");
-
-        move = gameplay.FindAction(MOVE_ACTION);
-
-        interact = gameplay.FindAction(CLICK_ACTION);
-        execute = gameplay.FindAction(THROW_ACTION);
-
-        // LoadUserInputPreferences();
-    }
 
     protected override void OnMenuEnabled()
     {
@@ -148,105 +123,57 @@ public class TerminalPauseMenu : TerminalMenu
 
         PrintLine("Press a key to bind (ESC to cancel)");
 
-        if (action == "move.up")
+        if (action == "move-up")
         {
-            // int index = GetCompositeIndex("Move", "Up");
-            //
-            // Debug.Log($"[Rebind] Binding index = {index}");
-            // StartRebind(
-            //     "Gameplay",
-            //     "Move",
-            //     index,
-            //     result =>
-            //     {
-            //         Debug.Log($"Bound move.up to {result}");
-            //         PrintLine($"Bound move.up to {result}");
-            //     });
-            GetIndexAndStartRebind("Gameplay", "Move", "Up", HandleBindResult);
-            // RebindComposite(move, WASD_ACTION, "Up");
-        } else if (action == "move.down") {
-            // int index = GetCompositeIndex("Move", "Down");
-            //
-            // Debug.Log($"[Rebind] Binding index = {index}");
-            // StartRebind(
-            //     "Gameplay",
-            //     "Move",
-            //     index,
-            //     result =>
-            //     {
-            //         Debug.Log($"Bound move.down to {result}");
-            //         PrintLine($"Bound move.down to {result}");
-            //     });
-            GetIndexAndStartRebind("Gameplay", "Move", "Down", HandleBindResult);
-        } else if (action == "move.left")
+            GetIndexAndStartRebind(Utility.GameplayAction, Utility.MoveAction, Utility.UpAction, HandleBindResult);
+        } else if (action == "move-down") {
+            GetIndexAndStartRebind(Utility.GameplayAction, Utility.MoveAction, Utility.DownAction, HandleBindResult);
+        } else if (action == "move-left")
         {
-            // int index = GetCompositeIndex("Move", "Left");
-            // Debug.Log($"[Rebind] Binding index = {index}");
-            // StartRebind(
-            //     "Gameplay",
-            //     "Move",
-            //     index,
-            //     result =>
-            //     {
-            //         Debug.Log($"Bound move.down to {result}");
-            //         PrintLine($"Bound move.down to {result}");
-            //     });
-            GetIndexAndStartRebind("Gameplay", "Move", "Left", HandleBindResult);
-        } else if (action == "move.right")
+            GetIndexAndStartRebind(Utility.GameplayAction, Utility.MoveAction, Utility.LeftAction, HandleBindResult);
+        } else if (action == "move-right")
         {
-            // int index = GetCompositeIndex("Move", "Right");
-            // Debug.Log($"[Rebind] Binding index = {index}");
-            // StartRebind(
-            //     "Gameplay",
-            //     "Move",
-            //     index,
-            //     result =>
-            //     {
-            //         Debug.Log($"Bound move.down to {result}");
-            //         PrintLine($"Bound move.down to {result}");
-            //     });
-            GetIndexAndStartRebind("Gameplay", "Move", "Right", HandleBindResult);
+            GetIndexAndStartRebind(Utility.GameplayAction, Utility.MoveAction, Utility.RightAction, HandleBindResult);
         }
     }
 
-    private void GetIndexAndStartRebind(string actionMap, string actionName, string part, Action<string> action)
+    private void GetIndexAndStartRebind(string actionMap, string actionName, string part, Action<string, string> action)
     {
         int index = GetCompositeIndex(actionName, part);
-        StartRebind(actionMap, actionName, index, action);
+        StartRebind(actionMap, actionName, index, action, part);
     }
     
-    private void HandleBindResult(string result)
+    private void HandleBindResult(string result, string partAction)
     {
-        Debug.Log($"Bound move.down to {result}");
-        PrintLine($"Bound move.down to {result}");
+        Debug.Log($"Bound {partAction} to {result}");
+        PrintLine($"Bound {partAction} to {result}");
     }
     
     public void StartRebind(
         string actionMap,
         string actionName,
         int bindingIndex,
-        Action<string> onComplete)
+        Action<string, string> onComplete,
+        string part)
     {
         UIInputMode.IsTerminalInputEnabled = false;
         UIInputMode.IsRebinding = true;
     
         var map = inputActions.FindActionMap(actionMap);
         var currentAction = map.FindAction(actionName);
-        _bindingIndex = bindingIndex;
-        // _onComplete = onComplete;
     
         currentAction.Disable();
     
         currentAction.PerformInteractiveRebinding(bindingIndex)
-            .WithCancelingThrough("<keyboard>/escape")
-            .OnCancel(op => EndRebind("Cancelled", currentAction, null))
+            .WithCancelingThrough(Utility.KeyboardEscape)
+            .OnCancel(op => EndRebind("Cancelled", currentAction, null, string.Empty))
             .OnComplete(op =>
             {
                 op.Dispose();
                 currentAction.Enable();
                 string result = currentAction.bindings[bindingIndex].ToDisplayString();
                 SaveActionsRebind();
-                EndRebind(result, currentAction, onComplete);
+                EndRebind(result, currentAction, onComplete, part);
             })
             .Start();
     }
@@ -260,7 +187,7 @@ public class TerminalPauseMenu : TerminalMenu
         {
             var b = action.bindings[i];
 
-            if (b.isComposite && b.name == "WASD")
+            if (b.isComposite && b.name == Utility.WasdAction)
             {
                 inside = true;
                 continue;
@@ -277,14 +204,14 @@ public class TerminalPauseMenu : TerminalMenu
         return -1;
     }
 
-    private void EndRebind(string result, InputAction currentAction, Action<string> onComplete)
+    private void EndRebind(string result, InputAction currentAction, Action<string, string> onComplete, string partAction)
     {
         currentAction.Enable();
         currentAction.actionMap.Enable();
         UIInputMode.IsRebinding = false;
         UIInputMode.IsTerminalInputEnabled = true;
     
-        onComplete?.Invoke(result);
+        onComplete?.Invoke(result, partAction);
         onComplete = null;
     
         SaveActionsRebind();
@@ -293,7 +220,7 @@ public class TerminalPauseMenu : TerminalMenu
     private void SaveActionsRebind()
     {
         string rebinds = inputActions.SaveBindingOverridesAsJson();
-        PlayerPrefs.SetString("ActionsControl", rebinds);
+        PlayerPrefs.SetString(Utility.ActionsControl, rebinds);
         PlayerPrefs.Save();
         print("Saving...");
         EventsManager.OnOptionsSave?.Invoke();
@@ -301,9 +228,9 @@ public class TerminalPauseMenu : TerminalMenu
 
     private void LoadUserInputPreferences()
     {
-        if (PlayerPrefs.HasKey("ActionsControl"))
+        if (PlayerPrefs.HasKey(Utility.ActionsControl))
         {
-            string userInputPreferences = PlayerPrefs.GetString("ActionsControl");
+            string userInputPreferences = PlayerPrefs.GetString(Utility.ActionsControl);
             inputActions.LoadBindingOverridesFromJson(userInputPreferences);
             print("User input preferences loaded");
         }
