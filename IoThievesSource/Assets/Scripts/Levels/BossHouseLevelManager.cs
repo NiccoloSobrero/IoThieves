@@ -272,6 +272,8 @@ namespace Levels
         {
             // Remove previous listener
             DialogueManager.Instance.onDialogueComplete.RemoveListener(OnLevelComplete);
+            
+            EventsManager.OnGameCompleted?.Invoke();
 
             // End level
             
