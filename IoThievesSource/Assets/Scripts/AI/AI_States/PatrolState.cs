@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using AI.NavigationAndWaypoints;
+using Managers;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -46,6 +47,7 @@ namespace AI.AI_States
                         (neighbour.transform.position - currentWaypoint.transform.position).normalized, 
                         Vector3.Distance(currentWaypoint.transform.position, neighbour.transform.position), 
                         LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore)
+                    && TemporaryUnaccessibleAreasManager.IsAccessible(neighbour)
                     )
                 {
                     availableWaypoints.Add(neighbour);
