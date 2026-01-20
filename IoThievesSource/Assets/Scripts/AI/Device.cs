@@ -5,10 +5,10 @@ namespace AI
     public class Device : MonoBehaviour
     {
         [SerializeField] private int interactTime;
-        [SerializeField] private float value = 0;
+         private float value = 0;
         
-        [SerializeField] public bool isHacked = false;
-        [SerializeField] private float hackedValue = 0;
+        [SerializeField] private bool isHacked = false;
+        private float hackedValue = 0;
         [SerializeField] private float hackedTime = 4;
 
         public int InteractTime => interactTime;
@@ -17,7 +17,11 @@ namespace AI
         {
             get => value;
         }
-        
+
+        public void HasBeenHacked()
+        {
+            isHacked = true;
+        }
         public bool Interact()
         {
             value += (1.0f/interactTime)*Time.deltaTime;
@@ -37,6 +41,7 @@ namespace AI
             hackedValue += (1.0f/hackedTime)*Time.deltaTime;
             if (hackedValue >= 1)
             {
+                print("SONO STATO DEHACKERATO");
                 hackedValue = 0;
                 isHacked = false;
                 return true;                   

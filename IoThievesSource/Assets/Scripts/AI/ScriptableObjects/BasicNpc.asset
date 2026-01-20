@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BasicNpc
   m_EditorClassIdentifier: 
   _speed: 1
-  _angularSpeed: 1
+  _angularSpeed: 1.5
   _alternativeSpeed: 2
   _alternativeAngularSpeed: 2
   _distanceThreshold: 0.3

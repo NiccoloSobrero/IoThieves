@@ -38,12 +38,16 @@ namespace Interactables
             Vector3 attractPos = transform.position;
             attractPos.y = 0;
 
+            Debug.Log("I found this number of enemies : " + size);
             for (int i = 0; i < size; i++)
             {
-                if (_enemies[i].TryGetComponent(out AIController enemy))
+                AIController enemy =  _enemies[i].GetComponentInParent<AIController>();
+                if (enemy is not null)
                 {
+                    print("Devo attrarre questo simpaticone");
                     DeviceHackedState hacked = (DeviceHackedState)enemy.StateFactory.GetState(AINames.DeviceHacked);
                     hacked.SetDevice(pointOfInterest);
+                    pointOfInterest.AssignedDevice.HasBeenHacked();
                     enemy.ChangeState(AINames.DeviceHacked);
                     //
                 }

@@ -1979,7 +1979,7 @@ MonoBehaviour:
   - {fileID: 2003210260}
   - {fileID: 632207302}
   - {fileID: 544297594}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 1337514015}
   - {fileID: 817527284}
   - {fileID: 892657484}
@@ -3734,7 +3734,6 @@ GameObject:
   - component: {fileID: 281300838}
   - component: {fileID: 281300837}
   - component: {fileID: 281300836}
-  - component: {fileID: 281300835}
   - component: {fileID: 281300839}
   m_Layer: 6
   m_Name: Waypoint (94)
@@ -3758,26 +3757,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1198328612}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &281300835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 281300833}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 372f80914bdb05845adb8593311f7bd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  neighbours:
-  - {fileID: 1062692183}
-  - {fileID: 692576671}
-  - {fileID: 721604371}
-  - {fileID: 1702289902}
-  - {fileID: 557903875}
-  - {fileID: 2026957347}
-  - {fileID: 441344785}
 --- !u!135 &281300836
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -4126,7 +4105,7 @@ MonoBehaviour:
   - {fileID: 758970256}
   - {fileID: 2003210260}
   - {fileID: 632207302}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 1337514015}
   - {fileID: 817527284}
   - {fileID: 892657484}
@@ -4725,6 +4704,10 @@ PrefabInstance:
       value: Wife_Friend1
       objectReference: {fileID: 0}
     - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -4970,7 +4953,7 @@ MonoBehaviour:
   - {fileID: 721604371}
   - {fileID: 1702289902}
   - {fileID: 1589549079}
-  - {fileID: 281300835}
+  - {fileID: 281300839}
 --- !u!135 &441344786
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5760,7 +5743,7 @@ MonoBehaviour:
   - {fileID: 642265698}
   - {fileID: 2003210260}
   - {fileID: 632207302}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 817527284}
   - {fileID: 167540413}
   - {fileID: 958978740}
@@ -5907,7 +5890,7 @@ MonoBehaviour:
   - {fileID: 910332569}
   - {fileID: 980480275}
   - {fileID: 2026957347}
-  - {fileID: 281300835}
+  - {fileID: 281300839}
   - {fileID: 758970256}
   - {fileID: 1722664612}
   - {fileID: 167540413}
@@ -6175,6 +6158,10 @@ PrefabInstance:
     - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_Name
       value: Wife_Friend2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_IsActive
@@ -6822,7 +6809,7 @@ MonoBehaviour:
   - {fileID: 758970256}
   - {fileID: 642265698}
   - {fileID: 544297594}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 167540413}
   - {fileID: 353506087}
   - {fileID: 1041259652}
@@ -7147,7 +7134,7 @@ MonoBehaviour:
   - {fileID: 2003210260}
   - {fileID: 632207302}
   - {fileID: 544297594}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 630929153}
   - {fileID: 1337514015}
   - {fileID: 817527284}
@@ -7814,11 +7801,11 @@ MonoBehaviour:
   - {fileID: 557903875}
   - {fileID: 2026957347}
   - {fileID: 441344785}
-  - {fileID: 281300835}
+  - {fileID: 281300839}
   - {fileID: 562593427}
   - {fileID: 758970256}
   - {fileID: 2003210260}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 817527284}
   - {fileID: 167540413}
   - {fileID: 958978740}
@@ -8400,7 +8387,7 @@ MonoBehaviour:
   - {fileID: 557903875}
   - {fileID: 2026957347}
   - {fileID: 441344785}
-  - {fileID: 281300835}
+  - {fileID: 281300839}
   - {fileID: 958978740}
   - {fileID: 1041259652}
   - {fileID: 1685655034}
@@ -9151,7 +9138,7 @@ MonoBehaviour:
   - {fileID: 201344581}
   - {fileID: 2003210260}
   - {fileID: 632207302}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 1337514015}
   - {fileID: 817527284}
   - {fileID: 892657484}
@@ -9547,7 +9534,7 @@ MonoBehaviour:
   - {fileID: 758970256}
   - {fileID: 2003210260}
   - {fileID: 544297594}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 910586763}
   - {fileID: 630929153}
   - {fileID: 1337514015}
@@ -10181,7 +10168,7 @@ MonoBehaviour:
   - {fileID: 1078599023}
   - {fileID: 758970256}
   - {fileID: 2003210260}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 910586763}
   - {fileID: 630929153}
   - {fileID: 1337514015}
@@ -11382,6 +11369,10 @@ PrefabInstance:
       value: Wife
       objectReference: {fileID: 0}
     - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -11634,6 +11625,10 @@ PrefabInstance:
       value: Son
       objectReference: {fileID: 0}
     - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -11767,7 +11762,7 @@ MonoBehaviour:
   - {fileID: 201344581}
   - {fileID: 2003210260}
   - {fileID: 544297594}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 630929153}
   - {fileID: 1337514015}
   - {fileID: 817527284}
@@ -12889,7 +12884,7 @@ MonoBehaviour:
   - {fileID: 2003210260}
   - {fileID: 632207302}
   - {fileID: 544297594}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 630929153}
   - {fileID: 1337514015}
   - {fileID: 817527284}
@@ -13372,7 +13367,7 @@ MonoBehaviour:
   - {fileID: 557903875}
   - {fileID: 2026957347}
   - {fileID: 441344785}
-  - {fileID: 281300835}
+  - {fileID: 281300839}
   - {fileID: 758970256}
   - {fileID: 817527284}
   - {fileID: 167540413}
@@ -13803,7 +13798,7 @@ MonoBehaviour:
   - {fileID: 562593427}
   - {fileID: 758970256}
   - {fileID: 2003210260}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 817527284}
   - {fileID: 892657484}
   - {fileID: 167540413}
@@ -14852,7 +14847,7 @@ MonoBehaviour:
   laxativesInteractable: {fileID: 1632306134}
   cupInteractable: {fileID: 6582738549260726891}
   bossAIController: {fileID: 2031874543}
-  cupWaypoint: {fileID: 1554099167}
+  cupWaypoint: {fileID: 0}
   toiletWaypoint: {fileID: 1007520507}
   bossTimeToDrink: 5
   onChatDownloadDialogue: {fileID: 11400000, guid: 6b4cfc3cc26afec47abf979df7c17b40, type: 2}
@@ -16689,7 +16684,7 @@ MonoBehaviour:
   - {fileID: 648724238}
   - {fileID: 758970256}
   - {fileID: 2003210260}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 910586763}
   - {fileID: 630929153}
   - {fileID: 817527284}
@@ -17851,13 +17846,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8721668084112110460, guid: b70a31a0cf487634ab01d99f58694117, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5470229123200904639, guid: b70a31a0cf487634ab01d99f58694117, type: 3}
     - {fileID: 5713924447833675813, guid: b70a31a0cf487634ab01d99f58694117, type: 3}
+    - {fileID: 2371661942289963186, guid: b70a31a0cf487634ab01d99f58694117, type: 3}
+    - {fileID: 5828093844890337154, guid: b70a31a0cf487634ab01d99f58694117, type: 3}
     m_RemovedGameObjects:
     - {fileID: 7354782413430116339, guid: b70a31a0cf487634ab01d99f58694117, type: 3}
+    - {fileID: 6359338521567209511, guid: b70a31a0cf487634ab01d99f58694117, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4823917835425267373, guid: b70a31a0cf487634ab01d99f58694117, type: 3}
@@ -18090,6 +18088,10 @@ PrefabInstance:
     - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_Name
       value: Boss_Friend
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_IsActive
@@ -18559,7 +18561,6 @@ GameObject:
   - component: {fileID: 1554099170}
   - component: {fileID: 1554099169}
   - component: {fileID: 1554099168}
-  - component: {fileID: 1554099167}
   - component: {fileID: 1554099171}
   m_Layer: 6
   m_Name: Waypoint (108)
@@ -18583,35 +18584,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1198328612}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1554099167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1554099165}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 372f80914bdb05845adb8593311f7bd6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  neighbours:
-  - {fileID: 692576671}
-  - {fileID: 648724238}
-  - {fileID: 1078599023}
-  - {fileID: 2026957347}
-  - {fileID: 758970256}
-  - {fileID: 2003210260}
-  - {fileID: 632207302}
-  - {fileID: 544297594}
-  - {fileID: 1337514015}
-  - {fileID: 817527284}
-  - {fileID: 892657484}
-  - {fileID: 167540413}
-  - {fileID: 958978740}
-  - {fileID: 353506087}
-  - {fileID: 1041259652}
-  - {fileID: 1685655034}
 --- !u!135 &1554099168
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -20032,7 +20004,7 @@ MonoBehaviour:
   - {fileID: 2003210260}
   - {fileID: 632207302}
   - {fileID: 544297594}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 910586763}
   - {fileID: 630929153}
   - {fileID: 1337514015}
@@ -20172,7 +20144,7 @@ MonoBehaviour:
   neighbours:
   - {fileID: 721604371}
   - {fileID: 441344785}
-  - {fileID: 281300835}
+  - {fileID: 281300839}
 --- !u!135 &1702289903
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -20315,7 +20287,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: casual_Female_K
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -4513969838509426261, guid: bcc8c8f342f71a7439ac0579aa86f030, type: 3}
+    - {fileID: 3868671272202102698, guid: bcc8c8f342f71a7439ac0579aa86f030, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -21493,6 +21467,8 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5470229123200904639, guid: b70a31a0cf487634ab01d99f58694117, type: 3}
     - {fileID: 5713924447833675813, guid: b70a31a0cf487634ab01d99f58694117, type: 3}
+    - {fileID: 2371661942289963186, guid: b70a31a0cf487634ab01d99f58694117, type: 3}
+    - {fileID: 5828093844890337154, guid: b70a31a0cf487634ab01d99f58694117, type: 3}
     m_RemovedGameObjects:
     - {fileID: 7354782413430116339, guid: b70a31a0cf487634ab01d99f58694117, type: 3}
     - {fileID: 6359338521567209511, guid: b70a31a0cf487634ab01d99f58694117, type: 3}
@@ -24355,7 +24331,7 @@ MonoBehaviour:
   - {fileID: 1547751570}
   - {fileID: 201344581}
   - {fileID: 544297594}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 630929153}
   - {fileID: 1337514015}
   - {fileID: 817527284}
@@ -24858,12 +24834,12 @@ MonoBehaviour:
   - {fileID: 1078599023}
   - {fileID: 917318098}
   - {fileID: 557903875}
-  - {fileID: 281300835}
+  - {fileID: 281300839}
   - {fileID: 562593427}
   - {fileID: 758970256}
   - {fileID: 201344581}
   - {fileID: 2003210260}
-  - {fileID: 1554099167}
+  - {fileID: 1554099171}
   - {fileID: 817527284}
   - {fileID: 167540413}
   - {fileID: 958978740}
@@ -25039,6 +25015,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 652133281}
     m_Modifications:
+    - target: {fileID: -996625976428397906, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: startState
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1101995406142850608, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: detectionRange
       value: 3
@@ -25050,6 +25030,10 @@ PrefabInstance:
     - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5884590623567349909, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: radius
@@ -57297,9 +57281,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactTime: 0
-  value: 0
   isHacked: 0
-  hackedValue: 0
   hackedTime: 6
 --- !u!65 &4356877829118566822
 BoxCollider:
@@ -75567,10 +75549,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactTime: 0
-  value: 0
   isHacked: 0
-  hackedValue: 0
-  hackedTime: 6
+  hackedTime: 3
 --- !u!114 &6772912781464498733
 MonoBehaviour:
   m_ObjectHideFlags: 0

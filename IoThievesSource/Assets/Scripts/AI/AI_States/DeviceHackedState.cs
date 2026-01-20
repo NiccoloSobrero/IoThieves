@@ -12,8 +12,9 @@ namespace AI.AI_States
         
         private List<PointOfInterest> _hackedDevices = new  List<PointOfInterest>();
         private List<Waypoint> _path;
-        private bool _destinationReached = true;
-
+        private bool _destinationReached = false;
+        private float THRESHOLD = 5;
+        private bool lookingAt = false;
         private bool DestinationReached 
         {
             get => _destinationReached;
@@ -22,6 +23,7 @@ namespace AI.AI_States
                 if(_destinationReached == value) return;
                 
                 _destinationReached = value;
+                
                 RaiseOnWalkingVarChanged(!_destinationReached); //if destination is reached --> no need to walk else -->  you need to walk
             }
         }
@@ -36,8 +38,18 @@ namespace AI.AI_States
         {
             if (_hackedDevices.Count > 0) 
             {
-                _path = PathFinding.FindPath(AIUtilities.FindNearestWaypoint(Npc.transform.position), _hackedDevices[0]);
+                Debug.Log("Ho un device ed è "+ _hackedDevices[0]);
+                Waypoint nearestToMe = AIUtilities.FindNearestWaypoint(Npc.transform.position);
+                Debug.Log("Waypoint più vicino a me is :" + nearestToMe);
+                _path = PathFinding.FindPath(nearestToMe, _hackedDevices[0]);
+                if(_path is not null && _path.Count > 0)
+                    Debug.Log("Ho trovato un percorso valido");
+                else
+                {
+                    Debug.Log("NON HO TROVATO UN PERCORSO SONO UN PAZZO");
+                }
                 DestinationReached = false;
+                RaiseOnWalkingVarChanged(!DestinationReached);
             }
         }
         
@@ -45,9 +57,22 @@ namespace AI.AI_States
         {
             if (DestinationReached)     //Resolve the reached device
             {
-                _solved = _hackedDevices[0].AssignedDevice.ResolveHack();
-                if (_solved)
+                if (!lookingAt)
                 {
+                    Vector3 npcT = new Vector3(Npc.transform.position.x, 0, Npc.transform.position.z);
+                    Vector3 d = _hackedDevices[0].AssignedDevice.transform.position;
+                    Vector3 deviceDir = new Vector3(d.x-npcT.x,0,d.z-npcT.z);
+                
+                    float angleMagnitude = AIUtilities.RotateTarget(Npc.transform, Npc.transform.forward, deviceDir, Npc.NpcDatas.AngularSpeed);
+                    lookingAt = IsLookingAt(d); 
+                    return;
+                }
+
+                
+                _solved = _hackedDevices[0].AssignedDevice.ResolveHack();
+                if (_solved && lookingAt)
+                {
+                    lookingAt = false;
                     _hackedDevices.RemoveAt(0);
                     if (_hackedDevices.Count > 0)
                     {
@@ -75,22 +100,35 @@ namespace AI.AI_States
                 if (distance < _nextWaypointThreshold)
                 {
                     Waypoint reached = _path[0];
-                    _path.RemoveAt(0);
-
+                    _path.RemoveAt(0); 
                     if (reached.Equals(_hackedDevices[0]))
                     {
                         DestinationReached = true;
+                        lookingAt = IsLookingAt(reached.transform.position);
                     }
                 }
             }
         }
-        
+
+        private bool IsLookingAt(Vector3 targetPos)
+        {
+            Vector3 tmp = new Vector3(targetPos.x, 0, targetPos.z);
+            Debug.Log("Device position is " +targetPos + "\nPalle : "+ Npc.transform.position);
+            float angle = Vector3.Angle(Npc.transform.forward, tmp - Npc.transform.position);
+            Debug.Log("angle : " + angle);
+            bool prova = angle  < THRESHOLD;
+                Debug.Log("Sto guardando il device? "+ prova);
+            return prova;
+        }
+
+
         public override void Exit()
         {
         }
 
         public void SetDevice(PointOfInterest pointOfInterest)
         {
+            Debug.Log("Device added");
             _hackedDevices.Add(pointOfInterest);
         }
     }
