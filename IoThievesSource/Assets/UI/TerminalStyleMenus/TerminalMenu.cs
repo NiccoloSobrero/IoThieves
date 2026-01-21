@@ -87,7 +87,8 @@ public abstract class TerminalMenu : MonoBehaviour
     
     private void OnKeyDown(KeyDownEvent evt)
     {
-        if (_hasStartedScanning || _isLoading)
+        if (!UIInputMode.IsTerminalInputEnabled || UIInputMode.IsRebinding
+            || _hasStartedScanning || _isLoading)
         {
             evt.StopPropagation();
             return;
@@ -215,6 +216,11 @@ public abstract class TerminalMenu : MonoBehaviour
         
         AudioClip clip = _typingAudioClips[Random.Range(0, _typingAudioClips.Length)];
         _typingAudioSource.PlayOneShot(clip, 0.6f);
+    }
+
+    protected void ClearScrollView()
+    {
+        _output.Clear();
     }
 
     protected abstract void ProcessCommand(string cmd);

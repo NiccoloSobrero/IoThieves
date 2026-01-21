@@ -198,7 +198,7 @@ namespace Levels
             endLevelTrigger.gameObject.SetActive(true);
             endLevelTrigger.onTriggerEnter.AddListener(OnGetOut);
             
-            DialogueManager.Instance.SetDialogue(exitDialogue);
+            DialogueManager.Instance.SetDialogue(exitDialogue, PlayerInputManager.Instance.CurrentContext);
             DialogueManager.Instance.OpenDialogueWindow();
         }
 

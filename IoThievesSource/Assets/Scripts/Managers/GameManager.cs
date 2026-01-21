@@ -165,9 +165,9 @@ namespace Managers
         public string LoadUserInputPreferences()
         {
             string userInputPreferences = "";
-            if (PlayerPrefs.HasKey("ActionsControl"))
+            if (PlayerPrefs.HasKey(Utility.ActionsControl))
             {
-                userInputPreferences = PlayerPrefs.GetString("ActionsControl");
+                userInputPreferences = PlayerPrefs.GetString(Utility.ActionsControl);
             }
 
             return userInputPreferences;

@@ -158,7 +158,7 @@ public class OptionsMenuController : MonoBehaviour
         action.Disable();
 
         action.PerformInteractiveRebinding(index)
-            .WithCancelingThrough("<keyboard>/escape")
+            .WithCancelingThrough(Utility.KeyboardEscape)
             .OnCancel(op =>
             {
                 button.text = previousButtonLabel;
@@ -179,16 +179,16 @@ public class OptionsMenuController : MonoBehaviour
     private void SaveActionsRebind()
     {
         string rebinds = inputActions.SaveBindingOverridesAsJson();
-        PlayerPrefs.SetString("ActionsControl", rebinds);
+        PlayerPrefs.SetString(Utility.ActionsControl, rebinds);
         PlayerPrefs.Save();
         print("Saving...");
     }
 
     private void LoadUserInputPreferences()
     {
-        if (PlayerPrefs.HasKey("ActionsControl"))
+        if (PlayerPrefs.HasKey(Utility.ActionsControl))
         {
-            string userInputPreferences = PlayerPrefs.GetString("ActionsControl");
+            string userInputPreferences = PlayerPrefs.GetString(Utility.ActionsControl);
             inputActions.LoadBindingOverridesFromJson(userInputPreferences);
             print("User input preferences loaded");
         }

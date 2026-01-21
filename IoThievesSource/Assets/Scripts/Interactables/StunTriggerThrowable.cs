@@ -11,14 +11,14 @@ namespace Interactables
         
         private void Awake()
         {
-            elapsed = 0f;
-            ScanArea(_radius);
+            _elapsed = 0f;
+            ScanArea(radius);
         }
 
         private void Update()
         {
-           elapsed += Time.deltaTime;
-           if (elapsed >= ttl)
+           _elapsed += Time.deltaTime;
+           if (_elapsed >= ttl)
                Destroy(gameObject);
         }
     }

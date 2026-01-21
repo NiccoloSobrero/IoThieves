@@ -1,7 +1,6 @@
 using AI;
 using AI.AI_States;
 using AI.NavigationAndWaypoints;
-using Enemy;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -35,8 +34,6 @@ namespace Interactables
             if (!triggerArea.IsPlayerInRange) return;
             
             int size = Physics.OverlapSphereNonAlloc(gameObject.transform.position, attractionRange, _enemies, enemyLayer);
-            Vector3 attractPos = transform.position;
-            attractPos.y = 0;
 
             Debug.Log("I found this number of enemies : " + size);
             for (int i = 0; i < size; i++)
@@ -49,7 +46,6 @@ namespace Interactables
                     hacked.SetDevice(pointOfInterest);
                     pointOfInterest.AssignedDevice.HasBeenHacked();
                     enemy.ChangeState(AINames.DeviceHacked);
-                    //
                 }
             }
 

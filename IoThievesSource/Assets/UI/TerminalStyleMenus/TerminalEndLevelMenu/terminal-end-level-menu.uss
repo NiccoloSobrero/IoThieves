@@ -27,7 +27,7 @@
     color: #33ff33;
     margin-right: 6px;
     font-size: 24px;
-    -unity-font: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf");
+    -unity-font-definition: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf");
     /*border-color: lime;*/
     /*border-width: 2px;*/
 }
@@ -43,7 +43,7 @@
 }
 
 .input-text {
-    -unity-font: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf");
+    -unity-font-definition: url("../../../Fonts/JetBrainsMono-VariableFont_wght.ttf");
     font-size: 24px;
     color: #33ff33;
     background-color: transparent;

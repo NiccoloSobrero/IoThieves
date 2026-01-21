@@ -1,5 +1,4 @@
-﻿using System;
-using AI;
+﻿using AI;
 using UnityEngine;
 
 namespace Interactables
@@ -8,22 +7,23 @@ namespace Interactables
     public class StunTrigger : MonoBehaviour
     {
         [SerializeField] private float samplingTime = 0.2f;
-        [SerializeField] protected float elapsed = 0.0f;
-        [SerializeField] protected float _radius;
+        protected float _elapsed = 0.0f;
+        [SerializeField] protected float radius;
+        
         private void Awake()
         {
-            elapsed = 0;
-            _radius = GetComponent<Collider>().bounds.extents.magnitude;
+            _elapsed = 0;
+            radius = GetComponent<Collider>().bounds.extents.magnitude;
             gameObject.SetActive(false);
         }
 
         private void Update()
         {
-            elapsed += Time.deltaTime;
-            if (elapsed >= samplingTime)
+            _elapsed += Time.deltaTime;
+            if (_elapsed >= samplingTime)
             {
-                elapsed = 0.0f;
-                ScanArea(_radius);
+                _elapsed = 0.0f;
+                ScanArea(radius);
             }
         }
 
@@ -35,13 +35,13 @@ namespace Interactables
         private void OnDisable()
         {
             print("AC disabled");
-           elapsed = 0; 
+           _elapsed = 0; 
         }
 
-        protected void ScanArea(float radius)
+        protected void ScanArea(float scanRadius)
         {
             Collider[] colliders = new Collider[10];
-            var size = Physics.OverlapSphereNonAlloc(transform.position, radius, colliders, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
+            var size = Physics.OverlapSphereNonAlloc(transform.position, scanRadius, colliders, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
 
             for (int i = 0 ; i<size; i++)
             {

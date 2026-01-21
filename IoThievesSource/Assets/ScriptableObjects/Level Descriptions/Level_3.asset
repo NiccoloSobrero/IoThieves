@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Level_3
   m_EditorClassIdentifier: 
   levelNumber: 3
-  levelName: suburban house
-  levelDescription: Find a way to escape the garage
+  levelName: beach
+  levelDescription: Do something
   levelObjectives:
   - bypass-auth
   - dump-credentials
   - exit-clean
-  difficulty: 9
+  difficulty: 6

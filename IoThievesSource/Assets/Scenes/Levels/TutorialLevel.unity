@@ -799,7 +799,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &263839453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1476,7 +1476,7 @@ MonoBehaviour:
   tutorialDialogue10: {fileID: 11400000, guid: f5cbb54df7ae41e4a94331b5a1539145, type: 2}
   safeCodeMinigame: {fileID: 7390597304352455577}
   tutorialDialogue11: {fileID: 11400000, guid: cdfc62642d4af4745a5680842b989a21, type: 2}
-  shuttersAnim: {fileID: 0}
+  shuttersAnim: {fileID: 6074248472131479111}
   enemyCamera: {fileID: 95663052}
   hackableWasherInteractable: {fileID: 7148049230356740045}
   hackableWasherOutline: {fileID: 1393093210}
@@ -1751,6 +1751,79 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1159210406}
   m_LocalEulerAnglesHint: {x: 90, y: -1.4, z: 0}
+--- !u!1 &747554245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 747554248}
+  - component: {fileID: 747554247}
+  - component: {fileID: 747554246}
+  m_Layer: 5
+  m_Name: TerminalPauseMenu
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &747554246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747554245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfff72a7a9ecce0499034c241d74a7e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiDocument: {fileID: 747554247}
+  _typingAudioSource: {fileID: 530763611}
+  _typingAudioClips:
+  - {fileID: 8300000, guid: 989db234bcac82d439f6c4a2cea28f61, type: 3}
+  - {fileID: 8300000, guid: e0df5d0f952e0cf43af9444691056746, type: 3}
+  - {fileID: 8300000, guid: 989db234bcac82d439f6c4a2cea28f61, type: 3}
+  _backspaceClip: {fileID: 8300000, guid: e0df5d0f952e0cf43af9444691056746, type: 3}
+  _enterClip: {fileID: 8300000, guid: 989db234bcac82d439f6c4a2cea28f61, type: 3}
+  inputActions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+--- !u!114 &747554247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747554245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PanelSettings: {fileID: 11400000, guid: c968046c3be4ac645bcabb57866c4c1d, type: 2}
+  m_ParentUI: {fileID: 0}
+  sourceAsset: {fileID: 9197481963319205126, guid: ec9b77c76c06ff642a8b5dd7d4eb526a, type: 3}
+  m_SortingOrder: 0
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+--- !u!4 &747554248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 747554245}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &756938558
 GameObject:
   m_ObjectHideFlags: 0
@@ -2116,6 +2189,38 @@ PrefabInstance:
       propertyPath: audioPlayerUI
       value: 
       objectReference: {fileID: 7854708642351606828}
+    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
+      propertyPath: playlist.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6c92b1b0d9acb5747bea4b48813ba075, type: 3}
+    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
+      propertyPath: playlist.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ea21721c9e92d747b749de614a1dbf0, type: 3}
+    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
+      propertyPath: playlist.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 54ffbf05f0f0e3845bd5d23899c8bc1d, type: 3}
+    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
+      propertyPath: playlist.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b8a57cddb16f9c24dbce0ddafe71d01d, type: 3}
+    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
+      propertyPath: playlist.Array.data[0].songName
+      value: Silent pursuit
+      objectReference: {fileID: 0}
+    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
+      propertyPath: playlist.Array.data[1].songName
+      value: Eastern mistery
+      objectReference: {fileID: 0}
+    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
+      propertyPath: playlist.Array.data[2].songName
+      value: Bamboo sly
+      objectReference: {fileID: 0}
+    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
+      propertyPath: playlist.Array.data[3].songName
+      value: Agent on a mission!!
+      objectReference: {fileID: 0}
     - target: {fileID: 3103878779350131962, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -8300,6 +8405,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1159210406}
   m_LocalEulerAnglesHint: {x: 90, y: -15.5, z: 0}
+--- !u!1 &1032016960
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1032016961}
+  m_Layer: 9
+  m_Name: PrinterParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1032016961
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1032016960}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.368, y: 1.075, z: -2.612}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3745622626905845543}
+  m_Father: {fileID: 543450651919545410}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1048095604
 GameObject:
   m_ObjectHideFlags: 0
@@ -11198,7 +11335,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2092398957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12905,7 +13042,7 @@ Transform:
   - {fileID: 5573369643726505267}
   - {fileID: 5289811728937274975}
   - {fileID: 3192607639611652031}
-  - {fileID: 3745622626905845543}
+  - {fileID: 1032016961}
   - {fileID: 4083501149917497860}
   - {fileID: 5680519943015699344}
   - {fileID: 7967766326586222665}
@@ -22396,7 +22533,7 @@ Transform:
   m_GameObject: {fileID: 832149485976101325}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071067, y: 0.00000013767878, z: 0.00000013767877, w: 0.7071068}
-  m_LocalPosition: {x: -3.248044, y: 1.0842179, z: -2.3757782}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.39963716, y: 0.39963716, z: 0.39963716}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -22418,7 +22555,7 @@ Transform:
   - {fileID: 1845986699269001864}
   - {fileID: 6645823806078454168}
   - {fileID: 3316992658967315461}
-  m_Father: {fileID: 543450651919545410}
+  m_Father: {fileID: 1032016961}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &3746275100820478413
 MeshRenderer:
@@ -35332,7 +35469,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 11
+  orthographic size: 4
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -38234,15 +38371,16 @@ SceneRoots:
   - {fileID: 8723246273941540644}
   - {fileID: 4310496242405220260}
   - {fileID: 521427371}
+  - {fileID: 7385203835066518608}
+  - {fileID: 8182915548410388059}
   - {fileID: 763081363}
   - {fileID: 86723471}
   - {fileID: 940735447}
+  - {fileID: 747554248}
   - {fileID: 2092398959}
   - {fileID: 1646750695}
   - {fileID: 263839455}
   - {fileID: 530763612}
   - {fileID: 871914866}
-  - {fileID: 7385203835066518608}
-  - {fileID: 8182915548410388059}
   - {fileID: 543450651919545410}
   - {fileID: 7513863537607122674}

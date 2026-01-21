@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/TerminalStyleMenus/TerminalCreditMenu/terminal-credit-menu.uss?fileID=7433441132597879392&amp;guid=0490d4994ce944545bf957a38361a1ce&amp;type=3#terminal-credit-menu" />
+    <ui:VisualElement name="terminalMainMenu" class="terminal-main-menu">
+        <ui:ScrollView name="terminalOutput" class="terminal-output" />
+        <ui:VisualElement name="inputLine" class="input-line">
+            <ui:Label name="promptHeader" text="iothieves@kali:~$" class="prompt-header"/>
+
+            <ui:VisualElement name="inputContainer" class="input-container">
+                <ui:Label name="inputText" class="input-text"/>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

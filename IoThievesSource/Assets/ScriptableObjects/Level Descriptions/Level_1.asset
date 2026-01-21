@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Level_1
   m_EditorClassIdentifier: 
   levelNumber: 1
-  levelName: suburban house
-  levelDescription: Find a way to escape the garage
+  levelName: hr office
+  levelDescription: Find the boss address and file a complaint
   levelObjectives:
-  - bypass-auth
-  - dump-credentials
-  - exit-clean
+  - Find a way to access the boss office
+  - Find the boss address
+  - File a complaint on the boss
   difficulty: 4

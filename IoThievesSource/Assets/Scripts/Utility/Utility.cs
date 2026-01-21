@@ -39,6 +39,46 @@ $$ \__$$ |/$$$$$$$ |$$ | $$ | $$ |$$$$$$$$/       $$ \__$$ |  $$ $$/  $$$$$$$$/ 
 $$    $$/ $$    $$ |$$ | $$ | $$ |$$       |      $$    $$/    $$$/   $$       |$$ |      
  $$$$$$/   $$$$$$$/ $$/  $$/  $$/  $$$$$$$/        $$$$$$/      $/     $$$$$$$/ $$/       
 ";
+
+    public static readonly string PauseArt = @"
+ _______                                         
+/       \                                        
+$$$$$$$  | ______   __    __   _______   ______  
+$$ |__$$ |/      \ /  |  /  | /       | /      \ 
+$$    $$/ $$$$$$  |$$ |  $$ |/$$$$$$$/ /$$$$$$  |
+$$$$$$$/  /    $$ |$$ |  $$ |$$      \ $$    $$ |
+$$ |     /$$$$$$$ |$$ \__$$ | $$$$$$  |$$$$$$$$/ 
+$$ |     $$    $$ |$$    $$/ /     $$/ $$       |
+$$/       $$$$$$$/  $$$$$$/  $$$$$$$/   $$$$$$$/                                                  
+";
+
+    public static readonly string CreditArt = @"
+ ________  __                            __                                            __ 
+/        |/  |                          /  |                                          /  |
+$$$$$$$$/ $$ |____    ______   _______  $$ |   __        __    __   ______   __    __ $$ |
+   $$ |   $$      \  /      \ /       \ $$ |  /  |      /  |  /  | /      \ /  |  /  |$$ |
+   $$ |   $$$$$$$  | $$$$$$  |$$$$$$$  |$$ |_/$$/       $$ |  $$ |/$$$$$$  |$$ |  $$ |$$ |
+   $$ |   $$ |  $$ | /    $$ |$$ |  $$ |$$   $$<        $$ |  $$ |$$ |  $$ |$$ |  $$ |$$/ 
+   $$ |   $$ |  $$ |/$$$$$$$ |$$ |  $$ |$$$$$$  \       $$ \__$$ |$$ \__$$ |$$ \__$$ | __ 
+   $$ |   $$ |  $$ |$$    $$ |$$ |  $$ |$$ | $$  |      $$    $$ |$$    $$/ $$    $$/ /  |
+   $$/    $$/   $$/  $$$$$$$/ $$/   $$/ $$/   $$/        $$$$$$$ | $$$$$$/   $$$$$$/  $$/ 
+                                                        /  \__$$ |                        
+                                                        $$    $$/                         
+                                                         $$$$$$/                          
+";
+
+    public static readonly string GameplayAction = "Gameplay";
+    public static readonly string MoveAction = "Move";
+    public static readonly string ClickAction = "Click";
+    public static readonly string ThrowAction = "Throw";
+    public static readonly string WasdAction = "WASD";
+    public static readonly string UpAction = "Up";
+    public static readonly string DownAction = "Down";
+    public static readonly string LeftAction = "Left";
+    public static readonly string RightAction = "Right";
+    
+    public static readonly string ActionsControl = "ActionsControl";
+    public static readonly string KeyboardEscape = "<keyboard>/escape";
     public static Vector3 ZeroOutY(Vector3 vector)
     {
         return new Vector3(vector.x, 0, vector.z);
