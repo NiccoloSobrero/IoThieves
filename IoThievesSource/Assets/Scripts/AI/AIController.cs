@@ -14,6 +14,7 @@ namespace AI
         [SerializeField] private AINames startState;
         [SerializeField] private AIState _currentState = null;
         [SerializeField] private NpcScriptableObject _NpcDatas;
+        [SerializeField] private WalkableArea _walkableArea;
         public event Action<AIState> OnStateChanged; 
         public event Action<AIState> BeforeStateChanged; 
         
@@ -37,6 +38,8 @@ namespace AI
                 OnStateChanged?.Invoke(_currentState);
             }
         }
+        
+        public WalkableArea WalkableArea => _walkableArea;
 
         private StateFactory _stateFactory;
         public StateFactory StateFactory => _stateFactory;
@@ -51,6 +54,7 @@ namespace AI
             _previousState = _stateFactory.GetState(AINames.Idle);
             CurrentState = _stateFactory.GetState(AINames.Idle);
             enemyAdapter.AnimationController.Initialize();
+            _walkableArea = gameObject.GetComponentInParent<WalkableArea>();
         }
         
         private void Update()

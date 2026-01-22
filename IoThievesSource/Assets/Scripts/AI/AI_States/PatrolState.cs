@@ -42,13 +42,7 @@ namespace AI.AI_States
 
             foreach (Waypoint neighbour in currentWaypoint.neighbours)
             {
-                if (!IsInRecentMovements(currentWaypoint, neighbour) && 
-                    !Physics.Raycast(currentWaypoint.transform.position, 
-                        (neighbour.transform.position - currentWaypoint.transform.position).normalized, 
-                        Vector3.Distance(currentWaypoint.transform.position, neighbour.transform.position), 
-                        LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore)
-                    && TemporaryUnaccessibleAreasManager.IsAccessible(neighbour)
-                    )
+                if (!IsInRecentMovements(currentWaypoint, neighbour) && IsAvailable(currentWaypoint, neighbour)) 
                 {
                     availableWaypoints.Add(neighbour);
                 }
@@ -64,6 +58,27 @@ namespace AI.AI_States
             AddMovement(currentWaypoint, nextWaypoint);
 
             return nextWaypoint;
+        }
+
+        private bool IsAvailable(Waypoint currentWaypoint, Waypoint destination)
+        {
+            bool isWalkable;
+            try
+            {
+                isWalkable = Npc.WalkableArea.IsWalkable(destination);
+            }
+            catch (Exception _)
+            {
+                isWalkable = true;
+            }
+
+            return isWalkable
+                   && !Physics.Raycast(currentWaypoint.transform.position,
+                       (destination.transform.position - currentWaypoint.transform.position).normalized,
+                       Vector3.Distance(currentWaypoint.transform.position, destination.transform.position),
+                       LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore)
+                   && TemporaryUnaccessibleAreasManager.IsAccessible(destination);
+
         }
 
         private void AddMovement(Waypoint from, Waypoint to)
