@@ -651,6 +651,117 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ad28dcef4f7bd34090729c7980cf99d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &55835155
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 55835160}
+  - component: {fileID: 55835159}
+  - component: {fileID: 55835158}
+  - component: {fileID: 55835157}
+  - component: {fileID: 55835156}
+  m_Layer: 0
+  m_Name: TemporaryUnaccessibleAreaManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &55835156
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55835155}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3, y: 1, z: 5.5}
+  m_Center: {x: 10.21, y: 0, z: -1.2}
+--- !u!65 &55835157
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55835155}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 6, y: 1, z: 9.7}
+  m_Center: {x: 13.71, y: 0, z: 1.09}
+--- !u!65 &55835158
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55835155}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 1, z: 3}
+  m_Center: {x: -12, y: 0, z: 0}
+--- !u!114 &55835159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55835155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 329f2111dd6b0b241a7aa0f9d9d357d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instance: {fileID: 0}
+--- !u!4 &55835160
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55835155}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &56075473
 GameObject:
   m_ObjectHideFlags: 0
@@ -3913,7 +4024,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 281300833}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecefea6b68e44e97a4b00a8f76bac78f, type: 3}
+  m_Script: {fileID: 11500000, guid: 372f80914bdb05845adb8593311f7bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
@@ -3924,7 +4035,6 @@ MonoBehaviour:
   - {fileID: 557903875}
   - {fileID: 2026957347}
   - {fileID: 441344785}
-  assignedDevice: {fileID: 0}
 --- !u!1001 &294780365
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5086,7 +5196,7 @@ MonoBehaviour:
   - {fileID: 721604371}
   - {fileID: 1702289902}
   - {fileID: 1589549079}
-  - {fileID: 281300835}
+  - {fileID: 281300839}
 --- !u!135 &441344786
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -6023,7 +6133,7 @@ MonoBehaviour:
   - {fileID: 910332569}
   - {fileID: 980480275}
   - {fileID: 2026957347}
-  - {fileID: 281300835}
+  - {fileID: 281300839}
   - {fileID: 758970256}
   - {fileID: 1722664612}
   - {fileID: 167540413}
@@ -7922,7 +8032,7 @@ MonoBehaviour:
   - {fileID: 557903875}
   - {fileID: 2026957347}
   - {fileID: 441344785}
-  - {fileID: 281300835}
+  - {fileID: 281300839}
   - {fileID: 562593427}
   - {fileID: 758970256}
   - {fileID: 2003210260}
@@ -8508,7 +8618,7 @@ MonoBehaviour:
   - {fileID: 557903875}
   - {fileID: 2026957347}
   - {fileID: 441344785}
-  - {fileID: 281300835}
+  - {fileID: 281300839}
   - {fileID: 958978740}
   - {fileID: 1041259652}
   - {fileID: 1685655034}
@@ -20115,7 +20225,7 @@ MonoBehaviour:
   neighbours:
   - {fileID: 721604371}
   - {fileID: 441344785}
-  - {fileID: 281300835}
+  - {fileID: 281300839}
 --- !u!135 &1702289903
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -24901,7 +25011,7 @@ MonoBehaviour:
   - {fileID: 1078599023}
   - {fileID: 917318098}
   - {fileID: 557903875}
-  - {fileID: 281300835}
+  - {fileID: 281300839}
   - {fileID: 562593427}
   - {fileID: 758970256}
   - {fileID: 201344581}
@@ -66977,6 +67087,8 @@ GameObject:
   - component: {fileID: 1738776582062551799}
   - component: {fileID: 4356877829118566822}
   - component: {fileID: 4356877829118566823}
+  - component: {fileID: 4356877829118566820}
+  - component: {fileID: 4356877829118566821}
   m_Layer: 9
   m_Name: Cube.018
   m_TagString: Untagged
@@ -67002,7 +67114,7 @@ MonoBehaviour:
     m_Bits: 128
   attractionRange: 5
   triggerArea: {fileID: 309216802}
-  pointOfInterest: {fileID: 281300839}
+  pointOfInterest: {fileID: 0}
   onInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -85471,9 +85583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   interactTime: 0
-  value: 0
   isHacked: 0
-  hackedValue: 0
   hackedTime: 6
 --- !u!114 &6772912781464498733
 MonoBehaviour:
@@ -106960,5 +107070,5 @@ SceneRoots:
   - {fileID: 1755919934}
   - {fileID: 1161810690}
   - {fileID: 1898656365}
-  - {fileID: 321010181}
   - {fileID: 2508939904230351561}
+  - {fileID: 55835160}
