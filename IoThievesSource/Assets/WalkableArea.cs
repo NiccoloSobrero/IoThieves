@@ -20,6 +20,20 @@ public class WalkableArea : MonoBehaviour
        }
     }
 
+    public Waypoint GetRandomValidwaypoint()
+    {
+        foreach (Waypoint wp in _waypoints.Keys)
+        {
+            if (_waypoints[wp])
+                return wp;
+        }
+
+        return null;
+    }
+    public bool IsInside(Transform t)
+    {
+        return _area.bounds.Contains(t.position);
+    }
     public bool IsWalkable(Waypoint wp)
     {
         return _waypoints[wp];

@@ -9,6 +9,7 @@ namespace AI
         NoiseHeardState,
         PathCycling,
         StunnedState,
-        GoToDestination
+        GoToDestination,
+        BackToWalkableArea,
     }
 }

@@ -94,7 +94,10 @@ namespace AI
         public void PreviousState()
         {
            CurrentState?.Exit();
-           (CurrentState, _previousState) = (_previousState, CurrentState);
+           if (_previousState is PatrolState && WalkableArea is not null)
+               (CurrentState, _previousState) = (StateFactory.GetState(AINames.BackToWalkableArea), CurrentState);
+           else
+                (CurrentState, _previousState) = (_previousState, CurrentState);
            CurrentState?.Enter();
         }
         

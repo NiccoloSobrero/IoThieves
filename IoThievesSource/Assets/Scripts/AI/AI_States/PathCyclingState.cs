@@ -69,7 +69,7 @@ namespace AI.AI_States
                     _targetPosition = _backPath[0].transform.position; 
                     _backPath.RemoveAt(0);
                 }
-                catch (ArgumentOutOfRangeException e)  //BackPath fully exhausted
+                catch (ArgumentOutOfRangeException _)  //BackPath fully exhausted
                 {
                     back_to_path = false;
                 }
