@@ -21470,7 +21470,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1185518551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ecefea6b68e44e97a4b00a8f76bac78f, type: 3}
+  m_Script: {fileID: 11500000, guid: 372f80914bdb05845adb8593311f7bd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours:
@@ -21499,7 +21499,6 @@ MonoBehaviour:
   - {fileID: 958978740}
   - {fileID: 1041259652}
   - {fileID: 1685655034}
-  assignedDevice: {fileID: 4356877829118566821}
 --- !u!1 &1189916498
 GameObject:
   m_ObjectHideFlags: 0
@@ -73266,7 +73265,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4356877829118566819}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9f420a16faddc564d9e9120c8a260b95, type: 3}
   m_Name: 
@@ -73277,7 +73276,7 @@ MonoBehaviour:
     m_Bits: 128
   attractionRange: 5
   triggerArea: {fileID: 309216802}
-  pointOfInterest: {fileID: 1185518557}
+  pointOfInterest: {fileID: 0}
   onInteract:
     m_PersistentCalls:
       m_Calls: []
@@ -73288,7 +73287,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4356877829118566819}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1f427c4be8741a0b07eeb3cf2c15762, type: 3}
   m_Name: 

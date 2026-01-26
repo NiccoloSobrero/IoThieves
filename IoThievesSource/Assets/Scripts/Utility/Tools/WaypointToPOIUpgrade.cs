@@ -44,6 +44,7 @@ public static class UpgradeWaypointToPOI
     public static void Downgrade()
     {
         var selected = Selection.activeGameObject;
+
         if (!selected)
         {
             Debug.LogError("Select a GameObject containing PointOfInterest.");
@@ -59,19 +60,27 @@ public static class UpgradeWaypointToPOI
 
         Undo.RegisterCompleteObjectUndo(selected, "Downgrade POI To Waypoint");
 
-        // Add Waypoint
-        var wp = selected.GetComponent<Waypoint>();
-        if (!wp)
-            wp = Undo.AddComponent<Waypoint>(selected);
+        // Cache neighbour list BEFORE destruction
+        var cachedNeighbours = new System.Collections.Generic.List<Waypoint>();
+        if (oldPoi.neighbours != null)
+            cachedNeighbours.AddRange(oldPoi.neighbours);
 
-        // STEP 1 — Rewire ALL references FIRST
-        RewireAllNeighbors(oldPoi, wp);
+        // TEMP reference for rewiring
+        var tempOld = oldPoi;
 
-        // STEP 2 — Copy neighbour list
-        CopyWaypointData(oldPoi, wp);
-
-        // STEP 3 — Destroy old POI
+        // Destroy POI first (critical due to inheritance)
         Undo.DestroyObjectImmediate(oldPoi);
+
+        // Add fresh Waypoint
+        var wp = Undo.AddComponent<Waypoint>(selected);
+
+        // Restore neighbour list
+        wp.neighbours = new System.Collections.Generic.List<Waypoint>(cachedNeighbours);
+
+        // Rewire all scene references
+        RewireAllNeighbors(tempOld, wp);
+
+        EditorUtility.SetDirty(wp);
 
         Debug.Log($"PointOfInterest downgraded → Waypoint on {selected.name}");
     }
