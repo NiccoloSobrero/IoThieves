@@ -22,6 +22,9 @@ public class DoorTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!(other.CompareTag("Player") || other.gameObject.layer == LayerMask.NameToLayer("Enemy")))
+            return;
+        
         onTriggerEnterEvent.Invoke();
         
         if (_isLocked) return;
