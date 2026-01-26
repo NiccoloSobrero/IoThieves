@@ -68,7 +68,7 @@ namespace AI.AI_States
                     return;
                 }
 
-                
+                Debug.Log("Looking at target"); 
                 _solved = _hackedDevices[0].AssignedDevice.ResolveHack();
                 if (_solved && lookingAt)
                 {

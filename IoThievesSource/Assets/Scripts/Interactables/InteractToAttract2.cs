@@ -46,6 +46,7 @@ namespace Interactables
                     hacked.SetDevice(pointOfInterest);
                     pointOfInterest.AssignedDevice.HasBeenHacked();
                     enemy.ChangeState(AINames.DeviceHacked);
+                    break;
                 }
             }
 
