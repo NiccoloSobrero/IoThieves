@@ -2669,6 +2669,14 @@ PrefabInstance:
       propertyPath: currentLevel
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8291589473830058277, guid: 7354bce59eb6bdb44aa6859f04c9dfee, type: 3}
+      propertyPath: programMsgText
+      value: 
+      objectReference: {fileID: 790481717}
+    - target: {fileID: 8291589473830058277, guid: 7354bce59eb6bdb44aa6859f04c9dfee, type: 3}
+      propertyPath: programPopupObj
+      value: 
+      objectReference: {fileID: 790481718}
     - target: {fileID: 8389717484081930284, guid: 7354bce59eb6bdb44aa6859f04c9dfee, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2738,6 +2746,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae0400c6e98b9a43b064d156d7dee43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &790481717 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1633323836036837479, guid: 7354bce59eb6bdb44aa6859f04c9dfee, type: 3}
+  m_PrefabInstance: {fileID: 790481714}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &790481718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4781768700713303355, guid: 7354bce59eb6bdb44aa6859f04c9dfee, type: 3}
+  m_PrefabInstance: {fileID: 790481714}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &812174414
 GameObject:
   m_ObjectHideFlags: 0
