@@ -77,7 +77,7 @@ public class TerminalPauseMenu : TerminalMenu
     
     private void ShowPauseMenu()
     {
-        print("Showing End Level");
+        print("Showing Pause Menu");
         PlayerInputManager.Instance.SetContext(InputContext.Disabled);
         
         uiDocument.rootVisualElement.style.display = DisplayStyle.Flex;

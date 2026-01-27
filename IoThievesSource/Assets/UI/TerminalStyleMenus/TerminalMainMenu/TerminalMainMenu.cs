@@ -120,7 +120,7 @@ public class TerminalMainMenu : TerminalMenu
             PrintLine("Available commands:");
             PrintLine(" start       start game");
             PrintLine(" help        list all available commands");
-            PrintLine(" options     settings [Not Available]");
+            // PrintLine(" options     open settings");
             PrintLine(" quit        quit game");
             
             PrintLine("");
@@ -146,7 +146,7 @@ public class TerminalMainMenu : TerminalMenu
                 PrintLine("Available commands:");
                 PrintLine("start            start game");
                 PrintLine("help             list all available commands");
-                PrintLine("options          settings [Not Available]");
+                // PrintLine("options          settings [Not Available]");
                 PrintLine("quit             quit game");
                 break;
             case "start":
@@ -154,10 +154,10 @@ public class TerminalMainMenu : TerminalMenu
                 EventsManager.OnEnterLevelSelection?.Invoke();
                 gameObject.SetActive(false);
                 break;
-            case "options":
-                PrintLine("Customization session started...");
-                EventsManager.OnOptionsClicked?.Invoke();
-                break;
+            // case "options":
+            //     PrintLine("Customization session started...");
+            //     EventsManager.OnOptionsClicked?.Invoke();
+            //     break;
             case "quit":
                 PrintLine("Shutting down...");
                 EventsManager.OnQuitGame?.Invoke();
