@@ -2177,50 +2177,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1569109043311938915, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
-      propertyPath: MinDistance
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
-      propertyPath: playOnStart
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
       propertyPath: audioPlayerUI
       value: 
       objectReference: {fileID: 7854708642351606828}
-    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
-      propertyPath: playlist.Array.data[0].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 6c92b1b0d9acb5747bea4b48813ba075, type: 3}
-    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
-      propertyPath: playlist.Array.data[1].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 7ea21721c9e92d747b749de614a1dbf0, type: 3}
-    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
-      propertyPath: playlist.Array.data[2].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 54ffbf05f0f0e3845bd5d23899c8bc1d, type: 3}
-    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
-      propertyPath: playlist.Array.data[3].clip
-      value: 
-      objectReference: {fileID: 8300000, guid: b8a57cddb16f9c24dbce0ddafe71d01d, type: 3}
-    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
-      propertyPath: playlist.Array.data[0].songName
-      value: Silent pursuit
-      objectReference: {fileID: 0}
-    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
-      propertyPath: playlist.Array.data[1].songName
-      value: Eastern mistery
-      objectReference: {fileID: 0}
-    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
-      propertyPath: playlist.Array.data[2].songName
-      value: Bamboo sly
-      objectReference: {fileID: 0}
-    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
-      propertyPath: playlist.Array.data[3].songName
-      value: Agent on a mission!!
-      objectReference: {fileID: 0}
     - target: {fileID: 3103878779350131962, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -35469,7 +35429,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 11
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

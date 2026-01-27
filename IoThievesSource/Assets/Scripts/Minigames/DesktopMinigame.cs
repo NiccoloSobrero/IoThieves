@@ -69,6 +69,10 @@ namespace Minigames
         [SerializeField] private GameObject toolbarItemPrefab;
         [SerializeField] private Transform toolbarItemParent;
         
+        [Header("Program")]
+        [SerializeField] private GameObject programPopupObj;
+        [SerializeField] private TextMeshProUGUI programMsgText;
+        
         private readonly List<string> _openPath = new();
         private readonly List<FolderContentScrObj> _pathScrObjs = new();
 
@@ -225,7 +229,10 @@ namespace Minigames
         
         public void OpenProgram()
         {
-            Debug.Log("ERROR: can't open program");
+            programPopupObj.SetActive(true);
+            programMsgText.text = "There is a time and a place for everything, but not now";
+            
+            // Debug.Log("ERROR: can't open program");
         }
 
         public void OpenComplaint()

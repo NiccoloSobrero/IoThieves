@@ -48,19 +48,19 @@ MonoBehaviour:
   audioPlayerUI: {fileID: 0}
   musicSource: {fileID: 1569109043311938915}
   playlist:
-  - songName: Agent on a mission!!
-    cover: {fileID: 21300000, guid: ff4773133a2035345934779f05e798e4, type: 3}
-    clip: {fileID: 8300000, guid: b8a57cddb16f9c24dbce0ddafe71d01d, type: 3}
   - songName: Silent pursuit
-    cover: {fileID: 21300000, guid: ff4773133a2035345934779f05e798e4, type: 3}
+    cover: {fileID: 21300000, guid: 4e62fccdeba20bd4c9bc63ca896eba2c, type: 3}
     clip: {fileID: 8300000, guid: 6c92b1b0d9acb5747bea4b48813ba075, type: 3}
   - songName: Eastern mistery
-    cover: {fileID: 21300000, guid: ff4773133a2035345934779f05e798e4, type: 3}
+    cover: {fileID: 21300000, guid: fc964c0302389a3498c22fc1f1f92822, type: 3}
     clip: {fileID: 8300000, guid: 7ea21721c9e92d747b749de614a1dbf0, type: 3}
   - songName: Bamboo sly
-    cover: {fileID: 21300000, guid: ff4773133a2035345934779f05e798e4, type: 3}
+    cover: {fileID: 21300000, guid: 7c07f0aed3297de48be9f91874aef2cd, type: 3}
     clip: {fileID: 8300000, guid: 54ffbf05f0f0e3845bd5d23899c8bc1d, type: 3}
-  playOnStart: 1
+  - songName: Agent on a mission!!
+    cover: {fileID: 21300000, guid: ec0defe724ad7a740a2d3e7b7b98b1a2, type: 3}
+    clip: {fileID: 8300000, guid: b8a57cddb16f9c24dbce0ddafe71d01d, type: 3}
+  playOnStart: 0
   loopSingle: 0
   uiUpdateInterval: 0.3
 --- !u!82 &1569109043311938915
@@ -84,7 +84,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 100
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0

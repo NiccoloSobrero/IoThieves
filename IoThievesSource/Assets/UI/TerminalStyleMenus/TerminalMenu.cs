@@ -27,7 +27,7 @@ public abstract class TerminalMenu : MonoBehaviour
     
     protected bool _hasStartedScanning = false;
     protected float _scannerTimer = 0f;
-    protected float[] _scanCharTypingDelay = { 0.1f, 1f };
+    protected float[] _scanCharTypingDelay = { 0.1f, 0.3f }; // was 0.1f ; 1f
     protected int _scanIndex = 0;
     protected string _scannerInput = null;
     

@@ -25,7 +25,7 @@ MonoBehaviour:
     value: 0
     documentSprite: {fileID: 0}
     folderContent: {fileID: 11400000, guid: 310a0b63a5543904c84dc892e3073949, type: 2}
-  - itemName: Conspiracy theories
+  - itemName: Conspiracy
     itemType: 0
     icon: {fileID: 21300000, guid: 1639ba3893f587d40a83d8c5c225ba32, type: 3}
     value: 0

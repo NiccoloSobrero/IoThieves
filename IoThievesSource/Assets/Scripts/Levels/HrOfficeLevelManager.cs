@@ -31,6 +31,10 @@ namespace Levels
         [SerializeField] private AnimationCurve cameraMoveCurve;
 
         [SerializeField] private DialogueLinesScrObj getKeyDialogue;
+        
+        [SerializeField] private LevelTrigger enterCanteenTrigger;
+        [SerializeField] private DialogueLinesScrObj enterCanteenDialogue;
+
         [SerializeField] private DialogueLinesScrObj obtainedKeyDialogue;
 
         private const float CameraTimeToTarget = 1f;
@@ -71,6 +75,7 @@ namespace Levels
         private void Init()
         {
             // Initialization
+            enterCanteenTrigger.gameObject.SetActive(false);
             endLevelTrigger.gameObject.SetActive(false);
 
             _completedFileComplaint = false;
@@ -144,6 +149,18 @@ namespace Levels
             bossDoorTrigger.onTriggerEnterEvent.RemoveListener(OnEnterBossDoorTrigger);
             
             DialogueManager.Instance.SetDialogue(getKeyDialogue);
+            DialogueManager.Instance.OpenDialogueWindow();
+            
+            enterCanteenTrigger.gameObject.SetActive(true);
+            enterCanteenTrigger.onTriggerEnter.AddListener(OnEnterCanteen);
+        }
+
+        private void OnEnterCanteen()
+        {
+            enterCanteenTrigger.gameObject.SetActive(false);
+            enterCanteenTrigger.onTriggerEnter.RemoveListener(OnEnterCanteen);
+            
+            DialogueManager.Instance.SetDialogue(enterCanteenDialogue);
             DialogueManager.Instance.OpenDialogueWindow();
             
             keyInteractable.SetEnabled(true);
