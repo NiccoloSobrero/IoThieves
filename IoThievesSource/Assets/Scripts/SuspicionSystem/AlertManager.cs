@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using AI;
+using Events;
 using SuspicionSystem.States;
 using UnityEngine;
 using UnityEngine.UI;
@@ -61,7 +62,22 @@ namespace SuspicionSystem
         //Added by Fede
         public EnemyAdapter EnemyAdapter { get; set; }
 
+        private void OnEnable()
+        {
+            EventsManager.OnRestartGame.AddListener(Initialize);
+        }
+
+        private void OnDisable()
+        {
+            EventsManager.OnRestartGame.RemoveListener(Initialize);
+        }
+
         private void Awake()
+        {
+            Initialize();
+        }
+
+        private void Initialize()
         {
             EnemyAdapter = GetComponent<EnemyAdapter>();
             
@@ -70,7 +86,7 @@ namespace SuspicionSystem
             Level2State = new Level2AlertState();
             GameOverState = new GameOverAlertState();
             
-            Initialize();
+            SetUpConstants();
             try
             {
                 EnemyAdapter.AIController.Initialize();
@@ -143,7 +159,7 @@ namespace SuspicionSystem
             exclamationMark2RectMask.padding = new Vector4(0, 0, 0, exclamationMark2Padding);
         }
 
-        private void Initialize()
+        private void SetUpConstants()
         {
             float multiplier = alertParent.GetComponent<RectTransform>().rect.width;
             

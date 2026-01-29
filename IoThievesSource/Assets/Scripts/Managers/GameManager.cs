@@ -55,7 +55,7 @@ namespace Managers
             EventsManager.OnResumeGame.AddListener(ResumeGame);
             EventsManager.OnQuitGame.AddListener(QuitGame);
             EventsManager.OnOptionsClicked.AddListener(OpenOptions);
-            EventsManager.OnRestartGame.AddListener(RestartGame);
+            // EventsManager.OnRestartGame.AddListener(RestartGame);
             EventsManager.OnGameOverTriggered.AddListener(GameOver);
             EventsManager.OnNextLevel.AddListener(GoToNextLevel);
             EventsManager.OnBackToMainMenu.AddListener(GoToMainMenu);
@@ -70,7 +70,7 @@ namespace Managers
             EventsManager.OnResumeGame.RemoveListener(ResumeGame);
             EventsManager.OnQuitGame.RemoveListener(QuitGame);
             EventsManager.OnOptionsClicked.RemoveListener(OpenOptions);
-            EventsManager.OnRestartGame.RemoveListener(RestartGame);
+            // EventsManager.OnRestartGame.RemoveListener(RestartGame);
             EventsManager.OnGameOverTriggered.RemoveListener(GameOver);
             EventsManager.OnNextLevel.RemoveListener(GoToNextLevel);
             EventsManager.OnBackToMainMenu.RemoveListener(GoToMainMenu);

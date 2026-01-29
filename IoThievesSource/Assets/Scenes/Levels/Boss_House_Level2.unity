@@ -5180,6 +5180,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1077692844}
   m_SourcePrefab: {fileID: 100100000, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+--- !u!1 &386444216 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+  m_PrefabInstance: {fileID: 386444215}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &386640806
 GameObject:
   m_ObjectHideFlags: 0
@@ -6924,6 +6929,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1491348172}
   m_SourcePrefab: {fileID: 100100000, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+--- !u!1 &573463978 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+  m_PrefabInstance: {fileID: 573463977}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &586034382
 GameObject:
   m_ObjectHideFlags: 0
@@ -21030,11 +21040,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc8e01db4f7045a4f913f19b472d71ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTransform: {fileID: 7974958050640836447}
+  enemies:
+  - {fileID: 2031874544}
+  - {fileID: 1411796283}
+  - {fileID: 672103598}
+  - {fileID: 1501205664}
+  - {fileID: 386444216}
+  - {fileID: 573463978}
+  - {fileID: 1832933637}
+  - {fileID: 1482318161}
   levelObjectivesUI: {fileID: 52330113}
   findChatLogs: {fileID: 11400000, guid: a903ac19b0ed1684ea301d582df65d71, type: 2}
   introDialogue: {fileID: 11400000, guid: 5e3dfd98cf5699443802c4faa216877a, type: 2}
   cameraFollowTransform: {fileID: 5315282969776145905}
-  playerTransform: {fileID: 7974958050640836447}
   bossOfficeCameraTarget: {fileID: 3545086010219898931}
   cameraMoveCurve:
     serializedVersion: 2
@@ -21066,7 +21085,7 @@ MonoBehaviour:
   laxativesInteractable: {fileID: 1632306134}
   cupInteractable: {fileID: 6582738549260726891}
   bossAIController: {fileID: 2031874543}
-  cupWaypoint: {fileID: 0}
+  cupWaypoint: {fileID: 1554099171}
   toiletWaypoint: {fileID: 1007520507}
   bossTimeToDrink: 5
   onChatDownloadDialogue: {fileID: 11400000, guid: 6b4cfc3cc26afec47abf979df7c17b40, type: 2}
@@ -24569,6 +24588,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 380892281}
   m_SourcePrefab: {fileID: 100100000, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+--- !u!1 &1501205664 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+  m_PrefabInstance: {fileID: 1501205663}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1517030878
 GameObject:
   m_ObjectHideFlags: 0
@@ -31839,12 +31863,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -996625976428397906, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
   m_PrefabInstance: {fileID: 2031874542}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2031874544}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efa156b458ed4b54b992c6a2f0666264, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &2031874544 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+  m_PrefabInstance: {fileID: 2031874542}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2033954759 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8569817063494681188, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}

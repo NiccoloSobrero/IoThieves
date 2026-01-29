@@ -63,7 +63,9 @@ public class TerminalGameOverMenu : TerminalMenu
             case "restart":
                 PrintLine("Connection established...");
                 EventsManager.OnRestartGame?.Invoke();
-                gameObject.SetActive(false);
+                // gameObject.SetActive(false);
+                _output.Clear();
+                HideGameOverMenu();
                 break;
             case "cd ..":
                 PrintLine("Going to main menu...");

@@ -12,7 +12,7 @@ using UnityEngine;
 
 namespace Levels
 {
-    public class BossHouseLevelManager : MonoBehaviour
+    public class BossHouseLevelManager : LevelManager
     {
         [Header("References")]
         [SerializeField] private LevelObjectivesUI levelObjectivesUI;
@@ -24,7 +24,6 @@ namespace Levels
         [SerializeField] private DialogueLinesScrObj introDialogue;
         
         [SerializeField] private Transform cameraFollowTransform;
-        [SerializeField] private Transform playerTransform;
         [SerializeField] private Transform bossOfficeCameraTarget;
         [SerializeField] private AnimationCurve cameraMoveCurve;
         
@@ -51,7 +50,7 @@ namespace Levels
         [Header("Exit level")]
         [SerializeField] private DialogueLinesScrObj onExitLevelDialogue;
         [SerializeField] private InteractToInvokeEvent carExitInteractable;
-
+        
         /*
          * Flow:
          *      - Start from entrance of boss house, intro dialogue explaining
@@ -80,8 +79,10 @@ namespace Levels
             carExitInteractable.SetEnabled(false);
         }
 
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
+            
             Intro();
         }
 

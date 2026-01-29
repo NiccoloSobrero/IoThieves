@@ -10,7 +10,7 @@ using UnityEngine;
 
 namespace Levels
 {
-    public class HrOfficeLevelManager : MonoBehaviour
+    public class HrOfficeLevelManager : LevelManager
     {
         [Header("References")]
         [SerializeField] private LevelObjectivesUI levelObjectivesUI;
@@ -26,7 +26,6 @@ namespace Levels
 
         [SerializeField] private DialogueLinesScrObj introDialogue;
         [SerializeField] private Transform cameraTarget;
-        [SerializeField] private Transform playerTransform;
         [SerializeField] private Transform bossOfficeCameraTarget;
         [SerializeField] private AnimationCurve cameraMoveCurve;
 
@@ -67,8 +66,9 @@ namespace Levels
          *      - Get out
          */
         
-        private void Start()
+        protected override void Start()
         {
+            base.Start();
             Init();
         }
 
@@ -145,6 +145,8 @@ namespace Levels
 
         private void OnEnterBossDoorTrigger()
         {
+            SaveLastValidPosition();
+                
             levelObjectivesUI.UpdateObjective(getBossAddress);
             bossDoorTrigger.onTriggerEnterEvent.RemoveListener(OnEnterBossDoorTrigger);
             
@@ -169,6 +171,8 @@ namespace Levels
 
         private void OnKeyInteract()
         {
+            SaveLastValidPosition();
+            
             levelObjectivesUI.UpdateObjective(getBossAddress);
             
             keyInteractable.SetEnabled(false);
@@ -197,6 +201,8 @@ namespace Levels
 
         private void OnAddressDownloaded()
         {
+            SaveLastValidPosition();
+            
             levelObjectivesUI.UpdateObjective(getBossAddress);
             
             DownloadsManager.Instance.onDownloadTargetFile.RemoveListener(OnAddressDownloaded);
@@ -226,7 +232,16 @@ namespace Levels
             
             // End level
             EventsManager.OnEndLevel?.Invoke();
-            
+        }
+
+        protected override void RestartLevel()
+        {
+            base.RestartLevel();
+
+            if (!_completedFileComplaint)
+            {
+                typeWriteMinigame.Init();
+            }
         }
     }
 }

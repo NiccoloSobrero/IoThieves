@@ -33894,6 +33894,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0055b3bfff6f5424485cba9a1e20531b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerTransform: {fileID: 7974958050640836447}
+  enemies:
+  - {fileID: 764727106}
+  - {fileID: 443992735}
+  - {fileID: 2020792352}
   levelObjectivesUI: {fileID: 4853687084063909749}
   getBossAddress: {fileID: 11400000, guid: 305a6d7089011804a84501f20c64cee4, type: 2}
   fileComplaint: {fileID: 11400000, guid: 41cf45d58dfd7204387ea2b753519772, type: 2}
@@ -33902,7 +33907,6 @@ MonoBehaviour:
   bossDoorTrigger: {fileID: 1250648123}
   introDialogue: {fileID: 11400000, guid: 9e5177e0c54d1084faaf9402987b363c, type: 2}
   cameraTarget: {fileID: 5315282969776145905}
-  playerTransform: {fileID: 7974958050640836447}
   bossOfficeCameraTarget: {fileID: 552475467316977210}
   cameraMoveCurve:
     serializedVersion: 2
