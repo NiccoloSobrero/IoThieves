@@ -28,7 +28,10 @@ namespace AnimationControllers
         void StateAboutToChange(AIState state)
         {
             if (state is not null)
+            {
+                SetWalking(false);
                 state.OnWalkingVarChanged -= SetWalking;
+            }
         }
 
         public void SetWalking(bool value)

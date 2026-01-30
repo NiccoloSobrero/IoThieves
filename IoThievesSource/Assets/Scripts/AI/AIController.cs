@@ -15,9 +15,11 @@ namespace AI
         
         [Header("AI Settings")]
         [SerializeField] private AINames startState;
-        [SerializeField] private AIState _currentState = null;
+        
         [SerializeField] private NpcScriptableObject _NpcDatas;
         [SerializeField] private WalkableArea _walkableArea;
+        public Vector3 lastPosition;
+        
         public event Action<AIState> OnStateChanged; 
         public event Action<AIState> BeforeStateChanged; 
         
@@ -28,6 +30,21 @@ namespace AI
         public bool Stun = false;
         #endregion
         
+
+        
+        
+
+        
+        private AIState _currentState = null;
+        private AIState _previousState;
+        private AIState _previousRealState;
+        
+        public WalkableArea WalkableArea => _walkableArea;
+
+        private StateFactory _stateFactory;
+        public StateFactory StateFactory => _stateFactory;
+        
+        public NpcScriptableObject NpcDatas => _NpcDatas;
 
         public AIState CurrentState
         {
@@ -42,20 +59,13 @@ namespace AI
                     OnStateChanged?.Invoke(_currentState);
             }
         }
-        
-        public WalkableArea WalkableArea => _walkableArea;
-
-        private StateFactory _stateFactory;
-        public StateFactory StateFactory => _stateFactory;
-        
-        public NpcScriptableObject NpcDatas => _NpcDatas;
-
-        private AIState _previousState;
 
         public void Awake()
         {
             resetPosition = transform;
         }
+        
+     
         public void Initialize()
         {
             transform.position = resetPosition.position;
@@ -64,8 +74,10 @@ namespace AI
             _stateFactory = new StateFactory(this);
             _previousState = _stateFactory.GetState(AINames.Idle);
             CurrentState = _stateFactory.GetState(AINames.Idle);
+            _previousRealState = _stateFactory.GetState(AINames.Idle);
             enemyAdapter.AnimationController.Initialize();
             _walkableArea = gameObject.GetComponentInParent<WalkableArea>();
+            lastPosition = transform.position;
         }
         
         private void Update()
@@ -99,16 +111,22 @@ namespace AI
             CurrentState?.Exit();
             _previousState = CurrentState;
             CurrentState = targetState;
+            lastPosition = transform.position;
             CurrentState?.Enter();
         }
 
         public void PreviousState()
         {
            CurrentState?.Exit();
-           if (_previousState is PatrolState && WalkableArea is not null)
-               (CurrentState, _previousState) = (StateFactory.GetState(AINames.BackToWalkableArea), CurrentState);
+
+           if (_currentState is BackToPreviousPosition)
+           {
+               (CurrentState, _previousState) = (_previousState, _previousRealState);
+           }
            else
-                (CurrentState, _previousState) = (_previousState, CurrentState);
+           {
+               (CurrentState, _previousState, _previousRealState) = (StateFactory.GetState(AINames.BackToPosition),_previousRealState, CurrentState);
+           }
            CurrentState?.Enter();
         }
         

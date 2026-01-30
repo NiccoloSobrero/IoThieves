@@ -10,6 +10,6 @@ namespace AI
         PathCycling,
         StunnedState,
         GoToDestination,
-        BackToWalkableArea,
+        BackToPosition,
     }
 }

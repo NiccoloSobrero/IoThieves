@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace AI.AI_States
 {
-    public class BackToWalkableArea : AIState
+    public class BackToPreviousPosition : AIState
     {
         private Waypoint _Destination;
         private List<Waypoint> _waypoints;
@@ -24,20 +24,12 @@ namespace AI.AI_States
             }
         }
         
-        public BackToWalkableArea(AIController npc) : base(npc) { }
+        public BackToPreviousPosition(AIController npc) : base(npc) { }
 
         public override void Enter()
         {
-           if(Npc.WalkableArea.IsInside(Npc.transform))
-               Npc.ChangeState(AINames.Patrol);
-           else
-           {
-              Waypoint wp = Npc.WalkableArea.GetRandomValidwaypoint();
-               if (wp is not null)
-               {
-                   SetDestination(wp);
-               }
-           }
+            Waypoint waypoint = AIUtilities.FindNearestWaypoint(Npc.lastPosition); 
+            SetDestination(waypoint);
         }
         
         
@@ -68,9 +60,9 @@ namespace AI.AI_States
 
         private void NextWaypoint()
         {
-            if (_waypoints is null || _waypoints.Count == 0) 
+            if (_waypoints is null || _waypoints.Count == 0)
             {
-                Npc.ChangeState(AINames.Patrol);
+                Npc.PreviousState();
                 return;
             } 
             
