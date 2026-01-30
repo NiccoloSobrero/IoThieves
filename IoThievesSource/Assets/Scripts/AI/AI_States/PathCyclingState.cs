@@ -97,6 +97,7 @@ namespace AI.AI_States
                 else
                 {
                     Waypoint start = AIUtilities.FindNearestWaypoint(Npc.transform.position);
+                    Debug.Log("PathCyclingState Enter");
                     _backPath = PathFinding.FindPath(start, _path[_idx]);
                 }
                 

@@ -34,6 +34,7 @@ namespace AI.AI_States
             Waypoint nearestObj = AIUtilities.FindNearestWaypoint(_throwedObject.position);
             Waypoint nearestWaypoint = AIUtilities.FindNearestWaypoint(Npc.transform.position);
             
+            Debug.Log("NoiseHeardState Waypoint: " + nearestWaypoint);
             _path = PathFinding.FindPath(nearestWaypoint, nearestObj);
             DestinationReached = false;
         }

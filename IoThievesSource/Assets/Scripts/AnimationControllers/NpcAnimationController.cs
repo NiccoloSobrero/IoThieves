@@ -21,12 +21,14 @@ namespace AnimationControllers
     
         void StateChanged(AIState state)
         {
-            state.OnWalkingVarChanged += SetWalking;
+            if(state is not null)
+                state.OnWalkingVarChanged += SetWalking;
         }
     
         void StateAboutToChange(AIState state)
         {
-            state.OnWalkingVarChanged -= SetWalking;
+            if (state is not null)
+                state.OnWalkingVarChanged -= SetWalking;
         }
 
         public void SetWalking(bool value)

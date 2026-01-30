@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using AI.AI_States;
+using Events;
 using Managers;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,6 +11,8 @@ namespace AI
 {
     public class AIController : MonoBehaviour
     {
+        private Transform resetPosition;
+        
         [Header("AI Settings")]
         [SerializeField] private AINames startState;
         [SerializeField] private AIState _currentState = null;
@@ -35,7 +38,8 @@ namespace AI
                 
                 BeforeStateChanged?.Invoke(_currentState);
                 _currentState = value;
-                OnStateChanged?.Invoke(_currentState);
+                if (_currentState is not null)
+                    OnStateChanged?.Invoke(_currentState);
             }
         }
         
@@ -48,8 +52,15 @@ namespace AI
 
         private AIState _previousState;
 
+        public void Awake()
+        {
+            resetPosition = transform;
+        }
         public void Initialize()
         {
+            transform.position = resetPosition.position;
+            transform.rotation = resetPosition.rotation;
+            CurrentState = null;
             _stateFactory = new StateFactory(this);
             _previousState = _stateFactory.GetState(AINames.Idle);
             CurrentState = _stateFactory.GetState(AINames.Idle);
