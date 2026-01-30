@@ -10,6 +10,8 @@ namespace AI.NavigationAndWaypoints
             var openSet = new List<Waypoint> { start };
             var cameFrom = new Dictionary<Waypoint, Waypoint>();
         
+            Debug.Log("START WAYPOINT IS "+start);
+            Debug.Log("GOAL WAYPOINT IS "+goal);
             var gScore = new Dictionary<Waypoint, float> { [start] = 0 };
             var fScore = new Dictionary<Waypoint, float> { [start] = EuclideanDistance(start, goal) };
 

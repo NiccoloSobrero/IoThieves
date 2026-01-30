@@ -40,7 +40,7 @@ namespace AI.AI_States
             {
                 Debug.Log("Ho un device ed è "+ _hackedDevices[0]);
                 Waypoint nearestToMe = AIUtilities.FindNearestWaypoint(Npc.transform.position);
-                Debug.Log("Waypoint più vicino a me is :" + nearestToMe);
+                Debug.Log("DeviceHackedState: Waypoint più vicino a me is :" + nearestToMe);
                 _path = PathFinding.FindPath(nearestToMe, _hackedDevices[0]);
                 if(_path is not null && _path.Count > 0)
                     Debug.Log("Ho trovato un percorso valido");
@@ -76,6 +76,7 @@ namespace AI.AI_States
                     _hackedDevices.RemoveAt(0);
                     if (_hackedDevices.Count > 0)
                     {
+                        Debug.Log("deviceHackedState _solved");
                         _path = PathFinding.FindPath(AIUtilities.FindNearestWaypoint(Npc.transform.position), _hackedDevices[0]);
                         DestinationReached = false;
                     }

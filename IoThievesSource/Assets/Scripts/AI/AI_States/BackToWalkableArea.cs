@@ -82,6 +82,7 @@ namespace AI.AI_States
         {
             _Destination = waypoint;
             Waypoint nearest = AIUtilities.FindNearestWaypoint(Npc.transform.position);
+            Debug.Log("BackToWalkableArea " + nearest);
             _waypoints = PathFinding.FindPath(nearest, _Destination);
             
             NextWaypoint();
