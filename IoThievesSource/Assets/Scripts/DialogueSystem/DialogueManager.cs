@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace DialogueSystem
 {
@@ -64,6 +65,16 @@ namespace DialogueSystem
 
             _completedTextGeneration = true;
             _canSkipTextGeneration = false;
+        }
+
+        private void OnEnable()
+        {
+            EventsManager.OnRestartGame.AddListener(CloseDialogueWindow);
+        }
+
+        private void OnDisable()
+        {
+            EventsManager.OnRestartGame.RemoveListener(CloseDialogueWindow);
         }
 
         public void SetDialogue(DialogueLinesScrObj dialogueLinesScrObj, 

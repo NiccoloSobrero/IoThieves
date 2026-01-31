@@ -47,11 +47,13 @@ namespace Managers
         private void OnEnable()
         {
             EventsManager.OnMinigameCompleted.AddListener(MoveToNextMinigame);
+            EventsManager.OnRestartGame.AddListener(() => EnableWindow(false));
         }
 
         private void OnDisable()
         {
             EventsManager.OnMinigameCompleted.RemoveListener(MoveToNextMinigame);
+            EventsManager.OnRestartGame.RemoveListener(() => EnableWindow(false));
         }
 
         private void MoveToNextMinigame()

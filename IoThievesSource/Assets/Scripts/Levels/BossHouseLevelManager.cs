@@ -154,6 +154,8 @@ namespace Levels
 
         private void OnEnterBossRoomDoorTrigger()
         {
+            SaveLastValidPosition();
+            
             // Remove previous listener
             bossRoomDoorTrigger.onTriggerEnterEvent.RemoveListener(OnEnterBossRoomDoorTrigger);
             
@@ -171,6 +173,8 @@ namespace Levels
         
         private void OnInteractWithLaxatives()
         {
+            SaveLastValidPosition();
+            
             // Remove previous listener
             laxativesInteractable.onInteract.RemoveListener(OnInteractWithLaxatives);
             
@@ -238,6 +242,8 @@ namespace Levels
         
         private void OnAddressDownloaded()
         {
+            SaveLastValidPosition();
+            
             // Remove previous listener
             DownloadsManager.Instance.onDownloadTargetFile.RemoveListener(OnAddressDownloaded);
             
@@ -275,9 +281,6 @@ namespace Levels
             DialogueManager.Instance.onDialogueComplete.RemoveListener(OnLevelComplete);
             
             EventsManager.OnGameCompleted?.Invoke();
-
-            // End level
-            
         }
     }
 }
