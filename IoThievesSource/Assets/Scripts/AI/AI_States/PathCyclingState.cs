@@ -52,6 +52,7 @@ namespace AI.AI_States
                 _hasPath = true; 
                 _idx = 0;
                 _targetPosition = _path[_idx].transform.position;
+                Debug.Log("Path is " + _path);
             }
             catch (Exception e)
             {
