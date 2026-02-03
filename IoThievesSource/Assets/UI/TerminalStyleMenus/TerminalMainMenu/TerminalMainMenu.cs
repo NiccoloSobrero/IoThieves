@@ -108,11 +108,11 @@ public class TerminalMainMenu : TerminalMenu
             PrintLine("");
             
             PrintLine("[OK] Scan completed.");
-            PrintLine("42 vulnerable devices found.");
+            /*PrintLine("42 vulnerable devices found.");
             PrintLine(" - 12 XSS vulnerabilities found.");
             PrintLine(" - 20 SQL injection vulnerabilities found.");
             PrintLine(" - 10 Binary exploitation vulnerabilities found.");
-            PrintLine("42 devices exploited.");
+            PrintLine("42 devices exploited.");*/
             
             PrintLine("");
             
