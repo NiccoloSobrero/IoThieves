@@ -11,6 +11,11 @@ namespace Interactables
         
         [SerializeField] private InteractableTriggerArea triggerArea;
         
+        [Header("Audio")]
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip audioSfx; 
+        
+        
         private const int MaxAttractableEnemies = 10;
         private readonly Collider[] _enemies = new Collider[MaxAttractableEnemies];
 
@@ -28,6 +33,15 @@ namespace Interactables
         public override void Interact()
         {
             if (!triggerArea.IsPlayerInRange) return;
+            
+            if (audioSource != null && audioSfx != null)
+            {
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.clip = audioSfx;
+                    audioSource.Play();
+                }
+            }
             
             int size = Physics.OverlapSphereNonAlloc(gameObject.transform.position, attractionRange, _enemies, enemyLayer);
             Vector3 attractPos = transform.position;

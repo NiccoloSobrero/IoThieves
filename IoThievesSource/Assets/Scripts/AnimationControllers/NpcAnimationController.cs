@@ -1,3 +1,4 @@
+using System;
 using AI;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace AnimationControllers
     
         public void Initialize()
         {
+            Debug.Log(gameObject.name + " Initialize ANIMACONTROLLER");
             _aiController = enemyAdapter.AIController;
             _aiController.OnStateChanged += StateChanged;
             _aiController.BeforeStateChanged += StateAboutToChange;
@@ -42,6 +44,17 @@ namespace AnimationControllers
         public void SetStunned(bool value)
         {
             animator.SetBool(IsStunned, value); 
+        }
+
+        private void OnDisable()
+        {
+            SetWalking(false);
+            SetStunned(false);
+        }
+
+        private void OnEnable()
+        {
+            Debug.Log("ENABLED CONTROLLER OF " + gameObject.name);
         }
     }
 }

@@ -9,10 +9,18 @@ public enum OpenType
 
 public class DoorTrigger : MonoBehaviour
 {
+    [Header("Door Animation")]
     [SerializeField] private Animator animator;
     [SerializeField] private OpenType openType;
+    
+    [Header("Audio")]
+    [SerializeField] private AudioSource doorAudioSource;
+    [SerializeField] private AudioClip doorOpenSfx; 
+    [Header("Mutual Exclusion")]
+    [SerializeField] private DoorTrigger otherTrigger;
 
     private bool _isLocked = false;
+    private bool _isAlreadyOpen = false;
 
     #region Events
 
@@ -29,6 +37,15 @@ public class DoorTrigger : MonoBehaviour
         
         if (_isLocked) return;
         
+        if (otherTrigger != null)
+            otherTrigger.BlockAudio();
+        
+        if (!_isAlreadyOpen)
+        {
+            PlayDoorOpenSound();
+            _isAlreadyOpen = true;
+        }
+        
         animator.SetBool(GetBoolParam(), true);
     }
 
@@ -36,7 +53,24 @@ public class DoorTrigger : MonoBehaviour
     {
         if (_isLocked) return;
         
+        if (otherTrigger != null)
+            otherTrigger.UnblockAudio();
+        
+        _isAlreadyOpen = false;  
+        
         animator.SetBool(GetBoolParam(), false);
+    }
+    
+    private bool _audioBlocked = false;
+    public void BlockAudio() => _audioBlocked = true;
+    public void UnblockAudio() => _audioBlocked = false;
+    
+    private void PlayDoorOpenSound()
+    {
+        if (doorAudioSource == null || doorOpenSfx == null || _audioBlocked) return;
+        
+        doorAudioSource.clip = doorOpenSfx;
+        doorAudioSource.Play();
     }
 
     private string GetBoolParam()

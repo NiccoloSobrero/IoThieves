@@ -10,6 +10,10 @@ namespace Interactables
         [SerializeField] private float stunTime;
         
         [SerializeField] private InteractableTriggerArea triggerArea;
+        
+        [Header("Audio")]
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip audioSfx; 
 
         private void Awake()
         {
@@ -19,12 +23,22 @@ namespace Interactables
         public override void Interact()
         {
             if (!triggerArea.IsPlayerInRange) return;
+            
+            if (audioSource != null && audioSource.isPlaying)
+                return;
 
             StartCoroutine(StartStunningCor());
         }
 
         private IEnumerator StartStunningCor()
         {
+            
+            if (audioSource != null && audioSfx != null)
+            {
+                audioSource.clip = audioSfx;
+                audioSource.Play();          
+            }
+            
             smokeVFX.Play();
             stunTrigger.gameObject.SetActive(true);
             

@@ -11,7 +11,8 @@ namespace AI
 {
     public class AIController : MonoBehaviour
     {
-        private Transform resetPosition;
+        private Vector3 resetPosition;
+        private Quaternion resetRotation;
         
         [Header("AI Settings")]
         [SerializeField] private AINames startState;
@@ -62,14 +63,19 @@ namespace AI
 
         public void Awake()
         {
-            resetPosition = transform;
+            resetPosition = transform.position;
+            resetRotation = transform.rotation;
+            Debug.Log(gameObject.name + ": Awake WITH POSITIONS = " + transform.position);
         }
         
      
         public void Initialize()
         {
-            transform.position = resetPosition.position;
-            transform.rotation = resetPosition.rotation;
+            Debug.Log(gameObject.name + " -->  Initializing AI Controller");
+            Debug.Log(gameObject.name + " -->  ACTUAL POSITION IS " + transform.position + "\nWITH RESET POSITION AS " + resetPosition);
+            gameObject.transform.position = resetPosition;
+            gameObject.transform.rotation = resetRotation;
+            Debug.Log(gameObject.name + " POSITION IS " + transform.position);
             CurrentState = null;
             _stateFactory = new StateFactory(this);
             _previousState = _stateFactory.GetState(AINames.Idle);

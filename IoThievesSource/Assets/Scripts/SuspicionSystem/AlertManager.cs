@@ -64,21 +64,23 @@ namespace SuspicionSystem
 
         private void OnEnable()
         {
-            EventsManager.OnRestartGame.AddListener(Initialize);
+            Initialize();
+            //EventsManager.OnRestartGame.AddListener(Initialize);
         }
 
         private void OnDisable()
         {
-            EventsManager.OnRestartGame.RemoveListener(Initialize);
+            //EventsManager.OnRestartGame.RemoveListener(Initialize);
         }
 
         private void Awake()
         {
-            Initialize();
+            //Initialize();
         }
 
         private void Initialize()
         {
+            Debug.Log("Initializing Alert Manager");
             EnemyAdapter = GetComponent<EnemyAdapter>();
             
             Level0State = new Level0AlertState();
@@ -90,13 +92,14 @@ namespace SuspicionSystem
             try
             {
                 EnemyAdapter.AIController.Initialize();
-                //print(gameObject.name + "AIController initialized");
+                print(gameObject.name + "AIController initialized");
             }
             catch (Exception e)
             {
             }
             
             ChangeState(Level0State);
+            print("state changed ");
         }
 
         private void Update()
