@@ -40,7 +40,7 @@ namespace AI
                         bestWaypoint = wp;
                     }
                 }
-               /* else
+             /*  else
                 {
                     Debug.Log("There is" +hit.collider.gameObject.name+" in between the npc and the waypoint "+ wp.name);
                 }*/
