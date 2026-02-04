@@ -228,6 +228,8 @@ namespace Minigames
 
         public void OnSelect(BaseEventData _)
         {
+            _minigame.SelectSection(this);
+            
             _isSelected = true;
             caretHighlight.gameObject.SetActive(true);
         }

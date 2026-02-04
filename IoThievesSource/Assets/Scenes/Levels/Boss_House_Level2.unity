@@ -759,7 +759,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -780,7 +780,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -801,7 +801,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -6881,6 +6881,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ceadee1c51859448c6419e2aadd911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedLayer:
+    serializedVersion: 2
+    m_Bits: 0
   samplingTime: 0.2
   radius: 5
 --- !u!65 &554065637
@@ -30621,6 +30624,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ceadee1c51859448c6419e2aadd911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedLayer:
+    serializedVersion: 2
+    m_Bits: 0
   samplingTime: 0.2
   radius: 7
 --- !u!65 &1869460920
@@ -31249,7 +31255,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e44624a3f374eaf428b6eca5370fb612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  states: 
 --- !u!1 &1914896212
 GameObject:
   m_ObjectHideFlags: 0
@@ -62944,7 +62949,7 @@ Transform:
   m_GameObject: {fileID: 5878271191979810119}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5334021, y: 0.3124597, z: -0.22094238, w: 0.75434446}
-  m_LocalPosition: {x: -21, y: 20, z: -5}
+  m_LocalPosition: {x: -21, y: 20.01, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -65465,7 +65470,7 @@ Transform:
   m_GameObject: {fileID: 6596042268962660814}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5334021, y: 0.3124597, z: -0.22094238, w: 0.75434446}
-  m_LocalPosition: {x: -21, y: 20, z: -5}
+  m_LocalPosition: {x: -21, y: 20.01, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -80183,6 +80188,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ceadee1c51859448c6419e2aadd911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedLayer:
+    serializedVersion: 2
+    m_Bits: 0
   samplingTime: 0.2
   radius: 5
 --- !u!4 &4838477158241826467
@@ -105073,7 +105081,7 @@ Transform:
   m_GameObject: {fileID: 8726743923501276603}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -16, y: 0, z: 0}
+  m_LocalPosition: {x: -16, y: 0.01, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -112043,7 +112051,7 @@ CharacterController:
   m_SlopeLimit: 45
   m_StepOffset: 0.1
   m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_MinMoveDistance: 0
   m_Center: {x: 0, y: 0.875, z: 0}
 --- !u!224 &8711716984002749026
 RectTransform:

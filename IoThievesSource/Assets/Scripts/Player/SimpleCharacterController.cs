@@ -42,6 +42,11 @@ namespace Player
         {
             Move();
         }
+        
+        // void OnControllerColliderHit(ControllerColliderHit hit)
+        // {
+        //     Debug.Log($"Hit: {hit.collider.name}  point:{hit.point}  normal:{hit.normal}");
+        // }
 
         private void Move()
         {
@@ -51,7 +56,6 @@ namespace Player
             if (moveDir.sqrMagnitude > 0.01f)
             {
                 moveDir = moveDir.normalized;
-                
                 _controller.Move(moveDir * (moveSpeed * Time.deltaTime));
                 
                 characterAnimator.SetBool("IsMoving", true);
