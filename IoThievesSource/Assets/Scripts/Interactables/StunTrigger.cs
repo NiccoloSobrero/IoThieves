@@ -42,7 +42,6 @@ namespace Interactables
         protected void ScanArea(float scanRadius)
         {
             Collider[] colliders = new Collider[10];
-            Debug.Log("SCAN AREA WITH RADIUS "+ radius+" I AM "+ LayerMask.LayerToName(affectedLayer.value));
             var size = Physics.OverlapSphereNonAlloc(transform.position, scanRadius, colliders, affectedLayer.value, QueryTriggerInteraction.Ignore);
 
             print("I hit " +size + " enemies " );

@@ -61,6 +61,14 @@ namespace SuspicionSystem
         
         //Added by Fede
         public EnemyAdapter EnemyAdapter { get; set; }
+        private bool _pause = false;
+
+        public bool Pause
+        {
+            get => _pause;
+            set => _pause = value;
+        }
+
 
         private void OnEnable()
         {
@@ -77,7 +85,7 @@ namespace SuspicionSystem
         {
             //Initialize();
         }
-
+        
         private void Initialize()
         {
             Debug.Log("Initializing Alert Manager");
@@ -97,13 +105,16 @@ namespace SuspicionSystem
             catch (Exception e)
             {
             }
-            
+
+            Pause = false;
             ChangeState(Level0State);
             print("state changed ");
         }
 
         private void Update()
         {
+            if (Pause)
+                return;
             _currentState?.Tick(this, Time.deltaTime);
             UpdateBars();
         }
