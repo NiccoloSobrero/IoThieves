@@ -6,9 +6,11 @@ namespace AI.AI_States
 {
     public class BackToPreviousPosition : AIState
     {
+        private Vector3 _finalDestination;
         private Waypoint _Destination;
         private List<Waypoint> _waypoints;
-        private Waypoint _currentWaypoint;
+        private Vector3 _currentDestination;
+        private bool _hasDestination = false;
 
 
         private bool _isMoving = false;
@@ -28,17 +30,18 @@ namespace AI.AI_States
 
         public override void Enter()
         {
-            Waypoint waypoint = AIUtilities.FindNearestWaypoint(Npc.lastPosition); 
+            _finalDestination = Npc.lastPosition;
+            Waypoint waypoint = AIUtilities.FindNearestWaypoint(_finalDestination); 
             SetDestination(waypoint);
         }
         
         
         public override void Execute()
         {
-           if (_currentWaypoint is null)
+           if (!_hasDestination)
                 return;
             
-           Vector3 dir = _currentWaypoint.transform.position - Npc.transform.position;
+           Vector3 dir = _currentDestination - Npc.transform.position;
            dir.Normalize();
 
            Vector3 forwardDir =  Npc.transform.forward.normalized;
@@ -50,7 +53,7 @@ namespace AI.AI_States
            if(IsMoving)
                AIUtilities.MoveTarget(Npc.transform, dir, Npc.NpcDatas.Speed);
 
-           float distance =  Vector3.Distance(Npc.transform.position, _currentWaypoint.transform.position);
+           float distance =  Vector3.Distance(Npc.transform.position, _currentDestination);
             
            if (distance < Npc.NpcDatas.DistanceThreshold)
            {
@@ -82,19 +85,27 @@ namespace AI.AI_States
                 _waypoints.RemoveAt(0);
             }
             
-            _currentWaypoint = _waypoints[0];
+            _currentDestination = _waypoints[0].transform.position;
+            _hasDestination = true;
             _waypoints.RemoveAt(0);
         }
         
         private void NextWaypoint()
         {
-            if (_waypoints is null || _waypoints.Count == 0)
+            if (_currentDestination == _finalDestination)
             {
                 Npc.PreviousState();
                 return;
+            }
+            
+            if (_waypoints.Count == 0)
+            {
+                _currentDestination = _finalDestination; 
+                return;
             } 
             
-            _currentWaypoint = _waypoints[0];
+            _currentDestination = _waypoints[0].transform.position;
+            _hasDestination = true;
             _waypoints.RemoveAt(0);
         }
   
@@ -104,7 +115,8 @@ namespace AI.AI_States
             IsMoving = false;
             _waypoints = null;
             _Destination = null;
-            _currentWaypoint = null;
+            //_currentDestination = null;
+            _hasDestination = false;
         }
     }
 }
