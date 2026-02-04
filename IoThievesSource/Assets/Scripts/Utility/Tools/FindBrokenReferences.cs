@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEditor;
 using UnityEngine;
 
@@ -23,4 +24,4 @@ public class FindBrokenReferences
         Debug.Log("Scan complete.");
     }
 }
-
+#endif

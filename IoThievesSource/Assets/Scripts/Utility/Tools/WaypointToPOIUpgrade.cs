@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using AI.NavigationAndWaypoints;
 using UnityEditor;
 using UnityEngine;
@@ -129,4 +130,4 @@ public static class UpgradeWaypointToPOI
         EditorUtility.SetDirty(dst);
     }
 }
-
+#endif
