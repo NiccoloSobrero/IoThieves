@@ -124929,7 +124929,7 @@ MonoBehaviour:
   minPower: 2
   maxPower: 8
   powerStep: 1
-  verticalBoost: 6
+  verticalBoost: 4
   lineRenderer: {fileID: 224101160982945316}
   steps: 25
   timeStep: 0.1
