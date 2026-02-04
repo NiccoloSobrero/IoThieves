@@ -19,8 +19,9 @@ namespace AI
 
         [SerializeField] private NpcScriptableObject _NpcDatas;
         [SerializeField] private WalkableArea _walkableArea;
+        
         public Vector3 lastPosition;
-
+        public Quaternion lastRotation;
         public event Action<AIState> OnStateChanged;
         public event Action<AIState> BeforeStateChanged;
 
@@ -45,6 +46,8 @@ namespace AI
         public StateFactory StateFactory => _stateFactory;
         
         public NpcScriptableObject NpcDatas => _NpcDatas;
+        
+        public bool matchRotationWhenComingBack = false;
 
         public AIState CurrentState
         {
@@ -124,7 +127,16 @@ namespace AI
             _previousState = CurrentState;
             _previousRealState = CurrentState;
             CurrentState = targetState;
+            
             lastPosition = transform.position;
+            if (_previousState is IdleState)
+            {
+                lastRotation = transform.rotation;
+                matchRotationWhenComingBack = true;
+            }
+            else
+                matchRotationWhenComingBack = false;
+            
             CurrentState?.Enter();
         }
 

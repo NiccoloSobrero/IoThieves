@@ -11,6 +11,9 @@ namespace AI.AI_States
         private List<Waypoint> _waypoints;
         private Vector3 _currentDestination;
         private bool _hasDestination = false;
+        
+        private Quaternion _lastRotation;
+        private bool _hasRotation = false;
 
 
         private bool _isMoving = false;
@@ -31,15 +34,40 @@ namespace AI.AI_States
         public override void Enter()
         {
             _finalDestination = Npc.lastPosition;
-            Waypoint waypoint = AIUtilities.FindNearestWaypoint(_finalDestination); 
+            Waypoint waypoint = AIUtilities.FindNearestWaypoint(_finalDestination);
+
+            _hasRotation = Npc.matchRotationWhenComingBack;
+            if (_hasRotation)
+                _lastRotation = Npc.lastRotation;
+                
             SetDestination(waypoint);
         }
         
         
         public override void Execute()
         {
-           if (!_hasDestination)
+            if (!_hasDestination)
+            {
+                if (!_hasRotation)
+                    Npc.PreviousState();
+
+                float maxStep = Npc.NpcDatas.AngularSpeed * Time.deltaTime *45.0f;
+
+                Npc.transform.rotation = Quaternion.RotateTowards(
+                    Npc.transform.rotation,
+                    _lastRotation,
+                    maxStep
+                );
+
+                if (Quaternion.Angle(Npc.transform.rotation, _lastRotation) < 0.1f)
+                {
+                    Npc.transform.rotation = _lastRotation;
+                    _hasRotation = false;
+                }
+  
                 return;
+            }
+                
             
            Vector3 dir = _currentDestination - Npc.transform.position;
            dir.Normalize();
@@ -94,7 +122,13 @@ namespace AI.AI_States
         {
             if (_currentDestination == _finalDestination)
             {
-                Npc.PreviousState();
+                IsMoving = false;
+                _hasDestination = false;
+                if (!_hasRotation)
+                {
+                    Npc.PreviousState();
+                }
+
                 return;
             }
             
