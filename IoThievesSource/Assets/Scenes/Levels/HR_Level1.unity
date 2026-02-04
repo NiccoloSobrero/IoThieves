@@ -14595,7 +14595,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.1628299, y: 1, z: 2.224754}
+  m_Size: {x: 2.1628299, y: 1, z: 2.82}
   m_Center: {x: -0.10856032, y: 0, z: -0.04841268}
 --- !u!114 &724864481
 MonoBehaviour:
@@ -14609,6 +14609,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ceadee1c51859448c6419e2aadd911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedLayer:
+    serializedVersion: 2
+    m_Bits: 128
   samplingTime: 0.2
   radius: 3
 --- !u!1 &725937896
@@ -22962,6 +22965,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ceadee1c51859448c6419e2aadd911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedLayer:
+    serializedVersion: 2
+    m_Bits: 128
   samplingTime: 0.2
   radius: 3
 --- !u!65 &1155057709
@@ -22983,7 +22989,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.1628299, y: 1, z: 2.224754}
+  m_Size: {x: 2.1628299, y: 1, z: 2.82}
   m_Center: {x: -0.10856032, y: 0, z: -0.04841268}
 --- !u!1 &1173162070
 GameObject:

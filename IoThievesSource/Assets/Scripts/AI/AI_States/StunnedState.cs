@@ -7,6 +7,7 @@ namespace AI.AI_States
     {
         private float elapsedTime;
         private float TotalStunTime = 2.0f;
+        private bool billboard;
         public StunnedState(AIController npc) : base(npc) {}
         
 
@@ -20,6 +21,7 @@ namespace AI.AI_States
             Npc.enemyAdapter.FovMesh.gameObject.SetActive(false);
             Npc.enemyAdapter.NpcTrigger.enabled = false;
             Npc.enemyAdapter.SuspicionSphere.gameObject.SetActive(false);
+            billboard = Npc.enemyAdapter.AlertManager._billboardVisible;
             Npc.enemyAdapter.AlertManager.ShowAlertBillboard(false);
         }
 
@@ -34,12 +36,17 @@ namespace AI.AI_States
 
         public override void Exit()
         {
-            Npc.enemyAdapter.AlertManager.ShowAlertBillboard(true); 
+            Npc.enemyAdapter.AlertManager.ShowAlertBillboard(billboard); 
             Npc.enemyAdapter.SuspicionSphere.gameObject.SetActive(true);
             Npc.enemyAdapter.NpcTrigger.enabled = true;
             Npc.enemyAdapter.FovMesh.gameObject.SetActive(true);
             Npc.enemyAdapter.AlertManager.Pause = false;
             Npc.enemyAdapter.AnimationController.SetStunned(false);
+        }
+
+        public void ResetCounter()
+        {
+           elapsedTime = 0; 
         }
     }
 }

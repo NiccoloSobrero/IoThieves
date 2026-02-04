@@ -104,9 +104,15 @@ namespace AI
         
         public void ChangeState(AINames state)
         {
-            if (CurrentState is (StunnedState or GoToDestination))
+            if(CurrentState is StunnedState stun)
             {
-                print("Non cambio stato poichè sono stunnato oppure sto andando in un punto specifico e davvero non mi posso fermare");
+                stun.ResetCounter();
+                return;
+            }
+            
+            if (CurrentState is  GoToDestination) 
+            {
+                print("Non cambio perchè andando in un punto specifico e davvero non mi posso fermare");
                 return;
             }
             

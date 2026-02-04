@@ -46,6 +46,8 @@ namespace SuspicionSystem
         
         private bool _canIncreaseSuspicion;
         private bool _canDecreaseSuspicion;
+
+        public bool _billboardVisible;
         
         public bool IsPlayerInRange { get; private set; }
         public bool CanDecreaseSuspicion { get; private set; }
@@ -189,6 +191,7 @@ namespace SuspicionSystem
 
         public void ShowAlertBillboard(bool show)
         {
+            _billboardVisible = show;
             alertBillboard.SetActive(show);
         }
     }
