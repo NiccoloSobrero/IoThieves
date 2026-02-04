@@ -6,6 +6,7 @@ namespace Interactables
     [RequireComponent(typeof(Collider))]
     public class StunTrigger : MonoBehaviour
     {
+        [SerializeField] private LayerMask affectedLayer;
         [SerializeField] private float samplingTime = 0.2f;
         protected float _elapsed = 0.0f;
         [SerializeField] protected float radius;
@@ -41,8 +42,10 @@ namespace Interactables
         protected void ScanArea(float scanRadius)
         {
             Collider[] colliders = new Collider[10];
-            var size = Physics.OverlapSphereNonAlloc(transform.position, scanRadius, colliders, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
+            Debug.Log("SCAN AREA WITH RADIUS "+ radius+" I AM "+ LayerMask.LayerToName(affectedLayer.value));
+            var size = Physics.OverlapSphereNonAlloc(transform.position, scanRadius, colliders, affectedLayer.value, QueryTriggerInteraction.Ignore);
 
+            print("I hit " +size + " enemies " );
             for (int i = 0 ; i<size; i++)
             {
                 AIController ai = colliders[i].GetComponentInParent<AIController>();
