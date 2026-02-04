@@ -7,6 +7,7 @@ namespace AI.AI_States
     {
         private float elapsedTime;
         private float TotalStunTime = 2.0f;
+        private bool billboard;
         public StunnedState(AIController npc) : base(npc) {}
         
 
@@ -16,11 +17,12 @@ namespace AI.AI_States
             elapsedTime = 0;
             //DisableFovsD
             Debug.Log("StunnedEnemy");
+            Npc.enemyAdapter.AlertManager.Pause = true;
             Npc.enemyAdapter.FovMesh.gameObject.SetActive(false);
+            Npc.enemyAdapter.NpcTrigger.enabled = false;
+            Npc.enemyAdapter.SuspicionSphere.gameObject.SetActive(false);
+            billboard = Npc.enemyAdapter.AlertManager._billboardVisible;
             Npc.enemyAdapter.AlertManager.ShowAlertBillboard(false);
-            Npc.enemyAdapter.AlertManager.enabled = false;
-            OnAndOffFovs(false);
-            
         }
 
         public override void Execute()
@@ -34,23 +36,17 @@ namespace AI.AI_States
 
         public override void Exit()
         {
-            Npc.enemyAdapter.AnimationController.SetStunned(false);
+            Npc.enemyAdapter.AlertManager.ShowAlertBillboard(billboard); 
+            Npc.enemyAdapter.SuspicionSphere.gameObject.SetActive(true);
+            Npc.enemyAdapter.NpcTrigger.enabled = true;
             Npc.enemyAdapter.FovMesh.gameObject.SetActive(true);
-            Npc.enemyAdapter.AlertManager.ShowAlertBillboard(true);
-            Npc.enemyAdapter.AlertManager.enabled = true;
-            OnAndOffFovs(true);
+            Npc.enemyAdapter.AlertManager.Pause = false;
+            Npc.enemyAdapter.AnimationController.SetStunned(false);
         }
 
-        private void OnAndOffFovs(bool active)
-        { 
-            String coroutineName = !active ? "ShrinkFov" : "EnlargeFov";
-            
-            //Npc.enemyAdapter.NpcTriggerConeOfDeath.gameObject.SetActive(active);
-            Npc.enemyAdapter.NpcTrigger.StartCoroutine(coroutineName);
-            // Npc.enemyAdapter.NpcTriggerConeOfDeath.StartCoroutine(coroutineName);
-            //Npc.enemyAdapter.NpcTrigger.gameObject.SetActive(active);
+        public void ResetCounter()
+        {
+           elapsedTime = 0; 
         }
-
-        
     }
 }

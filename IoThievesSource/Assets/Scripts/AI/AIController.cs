@@ -13,22 +13,41 @@ namespace AI
     {
         private Vector3 resetPosition;
         private Quaternion resetRotation;
-        
-        [Header("AI Settings")]
-        [SerializeField] private AINames startState;
-        [SerializeField] private AIState _currentState = null;
+
+        [Header("AI Settings")] [SerializeField]
+        private AINames startState;
+
         [SerializeField] private NpcScriptableObject _NpcDatas;
         [SerializeField] private WalkableArea _walkableArea;
-        public event Action<AIState> OnStateChanged; 
-        public event Action<AIState> BeforeStateChanged; 
         
+        public Vector3 lastPosition;
+        public Quaternion lastRotation;
+        public event Action<AIState> OnStateChanged;
+        public event Action<AIState> BeforeStateChanged;
+
         public EnemyAdapter enemyAdapter;
 
         #region DebugVariables
-        [Header("Debug Variables")]
-        public bool Stun = false;
+
+        [Header("Debug Variables")] public bool Stun = false;
+
         #endregion
+
+
+        [SerializeField] private AINames _currentNpcStateName;
         
+        private AIState _currentState = null;
+        private AIState _previousState;
+        private AIState _previousRealState;
+        
+        public WalkableArea WalkableArea => _walkableArea;
+
+        private StateFactory _stateFactory;
+        public StateFactory StateFactory => _stateFactory;
+        
+        public NpcScriptableObject NpcDatas => _NpcDatas;
+        
+        public bool matchRotationWhenComingBack = false;
 
         public AIState CurrentState
         {
@@ -39,19 +58,11 @@ namespace AI
                 
                 BeforeStateChanged?.Invoke(_currentState);
                 _currentState = value;
+                _currentNpcStateName = AIUtilities.RetrieveAIName(_currentState);
                 if (_currentState is not null)
                     OnStateChanged?.Invoke(_currentState);
             }
         }
-        
-        public WalkableArea WalkableArea => _walkableArea;
-
-        private StateFactory _stateFactory;
-        public StateFactory StateFactory => _stateFactory;
-        
-        public NpcScriptableObject NpcDatas => _NpcDatas;
-
-        private AIState _previousState;
 
         public void Awake()
         {
@@ -59,6 +70,8 @@ namespace AI
             resetRotation = transform.rotation;
             Debug.Log(gameObject.name + ": Awake WITH POSITIONS = " + transform.position);
         }
+        
+     
         public void Initialize()
         {
             Debug.Log(gameObject.name + " -->  Initializing AI Controller");
@@ -70,8 +83,10 @@ namespace AI
             _stateFactory = new StateFactory(this);
             _previousState = _stateFactory.GetState(AINames.Idle);
             CurrentState = _stateFactory.GetState(AINames.Idle);
+            _previousRealState = _stateFactory.GetState(AINames.Idle);
             enemyAdapter.AnimationController.Initialize();
             _walkableArea = gameObject.GetComponentInParent<WalkableArea>();
+            lastPosition = transform.position;
         }
         
         private void Update()
@@ -92,9 +107,15 @@ namespace AI
         
         public void ChangeState(AINames state)
         {
-            if (CurrentState is (StunnedState or GoToDestination))
+            if(CurrentState is StunnedState stun)
             {
-                print("Non cambio stato poichè sono stunnato oppure sto andando in un punto specifico e davvero non mi posso fermare");
+                stun.ResetCounter();
+                return;
+            }
+            
+            if (CurrentState is  GoToDestination) 
+            {
+                print("Non cambio perchè andando in un punto specifico e davvero non mi posso fermare");
                 return;
             }
             
@@ -104,17 +125,33 @@ namespace AI
             
             CurrentState?.Exit();
             _previousState = CurrentState;
+            _previousRealState = CurrentState;
             CurrentState = targetState;
+            
+            lastPosition = transform.position;
+            if (_previousState is IdleState)
+            {
+                lastRotation = transform.rotation;
+                matchRotationWhenComingBack = true;
+            }
+            else
+                matchRotationWhenComingBack = false;
+            
             CurrentState?.Enter();
         }
 
         public void PreviousState()
         {
            CurrentState?.Exit();
-           if (_previousState is PatrolState && WalkableArea is not null)
-               (CurrentState, _previousState) = (StateFactory.GetState(AINames.BackToWalkableArea), CurrentState);
+
+           if (_currentState is BackToPreviousPosition)
+           {
+               (CurrentState, _previousState) = (_previousState, _previousRealState);
+           }
            else
-                (CurrentState, _previousState) = (_previousState, CurrentState);
+           {
+               (CurrentState, _previousState, _previousRealState) = (StateFactory.GetState(AINames.BackToPosition),_previousRealState, CurrentState);
+           }
            CurrentState?.Enter();
         }
         

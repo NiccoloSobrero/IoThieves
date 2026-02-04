@@ -46,6 +46,8 @@ namespace SuspicionSystem
         
         private bool _canIncreaseSuspicion;
         private bool _canDecreaseSuspicion;
+
+        public bool _billboardVisible;
         
         public bool IsPlayerInRange { get; private set; }
         public bool CanDecreaseSuspicion { get; private set; }
@@ -61,6 +63,14 @@ namespace SuspicionSystem
         
         //Added by Fede
         public EnemyAdapter EnemyAdapter { get; set; }
+        private bool _pause = false;
+        public bool Initializing;
+        public bool Pause
+        {
+            get => _pause;
+            set => _pause = value;
+        }
+
 
         private void OnEnable()
         {
@@ -77,9 +87,10 @@ namespace SuspicionSystem
         {
             //Initialize();
         }
-
+        
         private void Initialize()
         {
+            Initializing = true;
             Debug.Log("Initializing Alert Manager");
             EnemyAdapter = GetComponent<EnemyAdapter>();
             
@@ -97,13 +108,17 @@ namespace SuspicionSystem
             catch (Exception e)
             {
             }
-            
+
+            Pause = false;
             ChangeState(Level0State);
             print("state changed ");
+            Initializing = false;
         }
 
         private void Update()
         {
+            if (Pause)
+                return;
             _currentState?.Tick(this, Time.deltaTime);
             UpdateBars();
         }
@@ -178,6 +193,7 @@ namespace SuspicionSystem
 
         public void ShowAlertBillboard(bool show)
         {
+            _billboardVisible = show;
             alertBillboard.SetActive(show);
         }
     }

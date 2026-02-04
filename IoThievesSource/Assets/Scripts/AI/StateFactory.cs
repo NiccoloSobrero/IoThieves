@@ -14,7 +14,7 @@ namespace AI
             private PathCyclingState pathCyclingState; 
             private StunnedState stunnedState;
             private GoToDestination goToDestination;
-            private BackToWalkableArea backToWalkableArea;
+            private BackToPreviousPosition _backToPreviousPosition;
             public StateFactory(AIController controller)
             {
                 idleState = new IdleState(controller);
@@ -25,7 +25,7 @@ namespace AI
                 pathCyclingState = new PathCyclingState(controller) ; 
                 stunnedState = new StunnedState(controller);
                 goToDestination = new GoToDestination(controller);
-                backToWalkableArea = new BackToWalkableArea(controller);
+                _backToPreviousPosition = new BackToPreviousPosition(controller);
             }
             
             public AIState GetState(AINames stateName)
@@ -41,7 +41,7 @@ namespace AI
                     case AINames.PathCycling : return pathCyclingState;
                     case AINames.StunnedState : return stunnedState;
                     case AINames.GoToDestination: return goToDestination;
-                    case AINames.BackToWalkableArea: return backToWalkableArea;
+                    case AINames.BackToPosition: return _backToPreviousPosition;
                     default: throw new ArgumentException($"Invalid state name: {stateName}.");
                 }
             }

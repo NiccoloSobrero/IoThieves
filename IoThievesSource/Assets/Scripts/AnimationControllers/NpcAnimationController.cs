@@ -17,6 +17,8 @@ namespace AnimationControllers
         {
             Debug.Log(gameObject.name + " Initialize ANIMACONTROLLER");
             _aiController = enemyAdapter.AIController;
+            SetWalking(false);
+            SetStunned(false);
             _aiController.OnStateChanged += StateChanged;
             _aiController.BeforeStateChanged += StateAboutToChange;
         }
@@ -30,7 +32,10 @@ namespace AnimationControllers
         void StateAboutToChange(AIState state)
         {
             if (state is not null)
+            {
+                SetWalking(false);
                 state.OnWalkingVarChanged -= SetWalking;
+            }
         }
 
         public void SetWalking(bool value)

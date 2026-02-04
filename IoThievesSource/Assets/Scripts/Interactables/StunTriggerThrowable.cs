@@ -12,6 +12,7 @@ namespace Interactables
         private void Awake()
         {
             _elapsed = 0f;
+            radius = GetComponent<SphereCollider>().radius;
             ScanArea(radius);
         }
 

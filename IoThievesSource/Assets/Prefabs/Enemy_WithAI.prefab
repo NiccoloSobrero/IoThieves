@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 7503103427044424747}
   - component: {fileID: 2510341666654401413}
   - component: {fileID: 7098223373304660499}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -559,6 +559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7810159985789411016}
   - component: {fileID: 5998737358564386977}
+  - component: {fileID: 2033232441931671109}
   m_Layer: 7
   m_Name: GFX
   m_TagString: Untagged
@@ -604,6 +605,29 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &2033232441931671109
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3141633984504744387}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4823917835425267373
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,7 +641,7 @@ GameObject:
   - component: {fileID: 2574360286532377722}
   - component: {fileID: -996625976428397906}
   - component: {fileID: 6032443908299983884}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy_WithAI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -695,6 +719,7 @@ MonoBehaviour:
   startState: 0
   _NpcDatas: {fileID: 11400000, guid: d0919ccfc129a8641b53174e97264d32, type: 2}
   _walkableArea: {fileID: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
   enemyAdapter: {fileID: 2574360286532377722}
   Stun: 0
 --- !u!114 &6032443908299983884
@@ -829,7 +854,7 @@ GameObject:
   - component: {fileID: 5246760813774231191}
   - component: {fileID: 6863724868310895443}
   - component: {fileID: 4206319699196671944}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: TemporaryModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -995,6 +1020,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ConeOfDeath
       objectReference: {fileID: 0}
+    - target: {fileID: 1189267757218570869, guid: b11884beb7cf79043ac518b5fcc4c3a2, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1418596984419265338, guid: b11884beb7cf79043ac518b5fcc4c3a2, type: 3}
       propertyPath: radius
       value: 6
@@ -1003,6 +1032,14 @@ PrefabInstance:
       propertyPath: fovMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 2e9f5a4f695e9a546b575fffc607c9cf, type: 2}
+    - target: {fileID: 1893048132928473992, guid: b11884beb7cf79043ac518b5fcc4c3a2, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1964296214283935047, guid: b11884beb7cf79043ac518b5fcc4c3a2, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4565742117867939833, guid: b11884beb7cf79043ac518b5fcc4c3a2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1091,6 +1128,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8569817063494681188}
     m_Modifications:
+    - target: {fileID: 20634142332712058, guid: bfea2d44aae289545b9126fe07c37ae3, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4968714630505790515, guid: bfea2d44aae289545b9126fe07c37ae3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1142,6 +1183,10 @@ PrefabInstance:
     - target: {fileID: 9078622970237325981, guid: bfea2d44aae289545b9126fe07c37ae3, type: 3}
       propertyPath: m_Name
       value: SuspicionSphere
+      objectReference: {fileID: 0}
+    - target: {fileID: 9078622970237325981, guid: bfea2d44aae289545b9126fe07c37ae3, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -134,6 +134,7 @@ namespace AI.AI_States
 
         public override void Exit()
         {
+            IsMoving = false;
            //Nothing to do there 
         }
     }
