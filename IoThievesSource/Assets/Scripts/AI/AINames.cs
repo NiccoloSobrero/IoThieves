@@ -11,5 +11,7 @@ namespace AI
         StunnedState,
         GoToDestination,
         BackToPosition,
+        NAME_NOT_FOUND,
+        NULL,
     }
 }

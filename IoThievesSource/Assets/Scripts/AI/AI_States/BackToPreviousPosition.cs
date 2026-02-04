@@ -58,6 +58,34 @@ namespace AI.AI_States
            }
         }
 
+        public void SetDestination(Waypoint waypoint)
+        {
+            _Destination = waypoint;
+            Waypoint nearest = AIUtilities.FindNearestWaypoint(Npc.transform.position);
+            Debug.Log("BackToPreviousPosition " + nearest);
+            _waypoints = PathFinding.FindPath(nearest, _Destination);
+            
+            FirstWaypoint();
+        }
+        
+        private void FirstWaypoint()
+        {
+            if (_waypoints is null || _waypoints.Count == 0)
+            {
+                Npc.PreviousState();
+                return;
+            }
+
+            if (_waypoints.Count > 1 && AIUtilities.IsVisible(Npc.gameObject, _waypoints[1].gameObject))
+            {
+                Debug.Log("I Start from the second");
+                _waypoints.RemoveAt(0);
+            }
+            
+            _currentWaypoint = _waypoints[0];
+            _waypoints.RemoveAt(0);
+        }
+        
         private void NextWaypoint()
         {
             if (_waypoints is null || _waypoints.Count == 0)
@@ -69,19 +97,11 @@ namespace AI.AI_States
             _currentWaypoint = _waypoints[0];
             _waypoints.RemoveAt(0);
         }
-
-        public void SetDestination(Waypoint waypoint)
-        {
-            _Destination = waypoint;
-            Waypoint nearest = AIUtilities.FindNearestWaypoint(Npc.transform.position);
-            Debug.Log("BackToWalkableArea " + nearest);
-            _waypoints = PathFinding.FindPath(nearest, _Destination);
-            
-            NextWaypoint();
-        }
+  
 
         public override void Exit()
         {
+            IsMoving = false;
             _waypoints = null;
             _Destination = null;
             _currentWaypoint = null;

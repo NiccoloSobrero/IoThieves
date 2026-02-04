@@ -17,6 +17,8 @@ namespace AnimationControllers
         {
             Debug.Log(gameObject.name + " Initialize ANIMACONTROLLER");
             _aiController = enemyAdapter.AIController;
+            SetWalking(false);
+            SetStunned(false);
             _aiController.OnStateChanged += StateChanged;
             _aiController.BeforeStateChanged += StateAboutToChange;
         }

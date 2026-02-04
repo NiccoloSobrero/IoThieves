@@ -16,11 +16,11 @@ namespace AI.AI_States
             elapsedTime = 0;
             //DisableFovsD
             Debug.Log("StunnedEnemy");
+            Npc.enemyAdapter.AlertManager.Pause = true;
             Npc.enemyAdapter.FovMesh.gameObject.SetActive(false);
+            Npc.enemyAdapter.NpcTrigger.enabled = false;
             Npc.enemyAdapter.SuspicionSphere.gameObject.SetActive(false);
             Npc.enemyAdapter.AlertManager.ShowAlertBillboard(false);
-            Npc.enemyAdapter.AlertManager.Pause = true;
-
         }
 
         public override void Execute()
@@ -34,11 +34,12 @@ namespace AI.AI_States
 
         public override void Exit()
         {
-            Npc.enemyAdapter.AnimationController.SetStunned(false);
-            Npc.enemyAdapter.SuspicionSphere.gameObject.SetActive(false);
-            Npc.enemyAdapter.FovMesh.gameObject.SetActive(true);
             Npc.enemyAdapter.AlertManager.ShowAlertBillboard(true); 
+            Npc.enemyAdapter.SuspicionSphere.gameObject.SetActive(true);
+            Npc.enemyAdapter.NpcTrigger.enabled = true;
+            Npc.enemyAdapter.FovMesh.gameObject.SetActive(true);
             Npc.enemyAdapter.AlertManager.Pause = false;
+            Npc.enemyAdapter.AnimationController.SetStunned(false);
         }
     }
 }

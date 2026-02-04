@@ -13,28 +13,27 @@ namespace AI
     {
         private Vector3 resetPosition;
         private Quaternion resetRotation;
-        
-        [Header("AI Settings")]
-        [SerializeField] private AINames startState;
-        
+
+        [Header("AI Settings")] [SerializeField]
+        private AINames startState;
+
         [SerializeField] private NpcScriptableObject _NpcDatas;
         [SerializeField] private WalkableArea _walkableArea;
         public Vector3 lastPosition;
-        
-        public event Action<AIState> OnStateChanged; 
-        public event Action<AIState> BeforeStateChanged; 
-        
+
+        public event Action<AIState> OnStateChanged;
+        public event Action<AIState> BeforeStateChanged;
+
         public EnemyAdapter enemyAdapter;
 
         #region DebugVariables
-        [Header("Debug Variables")]
-        public bool Stun = false;
+
+        [Header("Debug Variables")] public bool Stun = false;
+
         #endregion
-        
 
-        
-        
 
+        [SerializeField] private AINames _currentNpcStateName;
         
         private AIState _currentState = null;
         private AIState _previousState;
@@ -56,6 +55,7 @@ namespace AI
                 
                 BeforeStateChanged?.Invoke(_currentState);
                 _currentState = value;
+                _currentNpcStateName = AIUtilities.RetrieveAIName(_currentState);
                 if (_currentState is not null)
                     OnStateChanged?.Invoke(_currentState);
             }
@@ -116,6 +116,7 @@ namespace AI
             
             CurrentState?.Exit();
             _previousState = CurrentState;
+            _previousRealState = CurrentState;
             CurrentState = targetState;
             lastPosition = transform.position;
             CurrentState?.Enter();

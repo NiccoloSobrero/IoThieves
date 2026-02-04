@@ -1,3 +1,4 @@
+using AI.AI_States;
 using AI.NavigationAndWaypoints;
 using UnityEngine;
 
@@ -63,6 +64,31 @@ namespace AI
             float rotateOf = angle * angularSpeed * Time.deltaTime;
             npcTransform.Rotate(0,rotateOf,0);        
             return angleMag;
+        }
+
+        public static AINames RetrieveAIName(AIState currentState)
+        {
+            switch (currentState)
+            {
+                case PatrolState : return AINames.Patrol;
+                case SuspiciousState : return AINames.Suspicious;
+                case IdleState : return AINames.Idle;
+                case DeviceHackedState : return AINames.DeviceHacked;
+                case NoiseHeardState : return AINames.NoiseHeardState;
+                case PathCyclingState : return AINames.PathCycling;
+                case StunnedState :  return AINames.StunnedState;
+                case GoToDestination : return AINames.GoToDestination;
+                case BackToPreviousPosition : return AINames.BackToPosition;
+                case null : return AINames.NULL;
+                default : return AINames.NAME_NOT_FOUND;
+            }
+        }
+
+        public static bool IsVisible(GameObject from, GameObject to)
+        {
+            Vector3 direction = to.transform.position - from.transform.position;
+            return !Physics.Raycast(from.transform.position, direction.normalized, direction.magnitude, 
+                LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
         }
     }
 }
