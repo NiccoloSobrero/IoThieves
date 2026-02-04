@@ -64,7 +64,7 @@ namespace SuspicionSystem
         //Added by Fede
         public EnemyAdapter EnemyAdapter { get; set; }
         private bool _pause = false;
-
+        public bool Initializing;
         public bool Pause
         {
             get => _pause;
@@ -90,6 +90,7 @@ namespace SuspicionSystem
         
         private void Initialize()
         {
+            Initializing = true;
             Debug.Log("Initializing Alert Manager");
             EnemyAdapter = GetComponent<EnemyAdapter>();
             
@@ -111,6 +112,7 @@ namespace SuspicionSystem
             Pause = false;
             ChangeState(Level0State);
             print("state changed ");
+            Initializing = false;
         }
 
         private void Update()

@@ -24,7 +24,10 @@ namespace SuspicionSystem.States
             try
             {
                 AIController aiController = ctx.EnemyAdapter.AIController;
-                aiController.ChangeState(aiController.GetStartState());
+                if (ctx.Initializing)
+                    aiController.ChangeState(aiController.GetStartState());
+                else 
+                    aiController.PreviousState();
             }
             catch (NullReferenceException e)
             {
