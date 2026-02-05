@@ -67,15 +67,9 @@ MonoBehaviour:
     value: 0
     documentSprite: {fileID: 0}
     folderContent: {fileID: 0}
-  - itemName: CV_John_Pdor
-    itemType: 2
-    icon: {fileID: 21300000, guid: 871d1b0fb81e36b4eaff637c97de7694, type: 3}
-    value: 5
-    documentSprite: {fileID: 21300000, guid: 01e77e6351dcde64ba2f5e7ce0a65508, type: 3}
-    folderContent: {fileID: 11400000, guid: 0b152c030a064b64f829af12874ba44d, type: 2}
-  - itemName: My home
-    itemType: 3
-    icon: {fileID: 21300000, guid: 871d1b0fb81e36b4eaff637c97de7694, type: 3}
-    value: 7
-    documentSprite: {fileID: 21300000, guid: 503f0ba83e3173546b3f76626d0c56c2, type: 3}
-    folderContent: {fileID: 0}
+  - itemName: private
+    itemType: 1
+    icon: {fileID: 21300000, guid: 1639ba3893f587d40a83d8c5c225ba32, type: 3}
+    value: 0
+    documentSprite: {fileID: 0}
+    folderContent: {fileID: 11400000, guid: 73ecf2bef1878f94e9dada6a2e72eeab, type: 2}
