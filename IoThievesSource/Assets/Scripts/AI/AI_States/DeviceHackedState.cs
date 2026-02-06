@@ -30,8 +30,19 @@ namespace AI.AI_States
 
         private float _nextWaypointThreshold = 0.5f;
 
-        private bool _solved = false;
-        
+        private bool _solved = true;
+
+        public bool IsSolved
+        {
+            get => _solved;
+            set
+            {
+                if(_solved == value) return;
+                
+                _solved = value;
+                Npc.enemyAdapter.AnimationController.SetInteracting(!_solved); 
+            }
+        } 
         public DeviceHackedState(AIController npc) : base(npc) {}
 
         public override void Enter()
@@ -69,14 +80,15 @@ namespace AI.AI_States
                 }
 
                 Debug.Log("Looking at target"); 
-                _solved = _hackedDevices[0].AssignedDevice.ResolveHack();
-                if (_solved && lookingAt)
+                IsSolved = _hackedDevices[0].AssignedDevice.ResolveHack();
+                
+                if (IsSolved && lookingAt)
                 {
+                    Debug.Log("deviceHackedState _solved");
                     lookingAt = false;
                     _hackedDevices.RemoveAt(0);
                     if (_hackedDevices.Count > 0)
                     {
-                        Debug.Log("deviceHackedState _solved");
                         _path = PathFinding.FindPath(AIUtilities.FindNearestWaypoint(Npc.transform.position), _hackedDevices[0]);
                         DestinationReached = false;
                     }

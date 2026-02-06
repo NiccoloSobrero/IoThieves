@@ -8,17 +8,18 @@ namespace AnimationControllers
     {
         private static readonly int IsWalking = Animator.StringToHash("isWalking");
         private static readonly int IsStunned = Animator.StringToHash("isStunned");
+        private static readonly int IsInteracting = Animator.StringToHash("IsInteracting");
         //private static readonly int IsIdle = Animat
         [SerializeField] private Animator animator;
         [SerializeField] private EnemyAdapter enemyAdapter;
         private AIController _aiController;
-    
         public void Initialize()
         {
             Debug.Log(gameObject.name + " Initialize ANIMACONTROLLER");
             _aiController = enemyAdapter.AIController;
             SetWalking(false);
             SetStunned(false);
+            SetInteracting(false);
             _aiController.OnStateChanged += StateChanged;
             _aiController.BeforeStateChanged += StateAboutToChange;
         }
@@ -33,13 +34,14 @@ namespace AnimationControllers
         {
             if (state is not null)
             {
-                SetWalking(false);
+                Reset(); 
                 state.OnWalkingVarChanged -= SetWalking;
             }
         }
 
         public void SetWalking(bool value)
         {
+            print("Set walking :" + value);
             animator.SetBool(IsWalking, value);
         }
 
@@ -48,10 +50,23 @@ namespace AnimationControllers
             animator.SetBool(IsStunned, value); 
         }
 
+        public void SetInteracting(bool value)
+        {
+            animator.SetBool(IsInteracting, value);
+        }
+
         private void OnDisable()
         {
             SetWalking(false);
             SetStunned(false);
+            SetInteracting(false); 
+        }
+
+        private void Reset()
+        {
+            SetWalking(false);
+            SetStunned(false);
+            SetInteracting(false); 
         }
 
         private void OnEnable()
