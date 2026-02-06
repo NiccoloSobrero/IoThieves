@@ -71,21 +71,9 @@ namespace SuspicionSystem
             set => _pause = value;
         }
 
-
-        private void OnEnable()
+        private void Start()
         {
             Initialize();
-            //EventsManager.OnRestartGame.AddListener(Initialize);
-        }
-
-        private void OnDisable()
-        {
-            //EventsManager.OnRestartGame.RemoveListener(Initialize);
-        }
-
-        private void Awake()
-        {
-            //Initialize();
         }
         
         private void Initialize()
