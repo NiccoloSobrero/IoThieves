@@ -1223,6 +1223,7 @@ GameObject:
   - component: {fileID: 72711126}
   - component: {fileID: 72711127}
   - component: {fileID: 72711125}
+  - component: {fileID: 72711128}
   m_Layer: 0
   m_Name: Outline
   m_TagString: Untagged
@@ -1259,6 +1260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineRenderer: {fileID: 0}
   isPlayingMusic: 0
+  triggerArea: {fileID: 0}
 --- !u!33 &72711126
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1312,6 +1314,21 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &72711128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 72711123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f427c4be8741a0b07eeb3cf2c15762, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactTime: 0
+  isHacked: 0
+  hackedTime: 4
 --- !u!1 &75024443
 GameObject:
   m_ObjectHideFlags: 0
@@ -65390,6 +65407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineRenderer: {fileID: 1440874672}
   isPlayingMusic: 0
+  triggerArea: {fileID: 1100109189}
 --- !u!4 &1474175422 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5776691538091650739, guid: bae26acf817c6dc4e82f95d9ef4ab46a, type: 3}
@@ -65680,7 +65698,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: b016363a83261824d828a9259497df4d, type: 2}
   startingPosition: {x: -11.97, y: 0, z: -2.46}
   dancingPosition: {x: -10.052, y: 0, z: -2.916}
-  stereo: {fileID: 0}
+  stereo: {fileID: 1440874675}
   isDancing: 0
   StartingYRotation: 0
   DancingYRotation: 0
@@ -79847,7 +79865,7 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: b016363a83261824d828a9259497df4d, type: 2}
   startingPosition: {x: -9.97, y: 0, z: -5.04}
   dancingPosition: {x: -8.72, y: 0, z: -4.75}
-  stereo: {fileID: 0}
+  stereo: {fileID: 1440874675}
   isDancing: 0
   StartingYRotation: 0
   DancingYRotation: 0
