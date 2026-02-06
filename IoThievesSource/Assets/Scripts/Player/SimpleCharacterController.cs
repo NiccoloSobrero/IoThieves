@@ -43,10 +43,10 @@ namespace Player
             Move();
         }
         
-        // void OnControllerColliderHit(ControllerColliderHit hit)
-        // {
-        //     Debug.Log($"Hit: {hit.collider.name}  point:{hit.point}  normal:{hit.normal}");
-        // }
+        void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            Debug.Log($"Hit: {hit.collider.name}  point:{hit.point}  normal:{hit.normal}");
+        }
 
         private void Move()
         {
