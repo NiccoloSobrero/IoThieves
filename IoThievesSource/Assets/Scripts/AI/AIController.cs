@@ -79,7 +79,7 @@ namespace AI
             gameObject.transform.position = resetPosition;
             gameObject.transform.rotation = resetRotation;
             Debug.Log(gameObject.name + " POSITION IS " + transform.position);
-            CurrentState = null;
+            _currentState = null;
             _stateFactory = new StateFactory(this);
             _previousState = _stateFactory.GetState(AINames.Idle);
             CurrentState = _stateFactory.GetState(AINames.Idle);

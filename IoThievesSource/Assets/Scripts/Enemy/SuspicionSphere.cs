@@ -21,8 +21,15 @@ namespace Enemy
         
         private void Awake()
         {
+           
+        }
+
+        public void Initialize()
+        {
             _timer = 0.0f;
             _playerInRange = false;
+            _spotted = false;
+            playerTransform = null;
             SetDetectionSphere();
         }
         

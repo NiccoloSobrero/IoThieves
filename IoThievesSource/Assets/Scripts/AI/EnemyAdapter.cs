@@ -31,7 +31,12 @@ namespace AI
         private void Awake()
         {
             EventsManager.OnGameOverTriggered.AddListener(DisableAll);
-            EventsManager.OnRestartGame.AddListener(EnableAll);
+            EventsManager.OnRestartGame.AddListener(ResetNpc);
+        }
+
+        private void Start()
+        {
+            ResetNpc();
         }
 
         private void DisableAll()
@@ -45,15 +50,25 @@ namespace AI
             animationController.enabled = false;
         }
 
-        private void EnableAll()
+        private void ResetNpc()
         {
-            Debug.Log(gameObject.name + " EnableAll");
+            Debug.Log(gameObject.name + " Resetting Npc");
+            
+            alertManager.Initialize();
             alertManager.enabled = true;
+            
             npc.enabled = true;
+            
+            SphereFOV.Initialize();
             SphereFOV.enabled = true;
+            
             fovMesh.enabled = true;
+            
+            SuspicionSphere.Initialize();
             SuspicionSphere.enabled = true;
-            //animationController.enabled = true;
+            
+            animationController.Initialize();
+            animationController.enabled = true;
         }
     }
 }

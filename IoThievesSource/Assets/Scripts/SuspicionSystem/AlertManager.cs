@@ -63,7 +63,7 @@ namespace SuspicionSystem
         
         //Added by Fede
         public EnemyAdapter EnemyAdapter { get; set; }
-        private bool _pause = false;
+        [SerializeField] private bool _pause = false;
         public bool Initializing;
         public bool Pause
         {
@@ -73,10 +73,10 @@ namespace SuspicionSystem
 
         private void Start()
         {
-            Initialize();
+            //Initialize();
         }
         
-        private void Initialize()
+        public void Initialize()
         {
             Initializing = true;
             Debug.Log("Initializing Alert Manager");

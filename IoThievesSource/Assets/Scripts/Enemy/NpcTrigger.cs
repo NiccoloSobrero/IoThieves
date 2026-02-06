@@ -27,6 +27,13 @@ namespace Enemy
             SetDetectionSphere();
         }
 
+        public void Initialize()
+        {
+            _playerTransform = null;
+            _playerInRange = false;
+            _timer = 0.0f;
+        }
+        
         private void Update()
         {
             if (_playerInRange)
