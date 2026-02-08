@@ -1,3 +1,5 @@
+using Events;
+using Managers;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -38,6 +40,7 @@ public abstract class TerminalMenu : MonoBehaviour
     
     protected void OnEnable()
     {
+        PlayerInputManager.Instance.SetContext(InputContext.Disabled);
         var root = uiDocument.rootVisualElement;
 
         _output = root.Q<ScrollView>("terminalOutput");

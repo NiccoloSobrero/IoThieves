@@ -1,7 +1,5 @@
 using System;
-using System.Linq;
 using Events;
-using Minigames;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -52,6 +50,7 @@ public class TerminalPauseMenu : TerminalMenu
             case "cd ..":
                 PrintLine("Going to main menu...");
                 EventsManager.OnBackToMainMenu?.Invoke();
+                EventsManager.OnResumeGame?.Invoke();
                 break;
             case "quit":
                 PrintLine("Shutting down...");

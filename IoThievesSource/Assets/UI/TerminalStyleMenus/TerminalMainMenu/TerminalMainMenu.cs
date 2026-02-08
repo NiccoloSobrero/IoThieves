@@ -1,5 +1,6 @@
 using System;
 using Events;
+using Managers;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
@@ -15,6 +16,11 @@ public class TerminalMainMenu : TerminalMenu
     protected override void OnMenuEnabled()
     {
         StartScanning(IothievesScan);
+    }
+
+    private void OnDisable()
+    {
+        PlayerInputManager.Instance.SetContext(InputContext.LevelSelection);
     }
 
     protected override void OnUpdate()

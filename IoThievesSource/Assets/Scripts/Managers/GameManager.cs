@@ -109,24 +109,21 @@ namespace Managers
         private void SaveGame()
         {
             // useful if we want to show some loading screen or some feedback to the player
-            print("Saving Game");
+            // print("Saving Game");
         }
     
         private void PauseGame()
         {
-            print("Pausing Game in GameManager");
             Time.timeScale = 0f;
         }
 
         private void ResumeGame()
         {
-            print("Resuming Game in GameManager");
             Time.timeScale = 1f;
         }
 
         private void RestartGame()
         {
-            print("Restarting Game");
             PlayLevel(currentLevel);
         }
 
@@ -137,12 +134,11 @@ namespace Managers
 
         private void OpenOptions()
         {
-            print("Opening Options");
+            // print("Opening Options");
         }
     
         private void QuitGame()
         {
-            print("Quitting Game");
 # if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
 #else
