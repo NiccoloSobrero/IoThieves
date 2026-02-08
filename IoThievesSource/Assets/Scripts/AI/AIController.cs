@@ -27,6 +27,10 @@ namespace AI
 
         public EnemyAdapter enemyAdapter;
 
+        public GameObject stunVfx;
+        
+        
+        
         #region DebugVariables
 
         [Header("Debug Variables")] public bool Stun = false;

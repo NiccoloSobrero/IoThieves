@@ -10,7 +10,14 @@ namespace Interactables
         [SerializeField] private bool isPlayingMusic = false;
         [SerializeField] private InteractableTriggerArea triggerArea;
         private float elapsedTime;
-        private float TotalSongTime = 15.0f;
+        private float TotalSongTime = 16.0f;
+
+        [SerializeField] private GameObject musicVFX;
+        
+        [Header("Audio")]
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip audioSfx; 
+        
         public bool IsPlayingMusic { get => isPlayingMusic;}
         
         private void Awake()
@@ -29,6 +36,14 @@ namespace Interactables
         
         private IEnumerator Music()
         {
+            
+            if (audioSource != null && audioSfx != null)
+            {
+                audioSource.clip = audioSfx;
+                audioSource.Play();          
+            }
+            musicVFX.SetActive(true);
+            
             while (isPlayingMusic)
             {
                 elapsedTime += Time.deltaTime;
@@ -36,6 +51,7 @@ namespace Interactables
                 if (elapsedTime >= TotalSongTime)
                 {
                     isPlayingMusic = false;    
+                    musicVFX.SetActive(false);
                 }
 
                 yield return null;

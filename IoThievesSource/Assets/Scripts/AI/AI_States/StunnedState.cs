@@ -8,6 +8,10 @@ namespace AI.AI_States
         private float elapsedTime;
         private float TotalStunTime = 2.0f;
         private bool billboard;
+
+        private GameObject _vfx;
+        
+        
         public StunnedState(AIController npc) : base(npc) {}
         
 
@@ -23,6 +27,13 @@ namespace AI.AI_States
             Npc.enemyAdapter.SuspicionSphere.gameObject.SetActive(false);
             billboard = Npc.enemyAdapter.AlertManager._billboardVisible;
             Npc.enemyAdapter.AlertManager.ShowAlertBillboard(false);
+            
+            if (Npc.stunVfx != null)
+            {
+                Vector3 spawnPos = Npc.transform.position + new Vector3(0, 2.2f, 0); //0, 1.8f, 0
+                _vfx = GameObject.Instantiate(Npc.stunVfx, spawnPos, Quaternion.Euler(90,0,0));
+                _vfx.transform.SetParent(Npc.transform); 
+            }
         }
 
         public override void Execute()
@@ -42,6 +53,12 @@ namespace AI.AI_States
             Npc.enemyAdapter.FovMesh.gameObject.SetActive(true);
             Npc.enemyAdapter.AlertManager.Pause = false;
             Npc.enemyAdapter.AnimationController.SetStunned(false);
+
+            if (_vfx != null)
+            {
+                GameObject.Destroy(_vfx);
+                _vfx = null;
+            }
         }
 
         public void ResetCounter()

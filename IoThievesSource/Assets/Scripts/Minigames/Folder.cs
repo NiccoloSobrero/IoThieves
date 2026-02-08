@@ -86,7 +86,7 @@ namespace Minigames
                         _desktopMinigame.OpenFolder(_contentScrObj, _fileName);
                         break;
                     case DesktopItemType.Program:
-                        _desktopMinigame.OpenProgram();
+                        _desktopMinigame.OpenProgram(_fileName);
                         break;
                     case DesktopItemType.File:
                         _desktopMinigame.OpenFile(_fileName, _value, _documentSprite);

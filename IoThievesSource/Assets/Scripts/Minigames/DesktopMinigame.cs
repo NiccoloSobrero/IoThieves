@@ -236,10 +236,86 @@ namespace Minigames
             DownloadsManager.Instance.AddDownload(_currentOpenFile, _currentOpenFileDownloadTime);
         }
         
-        public void OpenProgram()
+        
+        public void OpenProgram(string fileName)
         {
             programPopupObj.SetActive(true);
-            programMsgText.text = "There is a time and a place for everything, but not now";
+            
+            string msg;
+            switch (fileName)
+            {
+                case "Astro Bartender": //c'è
+                    msg = "We can drink together later. I know a place REALLY far away: they have cool space-like drinks, and the best dj-frog ever.";
+                    break;
+                case "At Azzy's": //c'è
+                    msg = "I would really love throwing FIREBALL to cook (and in general at people), but now we have to focus on our mission";
+                    break;
+                case "Beta Tester": //c'è
+                    msg = "Rage-bait is in the air >:)"; //Trust me, you don't wanna play it.
+                                         //You're gonna be rage-baited so hard by everything, platforms included. 
+                                         //stop glitching-bitching around, we have a mission to do.
+                    break;
+                case "B-Side": //c'è
+                    msg = "We can play it when they will add Hatsune Miku songs";
+                    break;
+                case "Ctrl-V": //c'è
+                    msg = "Right now I would love to Ctrl-X my Boss >B)";
+                    break;
+                case "Echo of You": //c'è
+                    msg = "It's rewind time!"; 
+                    break;
+                case "Get There! Eventually...": //c'è
+                    msg = "We have to find the Boss house. We are gonna get there! eventually...";
+                    break;
+                case "HackLand": //c'è
+                    msg = "HackLand";
+                    break;
+                case "Lawmaker": //c'è
+                    msg = "I don't think people affect with Alzheimer should create new laws...";
+                    break;
+                case "Melted Hero": //c'è
+                    msg = "I spilled my drink on the floor and the ice started moving around.";
+                    break;
+                case "On & Off": //c'è
+                    msg = "Stop playing with the lights! We have no time for it.";
+                    break;
+                case "BurnOut":
+                    msg = "I'M the one having the burnout!";
+                    break;
+                case "Chains of Silence":
+                    msg = "OneNote non si apre qui.";
+                    break;
+                case "Package Protocol":
+                    msg = "Papera, please";
+                    break;
+                case "The Dream Walker":
+                    msg = "OneNote non si apre qui.";
+                    break;
+                case "The Sleeper":
+                    msg = "Excel non è installato su questo PC.";
+                    break;
+                case "Echo City":
+                    msg = "Rated AAAAA for mature zoobles only";
+                    break;
+                case "Erasure":
+                    msg = "OneNote non si apre qui.";
+                    break;
+                case "Komorebi":
+                    msg = "PowerPoint non è disponibile.";
+                    break;
+                case "IoThieves":
+                    msg = "Best game ever, if i can say it";
+                    break;
+                default:
+                    msg = "There is a time and a place for everything, but not now!";
+                    break;
+            }
+            
+            programMsgText.text = msg;
+            
+            
+            
+            //programMsgText.text = "There is a time and a place for everything, but not now";
             
             // Debug.Log("ERROR: can't open program");
         }

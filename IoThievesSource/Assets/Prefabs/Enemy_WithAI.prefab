@@ -686,6 +686,9 @@ MonoBehaviour:
   exclamationMark1RectMask: {fileID: 2113508935762611}
   exclamationMark2RectMask: {fileID: 6924928530132457139}
   timeBeforeAlertDecrease: 5
+  _billboardVisible: 0
+  _pause: 0
+  Initializing: 0
 --- !u!114 &2574360286532377722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,8 +723,12 @@ MonoBehaviour:
   _NpcDatas: {fileID: 11400000, guid: d0919ccfc129a8641b53174e97264d32, type: 2}
   _walkableArea: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
+  lastRotation: {x: 0, y: 0, z: 0, w: 0}
   enemyAdapter: {fileID: 2574360286532377722}
+  stunVfx: {fileID: 555508651056883583, guid: b315d3b3441565149bf9e1328f7304f1, type: 3}
   Stun: 0
+  _currentNpcStateName: 0
+  matchRotationWhenComingBack: 0
 --- !u!114 &6032443908299983884
 MonoBehaviour:
   m_ObjectHideFlags: 0
