@@ -2231,21 +2231,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3481334442683732109}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 8291589473830058277}
         m_TargetAssemblyTypeName: Minigames.DesktopMinigame, Assembly-CSharp
-        m_MethodName: CheckCompletion
+        m_MethodName: CloseDesktop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4106,8 +4094,8 @@ MonoBehaviour:
   toolbarHrComplaintObject: {fileID: 6140078563684008449}
   toolbarItemPrefab: {fileID: 3284049221018243301, guid: cfadf44dd87ca044abff80b820f911b2, type: 3}
   toolbarItemParent: {fileID: 5630253269358409117}
-  programPopupObj: {fileID: 0}
-  programMsgText: {fileID: 0}
+  programPopupObj: {fileID: 4781768700713303355}
+  programMsgText: {fileID: 1633323836036837479}
   onOpenFolderWithTarget:
     m_PersistentCalls:
       m_Calls: []
@@ -11183,21 +11171,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3481334442683732109}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 8291589473830058277}
         m_TargetAssemblyTypeName: Minigames.DesktopMinigame, Assembly-CSharp
-        m_MethodName: CheckCompletion
+        m_MethodName: CloseDesktop
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

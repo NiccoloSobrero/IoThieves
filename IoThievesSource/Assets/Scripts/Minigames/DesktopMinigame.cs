@@ -99,7 +99,13 @@ namespace Minigames
             _isHrComplaintMinigameInitialized = false;
 
             _openedFirstFolder = false;
+            toolbarFolderObject.SetActive(_openedFirstFolder);
+            
             _openedTextFile = false;
+            toolbarOpenItemObject.SetActive(_openedTextFile);
+
+            _openedHrComplaint = false;
+            toolbarHrComplaintObject.SetActive(_openedHrComplaint);
 
             // Initialize top bar handling variables
             _desktopLastPosition = desktopRect.rect.position;
@@ -178,6 +184,7 @@ namespace Minigames
             UpdatePathText();
             
             _openedFirstFolder = true;
+            toolbarFolderObject.SetActive(_openedFirstFolder);
         }
         
         public void OpenFolder(FolderContentScrObj scrObj, string folderName)
@@ -204,6 +211,7 @@ namespace Minigames
             openFileObj.transform.SetAsLastSibling();
 
             _openedTextFile = true;
+            toolbarOpenItemObject.SetActive(_openedTextFile);
         }
         
         public void OpenTargetFile(string fileName, float time, Sprite documentSprite)
@@ -220,6 +228,7 @@ namespace Minigames
             openFileObj.transform.SetAsLastSibling();
             
             _openedTextFile = true;
+            toolbarOpenItemObject.SetActive(_openedTextFile);
         }
 
         public void DownloadFile()
@@ -247,6 +256,7 @@ namespace Minigames
             }
 
             _openedHrComplaint = true;
+            toolbarHrComplaintObject.SetActive(_openedHrComplaint);
         }
 
         private void ClearChildren(Transform parent)
@@ -321,6 +331,7 @@ namespace Minigames
             _pathScrObjs.Add(_desktop);
 
             _openedFirstFolder = false;
+            toolbarFolderObject.SetActive(_openedFirstFolder);
             
             ClearChildren(folderItemsParent);
         }
@@ -355,12 +366,15 @@ namespace Minigames
             }
         }
 
-        public void CheckCompletion()
+        public void CloseDesktop()
         {
             DownloadedFile downloadedFiles = DownloadsManager.Instance.DownloadedFiles;
             
             if (downloadedFiles.GetTargetFilesNumFromLevel(GameManager.Instance.currentLevel) < _targetFilesNum)
             {
+                desktopObj.SetActive(false);
+                PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
+                
                 return;
             }
             
@@ -515,12 +529,14 @@ namespace Minigames
         {
             openFileObj.SetActive(false);
             _openedTextFile = false;
+            toolbarOpenItemObject.SetActive(_openedTextFile);
         }
 
         public void CloseHrComplaint()
         {
             hrComplaintObj.SetActive(false);
             _openedHrComplaint = false;
+            toolbarHrComplaintObject.SetActive(_openedHrComplaint);
         }
     }
 }
