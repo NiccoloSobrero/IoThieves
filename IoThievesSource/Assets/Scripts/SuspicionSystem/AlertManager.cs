@@ -71,9 +71,9 @@ namespace SuspicionSystem
             set => _pause = value;
         }
 
-        private void Start()
+        private void Awake()
         {
-            //Initialize();
+            Initialize();
         }
         
         public void Initialize()
@@ -90,7 +90,7 @@ namespace SuspicionSystem
             SetUpConstants();
             try
             {
-                EnemyAdapter.AIController.Initialize();
+                EnemyAdapter?.AIController.Initialize();
                 print(gameObject.name + "AIController initialized");
             }
             catch (Exception e)

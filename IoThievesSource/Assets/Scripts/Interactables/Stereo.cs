@@ -24,6 +24,7 @@ namespace Interactables
         {
             triggerArea.Init(this);
         }
+        
         public override void Interact()
         {
             if (!isPlayingMusic)

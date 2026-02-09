@@ -182,6 +182,8 @@ namespace Managers
             
                 yield return null;
             }
+            
+            _mainCameraTransform.SetPositionAndRotation(endPos, endRot);
         }
     
         private IEnumerator SetToPerspective()
