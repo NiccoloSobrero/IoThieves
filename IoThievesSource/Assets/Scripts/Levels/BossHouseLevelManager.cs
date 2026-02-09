@@ -239,6 +239,9 @@ namespace Levels
             levelObjectivesUI.AddObjective(stealValuesFromLivingRoom);
             levelObjectivesUI.AddObjective(stealPeluches);
             
+            // Move findChatLogs to the end of the list
+            levelObjectivesUI.ForceAsFirstSibling(findChatLogs);
+            
             // Set up next steps for sub-objectives
             DownloadsManager.Instance.onDownloadTargetFile.AddListener(OnDownloadedFileFromSonPC);
             

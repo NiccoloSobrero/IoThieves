@@ -157,6 +157,18 @@ namespace UI
             
             animator.SetBool(Open, _isOpened);
         }
+        
+        public void ForceAsFirstSibling(LevelObjectiveScrObj objectiveScrObj)
+        {
+            foreach (var objective in _objectivesToUI)
+            {
+                if (objective.ObjectiveScrObj == objectiveScrObj)
+                {
+                    objective.ObjectiveUI.transform.SetAsFirstSibling();
+                    return;
+                }
+            }
+        }
     }
 
     public class LevelObjectivesToUI
