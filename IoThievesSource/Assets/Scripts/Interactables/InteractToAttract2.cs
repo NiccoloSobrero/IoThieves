@@ -18,6 +18,8 @@ namespace Interactables
         private readonly Collider[] _enemies = new Collider[MaxAttractableEnemies];
         [SerializeField] PointOfInterest pointOfInterest;
 
+        [SerializeField] private GameObject vfx;
+
         #region Events
 
         [HideInInspector] public UnityEvent onInteract;

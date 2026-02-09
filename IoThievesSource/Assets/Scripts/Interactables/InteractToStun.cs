@@ -6,7 +6,7 @@ namespace Interactables
     public class InteractToStun : Interactable
     {
         [SerializeField] private StunTrigger stunTrigger;
-        [SerializeField] private ParticleSystem smokeVFX;
+        [SerializeField] private GameObject vfx;
         [SerializeField] private float stunTime;
         
         [SerializeField] private InteractableTriggerArea triggerArea;
@@ -18,6 +18,7 @@ namespace Interactables
         private void Awake()
         {
             triggerArea.Init(this);
+            vfx.SetActive(false);
         }
         
         public override void Interact()
@@ -39,13 +40,13 @@ namespace Interactables
                 audioSource.Play();          
             }
             
-            smokeVFX.Play();
+            vfx.SetActive(true);
             stunTrigger.gameObject.SetActive(true);
             
             yield return new WaitForSeconds(stunTime);
             
             stunTrigger.gameObject.SetActive(false);
-            smokeVFX.Stop();
+            vfx.SetActive(false);
         }
     }
 }
