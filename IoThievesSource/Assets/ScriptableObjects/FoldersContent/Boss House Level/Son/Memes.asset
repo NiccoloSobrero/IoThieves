@@ -26,7 +26,7 @@ MonoBehaviour:
     documentSprite: {fileID: 21300000, guid: 190245749ef41d34b83cd8851c78eafe, type: 3}
     folderContent: {fileID: 0}
   - itemName: Latias
-    itemType: 2
+    itemType: 3
     icon: {fileID: 21300000, guid: 9a2bba3510d96ca47ad45ba79e13d177, type: 3}
     value: 0
     documentSprite: {fileID: 21300000, guid: 6fad2f34fe8ea484685808eb33fdbb89, type: 3}

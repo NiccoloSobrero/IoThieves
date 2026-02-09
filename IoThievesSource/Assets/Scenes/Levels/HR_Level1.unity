@@ -17430,7 +17430,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineRenderer: {fileID: 1017819948}
   stunTrigger: {fileID: 1155057708}
-  smokeVFX: {fileID: 1325645694}
+  vfx: {fileID: 0}
   stunTime: 5
   triggerArea: {fileID: 2128553138}
   audioSource: {fileID: 1084686199}
@@ -126966,7 +126966,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineRenderer: {fileID: 2052292481}
   stunTrigger: {fileID: 724864481}
-  smokeVFX: {fileID: 616604116}
+  vfx: {fileID: 0}
   stunTime: 5
   triggerArea: {fileID: 154037568}
   audioSource: {fileID: 98396660}

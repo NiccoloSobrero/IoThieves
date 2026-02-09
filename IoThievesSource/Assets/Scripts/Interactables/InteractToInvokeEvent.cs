@@ -35,6 +35,8 @@ namespace Interactables
         public void SetEnabled(bool isEnabled)
         {
             _isEnabled = isEnabled;
+            
+            outlineRenderer.gameObject.SetActive(isEnabled);
         }
     }
 }

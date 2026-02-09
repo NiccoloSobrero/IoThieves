@@ -13,7 +13,7 @@ namespace Interactables
     
     public abstract class Interactable : MonoBehaviour
     {
-        [SerializeField] private MeshRenderer outlineRenderer;
+        [SerializeField] protected MeshRenderer outlineRenderer;
         
         private readonly Color _notInteractableColor = new Color(1f, 0f, 0f, 1f);
         private readonly Color _interactableColor = new Color(0f, 0.7f, 1f, 1f);

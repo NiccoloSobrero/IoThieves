@@ -1,7 +1,5 @@
 using System.Collections;
-using AI;
-using AI.AI_States;
-using AI.NavigationAndWaypoints;
+using System.Collections.Generic;
 using DialogueSystem;
 using Events;
 using Interactables;
@@ -19,6 +17,15 @@ namespace Levels
         
         [Header("Objectives")]
         [SerializeField] private LevelObjectiveScrObj findChatLogs;
+        [SerializeField] private LevelObjectiveScrObj downloadFileFromSonPC;
+        [SerializeField] private LevelObjectiveScrObj stealValuesFromKitchen;
+        [SerializeField] private LevelObjectiveScrObj stealValuesFromLivingRoom;
+        [SerializeField] private LevelObjectiveScrObj stealPeluches;
+
+        private bool _downloadedFileFromSonPC;
+        private bool _stoleValuesFromKitchen;
+        private bool _stoleValuesFromLivingRoom;
+        private bool _stolePeluches;
         
         [Header("Intro")]
         [SerializeField] private DialogueLinesScrObj introDialogue;
@@ -33,34 +40,44 @@ namespace Levels
         [SerializeField] private DialogueLinesScrObj onArriveAtDoorDialogue;
         [SerializeField] private DoorTrigger bossRoomDoorTrigger;
         
-        [Header("Find laxatives")]
-        [SerializeField] private DialogueLinesScrObj onFoundLaxativesDialogue;
-        [SerializeField] private InteractToInvokeEvent laxativesInteractable;
-        
-        [Header("Put laxatives in cup")]
-        [SerializeField] private InteractToInvokeEvent cupInteractable;
-        [SerializeField] private AIController bossAIController;
-        [SerializeField] private Waypoint cupWaypoint;
-        [SerializeField] private Waypoint toiletWaypoint;
-        [SerializeField] private float bossTimeToDrink = 5f;
+        [Header("Find door keys")]
+        [SerializeField] private DialogueLinesScrObj onFoundDoorKeysDialogue;
+        [SerializeField] private InteractToInvokeEvent doorKeysInteractable;
         
         [Header("Download chat logs")]
         [SerializeField] private DialogueLinesScrObj onChatDownloadDialogue;
+        
+        [Header("Download from son pc")]
+        // Dialogue?
+        
+        [Header("Steal values from kitchen")]
+        [SerializeField] private InteractToInvokeEvent kitchenValuesInteractable;
+        
+        [Header("Steal values from living room")]
+        [SerializeField] private InteractToInvokeEvent livingroomValuesInteractable;
+        
+        [Header("Steal peluches")]
+        [SerializeField] private List<InteractToInvokeEvent> peluchesInteractable;
+        private int _peluchesStolenCount;
+
+        [Header("All sub-objectives completed")] 
+        [SerializeField] private DialogueLinesScrObj onAllSubObjectivesCompletedDialogue;
         
         [Header("Exit level")]
         [SerializeField] private DialogueLinesScrObj onExitLevelDialogue;
         [SerializeField] private InteractToInvokeEvent carExitInteractable;
         
         /*
-         * Flow:
-         *      - Start from entrance of boss house, intro dialogue explaining
-         *      - The door is closed, have to put laxative in boss's drink
-         *      - Find laxatives in one of the bathrooms
-         *      - Put laxatives in boss's drink
-         *      - Attract boss to the cup
-         *      - Boss feels sick, go to the bathroom (door unlocks)
-         *      - Find boss's computer, download chat logs (The chats are in another device?)
-         *      - Exit the level
+         * Casa del capo:
+            - PIP: ingresso --> porta boss
+            - porta bloccata --> chiave magnetica sul divano --> porta boss sbloccata
+            - download file --> dialoghi --> start missions:
+            1) Download a file from son pc
+            2) Steal values from kitchen/living room
+            3) Steal peluche(s) (one or more)
+            4) Download file from Boss PC
+
+            missions completed --> go to garage and leave --> level completed
          */
         
         private void Awake()
@@ -72,11 +89,21 @@ namespace Levels
         {
             bossRoomDoorTrigger.SetLocked(true);
             
-            laxativesInteractable.SetEnabled(false);
+            doorKeysInteractable.SetEnabled(false);
             
-            cupInteractable.SetEnabled(false);
+            kitchenValuesInteractable.SetEnabled(false);
+            livingroomValuesInteractable.SetEnabled(false);
+            foreach (var peluche in peluchesInteractable)
+            {
+                peluche.SetEnabled(false);
+            }
             
             carExitInteractable.SetEnabled(false);
+            
+            _downloadedFileFromSonPC = false;
+            _stoleValuesFromKitchen = false;
+            _stoleValuesFromLivingRoom = false;
+            _stolePeluches = false;
         }
 
         protected override void Start()
@@ -167,85 +194,37 @@ namespace Levels
             levelObjectivesUI.UpdateObjective(findChatLogs);
             
             // Set up next step
-            laxativesInteractable.SetEnabled(true);
-            laxativesInteractable.onInteract.AddListener(OnInteractWithLaxatives);
+            doorKeysInteractable.SetEnabled(true);
+            doorKeysInteractable.onInteract.AddListener(OnInteractWithDoorKeys);
         }
         
-        private void OnInteractWithLaxatives()
+        private void OnInteractWithDoorKeys()
         {
             SaveLastValidPosition();
             
             // Remove previous listener
-            laxativesInteractable.onInteract.RemoveListener(OnInteractWithLaxatives);
+            doorKeysInteractable.onInteract.RemoveListener(OnInteractWithDoorKeys);
             
             // Show dialogue
-            DialogueManager.Instance.SetDialogue(onFoundLaxativesDialogue);
+            DialogueManager.Instance.SetDialogue(onFoundDoorKeysDialogue);
             DialogueManager.Instance.OpenDialogueWindow();
             
             // Update objectives
             levelObjectivesUI.UpdateObjective(findChatLogs);
             
-            // Set up next step
-            cupInteractable.SetEnabled(true);
-            cupInteractable.onInteract.AddListener(OnInteractWithCup);
-        }
-
-        private void OnInteractWithCup()
-        {
-            StartCoroutine(OnInteractWithCupCor());
-        }
-        
-        private IEnumerator OnInteractWithCupCor()
-        {
-            // Remove previous listener
-            cupInteractable.onInteract.RemoveListener(OnInteractWithCup);
-            
-            // Update objectives
-            levelObjectivesUI.UpdateObjective(findChatLogs);
-            
-            // Execute action
-            bossAIController.ChangeState(AINames.GoToDestination);
-
-            if (bossAIController.CurrentState is GoToDestination bossStateGtd)
-            {
-                bossStateGtd.SetDestination(cupWaypoint);
-            }
-            
-            // Wait for boss to reach cup
-            yield return new WaitUntil(() => Vector3.Distance(bossAIController.transform.position, cupWaypoint.transform.position) < 1f);
-            
-            // Wait for the boss to drink
-            bossAIController.ChangeState(AINames.Idle);
-            yield return new WaitForSeconds(bossTimeToDrink);
-            
             // Unlock boss room door
             bossRoomDoorTrigger.SetLocked(false);
             
-            // Make boss go to toilet
-            bossAIController.ChangeState(AINames.GoToDestination);
-            bossStateGtd = bossAIController.CurrentState as GoToDestination;
-            
-            if (bossStateGtd != null)
-            {
-                bossStateGtd.SetDestination(toiletWaypoint);
-            }
-            
-            // Wait for boss to reach toilet
-            yield return new WaitUntil(() => Vector3.Distance(bossAIController.transform.position, toiletWaypoint.transform.position) < 1f);
-            
-            // Set boss stunned in toilet
-            bossAIController.ChangeState(AINames.StunnedState);
-            
             // Set up next step
-            DownloadsManager.Instance.onDownloadTargetFile.AddListener(OnAddressDownloaded);
+            DownloadsManager.Instance.onDownloadTargetFile.AddListener(OnChatLogsDownloaded);
         }
         
-        private void OnAddressDownloaded()
+        private void OnChatLogsDownloaded()
         {
             SaveLastValidPosition();
             
             // Remove previous listener
-            DownloadsManager.Instance.onDownloadTargetFile.RemoveListener(OnAddressDownloaded);
+            DownloadsManager.Instance.onDownloadTargetFile.RemoveListener(OnChatLogsDownloaded);
             
             // Show dialogue
             DialogueManager.Instance.SetDialogue(onChatDownloadDialogue, PlayerInputManager.Instance.CurrentContext);
@@ -254,11 +233,101 @@ namespace Levels
             // Update objectives
             levelObjectivesUI.UpdateObjective(findChatLogs);
             
-            // Set up next step
+            // Add sub-objectives
+            levelObjectivesUI.AddObjective(downloadFileFromSonPC);
+            levelObjectivesUI.AddObjective(stealValuesFromKitchen);
+            levelObjectivesUI.AddObjective(stealValuesFromLivingRoom);
+            levelObjectivesUI.AddObjective(stealPeluches);
+            
+            // Set up next steps for sub-objectives
+            DownloadsManager.Instance.onDownloadTargetFile.AddListener(OnDownloadedFileFromSonPC);
+            
+            kitchenValuesInteractable.SetEnabled(true);
+            kitchenValuesInteractable.onInteract.AddListener(OnInteractWithKitchenValues);
+            
+            livingroomValuesInteractable.SetEnabled(true);
+            livingroomValuesInteractable.onInteract.AddListener(OnInteractWithLivingroomValues);
+
+            foreach (var peluche in peluchesInteractable)
+            {
+                peluche.SetEnabled(true);
+                peluche.onInteract.AddListener(OnInteractWithPeluches);
+            }
+        }
+        
+        private void OnDownloadedFileFromSonPC()
+        {
+            levelObjectivesUI.UpdateObjective(downloadFileFromSonPC);
+            
+            DownloadsManager.Instance.onDownloadTargetFile.RemoveListener(OnChatLogsDownloaded);
+            
+            _downloadedFileFromSonPC = true;
+            
+            CheckIfAllSubObjectivesCompleted();
+        }
+        
+        private void OnInteractWithKitchenValues()
+        {
+            kitchenValuesInteractable.onInteract.RemoveListener(OnInteractWithKitchenValues);
+            
+            levelObjectivesUI.UpdateObjective(stealValuesFromKitchen);
+            
+            _stoleValuesFromKitchen = true;
+            
+            CheckIfAllSubObjectivesCompleted();
+        }
+        
+        private void OnInteractWithLivingroomValues()
+        {
+            livingroomValuesInteractable.onInteract.RemoveListener(OnInteractWithLivingroomValues);
+            
+            levelObjectivesUI.UpdateObjective(stealValuesFromLivingRoom);
+
+            _stoleValuesFromLivingRoom = true;
+            
+            CheckIfAllSubObjectivesCompleted();
+        }
+        
+        private void OnInteractWithPeluches()
+        {
+            _peluchesStolenCount++;
+            levelObjectivesUI.UpdateObjective(stealPeluches);
+            
+            if (_peluchesStolenCount >= peluchesInteractable.Count)
+            {
+                // All peluches stolen, remove listeners
+                foreach (var peluche in peluchesInteractable)
+                {
+                    peluche.onInteract.RemoveListener(OnInteractWithPeluches);
+                }
+
+                _stolePeluches = true;
+                
+                CheckIfAllSubObjectivesCompleted();
+            }
+        }
+        
+        private void CheckIfAllSubObjectivesCompleted()
+        {
+            if (_downloadedFileFromSonPC && _stoleValuesFromKitchen && _stoleValuesFromLivingRoom && _stolePeluches)
+            {
+                SetUpLevelExit();
+            }
+        }
+
+        private void SetUpLevelExit()
+        {
+            // Show dialogue
+            DialogueManager.Instance.SetDialogue(onAllSubObjectivesCompletedDialogue);
+            DialogueManager.Instance.OpenDialogueWindow();
+            
+            // Add objective to exit level
+            levelObjectivesUI.UpdateObjective(findChatLogs);
+            
             carExitInteractable.SetEnabled(true);
             carExitInteractable.onInteract.AddListener(OnInteractWithCarExit);
         }
-
+        
         private void OnInteractWithCarExit()
         {
             // Remove previous listener
