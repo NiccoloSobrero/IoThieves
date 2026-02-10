@@ -245,15 +245,16 @@ namespace Minigames
             switch (fileName)
             {
                 case "Astro Bartender": //c'è
-                    msg = "We can drink together later. I know a place REALLY far away: they have cool space-like drinks, and the best dj-frog ever.";
+                    msg = "We can drink together later. I know a place with cool space-like drinks, and the best dj-frog ever.";
                     break;
                 case "At Azzy's": //c'è
-                    msg = "I would really love throwing FIREBALL to cook (and in general at people), but now we have to focus on our mission";
+                    msg = "Put the spellbook down, we have bigger problems than overcooked stew."; //I would really love throwing FIREBALL , but now we have to focus on our mission
                     break;
                 case "Beta Tester": //c'è
-                    msg = "Rage-bait is in the air >:)"; //Trust me, you don't wanna play it.
+                    msg = "I'm more tested than this beta"; //Trust me, you don't wanna play it.
                                          //You're gonna be rage-baited so hard by everything, platforms included. 
                                          //stop glitching-bitching around, we have a mission to do.
+                                         //Rage-bait is in the air >:)
                     break;
                 case "B-Side": //c'è
                     msg = "We can play it when they will add Hatsune Miku songs";
@@ -268,7 +269,7 @@ namespace Minigames
                     msg = "We have to find the Boss house. We are gonna get there! eventually...";
                     break;
                 case "HackLand": //c'è
-                    msg = "HackLand";
+                    msg = "We need to hack, but not like that";
                     break;
                 case "Lawmaker": //c'è
                     msg = "I don't think people affect with Alzheimer should create new laws...";
@@ -280,7 +281,7 @@ namespace Minigames
                     msg = "Stop playing with the lights! We have no time for it.";
                     break;
                 case "BurnOut":
-                    msg = "I'M the one having the burnout!";
+                    msg = "I'm the one having the burnout here!";
                     break;
                 case "Chains of Silence":
                     msg = "OneNote non si apre qui.";
@@ -445,6 +446,7 @@ namespace Minigames
         public void CloseDesktop()
         {
             DownloadedFile downloadedFiles = DownloadsManager.Instance.DownloadedFiles;
+            programPopupObj.SetActive(false);
             
             if (downloadedFiles.GetTargetFilesNumFromLevel(GameManager.Instance.currentLevel) < _targetFilesNum)
             {

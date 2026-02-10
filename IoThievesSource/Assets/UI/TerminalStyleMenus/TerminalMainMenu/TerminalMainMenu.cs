@@ -125,13 +125,13 @@ public class TerminalMainMenu : TerminalMenu
             // PrintLine("Type 'help' to list commands");
             PrintLine("Available commands:");
             PrintLine(" start       start game");
-            PrintLine(" help        list all available commands");
+            PrintLine(" help        list all available commands"); //potrebbe non servire
             // PrintLine(" options     open settings");
             PrintLine(" quit        quit game");
             
             PrintLine("");
             
-            PrintLine("Click anywhere to start hacking...");
+            PrintLine("Click anywhere and start typing the commands above..."); //"Click anywhere to start hacking..."
         }
     }
 
