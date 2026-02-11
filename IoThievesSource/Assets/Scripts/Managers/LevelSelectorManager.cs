@@ -169,12 +169,15 @@ namespace Managers
             Quaternion startRot = start.rotation;
             Quaternion endRot = end.rotation;
 
+            float duration = 1f;
             float eval = 0f;
 
-            while (eval < 1f)
+            while (eval < duration)
             {
-                Vector3 newPos = Vector3.Slerp(startPos, endPos, eval);
-                Quaternion newRot = Quaternion.Slerp(startRot, endRot, eval);
+                float t = eval / duration;
+                
+                Vector3 newPos = Vector3.Slerp(startPos, endPos, t);
+                Quaternion newRot = Quaternion.Slerp(startRot, endRot, t);
             
                 _mainCameraTransform.SetPositionAndRotation(newPos, newRot);
             

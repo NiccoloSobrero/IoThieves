@@ -1,3 +1,4 @@
+using SuspicionSystem;
 using UnityEngine;
 
 namespace AI.AI_States
@@ -61,6 +62,8 @@ namespace AI.AI_States
                 Object.Destroy(_vfx);
                 _vfx = null;
             }
+            
+            Npc.enemyAdapter.AlertManager.SetAlertedState(false);
         }
 
         public void ResetCounter()

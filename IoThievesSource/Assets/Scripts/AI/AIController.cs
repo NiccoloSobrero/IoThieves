@@ -24,16 +24,15 @@ namespace AI
 
         public GameObject stunVfx;
         
-        
-        
         #region DebugVariables
 
         [Header("Debug Variables")] public bool stun = false;
 
         #endregion
 
-
         [SerializeField] private AINames currentNpcStateName;
+        [SerializeField] private AINames previousNpcStateName;
+        [SerializeField] private AINames previousRealNpcStateName;
         
         private AIState _currentState = null;
         private AIState _previousState;
@@ -87,8 +86,12 @@ namespace AI
             _stateFactory = new StateFactory(this);
             
             _previousState = _stateFactory.GetState(AINames.Idle);
+            previousNpcStateName = AIUtilities.RetrieveAIName(_previousState);
+            
             CurrentState = _stateFactory.GetState(AINames.Idle);
+            
             _previousRealState = _stateFactory.GetState(AINames.Idle);
+            previousRealNpcStateName = AIUtilities.RetrieveAIName(_previousRealState);
             
             enemyAdapter.AnimationController.Initialize();
             walkableArea = gameObject.GetComponentInParent<WalkableArea>();
@@ -119,20 +122,24 @@ namespace AI
                 return;
             }
             
-            if (CurrentState is  GoToDestination) 
+            if (CurrentState is GoToDestination) 
             {
                 return;
             }
-            
+
             AIState targetState = _stateFactory.GetState(state);
             if (targetState == CurrentState)
                 return;
-            
+
             CurrentState?.Exit();
             _previousState = CurrentState;
-            _previousRealState = CurrentState;
-            CurrentState = targetState;
+            previousNpcStateName = AIUtilities.RetrieveAIName(_previousState);
             
+            _previousRealState = CurrentState;
+            previousRealNpcStateName = AIUtilities.RetrieveAIName(_previousRealState);
+            
+            CurrentState = targetState;
+
             lastPosition = transform.position;
             if (_previousState is IdleState)
             {
@@ -141,7 +148,7 @@ namespace AI
             }
             else
                 matchRotationWhenComingBack = false;
-            
+
             CurrentState?.Enter();
         }
 

@@ -72,6 +72,13 @@ namespace AI.AI_States
             else
             {
                 Vector3 dir = _nextDestination - Npc.transform.position;
+                if (dir.sqrMagnitude < 0.01f)
+                {
+                    _midpointReached = true;
+                    IsMoving = false;
+                    return;
+                }
+                
                 dir.Normalize();
 
                 Vector3 forwardDir = Npc.transform.forward.normalized;

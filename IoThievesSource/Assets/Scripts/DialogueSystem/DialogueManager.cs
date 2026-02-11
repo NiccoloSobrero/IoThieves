@@ -228,6 +228,8 @@ namespace DialogueSystem
         {
             _currentLine = 0;
             
+            TryStoppingCoroutines();
+            
             PlayerInputManager.Instance.SetContext(_closingInputContext);
             
             dialogueWindow.SetActive(false);

@@ -60,6 +60,12 @@ namespace AI.AI_States
 
         private void NextWaypoint()
         {
+            if (!_hasPath || _path == null || _path.Count == 0)
+            {
+                _hasPath = false;
+                return;
+            }
+            
             if (_backToPath)
             {
                 try
