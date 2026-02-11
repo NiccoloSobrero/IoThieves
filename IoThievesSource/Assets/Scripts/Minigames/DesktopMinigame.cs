@@ -495,7 +495,7 @@ namespace Minigames
                     _desktopLastSize = desktopRect.sizeDelta;
                         
                     desktopRect.anchoredPosition = Vector2.zero;
-                    desktopRect.sizeDelta = _canvas.renderingDisplaySize;
+                    desktopRect.sizeDelta = _canvas.GetComponent<RectTransform>().rect.size;
                 }
                 
                 // Maximize other windows if they were maximized

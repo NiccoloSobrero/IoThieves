@@ -90741,7 +90741,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   maxConnectionDistance: 5
-  debugMode: 1
 --- !u!114 &1198328614
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -119431,6 +119430,10 @@ PrefabInstance:
     - target: {fileID: 558168662965501489, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
+      propertyPath: playOnStart
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2520859263650081525, guid: 9c9298b471392e44b86dcbcf5afa9773, type: 3}
       propertyPath: audioPlayerUI
