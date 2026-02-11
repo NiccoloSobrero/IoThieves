@@ -70,5 +70,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   samplingTime: 0.2
-  radius: 0
+  radius: 2
   ttl: 1

@@ -449,6 +449,9 @@ namespace Minigames
             DownloadedFile downloadedFiles = DownloadsManager.Instance.DownloadedFiles;
             programPopupObj.SetActive(false);
             
+            CloseTextFile();
+            CloseHrComplaint();
+            
             if (downloadedFiles.GetTargetFilesNumFromLevel(GameManager.Instance.currentLevel) < _targetFilesNum)
             {
                 desktopObj.SetActive(false);

@@ -15,10 +15,10 @@ MonoBehaviour:
   dialogueLines:
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: Ok. First of all we need to hack this computer and log in.
+    text: Ok, first of all we need to hack this computer and log in.
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: Try cliking one of these words and see what you get.\nThe password must
+    text: Try clicking one of these words and see what you get.\nThe password must
       be one of them.
     tags: 

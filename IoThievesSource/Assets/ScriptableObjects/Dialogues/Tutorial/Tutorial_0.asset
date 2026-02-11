@@ -102,8 +102,8 @@ MonoBehaviour:
     tags: 03000000
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: Don't worry about it\nOh wait! I almost forgot! This garage is really quiet,
-      so here's some music.
+    text: Don't worry about it.\nOh wait! I almost forgot! This garage is really
+      quiet, so here's some music.
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}

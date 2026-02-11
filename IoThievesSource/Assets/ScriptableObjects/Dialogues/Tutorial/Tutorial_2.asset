@@ -24,25 +24,25 @@ MonoBehaviour:
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: We need a distraction. Head over to that 3D printer in the corner.
+    text: 'We need a distraction. Look, there is a 3D printer there in the corner,
+      with the <color=green>green</color> mark. '
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: Yeah, that chunky machine right there.\nIt's marked in <color=green>green</color>,
-      so if you click on it I can hack it remotely.
+    text: If you click on it, I will hack it from distance. You don't need to be
+      close to hack devices marked in <color=green>green</color>.
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: 'I''ll upload a blueprint for something noisy.\nWhen it finish, get close
-      to it to pick up the item.
+    text: 'I''m uploading a blueprint for something noisy.\nWhen it finishes, get
+      close to pick up the item.
 
 '
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: If the printer is marked in <color=red>red</color> it means you're too
-      distant, so be sure to be close enough to make the outline <color=blue>blue</color>
-      to make it interactable.
+    text: If the printer is marked in <color=red>red</color>, you're too distant
+      to pick it up. You can pick it up only when the outline is <color=blue>blue</color>.
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}

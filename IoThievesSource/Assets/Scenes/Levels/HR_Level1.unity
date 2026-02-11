@@ -9781,7 +9781,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   samplingTime: 0.2
-  radius: 3
 --- !u!1 &725937896
 GameObject:
   m_ObjectHideFlags: 0
@@ -18137,7 +18136,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   samplingTime: 0.2
-  radius: 3
 --- !u!65 &1155057709
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1,4 +1,5 @@
-﻿using AI;
+﻿using System;
+using AI;
 using UnityEngine;
 
 namespace Interactables
@@ -6,43 +7,45 @@ namespace Interactables
     [RequireComponent(typeof(Collider))]
     public class StunTrigger : MonoBehaviour
     {
-        [SerializeField] private LayerMask affectedLayer;
+        [SerializeField] protected LayerMask affectedLayer;
         [SerializeField] private float samplingTime = 0.2f;
-        protected float _elapsed = 0.0f;
-        [SerializeField] protected float radius;
+        protected float _elapsed;
+        
+        private BoxCollider _cubeColl;
+        
+        private Vector3 _cubeExtents;
+        private Vector3 _cubePos;
         
         private void Awake()
         {
+            _cubeColl =  GetComponent<BoxCollider>();
             _elapsed = 0;
-            radius = GetComponent<Collider>().bounds.extents.magnitude;
             gameObject.SetActive(false);
+
+            _cubeExtents = Vector3.Scale(_cubeColl.size * 0.5f, _cubeColl.transform.lossyScale);
+            _cubePos = _cubeColl.transform.TransformPoint(_cubeColl.center);
         }
 
         private void Update()
         {
             _elapsed += Time.deltaTime;
+            
             if (_elapsed >= samplingTime)
             {
                 _elapsed = 0.0f;
-                ScanArea(radius);
+                ScanArea();
             }
-        }
-
-        private void OnEnable()
-        {
-           print("AC enabled");
         }
 
         private void OnDisable()
         {
-            print("AC disabled");
            _elapsed = 0; 
         }
 
-        protected void ScanArea(float scanRadius)
+        private void ScanArea()
         {
             Collider[] colliders = new Collider[10];
-            var size = Physics.OverlapSphereNonAlloc(transform.position, scanRadius, colliders, affectedLayer.value, QueryTriggerInteraction.Ignore);
+            var size = Physics.OverlapBoxNonAlloc(_cubePos, _cubeExtents, colliders, _cubeColl.transform.rotation, affectedLayer.value, QueryTriggerInteraction.Ignore);
 
             print("I hit " +size + " enemies " );
             for (int i = 0 ; i<size; i++)
@@ -55,23 +58,11 @@ namespace Interactables
                 }
             }
         }
-        
-       /* 
-        public void Init(float radius)
-        {
-            gameObject.transform.localScale = new Vector3(radius, radius, radius);
-        }
-        
-        
-        private void OnTriggerEnter(Collider other)
-        {
-            AIController enemy = other.gameObject.GetComponentInParent<AIController>();
-             if (enemy is not null)
-             {
-                 enemy.ChangeState(AINames.StunnedState);
-                 print("Destroying gameObject");
-                 //Destroy(gameObject);
-             }
-        }*/
+
+        // private void OnDrawGizmos()
+        // {
+        //     Gizmos.color = Color.red;
+        //     Gizmos.DrawWireCube(transform.position + _cubePos, _cubeExtents);
+        // }
     }
 }

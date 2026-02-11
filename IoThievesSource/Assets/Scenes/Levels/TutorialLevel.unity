@@ -769,6 +769,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1159210406}
   m_LocalEulerAnglesHint: {x: 90, y: -6, z: 0}
+--- !u!1 &205097824
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 205097825}
+  - component: {fileID: 205097826}
+  m_Layer: 0
+  m_Name: washerCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &205097825
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205097824}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.13901697, y: -0.017214969, z: -0.12511352, w: 0.98220396}
+  m_LocalPosition: {x: -0.19762722, y: -0.82580423, z: 0.61680347}
+  m_LocalScale: {x: 0.33333337, y: 0.33333334, z: 0.33333334}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5598957344709903344}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &205097826
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 205097824}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.34271, y: 2.638958, z: 2.8684087}
+  m_Center: {x: -0.10082338, y: 0.8194793, z: -0.46394277}
 --- !u!1 &216729612
 GameObject:
   m_ObjectHideFlags: 0
@@ -27872,8 +27925,8 @@ GameObject:
   - component: {fileID: 4672593538499628857}
   - component: {fileID: 7148049230356740044}
   - component: {fileID: 7148049230356740045}
-  - component: {fileID: 7148049230356740046}
   - component: {fileID: 7148049230356740047}
+  - component: {fileID: 7148049230356740048}
   m_Layer: 9
   m_Name: Washer
   m_TagString: Untagged
@@ -28337,6 +28390,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1393093213}
+  - {fileID: 205097825}
   m_Father: {fileID: 1740402072}
   m_LocalEulerAnglesHint: {x: 15.592, y: 4.084, z: 15.078}
 --- !u!33 &5600542606938003661
@@ -32381,27 +32435,6 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls: []
---- !u!65 &7148049230356740046
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5458328307081035682}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.82948875, y: 1.01, z: 0.7642174}
-  m_Center: {x: -0.08092307, y: -0.21794197, z: 0.3167658}
 --- !u!82 &7148049230356740047
 AudioSource:
   m_ObjectHideFlags: 0
@@ -32499,6 +32532,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &7148049230356740048
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5458328307081035682}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.82948875, y: 1.0100001, z: 0.7642174}
+  m_Center: {x: -0.08092284, y: -0.217942, z: 0.31676555}
 --- !u!23 &7177627415104450567
 MeshRenderer:
   m_ObjectHideFlags: 0
