@@ -51,7 +51,7 @@ public class TerminalEndLevelMenu : TerminalMenu
                 break;
             case "cd ..":
                 PrintLine("Going to main menu...");
-                EventsManager.OnBackToMainMenu?.Invoke();
+                EventsManager.OnBackToMainMenu?.Invoke(false);
                 break;
             case "quit":
                 PrintLine("Shutting down...");

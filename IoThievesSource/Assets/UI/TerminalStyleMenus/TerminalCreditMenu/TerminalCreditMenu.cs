@@ -90,7 +90,7 @@ public class TerminalCreditMenu : TerminalMenu
                 break;
             case "cd ..":
                 PrintLine("Going to main menu...");
-                EventsManager.OnBackToMainMenu?.Invoke();
+                EventsManager.OnBackToMainMenu?.Invoke(false);
                 break;
             case "ls":
                 PrintLine("Printing all the available documents:");

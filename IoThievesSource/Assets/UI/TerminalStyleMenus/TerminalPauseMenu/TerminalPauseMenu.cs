@@ -49,7 +49,7 @@ public class TerminalPauseMenu : TerminalMenu
                 break;
             case "cd ..":
                 PrintLine("Going to main menu...");
-                EventsManager.OnBackToMainMenu?.Invoke();
+                EventsManager.OnBackToMainMenu?.Invoke(false);
                 EventsManager.OnResumeGame?.Invoke();
                 break;
             case "quit":

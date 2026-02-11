@@ -214,7 +214,7 @@ namespace Managers
             
             PlayerInputManager.Instance.SetContext(InputContext.Disabled);
             
-            EventsManager.OnBackToMainMenu?.Invoke();
+            EventsManager.OnBackToMainMenu?.Invoke(false);
         }
     }
 }

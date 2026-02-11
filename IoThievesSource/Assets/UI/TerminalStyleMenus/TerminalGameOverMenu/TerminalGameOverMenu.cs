@@ -69,7 +69,7 @@ public class TerminalGameOverMenu : TerminalMenu
                 break;
             case "cd ..":
                 PrintLine("Going to main menu...");
-                EventsManager.OnBackToMainMenu?.Invoke();
+                EventsManager.OnBackToMainMenu?.Invoke(false);
                 break;
             // case "options":
             //     PrintLine("Customization session started...");

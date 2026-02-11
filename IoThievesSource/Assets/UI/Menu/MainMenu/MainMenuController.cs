@@ -28,7 +28,7 @@ public class MainMenuController : MenuController
         gameObject.SetActive(false);
     }
     
-    private void EnableObject()
+    private void EnableObject(bool enable)
     {
         gameObject.SetActive(true);
     }

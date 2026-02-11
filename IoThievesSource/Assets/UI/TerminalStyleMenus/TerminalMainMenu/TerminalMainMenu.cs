@@ -15,7 +15,15 @@ public class TerminalMainMenu : TerminalMenu
 
     protected override void OnMenuEnabled()
     {
-        StartScanning(IothievesScan);
+        if (GameManager.Instance.ReloadMainMenuAnimation)
+        {
+            StartScanning(IothievesScan);
+        }
+        else
+        {
+            PrintStartMainMenu();
+            PrintEndMainMenu();
+        }
     }
 
     private void OnDisable()
@@ -57,19 +65,8 @@ public class TerminalMainMenu : TerminalMenu
             else
             {
                 _hasStartedScanning = false;
-                PrintLine($"iothieves@kali:~$ {IothievesScan}");
-                PrintLine("");
-                // PrintLine("IoThieves v0.1.2");
-                PrintBanner(Utility.IoThievesArt);
-                PrintLine("Copyright (c) 2025");
-                PrintColumns("Team Leader:", "Niccoló Sobrero");
-                PrintColumns("Designer:", "Matilde Sobberi");
-                PrintColumns("Architect:", "Daniel Bonardi");
-                PrintColumns("AI:", "Federico Tabellini");
-                PrintColumns("UI:", "Emanuele Sapio");
-                
-                PrintLine("Polimi Game Collective");
-                
+
+                PrintStartMainMenu();
                 StartLoading();
                 
                 _scannerInput = string.Empty;
@@ -80,6 +77,22 @@ public class TerminalMainMenu : TerminalMenu
                 UpdateCaretPosition();
             }
         }
+    }
+
+    private void PrintStartMainMenu()
+    {
+        PrintLine($"iothieves@kali:~$ {IothievesScan}");
+        PrintLine("");
+        // PrintLine("IoThieves v0.1.2");
+        PrintBanner(Utility.IoThievesArt);
+        PrintLine("Copyright (c) 2025");
+        PrintColumns("Team Leader:", "Niccoló Sobrero");
+        PrintColumns("Designer:", "Matilde Sobberi");
+        PrintColumns("Architect:", "Daniel Bonardi");
+        PrintColumns("AI:", "Federico Tabellini");
+        PrintColumns("UI:", "Emanuele Sapio");
+                
+        PrintLine("Polimi Game Collective");
     }
 
     private void StartLoading()
@@ -110,29 +123,33 @@ public class TerminalMainMenu : TerminalMenu
             PrintLine("");
 
             _loadingLabel.text = "[####################] 100%";
-            
-            PrintLine("");
-            
-            PrintLine("[OK] Scan completed.");
-            /*PrintLine("42 vulnerable devices found.");
-            PrintLine(" - 12 XSS vulnerabilities found.");
-            PrintLine(" - 20 SQL injection vulnerabilities found.");
-            PrintLine(" - 10 Binary exploitation vulnerabilities found.");
-            PrintLine("42 devices exploited.");*/
-            
-            PrintLine("");
-            
-            // PrintLine("Type 'help' to list commands");
-            PrintLine("Available commands:");
-            PrintLine(" start       start game");
-            PrintLine(" help        list all available commands"); //potrebbe non servire
-            // PrintLine(" options     open settings");
-            PrintLine(" quit        quit game");
-            
-            PrintLine("");
-            
-            PrintLine("Click anywhere and start typing the commands above..."); //"Click anywhere to start hacking..."
+            PrintEndMainMenu();
         }
+    }
+
+    private void PrintEndMainMenu()
+    {
+        PrintLine("");
+            
+        PrintLine("[OK] Scan completed.");
+        /*PrintLine("42 vulnerable devices found.");
+        PrintLine(" - 12 XSS vulnerabilities found.");
+        PrintLine(" - 20 SQL injection vulnerabilities found.");
+        PrintLine(" - 10 Binary exploitation vulnerabilities found.");
+        PrintLine("42 devices exploited.");*/
+            
+        PrintLine("");
+            
+        // PrintLine("Type 'help' to list commands");
+        PrintLine("Available commands:");
+        PrintLine(" start       start game");
+        PrintLine(" help        list all available commands"); //potrebbe non servire
+        // PrintLine(" options     open settings");
+        PrintLine(" quit        quit game");
+            
+        PrintLine("");
+            
+        PrintLine("Click anywhere and start typing the commands above..."); //"Click anywhere to start hacking..."
     }
 
     private void UpdateLoadingBarText()

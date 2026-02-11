@@ -32,6 +32,10 @@ namespace Managers
                 return _levelSelectorManager;
             }
         }
+
+        private bool _reloadMainMenuAnimation = true;
+        
+        public bool ReloadMainMenuAnimation => _reloadMainMenuAnimation;
     
         private void Awake()
         {
@@ -147,9 +151,10 @@ namespace Managers
 #endif
         }
 
-        private void GoToMainMenu()
+        private void GoToMainMenu(bool reloadMainMenuAnimation)
         {
             Time.timeScale = 1f;
+            _reloadMainMenuAnimation = reloadMainMenuAnimation;
             SceneManager.LoadScene("MainMenu");
             // EnterLevelSelection();
         }

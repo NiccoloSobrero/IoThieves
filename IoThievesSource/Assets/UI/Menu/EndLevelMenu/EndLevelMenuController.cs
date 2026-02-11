@@ -47,7 +47,7 @@ public class EndLevelMenuController : MonoBehaviour
     private void GoToMainMenu()
     {
         HideEndLevelMenu();
-        EventsManager.OnBackToMainMenu?.Invoke();
+        EventsManager.OnBackToMainMenu?.Invoke(false);
     }
 
     private void GoToNextLevel()
