@@ -11089,7 +11089,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e39b1957d385641bd0f0688533321d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableType: 1
+  interactableType: 3
 --- !u!65 &69601545
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -34443,7 +34443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e39b1957d385641bd0f0688533321d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableType: 1
+  interactableType: 3
 --- !u!65 &334005393
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -35790,6 +35790,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 652133281}
     m_Modifications:
+    - target: {fileID: -996625976428397906, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: npcDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: d0919ccfc129a8641b53174e97264d32, type: 2}
     - target: {fileID: -996625976428397906, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: startState
       value: 2
@@ -43145,6 +43149,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 652133281}
     m_Modifications:
+    - target: {fileID: -996625976428397906, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: npcDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: d0919ccfc129a8641b53174e97264d32, type: 2}
     - target: {fileID: -996625976428397906, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: startState
       value: 2
@@ -58520,7 +58528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e39b1957d385641bd0f0688533321d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableType: 1
+  interactableType: 3
 --- !u!65 &866644063
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -65239,6 +65247,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1078170201}
     m_Modifications:
+    - target: {fileID: -996625976428397906, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: npcDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: d0919ccfc129a8641b53174e97264d32, type: 2}
+    - target: {fileID: -996625976428397906, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: walkableArea
+      value: 
+      objectReference: {fileID: 1078170202}
     - target: {fileID: 1101995406142850608, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: detectionRange
       value: 3
@@ -65494,6 +65510,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 680691125}
     m_Modifications:
+    - target: {fileID: -996625976428397906, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: npcDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: d0919ccfc129a8641b53174e97264d32, type: 2}
+    - target: {fileID: -996625976428397906, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: walkableArea
+      value: 
+      objectReference: {fileID: 680691126}
     - target: {fileID: 1101995406142850608, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: detectionRange
       value: 3
@@ -78762,7 +78786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e39b1957d385641bd0f0688533321d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableType: 1
+  interactableType: 3
 --- !u!65 &1097669918
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -79617,7 +79641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e39b1957d385641bd0f0688533321d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableType: 1
+  interactableType: 3
 --- !u!65 &1142306637
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -99070,6 +99094,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 652133281}
     m_Modifications:
     - target: {fileID: -996625976428397906, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: npcDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: d0919ccfc129a8641b53174e97264d32, type: 2}
+    - target: {fileID: -996625976428397906, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: startState
       value: 2
       objectReference: {fileID: 0}
@@ -99161,9 +99189,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 676705912}
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1905487880}
     - targetCorrespondingSourceObject: {fileID: 3141633984504744387, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 380892281}
@@ -104093,11 +104118,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1.3, y: 1, z: 1.1}
   m_Center: {x: 0.5, y: 0.5, z: 0.55}
---- !u!1 &1520826930 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4823917835425267373, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
-  m_PrefabInstance: {fileID: 1501205663}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1521694923
 GameObject:
   m_ObjectHideFlags: 0
@@ -112342,7 +112362,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e39b1957d385641bd0f0688533321d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactableType: 1
+  interactableType: 3
 --- !u!65 &1744443477
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -119655,18 +119675,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8569817063494681188, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
   m_PrefabInstance: {fileID: 1501205663}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1905487880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1520826930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e44624a3f374eaf428b6eca5370fb612, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1913132175
 GameObject:
   m_ObjectHideFlags: 0
@@ -123078,6 +123086,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1019312424}
     m_Modifications:
+    - target: {fileID: -996625976428397906, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: npcDatas
+      value: 
+      objectReference: {fileID: 11400000, guid: d0919ccfc129a8641b53174e97264d32, type: 2}
+    - target: {fileID: -996625976428397906, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
+      propertyPath: walkableArea
+      value: 
+      objectReference: {fileID: 1019312425}
     - target: {fileID: 1101995406142850608, guid: f75f4a83b6674af42bfb31dd8aa4d54e, type: 3}
       propertyPath: detectionRange
       value: 3

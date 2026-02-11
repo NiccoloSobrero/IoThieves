@@ -16,7 +16,7 @@ namespace AI.AI_States
          private Waypoint _target;
          private Waypoint _lastWaypoint;
          
-        private Queue<Movement> _recentMovements = new Queue<Movement>();
+        private Queue<Movement> _recentMovements = new();
         private const int MaxMovementHistory = 15;
 
         private bool IsMoving
@@ -67,7 +67,7 @@ namespace AI.AI_States
             {
                 isWalkable = Npc.WalkableArea.IsWalkable(destination);
             }
-            catch (Exception _)
+            catch (Exception)
             {
                 isWalkable = true;
             }
@@ -167,7 +167,8 @@ namespace AI.AI_States
             float angleMag = AIUtilities.RotateTarget(Npc.transform, forwardDir, dir, Npc.NpcDatas.AngularSpeed); 
             
             IsMoving = angleMag < Npc.NpcDatas.AngularThreshold;
-            Npc.enemyAdapter.AnimationController.SetWalking(IsMoving);
+            
+            // Npc.enemyAdapter.AnimationController.SetWalking(IsMoving);
 
             if (IsMoving)
             {
@@ -177,15 +178,7 @@ namespace AI.AI_States
             float distance = (_target.transform.position - Npc.transform.position).magnitude;
             
             if (distance < Npc.NpcDatas.DistanceThreshold)
-            { 
-                /*
-                if (_target is PointOfInterest poi)
-                {
-                    IsMoving = false;
-                    _isInteracting = !poi.AssignedDevice.Interact();
-                }
-                */
-                
+            {
                 if (!_isInteracting)
                 {
                     _target = ChooseNextWaypoint(_target);
@@ -207,8 +200,8 @@ namespace AI.AI_States
 
         public Movement(Waypoint from, Waypoint to)
         {
-            this.From = from;
-            this.To = to;
+            From = from;
+            To = to;
         }
 
         public bool Equals(Waypoint fromWaypoint, Waypoint toWaypoint)

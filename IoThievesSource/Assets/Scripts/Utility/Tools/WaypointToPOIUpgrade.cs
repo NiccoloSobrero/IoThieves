@@ -88,7 +88,7 @@ public static class UpgradeWaypointToPOI
 
     static void RewireAllNeighbors(Waypoint oldWp, Waypoint newWp)
     {
-        var allWaypoints = GameObject.FindObjectsOfType<Waypoint>(true);
+        var allWaypoints = Object.FindObjectsByType<Waypoint>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         int rewired = 0;
 

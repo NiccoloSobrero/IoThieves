@@ -9,12 +9,11 @@ namespace AI.Utilities
         [SerializeField] private float cylinderRadius = 0.2f;
         [SerializeField] private LayerMask obstacleLayers = ~0;
         [SerializeField] private float maxConnectionDistance = 50f;
-        [SerializeField] private bool debugMode = true;
     
         [ContextMenu("Generate Connections")]
         public void GenerateConnections()
         {
-            Waypoint[] allWaypoints = FindObjectsOfType<Waypoint>();
+            Waypoint[] allWaypoints = FindObjectsByType<Waypoint>(FindObjectsSortMode.None);
         
             // Clear existing
             foreach (Waypoint wp in allWaypoints)
@@ -25,8 +24,6 @@ namespace AI.Utilities
 #endif
             }
         
-            int connections = 0;
-        
             // Check each pair
             for (int i = 0; i < allWaypoints.Length; i++)
             {
@@ -34,25 +31,19 @@ namespace AI.Utilities
                 {
                     if (HasLineOfSight(allWaypoints[i], allWaypoints[j]))
                     {
-                        allWaypoints[i].neighbours.Add(allWaypoints[j]);
-                        allWaypoints[j].neighbours.Add(allWaypoints[i]);
-                        connections++;
+                        if (!allWaypoints[i].neighbours.Contains(allWaypoints[j]))
+                        {
+                            allWaypoints[i].neighbours.Add(allWaypoints[j]);
+                            allWaypoints[j].neighbours.Add(allWaypoints[i]);
+                        }
+                        
 #if UNITY_EDITOR
                         EditorUtility.SetDirty(allWaypoints[i]);
                         EditorUtility.SetDirty(allWaypoints[j]);
 #endif
-                    
-                        if (debugMode)
-                            Debug.Log($"✓ Connected: {allWaypoints[i].name} <-> {allWaypoints[j].name}");
-                    }
-                    else if (debugMode)
-                    {
-                        Debug.Log($"✗ Blocked: {allWaypoints[i].name} <-> {allWaypoints[j].name}");
                     }
                 }
             }
-        
-            Debug.Log($"Generated {connections} connections for {allWaypoints.Length} waypoints");
         }
     
         private bool HasLineOfSight(Waypoint from, Waypoint to)
@@ -63,8 +54,6 @@ namespace AI.Utilities
         
             if (distance > maxConnectionDistance)
             {
-                if (debugMode)
-                    Debug.Log($"  Reason: Too far ({distance:F2}m > {maxConnectionDistance}m)");
                 return false;
             }
         
@@ -82,8 +71,6 @@ namespace AI.Utilities
                 if (col.gameObject != from.gameObject && 
                     col.gameObject != to.gameObject)
                 {
-                    if (debugMode)
-                        Debug.Log($"  Reason: Blocked by {col.gameObject.name} on layer {LayerMask.LayerToName(col.gameObject.layer)}");
                     return false;
                 }
             }
@@ -93,21 +80,19 @@ namespace AI.Utilities
     
         public void ClearAllConnections()
         {
-            Waypoint[] allWaypoints = FindObjectsOfType<Waypoint>();
+            Waypoint[] allWaypoints = FindObjectsByType<Waypoint>(FindObjectsSortMode.None);
         
             foreach (Waypoint wp in allWaypoints)
             {
                 wp.neighbours.Clear();
                 // EditorUtility.SetDirty(wp);
             }
-        
-            Debug.Log($"Cleared all connections for {allWaypoints.Length} waypoints.");
         }
     
         [ContextMenu("Rename All Waypoints")]
         public void RenameAllWaypoints()
         {
-            Waypoint[] allWaypoints = FindObjectsOfType<Waypoint>();
+            Waypoint[] allWaypoints = FindObjectsByType<Waypoint>(FindObjectsSortMode.None);
         
             for (int i = 0; i < allWaypoints.Length; i++)
             {
@@ -116,8 +101,6 @@ namespace AI.Utilities
                 EditorUtility.SetDirty(allWaypoints[i].gameObject);
 #endif
             }
-        
-            Debug.Log($"Renamed {allWaypoints.Length} waypoints");
         } 
     
         private void OnDrawGizmosSelected()

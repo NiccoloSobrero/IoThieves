@@ -22,6 +22,7 @@ namespace Managers
         [SerializeField] private Sprite genericCoverSprite;
         
         [SerializeField] private float volumePopUpDuration = 2f;
+        [SerializeField] private float volumePopUpFadeSpeed = 2f;
         
         private Animator _anim;
         
@@ -68,11 +69,11 @@ namespace Managers
         private IEnumerator ShowAndHideVolumePopUp()
         {
             volumePopUpCanvasGroup.alpha = 1f;
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(volumePopUpDuration);
 
             while (volumePopUpCanvasGroup.alpha > 0f)
             {
-                volumePopUpCanvasGroup.alpha -= Time.deltaTime * 2;
+                volumePopUpCanvasGroup.alpha -= Time.deltaTime * volumePopUpFadeSpeed;
                 yield return null;
             }
             

@@ -13,23 +13,18 @@ namespace Enemy
         
         [SerializeField] private Transform raycastOrigin;
         
-        private Transform playerTransform;
+        private Transform _playerTransform;
         [SerializeField] private bool _playerInRange = false;
         [SerializeField] private bool _spotted = false;
         private float _timer = 0;
         private float _checkTime = 0.1f;
-        
-        private void Awake()
-        {
-           
-        }
 
         public void Initialize()
         {
             _timer = 0.0f;
             _playerInRange = false;
             _spotted = false;
-            playerTransform = null;
+            _playerTransform = null;
             SetDetectionSphere();
         }
         
@@ -58,7 +53,24 @@ namespace Enemy
             if(other.gameObject.CompareTag("Player"))
             {
                 _playerInRange = true;
-                playerTransform = other.gameObject.transform;
+                _playerTransform = other.gameObject.transform;
+            }
+        }
+        
+        private void OnTriggerStay(Collider collision)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                Vector3 dirToPlayer = collision.transform.position - transform.position;
+                bool hasLineOfSight = !Physics.Raycast(
+                    transform.position,
+                    dirToPlayer.normalized,
+                    dirToPlayer.magnitude,
+                    LayerMask.GetMask("Default"),
+                    QueryTriggerInteraction.Ignore
+                );
+        
+                alertManager.SetAlertedState(hasLineOfSight);
             }
         }
         
@@ -67,7 +79,7 @@ namespace Enemy
             if (other.CompareTag("Player"))
             {
                 _playerInRange = false;
-                playerTransform = null;
+                _playerTransform = null;
                 _spotted = false;
                 alertManager.SetAlertedState(false);
             }
@@ -75,7 +87,7 @@ namespace Enemy
         
         private void CheckForPlayerInRange()
         {
-            Vector3 direction = playerTransform.position - transform.position;
+            Vector3 direction = _playerTransform.position - transform.position;
             if (!Physics.Raycast(raycastOrigin.position, direction.normalized, direction.magnitude, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore ))
             {
                 _spotted = true;

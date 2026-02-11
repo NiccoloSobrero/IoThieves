@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using AI.NavigationAndWaypoints;
-using NUnit.Framework;
 using UnityEngine;
 
 namespace AI.AI_States
@@ -13,7 +12,7 @@ namespace AI.AI_States
         private Vector3 _targetPosition;
         private bool _hasPath = false;
         private bool _isMoving = false;
-        private bool back_to_path = false;
+        private bool _backToPath = false;
         private List<Waypoint> _backPath;
 
         private bool IsMoving
@@ -32,16 +31,15 @@ namespace AI.AI_States
         {
             SetPath();
         }
-        
 
-        public void SetPath()
+
+        private void SetPath()
         {
             try
             {
                 PathToFollow ptf = Npc.GetComponent<PathToFollow>();
                 if (ptf is null)
                 {
-                    Debug.Log("There is no path to follow");
                     return;
                 }
                 
@@ -52,7 +50,6 @@ namespace AI.AI_States
                 _hasPath = true; 
                 _idx = 0;
                 _targetPosition = _path[_idx].transform.position;
-                Debug.Log("Path is " + _path);
             }
             catch (Exception e)
             {
@@ -61,18 +58,25 @@ namespace AI.AI_States
             }
         }
 
-        public void NextWaypoint()
+        private void NextWaypoint()
         {
-            if (back_to_path)
+            if (_backToPath)
             {
                 try
                 {
-                    _targetPosition = _backPath[0].transform.position; 
-                    _backPath.RemoveAt(0);
+                    if (_backPath == null || _backPath.Count == 0)
+                    {
+                        _backToPath = false;
+                    }
+                    else
+                    {
+                        _targetPosition = _backPath[0].transform.position; 
+                        _backPath.RemoveAt(0);
+                    }
                 }
-                catch (ArgumentOutOfRangeException _)  //BackPath fully exhausted
+                catch (ArgumentOutOfRangeException) 
                 {
-                    back_to_path = false;
+                    _backToPath = false;
                 }
             }
             else
@@ -80,7 +84,6 @@ namespace AI.AI_States
                 _idx = (_idx + 1)%_path.Count;
                 _targetPosition = _path[_idx].transform.position;
             }
-            //Debug.Log(_targetPosition);
         }
         
         public override void Enter()
@@ -88,7 +91,7 @@ namespace AI.AI_States
             float distanceFromTarget = Vector3.Distance(Npc.transform.position, _targetPosition);
             if (distanceFromTarget > 2.0f)   //If I am far from the path -> PathFind back to the path to follow
             {
-                back_to_path = true;
+                _backToPath = true;
                 Waypoint target =  _path[_idx];
                 if(!Physics.Raycast(Npc.transform.position, _targetPosition - Npc.transform.position, 
                        distanceFromTarget, LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore))
@@ -98,7 +101,6 @@ namespace AI.AI_States
                 else
                 {
                     Waypoint start = AIUtilities.FindNearestWaypoint(Npc.transform.position);
-                    Debug.Log("PathCyclingState Enter");
                     _backPath = PathFinding.FindPath(start, _path[_idx]);
                 }
                 
@@ -110,8 +112,10 @@ namespace AI.AI_States
 
         public override void Execute()
         {
-            if (!_hasPath)
+            if (!_hasPath || !AIUtilities.IsValidPath(_path))
+            {
                 return;
+            }
             
             Vector3 dir = _targetPosition - Npc.transform.position;
             dir.Normalize();
@@ -135,7 +139,6 @@ namespace AI.AI_States
         public override void Exit()
         {
             IsMoving = false;
-           //Nothing to do there 
         }
     }
 }

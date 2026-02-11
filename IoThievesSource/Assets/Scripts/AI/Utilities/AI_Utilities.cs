@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using AI.AI_States;
 using AI.NavigationAndWaypoints;
 using UnityEngine;
@@ -41,10 +42,6 @@ namespace AI
                         bestWaypoint = wp;
                     }
                 }
-             /*  else
-                {
-                    Debug.Log("There is" +hit.collider.gameObject.name+" in between the npc and the waypoint "+ wp.name);
-                }*/
             }
             
             return bestWaypoint;
@@ -89,6 +86,11 @@ namespace AI
             Vector3 direction = to.transform.position - from.transform.position;
             return !Physics.Raycast(from.transform.position, direction.normalized, direction.magnitude, 
                 LayerMask.GetMask("Default"), QueryTriggerInteraction.Ignore);
+        }
+        
+        public static bool IsValidPath(List<Waypoint> path)
+        {
+            return path != null && path.Count > 0;
         }
     }
 }

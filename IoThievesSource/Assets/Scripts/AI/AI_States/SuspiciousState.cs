@@ -16,17 +16,17 @@ namespace AI.AI_States
         private Waypoint _destinationWaypoint;
         private Vector3 _nextDestination;
 
-        private float _minDistance = 1.5f;        //Below this distance no intermediate points will be added
+        private const float MinDistance = 1.5f;        //Below this distance no intermediate points will be added
+        private const float Radius = 0.3f;
         private Vector3[] _positions;
         private int _positionIndex = 0;
-        private float _radius = 0.3f;
 
         private float _waitedTime = 0;
         private float _waitingTime;
         private const float MaxWaitingTime = 3.0f;
         private bool _midpointReached = false;
         
-        private Queue<Waypoint> _recentMovements = new Queue<Waypoint>();
+        private Queue<Waypoint> _recentMovements = new();
         private const int MaxMovementHistory = 15;
         
         private bool IsMoving
@@ -45,15 +45,12 @@ namespace AI.AI_States
 
         public override void Enter()
         {
-            //Text : What's that -> Looking around animation??
-            
             _destinationWaypoint = AIUtilities.FindNearestWaypoint(Npc.transform.position);
             ComputeMiddlePoints();
             
-            //Wait a second before it starts moving
             _midpointReached = true;
-            //IsMoving = false;
-            _waitingTime = Random.value * MaxWaitingTime; //Random waiting time up to 3 seconds
+            
+            _waitingTime = Mathf.Max(Random.value * MaxWaitingTime, 0.1f); //Random waiting time up to 3 seconds
         }
         
         public override void Execute()
@@ -102,7 +99,6 @@ namespace AI.AI_States
         public override void Exit()
         {
             _verySuspicious = false;
-            //Text: Must have been the wind 
         }
 
         public void VerySuspicious(bool suspicious)
@@ -171,7 +167,8 @@ namespace AI.AI_States
         private void NextDestination()
         {
             if (Vector3.Distance(_nextDestination, _destinationWaypoint.transform.position) < 0.05f)
-            { //If I reached a Waypoint ---> New Waypoint is Needed
+            { 
+                //If I reached a Waypoint ---> New Waypoint is Needed
                 ChooseNextWaypoint(_destinationWaypoint);
             }      
             else if (_positionIndex >= _positions.Length-1)
@@ -189,7 +186,7 @@ namespace AI.AI_States
         private void ComputeMiddlePoints()
         {
            float distance =  Vector3.Distance(Npc.transform.position, _destinationWaypoint.transform.position);
-           int points = Random.Range(0,Mathf.FloorToInt(distance / _minDistance)+1);
+           int points = Random.Range(0,Mathf.FloorToInt(distance / MinDistance)+1);
            _positions = new Vector3[points];
 
            for (int i = 0; i < points; i++)
@@ -197,8 +194,8 @@ namespace AI.AI_States
                float t = (float)(i + 1) / (points + 1);
 
                float angle = Random.Range(0f, Mathf.PI * 2f);
-               float x = Mathf.Cos(angle) * _radius;
-               float z = Mathf.Sin(angle) * _radius;
+               float x = Mathf.Cos(angle) * Radius;
+               float z = Mathf.Sin(angle) * Radius;
 
                _positions[i] = Vector3.Lerp(Npc.transform.position, _destinationWaypoint.transform.position, t) +
                               new Vector3(x, .1f, z);
@@ -207,7 +204,5 @@ namespace AI.AI_States
            _positionIndex = 0;
            NextDestination(); 
         }
-        
     }
-    
 }

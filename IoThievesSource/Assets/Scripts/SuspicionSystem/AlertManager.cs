@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using AI;
-using Events;
 using SuspicionSystem.States;
 using UnityEngine;
 using UnityEngine.UI;
@@ -79,7 +78,7 @@ namespace SuspicionSystem
         public void Initialize()
         {
             Initializing = true;
-            Debug.Log("Initializing Alert Manager");
+            
             EnemyAdapter = GetComponent<EnemyAdapter>();
             
             Level0State = new Level0AlertState();
@@ -91,15 +90,15 @@ namespace SuspicionSystem
             try
             {
                 EnemyAdapter?.AIController.Initialize();
-                print(gameObject.name + "AIController initialized");
             }
-            catch (Exception e)
+            catch (Exception)
             {
+                // ignored
             }
 
             Pause = false;
             ChangeState(Level0State);
-            print("state changed ");
+            
             Initializing = false;
         }
 
@@ -113,6 +112,9 @@ namespace SuspicionSystem
 
         public void SetAlertedState(bool isAlerted)
         {
+            if (IsPlayerInRange == isAlerted) 
+                return;
+            
             IsPlayerInRange = isAlerted;
             
             if (!isAlerted)
@@ -146,7 +148,6 @@ namespace SuspicionSystem
 
         public void ChangeState(AlertState newState)
         {
-            Debug.Log(newState.ToString());
             if (newState == _currentState || newState == null) return;
 
             _currentState?.Exit(this);

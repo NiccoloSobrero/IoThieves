@@ -1,4 +1,3 @@
-using System;
 using AnimationControllers;
 using Enemy;
 using Events;
@@ -18,14 +17,12 @@ namespace AI
         [SerializeField] private EnemyFOVMesh fovMesh;
         [SerializeField] private SuspicionSphere suspicionSphere;
         [SerializeField] private NpcAnimationController animationController;
-        //[SerializeField] private NpcTriggerConeOfDeath ConeOfDeath;  
         
         public AlertManager AlertManager => alertManager;
         public AIController AIController => npc;
         public NpcTrigger NpcTrigger => SphereFOV;
         public EnemyFOVMesh FovMesh => fovMesh;
         public SuspicionSphere SuspicionSphere => suspicionSphere;
-        //public NpcTriggerConeOfDeath NpcTriggerConeOfDeath => ConeOfDeath;
         public NpcAnimationController AnimationController => animationController;
 
         private void Awake()
@@ -54,10 +51,11 @@ namespace AI
         {
             Debug.Log(gameObject.name + " Resetting Npc");
             
+            npc.enabled = true;
+            npc.Initialize();
+            
             alertManager.Initialize();
             alertManager.enabled = true;
-            
-            npc.enabled = true;
             
             SphereFOV.Initialize();
             SphereFOV.enabled = true;

@@ -7,7 +7,7 @@ public class FindBrokenReferences
     [MenuItem("Tools/Find Missing References In Scene")]
     static void FindMissing()
     {
-        var objects = GameObject.FindObjectsOfType<GameObject>();
+        var objects = Object.FindObjectsByType<GameObject>(FindObjectsSortMode.None);
 
         foreach (var go in objects)
         {

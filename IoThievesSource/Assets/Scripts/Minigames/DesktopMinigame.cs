@@ -236,7 +236,6 @@ namespace Minigames
             DownloadsManager.Instance.AddDownload(_currentOpenFile, _currentOpenFileDownloadTime);
         }
         
-        
         public void OpenProgram(string fileName)
         {
             programPopupObj.SetActive(true);
@@ -244,42 +243,50 @@ namespace Minigames
             string msg;
             switch (fileName)
             {
-                case "Astro Bartender": //c'è
-                    msg = "We can drink together later. I know a place with cool space-like drinks, and the best dj-frog ever.";
+                case "Astro Bartender":
+                    msg = "We can drink together later. I know a place with cool, space-like drinks and the best DJ frog ever.";
                     break;
-                case "At Azzy's": //c'è
-                    msg = "Put the spellbook down, we have bigger problems than overcooked stew."; //I would really love throwing FIREBALL , but now we have to focus on our mission
+
+                case "At Azzy's":
+                    msg = "Put the spellbook down. We have bigger problems than overcooked stew.";
                     break;
-                case "Beta Tester": //c'è
-                    msg = "I'm more tested than this beta"; //Trust me, you don't wanna play it.
-                                         //You're gonna be rage-baited so hard by everything, platforms included. 
-                                         //stop glitching-bitching around, we have a mission to do.
-                                         //Rage-bait is in the air >:)
+
+                case "Beta Tester":
+                    msg = "I'm more tested than this beta.";
                     break;
-                case "B-Side": //c'è
-                    msg = "We can play it when they will add Hatsune Miku songs";
+
+                case "B-Side":
+                    msg = "We can play it when they add Hatsune Miku songs.";
                     break;
-                case "Ctrl-V": //c'è
-                    msg = "Right now I would love to Ctrl-X my Boss >B)";
+
+                case "Ctrl-V":
+                    msg = "Right now, I would love to Ctrl-X my boss >B)";
                     break;
-                case "Echo of You": //c'è
-                    msg = "It's rewind time!"; 
+
+                case "Echo of You":
+                    msg = "It's rewind time!";
                     break;
-                case "Get There! Eventually...": //c'è
-                    msg = "We have to find the Boss house. We are gonna get there! eventually...";
+
+                case "Get There! Eventually...":
+                    msg = "We have to find the boss's house. We are going to get there... eventually.";
                     break;
-                case "HackLand": //c'è
-                    msg = "We need to hack, but not like that";
+
+                case "HackLand":
+                    msg = "We need to hack, but not like that.";
                     break;
-                case "Lawmaker": //c'è
-                    msg = "I don't think people affect with Alzheimer should create new laws...";
+
+                case "Lawmaker":
+                    msg = "I don't think people affected by Alzheimer should create new laws...";
                     break;
-                case "Melted Hero": //c'è
-                    msg = "I spilled my drink on the floor and the ice started moving around.";
+
+                case "Melted Hero":
+                    msg = "I spilled my drink on the floor, and the ice started moving around.";
                     break;
-                case "On & Off": //c'è
-                    msg = "Stop playing with the lights! We have no time for it.";
+
+                case "On & Off":
+                    msg = "Stop playing with the lights! We have no time for that.";
                     break;
+                
                 case "BurnOut":
                     msg = "I'm the one having the burnout here!";
                     break;
@@ -313,12 +320,6 @@ namespace Minigames
             }
             
             programMsgText.text = msg;
-            
-            
-            
-            //programMsgText.text = "There is a time and a place for everything, but not now";
-            
-            // Debug.Log("ERROR: can't open program");
         }
 
         public void OpenComplaint()

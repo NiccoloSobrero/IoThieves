@@ -18,7 +18,7 @@ namespace Interactables
         private readonly Color _notInteractableColor = new Color(1f, 0f, 0f, 1f);
         private readonly Color _interactableColor = new Color(0f, 0.7f, 1f, 1f);
         private readonly Color _hackableColor = new Color(0.3f, 0.8f, 0.3f, 1f);
-        private readonly Color _objectiveColor = new Color(0.8f, 0.7f, 0.2f, 1f);
+        private readonly Color _objectiveColor = new Color(0.9f, 0.8f, 0.1f, 1f);
 
         public abstract void Interact();
         
