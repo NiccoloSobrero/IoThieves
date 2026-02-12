@@ -1,9 +1,10 @@
+using AI.AI_States.StateFamilies;
 using SuspicionSystem;
 using UnityEngine;
 
 namespace AI.AI_States
 {
-    public class StunnedState : AIState
+    public class StunnedState : AIState, ITemporaryState
     {
         private float _elapsedTime;
         private const float TotalStunTime = 2.0f;

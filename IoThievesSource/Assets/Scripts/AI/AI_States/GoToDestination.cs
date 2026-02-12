@@ -1,12 +1,12 @@
 using System.Collections.Generic;
-
+using AI.AI_States.StateFamilies;
 using AI.NavigationAndWaypoints;
 using Unity.VisualScripting;
 using UnityEngine;
 
 namespace AI.AI_States
 {
-    public class GoToDestination : AIState
+    public class GoToDestination : AIState, IExclusiveState 
     {
         private Waypoint _Destination;
         private List<Waypoint> _waypoints;

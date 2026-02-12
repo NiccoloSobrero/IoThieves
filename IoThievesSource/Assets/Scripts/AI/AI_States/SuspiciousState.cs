@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using AI.AI_States.StateFamilies;
 using AI.NavigationAndWaypoints;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 namespace AI.AI_States
 {
-    public class SuspiciousState : AIState
+    public class SuspiciousState : AIState, ITemporaryState,IInterruptableState
     {
         private bool _verySuspicious = false;
         
@@ -50,7 +51,7 @@ namespace AI.AI_States
             
             _midpointReached = true;
             
-            _waitingTime = Mathf.Max(Random.value * MaxWaitingTime, 0.1f); //Random waiting time up to 3 seconds
+            _waitingTime = Mathf.Max(Random.value * MaxWaitingTime, 1.0f); //Random waiting time up to 3 seconds
         }
         
         public override void Execute()
@@ -210,6 +211,11 @@ namespace AI.AI_States
 
            _positionIndex = 0;
            NextDestination(); 
+        }
+
+        public bool CanBeInterruptedBy(AIState other)
+        {
+            return other is StunnedState;
         }
     }
 }

@@ -1,13 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.NetworkInformation;
+using AI.AI_States.StateFamilies;
 using AI.NavigationAndWaypoints;
 using Interactables;
 using UnityEngine;
 
 namespace AI.AI_States
 {
-    public class DeviceHackedState : AIState
+    public class DeviceHackedState : AIState, ITemporaryState,IInterruptableState, ISuspendable
     {
         
         private List<PointOfInterest> _hackedDevices = new  List<PointOfInterest>();
@@ -143,6 +144,16 @@ namespace AI.AI_States
         {
             Debug.Log("Device added");
             _hackedDevices.Add(pointOfInterest);
+        }
+
+        public void Suspend()
+        {
+            
+        }
+
+        public void Resume()
+        {
+            
         }
     }
 }

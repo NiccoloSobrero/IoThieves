@@ -1,11 +1,12 @@
 using System.Collections.Generic;
+using AI.AI_States.StateFamilies;
 using AI.NavigationAndWaypoints;
 using Unity.Cinemachine;
 using UnityEngine;
 
 namespace AI.AI_States
 {
-    public class NoiseHeardState : AIState
+    public class NoiseHeardState : AIState, ITemporaryState, IInterruptableState
     {
         private Transform _throwedObject;
         private List<Waypoint> _path;

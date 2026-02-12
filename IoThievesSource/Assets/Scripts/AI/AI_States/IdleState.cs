@@ -1,6 +1,8 @@
+using AI.AI_States.StateFamilies;
+
 namespace AI.AI_States
 {
-    public class IdleState :AIState
+    public class IdleState : AIState , IBaseState, IInterruptableState
     {
         public IdleState(AIController npc) : base(npc) {}
 
@@ -9,5 +11,6 @@ namespace AI.AI_States
         public override void Execute() {}
 
         public override void Exit() {}
+  
     }
 }

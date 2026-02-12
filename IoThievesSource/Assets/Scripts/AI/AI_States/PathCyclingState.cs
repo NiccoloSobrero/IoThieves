@@ -1,11 +1,12 @@
 using System;
 using System.Collections.Generic;
+using AI.AI_States.StateFamilies;
 using AI.NavigationAndWaypoints;
 using UnityEngine;
 
 namespace AI.AI_States
 {
-    public class PathCyclingState : AIState
+    public class PathCyclingState : AIState, IBaseState, IInterruptableState 
     {
         private List<Waypoint> _path;
         private int _idx = 0;

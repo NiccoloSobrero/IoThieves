@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using AI.AI_States;
+using AI.AI_States.StateFamilies;
 using UnityEngine;
 
 namespace AI
@@ -31,12 +33,19 @@ namespace AI
         #endregion
 
         [SerializeField] private AINames currentNpcStateName;
+        /*
         [SerializeField] private AINames previousNpcStateName;
         [SerializeField] private AINames previousRealNpcStateName;
+        */
         
+        private readonly Stack<StateStackElement> _stateStack = new Stack<StateStackElement>();
+
+       
         private AIState _currentState = null;
-        private AIState _previousState;
-        private AIState _previousRealState;
+        /*
+       private AIState _previousState;
+       private AIState _previousRealState;
+       */
         
         public WalkableArea WalkableArea => walkableArea;
 
@@ -81,17 +90,10 @@ namespace AI
                 gameObject.transform.rotation = _resetRotation;
                 Debug.Log(gameObject.name + " ---> RESTORED TO: " + transform.position);
             }
+            _stateStack.Clear();
+           
             
-            _currentState = null;
             _stateFactory = new StateFactory(this);
-            
-            _previousState = _stateFactory.GetState(AINames.Idle);
-            previousNpcStateName = AIUtilities.RetrieveAIName(_previousState);
-            
-            CurrentState = _stateFactory.GetState(AINames.Idle);
-            
-            _previousRealState = _stateFactory.GetState(AINames.Idle);
-            previousRealNpcStateName = AIUtilities.RetrieveAIName(_previousRealState);
             
             enemyAdapter.AnimationController.Initialize();
             walkableArea = gameObject.GetComponentInParent<WalkableArea>();
@@ -101,11 +103,13 @@ namespace AI
         
         private void Update()
         {
+            /*
             if (stun)
             {
                 ChangeState(AINames.StunnedState);
                 stun = false; 
             }
+            */
             CurrentState?.Execute();
         }
 
@@ -114,62 +118,107 @@ namespace AI
             return startState;
         }
         
-        public void ChangeState(AINames state)
+        public void ChangeState(AINames nextStateName)
         {
-            if(CurrentState is StunnedState stunnedState && state == AINames.StunnedState)
+            AIState nextState = _stateFactory.GetState(nextStateName);
+
+            if (nextState == CurrentState)
+                return;
+
+            if (CurrentState is not IInterruptableState &&
+                CurrentState is not null)
             {
-                stunnedState.ResetCounter();
+                return;
+            }
+
+            if (CurrentState is IInterruptableState interruptable &&
+                !interruptable.CanBeInterruptedBy(nextState))
+            {
                 return;
             }
             
-            if (CurrentState is GoToDestination) 
+            if (CurrentState is not IRecoveryState &&
+                CurrentState is not null)
             {
-                return;
+                _stateStack.Push(new StateStackElement(CurrentState, transform, CurrentState is IdleState));
             }
-
-            AIState targetState = _stateFactory.GetState(state);
-            if (targetState == CurrentState)
-                return;
-
-            CurrentState?.Exit();
-            _previousState = CurrentState;
-            previousNpcStateName = AIUtilities.RetrieveAIName(_previousState);
             
-            _previousRealState = CurrentState;
-            previousRealNpcStateName = AIUtilities.RetrieveAIName(_previousRealState);
+            //Questi stati sono tutti Base,Temporary,Interruptable
+            if (CurrentState is ISuspendable susp)
+                susp.Suspend();
+            else 
+                CurrentState?.Exit();
             
-            CurrentState = targetState;
-
-            lastPosition = transform.position;
-            if (_previousState is IdleState)
-            {
-                lastRotation = transform.rotation;
-                matchRotationWhenComingBack = true;
-            }
-            else
-                matchRotationWhenComingBack = false;
-
-            CurrentState?.Enter();
+            CurrentState = nextState;
+            CurrentState.Enter();
         }
+
 
         public void PreviousState()
         {
-           CurrentState?.Exit();
+            CurrentState?.Exit();
 
-           if (_currentState is BackToPreviousPosition)
-           {
-               (CurrentState, _previousState) = (_previousState, _previousRealState);
-           }
-           else if (_currentState is StunnedState)
-           {
-               CurrentState = _previousState;
-           }
-           else
-           {
-               (CurrentState, _previousState, _previousRealState) = (StateFactory.GetState(AINames.BackToPosition),_previousRealState, CurrentState);
-           }
-           CurrentState?.Enter();
+            //Se serve fare recovery 
+            if (CurrentState is not IRecoveryState && IsRecoveryNeeded())
+            {
+                CurrentState = _stateFactory.GetState(AINames.BackToPosition);
+                CurrentState.Enter();
+                return;
+            }
+            
+            //Eventuale fine della recovery
+            if (_stateStack.Count == 0)
+            {
+                CurrentState = _stateFactory.GetState(startState);
+                CurrentState.Enter();
+                return;
+            }
+            
+            StateStackElement element = _stateStack.Pop();
+            
+            transform.position = element.Position;
+            if(element.RotationNeeded)
+                transform.rotation = element.Rotation;
+
+            CurrentState = element.State;
+            
+            if (CurrentState is ISuspendable susp)
+                susp.Resume();
+            else
+                CurrentState.Enter();
+        }
+
+        private bool IsRecoveryNeeded()
+        {
+            if (_stateStack.TryPeek(out StateStackElement lastContext))
+            {
+                return Vector3.Distance(transform.position, lastContext.Position) < 0.01f;
+            }
+
+            return false;
+        }
+
+        public StateStackElement PeekPreviousContext()
+        {
+            return _stateStack.Peek();
         }
         
+        public struct StateStackElement
+        {
+            public AIState State;
+            public Vector3 Position;
+            public Quaternion Rotation;
+            public bool RotationNeeded;
+
+            public StateStackElement(AIState state, Transform t, bool hasRotation = false)
+            {
+                State = state;
+                Position = t.position;
+                Rotation = t.rotation;
+                RotationNeeded = hasRotation;
+            }
+        }
+
+
     }
 }

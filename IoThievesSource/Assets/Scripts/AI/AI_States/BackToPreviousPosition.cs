@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using AI.AI_States.StateFamilies;
 using AI.NavigationAndWaypoints;
 using UnityEngine;
 
 namespace AI.AI_States
 {
-    public class BackToPreviousPosition : AIState
+    public class BackToPreviousPosition : AIState, IRecoveryState, IInterruptableState
     {
         private Vector3 _finalDestination;
         private Waypoint _Destination;
@@ -14,7 +15,6 @@ namespace AI.AI_States
         
         private Quaternion _lastRotation;
         private bool _hasRotation = false;
-
 
         private bool _isMoving = false;
         private bool IsMoving
@@ -33,13 +33,14 @@ namespace AI.AI_States
 
         public override void Enter()
         {
-            _finalDestination = Npc.lastPosition;
-            Waypoint waypoint = AIUtilities.FindNearestWaypoint(_finalDestination);
+            var context = Npc.PeekPreviousContext();
+            _finalDestination = context.Position;
+            _hasRotation = context.RotationNeeded;
+            if(context.RotationNeeded)
+                _lastRotation = context.Rotation;
 
-            _hasRotation = Npc.matchRotationWhenComingBack;
-            if (_hasRotation)
-                _lastRotation = Npc.lastRotation;
-                
+            Waypoint waypoint = AIUtilities.FindNearestWaypoint(_finalDestination);
+            
             SetDestination(waypoint);
         }
         

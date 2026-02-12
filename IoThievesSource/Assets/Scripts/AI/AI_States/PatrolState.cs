@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using AI.AI_States.StateFamilies;
 using AI.NavigationAndWaypoints;
 using Managers;
 using UnityEngine;
@@ -7,7 +8,7 @@ using Random = UnityEngine.Random;
 
 namespace AI.AI_States
 {
-    public class PatrolState : AIState
+    public class PatrolState : AIState, IBaseState, IInterruptableState
     {
          private bool _isMoving = false; 
         
