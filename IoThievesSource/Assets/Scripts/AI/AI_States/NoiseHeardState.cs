@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace AI.AI_States
 {
-    public class NoiseHeardState : AIState, ITemporaryState, IInterruptableState
+    public class NoiseHeardState : AIState, ITemporaryState, IInterruptableState, ISuspendable
     {
         private Transform _throwedObject;
         private List<Waypoint> _path;

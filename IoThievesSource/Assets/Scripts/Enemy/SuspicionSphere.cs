@@ -47,5 +47,10 @@ namespace Enemy
                 alertManager.SetAlertedState(false);
             }
         }
+
+        public void EnableSphere(bool enable)
+        {
+            GetComponent<Collider>().enabled = enable;
+        }
     }
 }

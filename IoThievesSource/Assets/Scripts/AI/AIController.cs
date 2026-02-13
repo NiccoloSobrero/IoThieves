@@ -91,9 +91,10 @@ namespace AI
                 Debug.Log(gameObject.name + " ---> RESTORED TO: " + transform.position);
             }
             _stateStack.Clear();
-           
             
             _stateFactory = new StateFactory(this);
+
+            _currentState = null;
             
             enemyAdapter.AnimationController.Initialize();
             walkableArea = gameObject.GetComponentInParent<WalkableArea>();
@@ -103,13 +104,11 @@ namespace AI
         
         private void Update()
         {
-            /*
             if (stun)
             {
                 ChangeState(AINames.StunnedState);
                 stun = false; 
             }
-            */
             CurrentState?.Execute();
         }
 
@@ -123,8 +122,12 @@ namespace AI
             AIState nextState = _stateFactory.GetState(nextStateName);
 
             if (nextState == CurrentState)
+            {
+                if (CurrentState is StunnedState stun)
+                    stun.ResetCounter();
                 return;
-
+            }
+            
             if (CurrentState is not IInterruptableState &&
                 CurrentState is not null)
             {
@@ -158,11 +161,14 @@ namespace AI
         {
             CurrentState?.Exit();
 
+            Debug.Log("PreviousState : " + CurrentState?.GetType().Name);
             //Se serve fare recovery 
             if (CurrentState is not IRecoveryState && IsRecoveryNeeded())
             {
+                Debug.Log("I NEED A RECOVERY");
                 CurrentState = _stateFactory.GetState(AINames.BackToPosition);
                 CurrentState.Enter();
+                Debug.Log(gameObject.name + " ###> " +CurrentState.GetType().Name);
                 return;
             }
             
@@ -192,7 +198,10 @@ namespace AI
         {
             if (_stateStack.TryPeek(out StateStackElement lastContext))
             {
-                return Vector3.Distance(transform.position, lastContext.Position) < 0.01f;
+                Debug.Log(gameObject.name + "Got a context there ####> "+ lastContext);
+                Debug.Log(gameObject.name + " Actual position is " +  transform.position + "\n"
+                          + Vector3.Distance(transform.position, lastContext.Position));
+                return !(Vector3.Distance(transform.position, lastContext.Position) < 0.01f);
             }
 
             return false;
@@ -216,6 +225,11 @@ namespace AI
                 Position = t.position;
                 Rotation = t.rotation;
                 RotationNeeded = hasRotation;
+            }
+
+            public override string ToString()
+            {
+                return State.GetType().Name + " " + Position + " " + RotationNeeded + " " + Rotation;
             }
         }
 

@@ -17,6 +17,7 @@ namespace AI.AI_States
 
         public override void Enter()
         {
+            Debug.Log("Entering StunnedState");
             Npc.enemyAdapter.AnimationController.SetStunned(true);
             Npc.enemyAdapter.AnimationController.SetWalking(false);
             _elapsedTime = 0;
@@ -30,7 +31,7 @@ namespace AI.AI_States
             _billboard = Npc.enemyAdapter.AlertManager._billboardVisible;
             Npc.enemyAdapter.AlertManager.ShowAlertBillboard(false);
             
-            if (Npc.stunVfx != null)
+            if (Npc.stunVfx is not null)
             {
                 Vector3 spawnPos = Npc.transform.position + new Vector3(0, 2.2f, 0);
                 _vfx = Object.Instantiate(Npc.stunVfx, spawnPos, Quaternion.Euler(90,0,0));
@@ -58,7 +59,7 @@ namespace AI.AI_States
             Npc.enemyAdapter.AnimationController.SetStunned(false);
             Npc.enemyAdapter.AnimationController.SetWalking(false);
 
-            if (_vfx != null)
+            if (_vfx  is not null)
             {
                 Object.Destroy(_vfx);
                 _vfx = null;

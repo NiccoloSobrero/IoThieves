@@ -44,6 +44,7 @@ namespace AI
             SphereFOV.enabled = false;
             fovMesh.enabled = false;
             SuspicionSphere.enabled = false;
+            SuspicionSphere.EnableSphere(false);
             animationController.enabled = false;
         }
 
@@ -67,6 +68,8 @@ namespace AI
             
             animationController.Initialize();
             animationController.enabled = true;
+            
+            SuspicionSphere.EnableSphere(true);
         }
     }
 }

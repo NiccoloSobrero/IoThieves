@@ -89,16 +89,19 @@ namespace SuspicionSystem
             SetUpConstants();
             try
             {
-                EnemyAdapter?.AIController.Initialize();
+                //EnemyAdapter?.AIController.Initialize();
             }
             catch (Exception)
             {
                 // ignored
             }
-
-            Pause = false;
+            
+            ShowAlertBillboard(false);
+            IsPlayerInRange = false;
+            
             ChangeState(Level0State);
             
+            Pause = false;
             Initializing = false;
         }
 

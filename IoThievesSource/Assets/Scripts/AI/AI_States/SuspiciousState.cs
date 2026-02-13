@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 namespace AI.AI_States
 {
-    public class SuspiciousState : AIState, ITemporaryState,IInterruptableState
+    public class SuspiciousState : AIState, ITemporaryState,IInterruptableState, ISuspendable
     {
         private bool _verySuspicious = false;
         

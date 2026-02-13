@@ -2,7 +2,14 @@ namespace AI.AI_States.StateFamilies
 {
     public interface ISuspendable
     {
-        void Suspend();
-        void Resume();
+        public void Suspend()
+        {
+            
+        }
+
+        public void Resume()
+        {
+            
+        }
     }
 }
