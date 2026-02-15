@@ -125586,7 +125586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineRenderer: {fileID: 373355696}
   minigames:
-  - {fileID: 11400000, guid: 46f3562810d58184eb4096483976d25d, type: 2}
+  - {fileID: 11400000, guid: efb280a581a394145b9e50877da8582f, type: 2}
   redoCompletedMinigameAfterReopen: 1
   playerLayer:
     serializedVersion: 2
@@ -161196,8 +161196,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   outlineRenderer: {fileID: 883358817}
   minigames:
-  - {fileID: 11400000, guid: 334a165d5b7d33a4ca361ced117a5cd5, type: 2}
-  - {fileID: 11400000, guid: efb280a581a394145b9e50877da8582f, type: 2}
+  - {fileID: 11400000, guid: 46f3562810d58184eb4096483976d25d, type: 2}
   redoCompletedMinigameAfterReopen: 1
   playerLayer:
     serializedVersion: 2

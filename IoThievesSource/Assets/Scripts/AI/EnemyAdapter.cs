@@ -18,12 +18,16 @@ namespace AI
         [SerializeField] private SuspicionSphere suspicionSphere;
         [SerializeField] private NpcAnimationController animationController;
         
+        [Header("VFX")]
+        [SerializeField] private NpcVfxController npcVfxController;
+        
         public AlertManager AlertManager => alertManager;
         public AIController AIController => npc;
         public NpcTrigger NpcTrigger => SphereFOV;
         public EnemyFOVMesh FovMesh => fovMesh;
         public SuspicionSphere SuspicionSphere => suspicionSphere;
         public NpcAnimationController AnimationController => animationController;
+        public NpcVfxController NpcVfxController => npcVfxController;
 
         private void Awake()
         {
@@ -46,6 +50,8 @@ namespace AI
             SuspicionSphere.enabled = false;
             SuspicionSphere.EnableSphere(false);
             animationController.enabled = false;
+
+            npcVfxController?.StunVfx(false); //is not null OR !=null
         }
 
         private void ResetNpc()
@@ -70,6 +76,8 @@ namespace AI
             animationController.enabled = true;
             
             SuspicionSphere.EnableSphere(true);
+
+            npcVfxController?.Initialize(); //is not null OR !=null
         }
     }
 }

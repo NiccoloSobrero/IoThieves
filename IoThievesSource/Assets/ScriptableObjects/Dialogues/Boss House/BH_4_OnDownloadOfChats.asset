@@ -23,8 +23,8 @@ MonoBehaviour:
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: Now i'm pissed. Let's do some crimes >B ) \nI need you to steal something
-      and hack some devices for me.
+    text: Now i'm <i>pissed</i>. Let's do some crimes >B ) \nI need you to steal
+      something and hack some devices for me.
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
@@ -32,13 +32,13 @@ MonoBehaviour:
       Kenney action figuers. There are some around the house that worths a fortune. '
     tags: 
   - speakerName: Hacker
-    icon: {fileID: 21300000, guid: c4cb55bb1b421e94e9b8af299ed69aa8, type: 3}
-    text: Also, steal their coffee machine, the pot on the table in the living room,
-      and hack the son's pc. Just for fun...
+    icon: {fileID: 21300000, guid: 5ff570c2964bbe748bf7be2ffcc8bd95, type: 3}
+    text: Also, steal their coffee machine in the kitchen, the pot on the table in
+      the living room, and hack the son's pc. Just for fun...
     tags: 
   - speakerName: PIP
     icon: {fileID: 21300000, guid: 3e4ff024cd09fad41a6f1af4bf8b77be, type: 3}
-    text: ...ok? Why not. I don't care anymore.
+    text: ...ok? Sure, why not. I don't care anymore.
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: ad771f752afefa244b5c465f7173d61b, type: 3}
@@ -46,5 +46,5 @@ MonoBehaviour:
     tags: 
   - speakerName: Hacker
     icon: {fileID: 21300000, guid: ad771f752afefa244b5c465f7173d61b, type: 3}
-    text: 'We''ll be thieves of the Internet of Things. Let''s be IoThieves!!! '
+    text: We'll be thieves of the Internet of Things. Let's be <i><b>IoThieves!!!</b></i>
     tags: 

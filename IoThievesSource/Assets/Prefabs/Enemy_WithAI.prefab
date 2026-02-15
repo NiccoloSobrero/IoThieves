@@ -641,6 +641,7 @@ GameObject:
   - component: {fileID: 2574360286532377722}
   - component: {fileID: -996625976428397906}
   - component: {fileID: 6032443908299983884}
+  - component: {fileID: 141118776390623667}
   m_Layer: 7
   m_Name: Enemy_WithAI
   m_TagString: Untagged
@@ -707,6 +708,7 @@ MonoBehaviour:
   fovMesh: {fileID: 5884590623567349909}
   suspicionSphere: {fileID: 2302087526449798971}
   animationController: {fileID: 6032443908299983884}
+  npcVfxController: {fileID: 141118776390623667}
 --- !u!114 &-996625976428397906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,14 +722,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startState: 0
-  _NpcDatas: {fileID: 11400000, guid: d0919ccfc129a8641b53174e97264d32, type: 2}
-  _walkableArea: {fileID: 0}
+  npcDatas: {fileID: 0}
+  walkableArea: {fileID: 0}
   lastPosition: {x: 0, y: 0, z: 0}
   lastRotation: {x: 0, y: 0, z: 0, w: 0}
   enemyAdapter: {fileID: 2574360286532377722}
   stunVfx: {fileID: 555508651056883583, guid: b315d3b3441565149bf9e1328f7304f1, type: 3}
-  Stun: 0
-  _currentNpcStateName: 0
+  stun: 0
+  currentNpcStateName: 0
   matchRotationWhenComingBack: 0
 --- !u!114 &6032443908299983884
 MonoBehaviour:
@@ -743,6 +745,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 5998737358564386977}
   enemyAdapter: {fileID: 2574360286532377722}
+--- !u!114 &141118776390623667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4823917835425267373}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92fe57a583ca390498361a446c8577ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stunVfxPrefab: {fileID: 555508651056883583, guid: b315d3b3441565149bf9e1328f7304f1, type: 3}
 --- !u!1 &4945581270845159002
 GameObject:
   m_ObjectHideFlags: 0

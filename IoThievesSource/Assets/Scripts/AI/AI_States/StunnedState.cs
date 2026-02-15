@@ -30,13 +30,8 @@ namespace AI.AI_States
             
             _billboard = Npc.enemyAdapter.AlertManager._billboardVisible;
             Npc.enemyAdapter.AlertManager.ShowAlertBillboard(false);
-            
-            if (Npc.stunVfx is not null)
-            {
-                Vector3 spawnPos = Npc.transform.position + new Vector3(0, 2.2f, 0);
-                _vfx = Object.Instantiate(Npc.stunVfx, spawnPos, Quaternion.Euler(90,0,0));
-                _vfx.transform.SetParent(Npc.transform); 
-            }
+
+            Npc.enemyAdapter.NpcVfxController?.StunVfx(true); //is not null OR !=null
         }
 
         public override void Execute()
@@ -59,12 +54,8 @@ namespace AI.AI_States
             Npc.enemyAdapter.AnimationController.SetStunned(false);
             Npc.enemyAdapter.AnimationController.SetWalking(false);
 
-            if (_vfx  is not null)
-            {
-                Object.Destroy(_vfx);
-                _vfx = null;
-            }
-            
+            Npc.enemyAdapter.NpcVfxController?.StunVfx(false); //is not null OR !=null
+
             Npc.enemyAdapter.AlertManager.SetAlertedState(false);
         }
 
