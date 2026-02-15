@@ -60,22 +60,31 @@ namespace AI
             
             npc.enabled = true;
             npc.Initialize();
+            //Debug.Log(gameObject.name + " AICONTROLLER RESET ");
             
             alertManager.Initialize();
             alertManager.enabled = true;
+            //Debug.Log(gameObject.name + " ALERTMANAGER RESET ");
             
             SphereFOV.Initialize();
             SphereFOV.enabled = true;
+            //Debug.Log(gameObject.name + " NPCDeathTrigger RESET ");
             
             fovMesh.enabled = true;
+            fovMesh.gameObject.SetActive(true);
+            //Debug.Log(gameObject.name + " FOVMesh RESET ");
             
-            SuspicionSphere.Initialize();
             SuspicionSphere.enabled = true;
+            SuspicionSphere.gameObject.SetActive(true);
+            SuspicionSphere.Initialize();
+            //Debug.Log(gameObject.name + " SUSPICION SPHERE RESET ");
             
             animationController.Initialize();
             animationController.enabled = true;
+            //Debug.Log(gameObject.name + " AnimationController RESET ");
             
             SuspicionSphere.EnableSphere(true);
+            //Debug.Log(gameObject.name + " SUSPICION SPHERE ENABLED ");
 
             npcVfxController?.Initialize(); //is not null OR !=null
         }
