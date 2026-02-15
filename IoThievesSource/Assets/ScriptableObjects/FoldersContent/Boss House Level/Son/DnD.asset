@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: DnD
   m_EditorClassIdentifier: 
   folderItems:
-  - itemName: Muten
+  - itemName: Muten the Tortle
     itemType: 2
     icon: {fileID: 21300000, guid: 9a2bba3510d96ca47ad45ba79e13d177, type: 3}
     value: 0
     documentSprite: {fileID: 21300000, guid: 12f6d24c8c2520d4592fae6fbdc8bcfb, type: 3}
     folderContent: {fileID: 0}
-  - itemName: Astolfo
+  - itemName: 'Astolfo '
     itemType: 2
     icon: {fileID: 21300000, guid: 9a2bba3510d96ca47ad45ba79e13d177, type: 3}
     value: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
     value: 0
     documentSprite: {fileID: 21300000, guid: 72975c655ed1e0f4996e304c38b6d472, type: 3}
     folderContent: {fileID: 0}
-  - itemName: The Drunken Tortle
+  - itemName: The Drunken Tortle tavern
     itemType: 2
     icon: {fileID: 21300000, guid: 9a2bba3510d96ca47ad45ba79e13d177, type: 3}
     value: 0

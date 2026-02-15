@@ -146,6 +146,7 @@ namespace Levels
             hackableWasherOutline.SetActive(false);
 
             printerInteractable.gameObject.layer = (int)Mathf.Log(defaultLayer.value, 2);
+            pcInteractable.gameObject.layer = (int)Mathf.Log(defaultLayer.value, 2);
             
             lastHackableTriggerArea.SetActive(false);
         }

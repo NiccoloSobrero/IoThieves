@@ -15,6 +15,9 @@ namespace Levels
         [Header("References")]
         [SerializeField] private LevelObjectivesUI levelObjectivesUI;
         
+        [SerializeField] private LayerMask interactableLayer;
+        [SerializeField] private LayerMask defaultLayer;
+        
         [Header("Objectives")]
         [SerializeField] private LevelObjectiveScrObj findChatLogs;
         [SerializeField] private LevelObjectiveScrObj downloadFileFromSonPC;
@@ -48,7 +51,8 @@ namespace Levels
         [SerializeField] private DialogueLinesScrObj onChatDownloadDialogue;
         
         [Header("Download from son pc")]
-        // Dialogue?
+        [SerializeField] private GameObject pcSonInteractable;
+        [SerializeField] private GameObject pcSonInteractableOutline;
         
         [Header("Steal values from kitchen")]
         [SerializeField] private InteractToInvokeEvent kitchenValuesInteractable;
@@ -104,6 +108,9 @@ namespace Levels
             _stoleValuesFromKitchen = false;
             _stoleValuesFromLivingRoom = false;
             _stolePeluches = false;
+            
+            pcSonInteractableOutline.SetActive(false);
+            pcSonInteractable.gameObject.layer = (int)Mathf.Log(defaultLayer.value, 2);
         }
 
         protected override void Start()
@@ -246,6 +253,10 @@ namespace Levels
             DownloadsManager.Instance.onDownloadTargetFile.AddListener(OnDownloadedFileFromSonPC);
             
             kitchenValuesInteractable.SetEnabled(true);
+            
+            pcSonInteractable.layer = (int)Mathf.Log(interactableLayer.value, 2);
+            pcSonInteractableOutline.SetActive(true);
+            
             kitchenValuesInteractable.onInteract.AddListener(OnInteractWithKitchenValues);
             
             livingroomValuesInteractable.SetEnabled(true);
