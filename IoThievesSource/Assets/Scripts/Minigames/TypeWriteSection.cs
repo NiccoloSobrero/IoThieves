@@ -41,6 +41,9 @@ namespace Minigames
 
         private bool _isSelected;
 
+        private const float BlinkTime = 1f;
+        private float _blinkTimer;
+
         private void Awake()
         {
             _buttonSelectionListener = GetComponent<ButtonSelectionListener>();
@@ -69,6 +72,7 @@ namespace Minigames
             
             _index = 0;
             _isSelected = false;
+            _blinkTimer = BlinkTime;
 
             _typed = new char[textToType.Length];
             _correctAtIndex = new bool[textToType.Length];
@@ -79,6 +83,16 @@ namespace Minigames
         private void Update()
         {
             if (!_isSelected) return;
+            
+            if (_blinkTimer > 0f)
+            {
+                _blinkTimer -= Time.deltaTime;
+                if (_blinkTimer <= 0f)
+                {
+                    caretHighlight.enabled = !caretHighlight.enabled;
+                    _blinkTimer = BlinkTime;
+                }
+            }
             
             string input = Input.inputString;
             if (string.IsNullOrEmpty(input))

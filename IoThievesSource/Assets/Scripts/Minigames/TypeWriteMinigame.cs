@@ -21,6 +21,8 @@ namespace Minigames
             {
                 typeWriteSection.Init(this);
             }
+            
+            typingSections[0]?.OnSelect(null);
         }
 
         public void Send()
