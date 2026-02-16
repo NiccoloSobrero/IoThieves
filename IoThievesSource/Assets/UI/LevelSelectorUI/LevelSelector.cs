@@ -9,13 +9,13 @@ public class LevelSelector : MonoBehaviour
 
     private void OnEnable()
     {
-        EventsManager.OnEnterLevelSelection.AddListener(ShowLevelSelectionUI);
+        EventsManager.OnLevelSelectionEntered.AddListener(ShowLevelSelectionUI);
         HideLevelSelectionUI();
     }
     
     private void OnDisable()
     {
-        EventsManager.OnEnterLevelSelection.RemoveListener(ShowLevelSelectionUI);
+        EventsManager.OnLevelSelectionEntered.RemoveListener(ShowLevelSelectionUI);
     }
 
     private void ShowLevelSelectionUI()

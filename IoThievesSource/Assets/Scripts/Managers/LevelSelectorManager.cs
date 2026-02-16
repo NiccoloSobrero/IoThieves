@@ -201,6 +201,9 @@ namespace Managers
             SetLevelDescription(levelsScriptableObjects[_currentLevelIndex]);
             levelDetailsObj.SetActive(true);
             
+            // call event
+            EventsManager.OnLevelSelectionEntered?.Invoke();
+            
             PlayerInputManager.Instance.SetContext(InputContext.LevelSelection);
         }
     
