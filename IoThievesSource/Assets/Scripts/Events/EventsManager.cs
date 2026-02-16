@@ -35,6 +35,7 @@ namespace Events
         public static readonly UnityEvent<Level> OnPlayLevel = new();
         public static readonly UnityEvent<bool> OnBackToMainMenu = new();
         public static readonly UnityEvent OnEnterLevelSelection = new();
+        public static readonly UnityEvent OnLevelSelectionEntered = new();
         public static readonly UnityEvent OnSaveGame = new();
         public static readonly UnityEvent OnPauseGame = new();
         public static readonly UnityEvent OnResumeGame = new();
