@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI/LevelSelectorUI/level-selector.uss?fileID=7433441132597879392&amp;guid=c21e6db8684a183448cbf10a0c915b3b&amp;type=3#level-selector" />
+    <ui:VisualElement name="levelSelectorContainer" class="level-selector-container">
+        <ui:VisualElement name="leftArrowContainer" class="arrow-container">
+            <ui:Label name="leftArrowLabel" text="A" class="arrow-label" />
+            <ui:Image name="leftArrowImage" class="arrow-image left-arrow-image" />
+        </ui:VisualElement>
+        <ui:VisualElement name="rightArrowContainer" class="arrow-container">
+            <ui:Label name="rightArrowLabel" text="D" class="arrow-label" />
+            <ui:Image name="rightArrowImage" class="arrow-image right-arrow-image" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

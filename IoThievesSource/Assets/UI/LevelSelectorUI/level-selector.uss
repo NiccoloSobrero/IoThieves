@@ -1,0 +1,56 @@
+.level-selector-container {
+    /*border-width: 1px;*/
+    /*border-color: red;*/
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow-container {
+    /*border-width: 1px;*/
+    /*border-color: blue;*/
+    /*height: 20%;*/
+    /*width: 10%;*/
+    flex-direction: column;
+    margin-left: 20px;
+    margin-right: 20px;
+    transform-origin: 50% 50%;
+    
+}
+
+.arrow-label {
+    /*border-width: 1px;*/
+    /*border-color: greenyellow;*/
+    font-size: 64px;
+    align-self: center;
+    -unity-font-definition: url("../../Fonts/JetBrainsMono-VariableFont_wght.ttf");
+    color: #33ff33;
+
+    scale: 1.0;
+
+    transition-property: scale;
+    transition-duration: 1.2s;
+    transition-timing-function: ease-in-out;
+
+    /* This makes it alternate automatically */
+    transition-delay: 0s;
+}
+
+.arrow-image {
+    /*border-width: 1px;*/
+    /*border-color: deeppink;*/
+    background-image: url(project://database/Assets/Art/Sprites/icons/arrow.png);
+    width: 48px;
+    height: 48px;
+    -unity-background-image-tint-color: #33ff33;
+}
+
+.left-arrow-image {
+    rotate: 90deg;
+}
+
+.right-arrow-image {
+    rotate: -90deg;
+}
