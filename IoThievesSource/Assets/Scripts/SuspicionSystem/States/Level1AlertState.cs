@@ -20,7 +20,7 @@ namespace SuspicionSystem.States
 
         public override void Enter(AlertManager ctx)
         {
-            Debug.Log("Entered Level1AlertState");
+            // Debug.Log("Entered Level1AlertState");
             ctx.ShowAlertBillboard(true);
 
             try
@@ -39,7 +39,7 @@ namespace SuspicionSystem.States
 
         public override void Exit(AlertManager ctx)
         {
-            Debug.Log("Exited Level1AlertState");
+            // Debug.Log("Exited Level1AlertState");
         }
 
         public override void Tick(AlertManager ctx, float dt)

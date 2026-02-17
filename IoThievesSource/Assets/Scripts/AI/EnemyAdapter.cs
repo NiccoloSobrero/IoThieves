@@ -42,7 +42,7 @@ namespace AI
 
         private void DisableAll()
         {
-            Debug.Log(gameObject.name + " DisableAll");
+            // Debug.Log(gameObject.name + " DisableAll");
             npc.enabled = false;
             alertManager.enabled = false;
             SphereFOV.enabled = false;
@@ -56,35 +56,35 @@ namespace AI
 
         private void ResetNpc()
         {
-            Debug.Log(gameObject.name + " Resetting Npc");
+            // Debug.Log(gameObject.name + " Resetting Npc");
             
             npc.enabled = true;
             npc.Initialize();
-            //Debug.Log(gameObject.name + " AICONTROLLER RESET ");
+            //// Debug.Log(gameObject.name + " AICONTROLLER RESET ");
             
             alertManager.Initialize();
             alertManager.enabled = true;
-            //Debug.Log(gameObject.name + " ALERTMANAGER RESET ");
+            //// Debug.Log(gameObject.name + " ALERTMANAGER RESET ");
             
             SphereFOV.Initialize();
             SphereFOV.enabled = true;
-            //Debug.Log(gameObject.name + " NPCDeathTrigger RESET ");
+            //// Debug.Log(gameObject.name + " NPCDeathTrigger RESET ");
             
             fovMesh.enabled = true;
             fovMesh.gameObject.SetActive(true);
-            //Debug.Log(gameObject.name + " FOVMesh RESET ");
+            //// Debug.Log(gameObject.name + " FOVMesh RESET ");
             
             SuspicionSphere.enabled = true;
             SuspicionSphere.gameObject.SetActive(true);
             SuspicionSphere.Initialize();
-            //Debug.Log(gameObject.name + " SUSPICION SPHERE RESET ");
+            //// Debug.Log(gameObject.name + " SUSPICION SPHERE RESET ");
             
             animationController.Initialize();
             animationController.enabled = true;
-            //Debug.Log(gameObject.name + " AnimationController RESET ");
+            //// Debug.Log(gameObject.name + " AnimationController RESET ");
             
             SuspicionSphere.EnableSphere(true);
-            //Debug.Log(gameObject.name + " SUSPICION SPHERE ENABLED ");
+            //// Debug.Log(gameObject.name + " SUSPICION SPHERE ENABLED ");
 
             npcVfxController?.Initialize(); //is not null OR !=null
         }

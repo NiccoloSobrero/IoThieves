@@ -12,7 +12,7 @@ public class WalkableArea : MonoBehaviour
     private void Awake()
     {
        _area = GetComponent<Collider>(); 
-       Debug.Log(_area);
+       // Debug.Log(_area);
        Waypoint[] waypoints = FindObjectsByType<Waypoint>(FindObjectsInactive.Exclude, FindObjectsSortMode.None);
        foreach (var wp in waypoints)
        {

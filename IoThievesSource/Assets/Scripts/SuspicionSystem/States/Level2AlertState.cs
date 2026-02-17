@@ -27,16 +27,16 @@ namespace SuspicionSystem.States
             }
             catch(Exception e)
             {
-               Debug.LogException(e); 
+               // Debug.LogException(e); 
             }
             
             
-            Debug.Log("Entered Level2AlertState");
+            // Debug.Log("Entered Level2AlertState");
         }
 
         public override void Exit(AlertManager ctx)
         {
-            Debug.Log("Exited Level2AlertState");
+            // Debug.Log("Exited Level2AlertState");
         }
 
         public override void Tick(AlertManager ctx, float dt)

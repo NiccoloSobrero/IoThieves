@@ -17,7 +17,7 @@ namespace AI.AI_States
 
         public override void Enter()
         {
-            Debug.Log("Entering StunnedState");
+            // Debug.Log("Entering StunnedState");
             Npc.enemyAdapter.AnimationController.SetStunned(true);
             Npc.enemyAdapter.AnimationController.SetWalking(false);
             _elapsedTime = 0;

@@ -47,13 +47,13 @@ namespace Interactables
             Collider[] colliders = new Collider[10];
             var size = Physics.OverlapBoxNonAlloc(_cubePos, _cubeExtents, colliders, _cubeColl.transform.rotation, affectedLayer.value, QueryTriggerInteraction.Ignore);
 
-            print("I hit " +size + " enemies " );
+            // print("I hit " +size + " enemies " );
             for (int i = 0 ; i<size; i++)
             {
                 AIController ai = colliders[i].GetComponentInParent<AIController>();
                 if (ai is not null)
                 {
-                    Debug.Log("AIController found: " + colliders[i].name);
+                    // Debug.Log("AIController found: " + colliders[i].name);
                     ai.ChangeState(AINames.StunnedState);
                 }
             }

@@ -18,7 +18,7 @@ namespace SuspicionSystem.States
 
         public override void Enter(AlertManager ctx)
         {
-            Debug.Log("Entered Level0AlertState");
+            // Debug.Log("Entered Level0AlertState");
             ctx.ShowAlertBillboard(false);
 
             try
@@ -26,7 +26,7 @@ namespace SuspicionSystem.States
                 AIController aiController = ctx.EnemyAdapter.AIController;
                 if (ctx.Initializing)
                 {
-                    Debug.Log(" STARTING STATE");
+                    // Debug.Log(" STARTING STATE");
                     aiController.ChangeState(aiController.GetStartState());
                 }
                 else 
@@ -34,15 +34,15 @@ namespace SuspicionSystem.States
             }
             catch (NullReferenceException)
             {
-                Debug.Log(ctx.gameObject.name + " HAS NO AI CONTROLLER");
-                //Debug.LogException(e);
+                // Debug.Log(ctx.gameObject.name + " HAS NO AI CONTROLLER");
+                //// Debug.LogException(e);
             }
             
         }
 
         public override void Exit(AlertManager ctx)
         {
-            Debug.Log("Exited Level0AlertState");
+            // Debug.Log("Exited Level0AlertState");
         }
 
         public override void Tick(AlertManager ctx, float dt)

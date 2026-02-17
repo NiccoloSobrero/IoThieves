@@ -50,7 +50,7 @@ namespace AI
             var stereoDir = stereo.transform.position - dancingPosition;
             DancingYRotation = Mathf.Atan2(stereoDir.x, stereoDir.z) * Mathf.Rad2Deg;
             
-            Debug.Log("DancingYRotation : "+ DancingYRotation+"\nStartingYRotation : " + StartingYRotation);
+            // Debug.Log("DancingYRotation : "+ DancingYRotation+"\nStartingYRotation : " + StartingYRotation);
             startingPosition = transform.position;
            dancingPosition.y =  transform.position.y;
            
@@ -60,14 +60,14 @@ namespace AI
         {
             if (stereo.IsPlayingMusic)
             {
-                //Debug.Log("Stereo? "+ stereo.IsPlayingMusic);
+                // Debug.Log("Stereo? "+ stereo.IsPlayingMusic);
                 if(Vector3.Distance(transform.position, dancingPosition) > 0.1f){   //You must reach the dancing area
                     IsMoving = true;
                     PlanMovement(dancingPosition);
                 }
                 else
                 {                                                                   //Alor on dance
-                    Debug.Log("rotate towards the stereo");
+                    // Debug.Log("rotate towards the stereo");
                     IsMoving = false;
                     PlanRotation(DancingYRotation);
                     IsDancing = true;
@@ -76,7 +76,7 @@ namespace AI
             }
             else  // stereo is off
             {
-                //Debug.Log("Stereo? "+ stereo.IsPlayingMusic);
+                // Debug.Log("Stereo? "+ stereo.IsPlayingMusic);
                 if (IsDancing)              //Stop dancing
                 {
                     IsDancing = false;

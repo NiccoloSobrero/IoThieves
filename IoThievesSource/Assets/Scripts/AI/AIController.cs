@@ -76,19 +76,19 @@ namespace AI
             _resetPosition = transform.position;
             _resetRotation = transform.rotation;
             
-            Debug.Log(gameObject.name + ": Awake WITH POSITIONS = " + transform.position);
+            // Debug.Log(gameObject.name + ": Awake WITH POSITIONS = " + transform.position);
         }
         
      
         public void Initialize()
         {
-            Debug.Log(gameObject.name + " -->  Initializing AI Controller");
+            // Debug.Log(gameObject.name + " -->  Initializing AI Controller");
             
             if (_resetPosition != Vector3.zero || gameObject.activeSelf)
             {
                 gameObject.transform.position = _resetPosition;
                 gameObject.transform.rotation = _resetRotation;
-                Debug.Log(gameObject.name + " ---> RESTORED TO: " + transform.position);
+                // Debug.Log(gameObject.name + " ---> RESTORED TO: " + transform.position);
             }
             _stateStack.Clear();
             
@@ -161,14 +161,14 @@ namespace AI
         {
             CurrentState?.Exit();
 
-            Debug.Log("PreviousState : " + CurrentState?.GetType().Name);
+            // Debug.Log("PreviousState : " + CurrentState?.GetType().Name);
             //Se serve fare recovery 
             if (CurrentState is not IRecoveryState && IsRecoveryNeeded())
             {
-                Debug.Log("I NEED A RECOVERY");
+                // Debug.Log("I NEED A RECOVERY");
                 CurrentState = _stateFactory.GetState(AINames.BackToPosition);
                 CurrentState.Enter();
-                Debug.Log(gameObject.name + " ###> " +CurrentState.GetType().Name);
+                // Debug.Log(gameObject.name + " ###> " +CurrentState.GetType().Name);
                 return;
             }
             
@@ -198,9 +198,9 @@ namespace AI
         {
             if (_stateStack.TryPeek(out StateStackElement lastContext))
             {
-                Debug.Log(gameObject.name + "Got a context there ####> "+ lastContext);
-                Debug.Log(gameObject.name + " Actual position is " +  transform.position + "\n"
-                          + Vector3.Distance(transform.position, lastContext.Position));
+                // Debug.Log(gameObject.name + "Got a context there ####> "+ lastContext);
+                // Debug.Log(gameObject.name + " Actual position is " +  transform.position + "\n"
+                //           + Vector3.Distance(transform.position, lastContext.Position));
                 return !(Vector3.Distance(transform.position, lastContext.Position) < 0.01f);
             }
 
@@ -232,7 +232,5 @@ namespace AI
                 return State.GetType().Name + " " + Position + " " + RotationNeeded + " " + Rotation;
             }
         }
-
-
     }
 }

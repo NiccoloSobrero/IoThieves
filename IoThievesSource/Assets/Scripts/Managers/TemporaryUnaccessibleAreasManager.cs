@@ -17,7 +17,7 @@ namespace Managers
             {
                 instance = this;
                 _collider = GetComponents<Collider>(); 
-                Debug.Log("I found "+ _collider.Length + " areas to protect ");
+                // Debug.Log("I found "+ _collider.Length + " areas to protect ");
             }
             else
                 Destroy(gameObject);
