@@ -49,8 +49,8 @@ namespace AI.AI_States
         {
             if (!_hasDestination)
             {
-                // if (!_hasRotation)
-                //     Npc.Debug.Log();
+                if (!_hasRotation)
+                    Npc.PreviousState();
 
                 float maxStep = Npc.NpcDatas.AngularSpeed * Time.deltaTime *45.0f;
 
@@ -104,7 +104,7 @@ namespace AI.AI_States
         {
             if (_waypoints is null || _waypoints.Count == 0)
             {
-                // Npc.Debug.Log();
+                Npc.PreviousState();
                 return;
             }
 
@@ -127,7 +127,7 @@ namespace AI.AI_States
                 _hasDestination = false;
                 if (!_hasRotation)
                 {
-                    // Npc.Debug.Log();
+                    Npc.PreviousState();
                 }
 
                 return;
