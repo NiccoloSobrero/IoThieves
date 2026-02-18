@@ -14,8 +14,6 @@ namespace Levels
 {
     public class TutorialLevelManager : MonoBehaviour
     {
-        private static readonly int Open = Animator.StringToHash("Open");
-
         [Header("Objectives")] 
         [SerializeField] private LevelObjectivesUI levelObjectivesUI;
         [SerializeField] private LevelObjectiveScrObj objective1;
@@ -403,7 +401,7 @@ namespace Levels
             
             hackableWasherInteractable.onInteract.AddListener(OnHackableWasherInteract);
 
-            shuttersAnim.SetTrigger(Open);
+            shuttersAnim.SetTrigger("Open");
             
             // Move player to safe spot
             playerController.MoveTowards(playerTargetPos.position);

@@ -1,15 +1,13 @@
-using System;
 using System.Collections.Generic;
-using Unity.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace AI.NavigationAndWaypoints
 {
     public class Waypoint : MonoBehaviour
     {
         [SerializeField] public List<Waypoint> neighbours;
-      /*  private void OnDrawGizmos()
+
+        /*  private void OnDrawGizmos()
         {
             if (neighbours == null) return;
     

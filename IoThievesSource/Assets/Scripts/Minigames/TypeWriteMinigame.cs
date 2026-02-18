@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Events;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +15,16 @@ namespace Minigames
         private TypeWriteSection _lastSelectedSection;
 
         [HideInInspector] public UnityEvent onSendComplaint;
+
+        private void OnEnable()
+        {
+            EventsManager.OnGameOverTriggered.AddListener(() => typingSections[_currentIndex].OnDeselect(null));
+        }
+        
+        private void OnDisable()
+        {
+            EventsManager.OnGameOverTriggered.RemoveListener(() => typingSections[_currentIndex].OnDeselect(null));
+        }
 
         public void Init()
         {
