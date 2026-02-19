@@ -82,7 +82,7 @@ public class TerminalMainMenu : TerminalMenu
     private void PrintStartMainMenu()
     {
         PrintLine($"iothieves@kali:~$ {IothievesScan}");
-        PrintLine("");
+        // PrintLine("");
         // PrintLine("IoThieves v0.1.2");
         PrintBanner(Utility.IoThievesArt);
         PrintLine("Copyright (c) 2025");
@@ -92,7 +92,8 @@ public class TerminalMainMenu : TerminalMenu
         PrintColumns("AI:", "Federico Tabellini");
         PrintColumns("UI:", "Emanuele Sapio");
                 
-        PrintLine("Polimi Game Collective");
+        // PrintLine("Polimi Game Collective");
+        PrintLine("Developed for the Videogame Design and Programming course of the Politecnico di Milano \ntaught by Prof. Pierluca Lanzi & Prof. Daniele Loiacono.");
     }
 
     private void StartLoading()
