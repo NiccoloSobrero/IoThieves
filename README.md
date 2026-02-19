@@ -1,197 +1,229 @@
 # Game Design Document: IoThieves                                
-
-<pre>
+<blockquote>
+<samp>
+  
 iothieves@kali:~$ iothieves --scan 192.168.200.0/24
+  
+<br>
 
 <img width="1070" height="240" alt="IoThieves_logo" src="https://github.com/user-attachments/assets/7800168a-a720-4a57-b17c-53daa18cb6c6" />
-                                                  
-Copyright (c) 2025
-Team Leader: Niccolò Sobrero                          
-Designer: Matilde Sobberi                          
-Architect: Daniel Bonardi                             
-AI: Federico Tabellini                                
-UI: Emanuele Sapio   
 
-<b>Polimi Game Collective</b> [████████████████████████████████████] 100%
+<br>
+&nbsp;
+<br>  
 
-------------------------------------------------------------------------------------------------------------------
-<b>> INITIALIZING MISSION_LOG...</b>
-<b>> ACCESSING PROJECT_IO_THIEVES...</b>
-------------------------------------------------------------------------------------------------------------------
-<h2><b>[OVERVIEW AND VISION STATEMENT]</b></h2> 
-It's the 20XX. Technology has spread across the globe—everything is 
-connected to the internet, and smart devices have become integral to 
-daily life. But this hyperconnected world has created new opportunities 
-for theft.
+### Copyright (c) 2025 <br>
+&gt; **Team Leader**: Niccolò Sobrero                          
+&gt; **Designer**: Matilde Sobberi                        
+&gt; **Architect**: Daniel Bonardi                             
+&gt; **AI**: Federico Tabellini                                
+&gt; **UI**: Emanuele Sapio   
 
-You're an ordinary person, just fired from your job by a wealthy, 
-arrogant boss. Furious and desperate for revenge, you decide to 
-infiltrate his life and expose his secrets. But you can't do it alone. 
-So you build <b>PIP</b>—your Personal Infiltration Prototype—a stealth 
-robot that will be your partner in crime.
+<br>
 
-Armed with hacking skills and a loyal bot, you'll sneak into homes 
-and offices, hack smart devices to distract their owners, and steal 
-data that will bring them down. But be careful: if you're 
-spotted, it's game over. Can you pull off the heist without getting 
-caught?
+**Polimi Game Collective** [████████████████████████████████████] 100%
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+**> INITIALIZING MISSION_LOG...** <br>
+**> ACCESSING PROJECT_IO_THIEVES...** 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## [OVERVIEW AND VISION STATEMENT] 
+It's the 20XX. Technology has spread across the globe—everything is connected to the internet, and smart devices have become integral to daily life. But this hyperconnected world has created new opportunities for theft.
+
+You're an ordinary person, just fired from your job by a wealthy, arrogant boss. <br>
+Furious and desperate for revenge, you decide to infiltrate his life and expose his secrets. But you can't do it alone. So you build **_PIP_**, your **_Personal Infiltration Prototype_**, a stealth robot that will be your partner in crime.
+
+Armed with hacking skills and a loyal bot, you'll sneak into homes and offices, hack smart devices to distract their owners, and steal data that will bring them down. But be careful: if you're spotted, it's **GAME OVER**. <br>
+Can you pull off the heist without getting caught?
  
-<h3><b>Genre:</b></h3>> Isometric Stealth
-> Puzzle game
-> Story-driven
-> Low-poly
+### Genre:
+&gt; Isometric Stealth <br>
+&gt; Puzzle game <br>
+&gt; Story-driven <br>
+&gt; Low-poly 
 
-<h3><b>Players:</b></h3>> Single player
 
-------------------------------------------------------------------------------------------------------------------
-<h2><b>[ Technical Specs ]</b></h2><h3><b>Game view:</b></h3>> 3D, isometric, low-poly
-    > <i>Visual Style:</i> Cartoonish rendering with bright, soft colors 
-      and subtle shadows. Low-poly models with minimalistic shapes.
+### Players:
+&gt; Single player
 
-<h3><b>Language:</b></h3> Unity - C# 
-<h3><b>Platform:</b></h3> PC - WebGL
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## [ Technical Specs ]
+### Game view:
+&gt; 3D, isometric, low-poly <br>
+&nbsp;&nbsp; &gt; _Visual Style:_ Cartoonish rendering with bright, soft colors and subtle shadows. <br>
+&nbsp;&nbsp;&nbsp;&nbsp; Low-poly models with minimalistic shapes.
 
-------------------------------------------------------------------------------------------------------------------
-<h2><b>[ GAMEPLAY ]</b></h2><h3><b>Game Flow</b></h3>The game is structured in multiple consecutive levels. Inside each level 
-the player must explore the environment to find an item which is 
-compelling with the story.
+### Language:
+&gt; Unity - C#
 
-The item may not be stated at the beginning of the level forcing the 
-player to explore the map to find it. Once the item is found a message 
-is given to the player. After that the player can .....
-<!--
-Inside each level there are multiple npcs around and the player must hack various devices to distract them and sneak around without being caught. To hack a device the player click on it. Each hacked device has a different behaviour. 
+### Platform:
+&gt; PC - WebGL
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## [ GAMEPLAY ]
+### Game Flow
+The game is structured across three consecutive levels. <br>
+Within each level, the player must explore the environment to find specific items necessary to complete the level objectives, compelled with the story. <br>
+
+Some objectives are revealed sequentially as the player advances. Once an objective is successfully fulfilled, the next task is triggered. This cycle continues until the final objective is reached: _finding the exit and escaping the level._  <br>
+
+Each level is populated by NPCs patrolling the area; the core mechanic of the game involves hacking the IoT devices to distract or bypass them. The player must strategically interact with the environment to sneak around without being caught. Every hackable device possesses a unique behavior, requiring the player to adapt their tactics based on the available technology in each room. <br>
+
+Walking too closely to the NPCs may increase the their suspicion level and put them in alert state. If a certain threshold is exceeded, the player is detected, resulting in an immediate Game Over. In this event, the player can restart from the most recent checkpoint.
+
+<br>
+
+There are 2 main categories of objets: <br> <br>
+**Interactable objects:** <br>
+   &gt; **Throwable:** distract enemies <br>
+   &gt; **Pick-ups:** collectables <br>
+   &gt; **Minigame:** starts a minigame interaction <br>
+
+   <br>
  
-may increase the suspicion of the npcs and put them in alarm and if a certain threshold is exceeded they will find the player causing a game over and making him restart the level. 
--->
-There are 2 main categories of objets:
-<b>1) Interactable objects:</b> 
-   > <b>Throwable:</b> distract enemies
-   > <b>Pick-ups:</b> collectables
-   > <b>Minigame:</b> starts a minigame interaction
+**Hackable objects:** <br>
+   &gt; **Attract:** redirects enemies path <br>
+   &gt; **Stun:** stuns NPCs if activated nearby  <br>
+   &gt; **Minigame:** starts a hacking minigame <br>
+   &gt; **Downloadable:** collectables inside the PCs <br>
+
+<br>
+
+**Hackable Devices List:** <br>
+ &gt; PCs (minigame) <br>
+ &gt; Washing Machine (attract) <br>
+ &gt; ACs (stunning) <br>
+ &gt; Printers (generate the throwable) <br>
+ &gt; Alexa (attract) <br>
+ &gt; Blender (stunning) <br>
+ &gt; Kitchen hood (stunning) <br>
+
+ <br>
+
+ **Interactable Devices List:** <br>
+ &gt; Keypad (minigame)  <br>
+ &gt; Printers (throwable)<br>
+ &gt; Cup (throwable) <br>
+ &gt; Crowbar (objective) <br>
+ &gt; Books (throwable)  <br>
+ &gt; Toilet Paper (throwable) <br>
+ &gt; Key (objective) <br>
+ &gt; Peluches (objective) <br>
+ &gt; Car (objective) <br>
+
+<br>
  
-<b>2) Hackable objects:</b>
-   > <b>Attract:</b> redirects enemies path
-   > <b>Stun:</b> stuns NPCs if activated nearby
-   > <b>Minigame:</b> starts a hacking minigame
-   > <b>Downloadable:</b> collectables inside the PCs
+### Core Mechanics
+&gt; **Hacking system:** Select devices to hack and distract/stun NPCs. <br>
+&gt; **Suspicion system:** Increases when PIP walk near NPCs and make the NPCs patrolling around. <br>
+  &nbsp;&nbsp; &gt; Past a certain suspicion threshold is Instant Game Over. <br>
+  &nbsp;&nbsp; &gt; There are 2 possible alert states: yellow and red. <br>
+      &nbsp;&nbsp; &nbsp;&nbsp; &gt; yellow alert state starts when the player goes near the NPC. It makes NPCs start patrolling. <br>
+      &nbsp;&nbsp; &nbsp;&nbsp; &gt; red alert state make NPCs patrolling around faster. <br>
+&gt; **Minigame:** Puzzle game that starts when you interact with some hackable and interactable devices: <br>
+  &nbsp;&nbsp; &gt; _Keypad Insertion:_ insert a code into the Keypad. <br>
+  &nbsp;&nbsp; &gt; _Password Decryptor_: find the password to access the pc. <br>
+  &nbsp;&nbsp; &gt; _Desktop Navigation:_ navigate the folders and download files. <br>
+  &nbsp;&nbsp; &gt; _HR Complaint:_ write a complaint on your Boss. <br>
 
-<b>Hackable Devices List:</b>
- - PCs (minigame)
- - Washing Machine (attract)
- - ACs (stunning)
- - Printers (generate the throwable)
- - Alexa (attract)
- - Blender (stunning)
- - Kitchen hood (stunning)
+### Player Actions 
+&gt; **Interactions:** Point and click (mouse) <br>
+&gt; **Hacking:** Point and click (mouse) <br>
+&gt; **Typing:** keyboard <br>
+&gt; **Player Movement:** WASD (keyboard) <br>
+&gt; **Camera Movement:** Automatically follows the player <br>
 
- <b>Interactable Devices List:</b>
- - Keypad (minigame) 
- - Printers (throwable)
- - Cup (throwable)
- - Crowbar (objective)
- - Books (throwable) 
- - Toilet Paper (throwable)
- - Key (objective)
- - Peluches (objective)
- - Car (objective)
- 
-<h3><b>Core Mechanics</b></h3>> <b>Hacking system:</b> Select devices to hack and distract/stun NPCs.
-> <b>Suspicion system:</b> Increases when PIP walk near NPCs and make the NPCs patrolling around
-  > Past a certain suspicion threshold is Instant Game Over.
-  > There are 2 possible alert states: yellow and red.
-     > yellow alert state starts when the player goes near the NPC. It makes NPCs start patrolling
-     > red alert state make NPCs patrolling around faster
-> <b>Minigame:</b> Puzzle game that starts when you interact with some hackable and interactable devices:
-  > Keypad Insertion: insert a code into the Keypad
-  > Password Decryptor: find the password to access the pc
-  > Desktop Navigation: navigate the folders and download files
-  > HR Complaint: write a complaint on your Boss
- 
-<h3><b>Player Actions</b></h3>> <b>Interactions:</b> Point and click (mouse)
-> <b>Hacking:</b> Point and click (mouse)
-> <b>Typing:</b>b> keyboard 
-> <b>Player Movement:</b> WASD (keyboard)
-> <b>Camera Movement:</b> Automatically follows the player 
+### Challenges 
+&gt; Strategic Path <br>
+&gt; Level Goals <br>
+&gt; Puzzle Solving <br>
 
-<h3><b>Challenges</b></h3>> Strategic Path
-> Level Goals
-> Puzzle Solving
-
-<h3><b>Win and lose conditions:</b></h3>
-> <b>Win conditions:</b>
-  > Complete the level objectives
-> <b>Lose conditions:</b>
-  > Being spotted by a NPC
-  > Suspicion system reaches a certain threshold
+### Win and lose conditions:
+&gt; **Win conditions:** <br>
+  &nbsp;&nbsp; &gt; Complete the level objectives <br>
+&gt; **Lose conditions:** <br>
+  &nbsp;&nbsp; &gt; Being spotted by a NPC <br>
+  &nbsp;&nbsp; &gt; Suspicion system reaches a certain threshold <br>
   
-------------------------------------------------------------------------------------------------------------------
-<h2><b>[ LEVEL DESIGN ]</b></h2><h3><b>Structure:</b></h3>>The gameplay is story-driven, so the levels are connected by the lore of the game.
-<h3><b>Levels:</b></h3>
- > Garage
- > HR Offices
- > Boss House
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## [ LEVEL DESIGN ]
+### Structure:
+&gt; The gameplay is story-driven, so the levels are connected by the lore of the game.
 
-<h3><b>Level progression</b></h3>> <b>Devices</b>: Start with few devices to interact with, then new devices with different behaviours are introduced.
- > <b>Enemies</b>: Start on easy levels with few enemies to handle, later levels will require handling more enemies. 
-    > Paths: NPCs have their own routine, but it will be disrupted by the increase of suspicion level 
-over a certain treshold, that change their state to patrolling/alert. 
-    > Suspicion system: In easy levels each person has an individual suspicion level.
-        > Avoiding alerted NPCs decreases the suspicion level with time.
-> More level goals to achieve before leaving the level.
+### Levels:
+ &gt; Garage <br>
+ &gt; HR Offices <br>
+ &gt; Boss House <br>
 
-------------------------------------------------------------------------------------------------------------------
-<h2><b>User Interface</b></h2>> <b>Main Menu</b>
-> <b>In-Game Interface</b>
-  > World Interface (MAP)
-  > Gameover menu
-  > Pause level menu
-  > End level menu
-  > Minigame Interface
-    > Keypad 
-    > Password Decryptor
-    > Desktop 
-    > HR Complaint
+### Level progression
+&gt; **Devices:** Start with few devices to interact with, then new devices with different behaviours are introduced. <br>
+&gt; **Enemies:** Start on easy levels with few enemies to handle, later levels will require handling more enemies. <br>
+  &nbsp;&nbsp; &gt; Paths: NPCs have their own routine, but it will be disrupted by the increase of suspicion level 
+over a certain treshold, that change their state to patrolling/alert. <br>
+  &nbsp;&nbsp; &gt; Suspicion system: In easy levels each person has an individual suspicion level. <br>
+        &nbsp;&nbsp; &nbsp;&nbsp; &gt; Avoiding alerted NPCs decreases the suspicion level with time. <br>
+&gt; More level goals to achieve before leaving the level. <br>
 
-------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## User Interface
+&gt; **Main Menu** <br>
+&gt; **In-Game Interface** <br>
+  &nbsp;&nbsp; &gt; World Interface (MAP) <br>
+  &nbsp;&nbsp; &gt; Gameover menu <br>
+  &nbsp;&nbsp; &gt; Pause level menu <br>
+  &nbsp;&nbsp; &gt; End level menu <br>
+  &nbsp;&nbsp; &gt; Minigame Interface <br>
+    &nbsp;&nbsp; &nbsp;&nbsp; &gt; Keypad  <br>
+    &nbsp;&nbsp; &nbsp;&nbsp; &gt; Password Decryptor <br>
+    &nbsp;&nbsp; &nbsp;&nbsp; &gt; Desktop <br>
+    &nbsp;&nbsp; &nbsp;&nbsp; &gt; HR Complaint <br>
 
-<h2><b>Characters</b></h2>> <b>The Hacker</b> (Narrator/Player: Hacking Interaction)
-> <b>PIP:</b> The <i>Personal Infiltration Prototype</i> (Player: In-Game Interaction)
-> <b>Enemies</b> 
-  > Camera (Tutorial)
-  > <b>NPCs:</b> 
-    > Security guards x3 (Nina, Pinta and Santa Maria)
-    > <b>Big Boss</b> (Boss)
-    > Franco (Boss friend)
-    > Rosalina (Boss' wife)
-    > Claire (Boss' child 1)
-    > Obscure ((Boss' child 2)
-    > Piola (Boss' child 3)
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-------------------------------------------------------------------------------------------------------------------
-<h2><b>[ RESOURCES ]</b></h2><h3><b>Graphical Elements:</b></h3>> <b>Setting:</b> Indoor environments (garage, offices, house).
-> <b>Assets:</b> Furniture, Electronic devices, Household items, NPCs, Nature, Buildings, Cars.
+## Characters
+&gt; **The Hacker** (Narrator/Player: Hacking Interaction) <br>
+&gt; **_PIP:_** The **_Personal Infiltration Prototype_** robot. (Player: In-Game Interaction)  <br>
+&gt; **Enemies**  <br>
+  &nbsp;&nbsp; &gt; Camera (Tutorial)  <br>
+  &nbsp;&nbsp; &gt; **NPCs:**  <br>
+    &nbsp;&nbsp; &nbsp;&nbsp; &gt; Security guards x3 (Nina, Pinta and Santa Maria)  <br>
+    &nbsp;&nbsp; &nbsp;&nbsp; &gt; **Big Boss**(Boss)  <br>
+    &nbsp;&nbsp; &nbsp;&nbsp; &gt; Franco (Boss friend)  <br>
+    &nbsp;&nbsp; &nbsp;&nbsp; &gt; Rosalina (Boss' wife)  <br>
+    &nbsp;&nbsp; &nbsp;&nbsp; &gt; Claire (Boss' child 1)  <br>
+    &nbsp;&nbsp; &nbsp;&nbsp; &gt; Obscure ((Boss' child 2)  <br>
+    &nbsp;&nbsp; &nbsp;&nbsp; &gt; Piola (Boss' child 3)  <br>
 
-<h3><b>SFX & VFX:</b></h3>> <b>SFX:</b> 
-   > Dialogues: Typing sound.
-   > Environmental: Interactions with hackable devices:
-     > Electricity buzz
-     > Washing machine noise
-     > AC & Kitchen Hood sound
-     > Doors
-     > Printer
-> <b>VFX:</b> 
-  > Electric Sparks
-  > Smoke
-  > Particles fireflies
-  > Music Notes
-  > Visual indicators for suspicion (?!!)
-> <b>Music:</b> IPod with 4 songs.
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## [ RESOURCES ]
+### Graphical Elements:
+&gt; **Setting:** Indoor environments (garage, offices, house).  <br>
+&gt; **Assets:** Furniture, Electronic devices, Household items, NPCs, Nature, Buildings, Cars.  
+
+### SFX & VFX:
+&nbsp; **SFX:**  <br>
+   &nbsp;&nbsp; &gt; Dialogues: Typing sound.  <br>
+   &nbsp;&nbsp; &gt; Environmental: Interactions with hackable devices:  <br>
+     &nbsp;&nbsp; &nbsp;&nbsp; &gt; Electricity buzz  <br>
+     &nbsp;&nbsp; &nbsp;&nbsp; &gt; Washing machine noise  <br>
+     &nbsp;&nbsp; &nbsp;&nbsp; &gt; AC & Kitchen Hood sound  <br>
+     &nbsp;&nbsp; &nbsp;&nbsp; &gt; Doors  <br>
+     &nbsp;&nbsp; &nbsp;&nbsp; &gt; Printer  <br>
+&nbsp; **VFX:**  <br>
+  &nbsp;&nbsp; &gt; Electric Sparks  <br>
+  &nbsp;&nbsp; &gt; Smoke  <br>
+  &nbsp;&nbsp; &gt; Particles fireflies  <br>
+  &nbsp;&nbsp; &gt; Music Notes  <br>
+  &nbsp;&nbsp; &gt; Visual indicators for suspicion (?!!)  <br>
+&nbsp; **Music:** IPod with 4 songs.  <br>
  
-------------------------------------------------------------------------------------------------------------------
-<b>> DISCONNECTING...</b>
-_
-</pre>
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+&gt; **DISCONNECTING...** <br>
+
+</samp>
+</blockquote>
 
 
 ### Milestones:
