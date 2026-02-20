@@ -220,55 +220,43 @@ over a certain treshold, that change their state to patrolling/alert. <br>
 &nbsp; **Music:** IPod with 4 songs.  <br>
  
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## [ MILESTONES ]
+### Design phase - 2/11/2025
+&nbsp; **Game concept**  <br>
+&nbsp; **Game design document**  <br>
+
+### Prototype - 7/12/2025
+&nbsp; **Player Actions:**  <br>
+  &nbsp;&nbsp; &gt; Movement - Daniel Bonardi (4/11/25) <br>
+  &nbsp;&nbsp; &gt; Point and click - Daniel Bonardi (24/11/25) <br>
+  &nbsp;&nbsp; &gt; Throwing System - Daniel Bonardi (1/12/25) <br>
+  <br>
+&nbsp; **Enemies:**  <br>
+  &nbsp;&nbsp; &gt; CCTV enemy - Daniel Bonardi (7/12/25) <br>
+  <br>
+&nbsp; **UI:**  <br>
+  &nbsp;&nbsp; &gt; Main Menu - Emanuele Sapio (7/12/25) <br>
+  &nbsp;&nbsp; &gt; Pause Menu - Emanuele Sapio (22/11/25) <br>
+  &nbsp;&nbsp; &gt; Game Over Menu - Emanuele Sapio (28/11/25) <br>
+  &nbsp;&nbsp; &gt; End Level Menu - Emanuele Sapio (7/12/25) <br>
+  <br>
+&nbsp; **Minigames:** Daniel Bonardi and Niccolo Sobrero<br>
+  &nbsp;&nbsp; &gt; Desktop minigame - (18/11/25) <br>
+  &nbsp;&nbsp; &gt; Password decryptor - (18/11/25) <br>
+  &nbsp;&nbsp; &gt; File download - (24/11/25) <br>
+  &nbsp;&nbsp; &gt; Safe code - (28/11/25) <br>
+  <br>
+&nbsp; **Levels:** <br>
+  &nbsp;&nbsp; &gt; Main menu assets - Emanuele Sapio (6/12/25) <br>
+  &nbsp;&nbsp; &gt; Tutorial level asset - Matilde Sobberi (5/12/25) <br>
+  &nbsp;&nbsp; &gt; Tutorial level manager - Daniel Bonardi (7/12/25) <br>
+  
+### Beta - 11/1/2026
+  
+### Final submission - 24/2/2026
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 &gt; **DISCONNECTING...** <br>
 
 </samp>
 </blockquote>
-
-
-### Milestones:
-- Hacking System
-- Suspicion system
-- Minigames
-- UI:
-    - MainMenu:
-        - Play
-        - Settings
-        - Skills
-        - Select Level
-        - Quit
-    - WorldUI:
-        - Suspicion level (top-center)
-        - Map (top-left) (?)
-    - MinigamesUI
-    - PauseMenu:
-        - Play
-        - Settings
-        - Quit
-    - EndLevelMenu:
-        - NextLevel
-        - Skills
-        - MainMenu
-    - GameOverMenu:
-        - Start
-        - Settings
-        - Quit
-- Level Design (for each level):
-    - Environment
-    - Characters
-    - Hackable devices
-    - Design a path to the goal (intended solution(s))
-- Cinematics
-- Camera System
-- NPC patrolling:
-    - movement by code (NavMesh is expensive)
-    - FOV visible to the player with a raycast
-- PIP movement system:
-    - NavMesh
-- Save/Load system (?)
-- Economy system (Balancing money stolen with skills price) - Emanuele (?)
-- Skill Tree system
-
-
-
-
