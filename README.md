@@ -228,80 +228,136 @@ over a certain treshold, that change their state to patrolling/alert. <br>
 ### Prototype - 7/12/2025
 **Core gameplay systems:**  <br>
 <table>
-<tr><th>Feature</th><th>Owner</th><th>Date</th></tr>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
 
-<tr><td> Movement </td><td> Daniel Bonardi </td><td> 4/11/25 </td></tr>
-<tr><td> Interactables </td><td> Daniel Bonardi </td><td> 24/11/25 </td></tr>
-<tr><td> Throwing system </td><td> Daniel Bonardi </td><td> 1/12/25 </td></tr>
-<tr><td> Dialogue system </td><td> Daniel Bonardi </td><td> 7/12/25 </td></tr>
+<tr><td> Movement </td><td> Daniel Bonardi </td><td> 4/11/25 </td><td> New </td></tr>
+<tr><td> Interactables </td><td> Daniel Bonardi </td><td> 24/11/25 </td><td> New </td></tr>
+<tr><td> Throwing system </td><td> Daniel Bonardi </td><td> 1/12/25 </td><td> New </td></tr>
+<tr><td> Dialogue system </td><td> Daniel Bonardi </td><td> 7/12/25 </td><td> New </td></tr>
 
 </table>
-&nbsp; **AI & Enemies:**  <br>
-  &nbsp;&nbsp; &gt; CCTV enemy - Daniel Bonardi (7/12/25) <br>
-  <br>
-&nbsp; **UI & Menus:**  <br>
-  &nbsp;&nbsp; &gt; Main menu - Emanuele Sapio (7/12/25) <br>
-  &nbsp;&nbsp; &gt; Pause menu - Emanuele Sapio (22/11/25) <br>
-  &nbsp;&nbsp; &gt; Game over menu - Emanuele Sapio (28/11/25) <br>
-  &nbsp;&nbsp; &gt; End level menu - Emanuele Sapio (7/12/25) <br>
-  &nbsp;&nbsp; &gt; Dialogue UI - Daniel Bonardi (7/12/25) <br>
-  <br>
-&nbsp; **Minigame systems & Content:** <br>
-  &nbsp;&nbsp; &gt; Desktop minigame - Daniel Bonardi/Niccolo Sobrero (18/11/25) <br>
-  &nbsp;&nbsp; &gt; Password decryptor - Daniel Bonardi/Niccolo Sobrero (18/11/25) <br>
-  &nbsp;&nbsp; &gt; File download - Daniel Bonardi (24/11/25) <br>
-  &nbsp;&nbsp; &gt; Safe code - Daniel Bonardi/Niccolo Sobrero (28/11/25) <br>
-  &nbsp;&nbsp; &gt; Desktop minigame files - Niccolo Sobrero (7/12/25) <br>
-  <br>
-&nbsp; **Levels & Progression system:** <br>
-  &nbsp;&nbsp; &gt; Tutorial level manager - Daniel Bonardi (7/12/25) <br>
-  <br>
-&nbsp; **Art, Audio & Narrative content:** <br>
-  &nbsp;&nbsp; &gt; Main menu assets - Emanuele Sapio (6/12/25) <br>
-  &nbsp;&nbsp; &gt; Tutorial level asset - Matilde Sobberi (5/12/25) <br>
-  &nbsp;&nbsp; &gt; Hackable devices assets - Matilde Sobberi (5/12/25) <br>
-  &nbsp;&nbsp; &gt; Dialogue lines - Niccolo Sobrero (7/12/25) <br>
-  
+
+**AI & Enemies:**  <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> CCTV enemy </td><td> Daniel Bonardi </td><td> 7/12/25 </td><td> New </td></tr>
+
+</table>
+
+**UI & Menus:**  <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> Main menu </td><td> Emanuele Sapio </td><td> 7/12/25 </td><td> New </td></tr>
+<tr><td> Pause menu </td><td> Emanuele Sapio </td><td> 22/11/25 </td><td> New </td></tr>
+<tr><td> Game over menu </td><td> Emanuele Sapio </td><td> 28/11/25 </td><td> New </td></tr>
+<tr><td> End level menu </td><td> Emanuele Sapio </td><td> 7/12/25 </td><td> New </td></tr>
+<tr><td> Dialogue UI </td><td> Daniel Bonardi </td><td> 7/12/25 </td><td> New </td></tr>
+
+</table>
+
+**Minigame systems & Content:** <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> Desktop minigame </td><td> Daniel Bonardi<br>Niccolo Sobrero </td><td> 18/11/25 </td><td> New </td></tr>
+<tr><td> Password decryptor </td><td> Daniel Bonardi<br>Niccolo Sobrero </td><td> 18/11/25 </td><td> New </td></tr>
+<tr><td> File download </td><td> Daniel Bonardi </td><td> 24/11/25 </td><td> New </td></tr>
+<tr><td> Safe code </td><td> Daniel Bonardi<br>Niccolo Sobrero </td><td> 28/11/25 </td><td> New </td></tr>
+<tr><td> Desktop minigame files </td><td> Niccolo Sobrero </td><td> 7/12/25 </td><td> New </td></tr>
+
+</table>
+
+**Levels & Progression system:** <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> Tutorial level manager </td><td> Daniel Bonardi </td><td> 7/12/25 </td><td> New </td></tr>
+
+</table>
+
+**Art, Audio & Narrative content:** <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> Main menu assets </td><td> Emanuele Sapio </td><td> 6/12/25 </td><td> New </td></tr>
+<tr><td> Tutorial level asset </td><td> Matilde Sobberi </td><td> 5/12/25 </td><td> New </td></tr>
+<tr><td> Hackable devices assets </td><td> Matilde Sobberi </td><td> 5/12/25 </td><td> New </td></tr>
+<tr><td> Dialogue lines </td><td> Niccolo Sobrero </td><td> 7/12/25 </td><td> New </td></tr>
+
+</table>
+
 ### Beta - 11/1/2026
 &nbsp; **Core gameplay systems:**  <br>
-  &nbsp;&nbsp; &gt; Interactables [Expanded] - Daniel Bonardi (8/1/26) <br>
-  &nbsp;&nbsp; &gt; Stunning enemies - Federico Tabellini/Daniel Bonardi (10/1/26) <br>
-  &nbsp;&nbsp; &gt; Dialogue system [Expanded] - Daniel Bonardi (7/1/26) <br>
-  &nbsp;&nbsp; &gt; Objectives system - Daniel Bonardi (10/1/26) <br>
-  <br>
-&nbsp; **AI & Enemies:**  <br>
-  &nbsp;&nbsp; &gt; Enemy patrolling - Federico Tabellini (8/12/25) <br>
-  &nbsp;&nbsp; &gt; Enemy path cycling - Federico Tabellini (30/12/25) <br>
-  &nbsp;&nbsp; &gt; Alert system - Federico Tabellini/Daniel Bonardi (2/1/26) <br>
-  &nbsp;&nbsp; &gt; Enemy FOV - Federico Tabellini/Daniel Bonardi (9/1/26) <br>
-  &nbsp;&nbsp; &gt; Enemies animations - Federico Tabellini (11/1/26) <br>
-  <br>
-&nbsp; **UI & Menus:**  <br>
-  &nbsp;&nbsp; &gt; End level menu [Expanded] - Emanuele Sapio (10/1/26) <br>
-  &nbsp;&nbsp; &gt; Dialogue UI [Expanded] - Daniel Bonardi (7/1/26) <br>
-  &nbsp;&nbsp; &gt; Level selection - Daniel Bonardi (7/1/26) <br>
-  &nbsp;&nbsp; &gt; Main menu [Expanded] - Emanuele Sapio (10/1/26) <br>
-  &nbsp;&nbsp; &gt; Game over menu [Expanded] - Emanuele Sapio (10/1/26) <br>
-  &nbsp;&nbsp; &gt; Background music system - Daniel Bonardi (11/1/26) <br>
-  &nbsp;&nbsp; &gt; Objectives UI - Daniel Bonardi (10/1/26) <br>
-  <br>
-&nbsp; **Minigame systems & Content:** <br>
-  &nbsp;&nbsp; &gt; Desktop minigame [Expanded] - Daniel Bonardi (10/1/26) <br>
-  &nbsp;&nbsp; &gt; Desktop minigame files - Niccolo Sobrero (9/1/26) <br>
-  &nbsp;&nbsp; &gt; HR complaint - Daniel Bonardi (10/1/26) <br>
-  <br>
-&nbsp; **Levels & Progression system:** <br>
-  &nbsp;&nbsp; &gt; Tutorial level manager [Expanded] - Daniel Bonardi (11/1/26) <br>
-  &nbsp;&nbsp; &gt; HR level manager - Daniel Bonardi (2/1/26) <br>
-  &nbsp;&nbsp; &gt; Boss house level manager - Daniel Bonardi (11/1/26) <br>
-  <br>
-&nbsp; **Art, Audio & Narrative content:** <br>
-  &nbsp;&nbsp; &gt; Player animations - Emanuele Sapio (18/12/25) <br>
-  &nbsp;&nbsp; &gt; HR offices asset - Matilde Sobberi (27/12/25) <br>
-  &nbsp;&nbsp; &gt; Boss house asset - Matilde Sobberi (27/12/25) <br>
-  &nbsp;&nbsp; &gt; Hackables VFX - Emanuele Sapio (28/12/25) <br>
-  &nbsp;&nbsp; &gt; Hackables SFX - Emanuele Sapio (28/12/25) <br>
-  &nbsp;&nbsp; &gt; Dialogue lines - Niccolo Sobrero (9/1/26) <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> Interactables </td><td> Daniel Bonardi </td><td> 8/1/26 </td><td> Expanded </td></tr>
+<tr><td> Stunning enemies </td><td> Federico Tabellini<br>Daniel Bonardi </td><td> 10/1/26 </td><td> New </td></tr>
+<tr><td> Dialogue system </td><td> Daniel Bonardi </td><td> 7/1/26 </td><td> Expanded </td></tr>
+<tr><td> Objectives system </td><td> Daniel Bonardi </td><td> 10/1/26 </td><td> New </td></tr>
+
+</table>
+
+**AI & Enemies:**  <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> Enemy patrolling </td><td> Federico Tabellini </td><td> 8/12/25 </td><td> New </td></tr>
+<tr><td> Enemy path cycling </td><td> Federico Tabellini </td><td> 30/12/25 </td><td> New </td></tr>
+<tr><td> Alert system </td><td> Federico Tabellini<br>Daniel Bonardi </td><td> 2/1/26 </td><td> New </td></tr>
+<tr><td> Enemy FOV </td><td> Federico Tabellini<br>Daniel Bonardi </td><td> 9/1/26 </td><td> New </td></tr>
+<tr><td> Enemies animations </td><td> Federico Tabellini </td><td> 11/1/26 </td><td> New </td></tr>
+
+</table>
+
+**UI & Menus:**  <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> End level menu </td><td> Emanuele Sapio </td><td> 10/1/26 </td><td> Expanded </td></tr>
+<tr><td> Dialogue UI </td><td> Daniel Bonardi </td><td> 7/1/26 </td><td> Expanded </td></tr>
+<tr><td> Level selection </td><td> Daniel Bonardi </td><td> 7/1/26 </td><td> New </td></tr>
+<tr><td> Main menu </td><td> Emanuele Sapio </td><td> 10/1/26 </td><td> Expanded </td></tr>
+<tr><td> Game over menu </td><td> Emanuele Sapio </td><td> 10/1/26 </td><td> Expanded </td></tr>
+<tr><td> Background music system </td><td> Daniel Bonardi </td><td> 11/1/26 </td><td> New </td></tr>
+<tr><td> Objectives UI </td><td> Daniel Bonardi </td><td> 10/1/26 </td><td> New </td></tr>
+
+</table>
+
+**Minigame systems & Content:** <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> Desktop minigame </td><td> Daniel Bonardi </td><td> 10/1/26 </td><td> Expanded </td></tr>
+<tr><td> Desktop minigame files </td><td> Niccolo Sobrero </td><td> 9/1/26 </td><td> New </td></tr>
+<tr><td> HR complaint </td><td> Daniel Bonardi </td><td> 10/1/26 </td><td> New </td></tr>
+
+</table>
+
+**Levels & Progression system:** <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> Tutorial level manager </td><td> Daniel Bonardi </td><td> 11/1/26 </td><td> Expanded </td></tr>
+<tr><td> HR level manager </td><td> Daniel Bonardi </td><td> 2/1/26 </td><td> New </td></tr>
+<tr><td> Boss house level manager </td><td> Daniel Bonardi </td><td> 11/1/26 </td><td> New </td></tr>
+
+</table>
+
+**Art, Audio & Narrative content:** <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> Player animations </td><td> Emanuele Sapio </td><td> 18/12/25 </td><td> New </td></tr>
+<tr><td> HR offices asset </td><td> Matilde Sobberi </td><td> 27/12/25 </td><td> New </td></tr>
+<tr><td> Boss house asset </td><td> Matilde Sobberi </td><td> 27/12/25 </td><td> New </td></tr>
+<tr><td> Hackables VFX </td><td> Emanuele Sapio </td><td> 28/12/25 </td><td> New </td></tr>
+<tr><td> Hackables SFX </td><td> Emanuele Sapio </td><td> 28/12/25 </td><td> New </td></tr>
+<tr><td> Dialogue lines </td><td> Niccolo Sobrero </td><td> 9/1/26 </td><td> New </td></tr>
+
+</table>
 
 ### Final submission - 24/2/2026
 
