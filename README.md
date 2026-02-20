@@ -228,17 +228,18 @@ over a certain treshold, that change their state to patrolling/alert. <br>
 ### Prototype - 7/12/2025
 &nbsp; **Player Actions:**  <br>
   &nbsp;&nbsp; &gt; Movement - Daniel Bonardi (4/11/25) <br>
-  &nbsp;&nbsp; &gt; Point and click - Daniel Bonardi (24/11/25) <br>
-  &nbsp;&nbsp; &gt; Throwing System - Daniel Bonardi (1/12/25) <br>
+  &nbsp;&nbsp; &gt; Interactables - Daniel Bonardi (24/11/25) <br>
+  &nbsp;&nbsp; &gt; Throwing system - Daniel Bonardi (1/12/25) <br>
   <br>
 &nbsp; **Enemies:**  <br>
   &nbsp;&nbsp; &gt; CCTV enemy - Daniel Bonardi (7/12/25) <br>
   <br>
 &nbsp; **UI:**  <br>
-  &nbsp;&nbsp; &gt; Main Menu - Emanuele Sapio (7/12/25) <br>
-  &nbsp;&nbsp; &gt; Pause Menu - Emanuele Sapio (22/11/25) <br>
-  &nbsp;&nbsp; &gt; Game Over Menu - Emanuele Sapio (28/11/25) <br>
-  &nbsp;&nbsp; &gt; End Level Menu - Emanuele Sapio (7/12/25) <br>
+  &nbsp;&nbsp; &gt; Main menu - Emanuele Sapio (7/12/25) <br>
+  &nbsp;&nbsp; &gt; Pause menu - Emanuele Sapio (22/11/25) <br>
+  &nbsp;&nbsp; &gt; Game over menu - Emanuele Sapio (28/11/25) <br>
+  &nbsp;&nbsp; &gt; End level menu - Emanuele Sapio (7/12/25) <br>
+  &nbsp;&nbsp; &gt; Dialogue system - Daniel Bonardi (7/12/25) <br>
   <br>
 &nbsp; **Minigames:** Daniel Bonardi and Niccolo Sobrero<br>
   &nbsp;&nbsp; &gt; Desktop minigame - (18/11/25) <br>
@@ -247,12 +248,52 @@ over a certain treshold, that change their state to patrolling/alert. <br>
   &nbsp;&nbsp; &gt; Safe code - (28/11/25) <br>
   <br>
 &nbsp; **Levels:** <br>
+  &nbsp;&nbsp; &gt; Tutorial level manager - Daniel Bonardi (7/12/25) <br>
+&nbsp; **Assets:** <br>
   &nbsp;&nbsp; &gt; Main menu assets - Emanuele Sapio (6/12/25) <br>
   &nbsp;&nbsp; &gt; Tutorial level asset - Matilde Sobberi (5/12/25) <br>
-  &nbsp;&nbsp; &gt; Tutorial level manager - Daniel Bonardi (7/12/25) <br>
+  &nbsp;&nbsp; &gt; Hackable devices assets - Matilde Sobberi (5/12/25) <br>
+  &nbsp;&nbsp; &gt; Dialogue lines - Niccolo Sobrero (7/12/25) <br>
+  &nbsp;&nbsp; &gt; Desktop minigame files - Niccolo Sobrero (7/12/25) <br>
   
 ### Beta - 11/1/2026
-  
+&nbsp; **Player Actions:**  <br>
+  &nbsp;&nbsp; &gt; Interactables(+) - Daniel Bonardi (8/1/26) <br>
+  &nbsp;&nbsp; &gt; Stunning enemies - Federico Tabellini/Daniel Bonardi (10/1/26) <br>
+  <br>
+&nbsp; **Enemies:**  <br>
+  &nbsp;&nbsp; &gt; Enemy patrolling - Federico Tabellini (8/12/25) <br>
+  &nbsp;&nbsp; &gt; Enemy path cycling - Federico Tabellini (30/12/25) <br>
+  &nbsp;&nbsp; &gt; Alert system - Federico Tabellini/Daniel Bonardi (2/1/26) <br>
+  &nbsp;&nbsp; &gt; Enemy FOV - Federico Tabellini/Daniel Bonardi (9/1/26) <br>
+  <br>
+&nbsp; **UI:**  <br>
+  &nbsp;&nbsp; &gt; End level menu(+) - Emanuele Sapio (10/1/26) <br>
+  &nbsp;&nbsp; &gt; Dialogue system(+) - Daniel Bonardi (7/1/26) <br>
+  &nbsp;&nbsp; &gt; Level selection - Daniel Bonardi (7/1/26) <br>
+  &nbsp;&nbsp; &gt; Main menu(+) - Emanuele Sapio (10/1/26) <br>
+  &nbsp;&nbsp; &gt; Game over menu(+) - Emanuele Sapio (10/1/26) <br>
+  &nbsp;&nbsp; &gt; Background music system - Daniel Bonardi (11/1/26) <br>
+  &nbsp;&nbsp; &gt; Objectives system - Daniel Bonardi (10/1/26) <br>
+  <br>
+&nbsp; **Minigames:** <br>
+  &nbsp;&nbsp; &gt; Desktop minigame(+) - Daniel Bonardi (10/1/26) <br>
+  &nbsp;&nbsp; &gt; HR complaint - Daniel Bonardi (10/1/26) <br>
+  <br>
+&nbsp; **Levels:** <br>
+  &nbsp;&nbsp; &gt; Tutorial level manager(+) - Daniel Bonardi (11/1/26) <br>
+  &nbsp;&nbsp; &gt; HR level manager - Daniel Bonardi (2/1/26) <br>
+  &nbsp;&nbsp; &gt; Boss house level manager - Daniel Bonardi (11/1/26) <br>
+&nbsp; **Assets:** <br>
+  &nbsp;&nbsp; &gt; Player animations - Emanuele Sapio (18/12/25) <br>
+  &nbsp;&nbsp; &gt; HR offices asset - Matilde Sobberi (27/12/25) <br>
+  &nbsp;&nbsp; &gt; Boss house asset - Matilde Sobberi (27/12/25) <br>
+  &nbsp;&nbsp; &gt; Hackables VFX - Emanuele Sapio (28/12/25) <br>
+  &nbsp;&nbsp; &gt; Hackables SFX - Emanuele Sapio (28/12/25) <br>
+  &nbsp;&nbsp; &gt; Dialogue lines - Niccolo Sobrero (9/1/26) <br>
+  &nbsp;&nbsp; &gt; Desktop minigame files - Niccolo Sobrero (9/1/26) <br>
+  &nbsp;&nbsp; &gt; Enemies animations - Federico Tabellini (11/1/26) <br>
+
 ### Final submission - 24/2/2026
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
