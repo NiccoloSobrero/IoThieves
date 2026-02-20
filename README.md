@@ -289,7 +289,7 @@ over a certain treshold, that change their state to patrolling/alert. <br>
 </table>
 
 ### Beta - 11/1/2026
-&nbsp; **Core gameplay systems:**  <br>
+**Core gameplay systems:**  <br>
 <table>
 <tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
 
@@ -360,7 +360,66 @@ over a certain treshold, that change their state to patrolling/alert. <br>
 </table>
 
 ### Final submission - 24/2/2026
+**Core gameplay systems:**  <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
 
+<tr><td> Interactables </td><td> Daniel Bonardi<br>Federico Tabellini </td><td> 26/1/26 </td><td> Expanded </td></tr>
+<tr><td> Level checkpoints </td><td> Daniel Bonardi </td><td> 29/1/26 </td><td> New </td></tr>
+<tr><td> Stunning enemies </td><td> Federico Tabellini </td><td> 4/2/26 </td><td> Refined </td></tr>
+
+</table>
+
+**AI & Enemies:**  <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> Enemies AI behavior </td><td> Federico Tabellini </td><td> 19/2/26 </td><td> Refined </td></tr>
+<tr><td> Enemies animations </td><td> Federico Tabellini </td><td> 26/1/26 </td><td> Expanded </td></tr>
+
+</table>
+
+**UI & Menus:**  <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> Pause menu </td><td> Emanuele Sapio </td><td> 17/1/26 </td><td> Expanded </td></tr>
+<tr><td> Credits menu </td><td> Emanuele Sapio </td><td> 19/1/26 </td><td> New </td></tr>
+<tr><td> Main menu </td><td> Emanuele Sapio </td><td> 11/2/26 </td><td> Refined </td></tr>
+<tr><td> Custom cursor </td><td> Emanuele Sapio </td><td> 16/2/26 </td><td> New </td></tr>
+<tr><td> Level selector UI </td><td> Emanuele Sapio </td><td> 16/2/26 </td><td> Refined </td></tr>
+
+</table>
+
+**Minigame systems & Content:** <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> Desktop minigame files </td><td> Niccolo Sobrero </td><td> 5/2/26 </td><td> Expanded </td></tr>
+<tr><td> Desktop minigame </td><td> Daniel Bonardi </td><td> 11/2/26 </td><td> Refined </td></tr>
+<tr><td> HR complaint </td><td> Daniel Bonardi </td><td> 18/2/26 </td><td> Refined </td></tr>
+
+</table>
+
+**Levels & Progression system:** <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> Objectives system </td><td> Daniel Bonardi </td><td> 11/2/26 </td><td> Refined </td></tr>
+<tr><td> Boss house level manager </td><td> Daniel Bonardi </td><td> 11/2/26 </td><td> Refined </td></tr>
+
+</table>
+
+**Art, Audio & Narrative content:** <br>
+<table>
+<tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
+
+<tr><td> Main menu enviroment assets </td><td> Daniel Bonardi<br>Niccolo Sobrero </td><td> 21/1/26 </td><td> New </td></tr>
+<tr><td> Interactables SFX </td><td> Niccolo Sobrero </td><td> 9/2/26 </td><td> Expanded </td></tr>
+<tr><td> Interactables VFX </td><td> Niccolo Sobrero </td><td> 9/2/26 </td><td> Expanded </td></tr>
+<tr><td> Dialogue lines </td><td> Niccolo Sobrero </td><td> 11/2/26 </td><td> Expanded </td></tr>
+
+</table>
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 &gt; **DISCONNECTING...** <br>
