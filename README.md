@@ -21,6 +21,12 @@ iothieves@kali:~$ iothieves --scan 192.168.200.0/24
 
 <br>
 
+Developed for the **Videogame Design and Programming** course of the Politecnico di Milano <br>
+taught by Prof. Pierluca Lanzi & Prof. Daniele Loiacono.
+
+<br>
+
+
 **Polimi Game Collective** [████████████████████████████████████] 100%
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -160,8 +166,8 @@ There are 2 main categories of objets: <br> <br>
 ### Level progression
 &gt; **Devices:** Start with few devices to interact with, then new devices with different behaviours are introduced. <br>
 &gt; **Enemies:** Start on easy levels with few enemies to handle, later levels will require handling more enemies. <br>
-  &nbsp;&nbsp; &gt; Paths: NPCs have their own routine, but it will be disrupted by the increase of suspicion level 
-over a certain treshold, that change their state to patrolling/alert. <br>
+  &nbsp;&nbsp; &gt; Paths: NPCs have their own routine, but it will be disrupted by the increase of suspicion level over a certain treshold, 
+      &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; that change their state to patrolling/alert. <br>
   &nbsp;&nbsp; &gt; Suspicion system: In easy levels each person has an individual suspicion level. <br>
         &nbsp;&nbsp; &nbsp;&nbsp; &gt; Avoiding alerted NPCs decreases the suspicion level with time. <br>
 &gt; More level goals to achieve before leaving the level. <br>
@@ -174,7 +180,7 @@ over a certain treshold, that change their state to patrolling/alert. <br>
   &nbsp;&nbsp; &gt; Gameover menu <br>
   &nbsp;&nbsp; &gt; Pause level menu <br>
   &nbsp;&nbsp; &gt; End level menu <br>
-  &nbsp;&nbsp; &gt; Minigame Interface <br>
+  &nbsp;&nbsp; &gt; **Minigame Interface** <br>
     &nbsp;&nbsp; &nbsp;&nbsp; &gt; Keypad  <br>
     &nbsp;&nbsp; &nbsp;&nbsp; &gt; Password Decryptor <br>
     &nbsp;&nbsp; &nbsp;&nbsp; &gt; Desktop <br>
@@ -204,7 +210,7 @@ over a certain treshold, that change their state to patrolling/alert. <br>
 
 ### SFX & VFX:
 &nbsp; **SFX:**  <br>
-   &nbsp;&nbsp; &gt; Dialogues: Typing sound.  <br>
+   &nbsp;&nbsp; &gt; Dialogues: Typing sound  <br>
    &nbsp;&nbsp; &gt; Environmental: Interactions with hackable devices:  <br>
      &nbsp;&nbsp; &nbsp;&nbsp; &gt; Electricity buzz  <br>
      &nbsp;&nbsp; &nbsp;&nbsp; &gt; Washing machine noise  <br>
@@ -261,11 +267,11 @@ over a certain treshold, that change their state to patrolling/alert. <br>
 <table>
 <tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
 
-<tr><td> Desktop minigame </td><td> Daniel Bonardi<br>Niccolo Sobrero </td><td> 18/11/25 </td><td> New </td></tr>
-<tr><td> Password decryptor </td><td> Daniel Bonardi<br>Niccolo Sobrero </td><td> 18/11/25 </td><td> New </td></tr>
+<tr><td> Desktop minigame </td><td> Daniel Bonardi<br>Niccolò Sobrero </td><td> 18/11/25 </td><td> New </td></tr>
+<tr><td> Password decryptor </td><td> Daniel Bonardi<br>Niccolò Sobrero </td><td> 18/11/25 </td><td> New </td></tr>
 <tr><td> File download </td><td> Daniel Bonardi </td><td> 24/11/25 </td><td> New </td></tr>
-<tr><td> Safe code </td><td> Daniel Bonardi<br>Niccolo Sobrero </td><td> 28/11/25 </td><td> New </td></tr>
-<tr><td> Desktop minigame files </td><td> Niccolo Sobrero </td><td> 7/12/25 </td><td> New </td></tr>
+<tr><td> Safe code </td><td> Daniel Bonardi<br>Niccolò Sobrero </td><td> 28/11/25 </td><td> New </td></tr>
+<tr><td> Desktop minigame files </td><td> Niccolò Sobrero </td><td> 7/12/25 </td><td> New </td></tr>
 
 </table>
 
@@ -284,7 +290,7 @@ over a certain treshold, that change their state to patrolling/alert. <br>
 <tr><td> Main menu assets </td><td> Emanuele Sapio </td><td> 6/12/25 </td><td> New </td></tr>
 <tr><td> Tutorial level asset </td><td> Matilde Sobberi </td><td> 5/12/25 </td><td> New </td></tr>
 <tr><td> Hackable devices assets </td><td> Matilde Sobberi </td><td> 5/12/25 </td><td> New </td></tr>
-<tr><td> Dialogue lines </td><td> Niccolo Sobrero </td><td> 7/12/25 </td><td> New </td></tr>
+<tr><td> Dialogue lines </td><td> Niccolò Sobrero </td><td> 7/12/25 </td><td> New </td></tr>
 
 </table>
 
@@ -331,7 +337,7 @@ over a certain treshold, that change their state to patrolling/alert. <br>
 <tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
 
 <tr><td> Desktop minigame </td><td> Daniel Bonardi </td><td> 10/1/26 </td><td> Expanded </td></tr>
-<tr><td> Desktop minigame files </td><td> Niccolo Sobrero </td><td> 9/1/26 </td><td> New </td></tr>
+<tr><td> Desktop minigame files </td><td> Niccolò Sobrero </td><td> 9/1/26 </td><td> New </td></tr>
 <tr><td> HR complaint </td><td> Daniel Bonardi </td><td> 10/1/26 </td><td> New </td></tr>
 
 </table>
@@ -355,7 +361,7 @@ over a certain treshold, that change their state to patrolling/alert. <br>
 <tr><td> Boss house asset </td><td> Matilde Sobberi </td><td> 27/12/25 </td><td> New </td></tr>
 <tr><td> Hackables VFX </td><td> Emanuele Sapio </td><td> 28/12/25 </td><td> New </td></tr>
 <tr><td> Hackables SFX </td><td> Emanuele Sapio </td><td> 28/12/25 </td><td> New </td></tr>
-<tr><td> Dialogue lines </td><td> Niccolo Sobrero </td><td> 9/1/26 </td><td> New </td></tr>
+<tr><td> Dialogue lines </td><td> Niccolò Sobrero </td><td> 9/1/26 </td><td> New </td></tr>
 
 </table>
 
@@ -395,7 +401,7 @@ over a certain treshold, that change their state to patrolling/alert. <br>
 <table>
 <tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
 
-<tr><td> Desktop minigame files </td><td> Niccolo Sobrero </td><td> 5/2/26 </td><td> Expanded </td></tr>
+<tr><td> Desktop minigame files </td><td> Niccolò Sobrero </td><td> 5/2/26 </td><td> Expanded </td></tr>
 <tr><td> Desktop minigame </td><td> Daniel Bonardi </td><td> 11/2/26 </td><td> Refined </td></tr>
 <tr><td> HR complaint </td><td> Daniel Bonardi </td><td> 18/2/26 </td><td> Refined </td></tr>
 
@@ -414,10 +420,10 @@ over a certain treshold, that change their state to patrolling/alert. <br>
 <table>
 <tr><th>Feature</th><th>Owner</th><th>Date</th><th>Status</th></tr>
 
-<tr><td> Main menu enviroment assets </td><td> Daniel Bonardi<br>Niccolo Sobrero </td><td> 21/1/26 </td><td> New </td></tr>
-<tr><td> Interactables SFX </td><td> Niccolo Sobrero </td><td> 9/2/26 </td><td> Expanded </td></tr>
-<tr><td> Interactables VFX </td><td> Niccolo Sobrero </td><td> 9/2/26 </td><td> Expanded </td></tr>
-<tr><td> Dialogue lines </td><td> Niccolo Sobrero </td><td> 11/2/26 </td><td> Expanded </td></tr>
+<tr><td> Main menu enviroment assets </td><td> Daniel Bonardi<br>Niccolò Sobrero </td><td> 21/1/26 </td><td> New </td></tr>
+<tr><td> Interactables SFX </td><td> Niccolò Sobrero </td><td> 9/2/26 </td><td> Expanded </td></tr>
+<tr><td> Interactables VFX </td><td> Niccolò Sobrero </td><td> 9/2/26 </td><td> Expanded </td></tr>
+<tr><td> Dialogue lines </td><td> Niccolò Sobrero </td><td> 11/2/26 </td><td> Expanded </td></tr>
 
 </table>
 
