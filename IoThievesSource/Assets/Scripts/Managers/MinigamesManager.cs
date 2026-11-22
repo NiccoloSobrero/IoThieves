@@ -47,13 +47,13 @@ namespace Managers
         private void OnEnable()
         {
             EventsManager.OnMinigameCompleted.AddListener(MoveToNextMinigame);
-            EventsManager.OnRestartGame.AddListener(() => EnableWindow(false));
+            EventsManager.OnRestartGame.AddListener(CloseWindowOnRestart);
         }
 
         private void OnDisable()
         {
             EventsManager.OnMinigameCompleted.RemoveListener(MoveToNextMinigame);
-            EventsManager.OnRestartGame.RemoveListener(() => EnableWindow(false));
+            EventsManager.OnRestartGame.RemoveListener(CloseWindowOnRestart);
         }
 
         private void MoveToNextMinigame()
@@ -80,6 +80,11 @@ namespace Managers
                 
                 PlayerInputManager.Instance.SetContext(InputContext.Gameplay);
             }
+        }
+
+        private void CloseWindowOnRestart()
+        {
+            EnableWindow(false);
         }
 
         private void EnableWindow(bool enable)

@@ -48,13 +48,10 @@ namespace AI.AI_States
 
         public override void Enter()
         {
-            if (_hackedDevices.Count > 0) 
+            if (_hackedDevices.Count > 0)
             {
                 Debug.Log("Ho un device ed è "+ _hackedDevices[0]);
-                Waypoint nearestToMe = AIUtilities.FindNearestWaypoint(Npc.transform.position);
-                Debug.Log("DeviceHackedState: Waypoint più vicino a me is :" + nearestToMe);
-                _path = PathFinding.FindPath(nearestToMe, _hackedDevices[0]);
-                if(_path is not null && _path.Count > 0)
+                if (TryComputePathToCurrentDevice())
                     Debug.Log("Ho trovato un percorso valido");
                 else
                 {
@@ -67,6 +64,12 @@ namespace AI.AI_States
         
         public override void Execute()
         {
+            if (_hackedDevices.Count == 0)
+            {
+                Npc.PreviousState();
+                return;
+            }
+
             if (DestinationReached)     //Resolve the reached device
             {
                 if (!lookingAt)
@@ -90,7 +93,7 @@ namespace AI.AI_States
                     _hackedDevices.RemoveAt(0);
                     if (_hackedDevices.Count > 0)
                     {
-                        _path = PathFinding.FindPath(AIUtilities.FindNearestWaypoint(Npc.transform.position), _hackedDevices[0]);
+                        TryComputePathToCurrentDevice();
                         DestinationReached = false;
                     }
                     else Npc.PreviousState();
@@ -98,7 +101,12 @@ namespace AI.AI_States
             }
             else                  //Reach the hacked device
             {
-                
+                if (_path is not { Count: > 0 })
+                {
+                    AbandonCurrentDevice();
+                    return;
+                }
+
                 Vector3 dir = _path[0].transform.position - Npc.transform.position;
                 AIUtilities.MoveTarget(Npc.transform, dir, Npc.NpcDatas.Speed);
                 
@@ -122,6 +130,31 @@ namespace AI.AI_States
                     }
                 }
             }
+        }
+
+        private bool TryComputePathToCurrentDevice()
+        {
+            Waypoint nearestToMe = AIUtilities.FindNearestWaypoint(Npc.transform.position);
+            _path = PathFinding.FindPath(nearestToMe, _hackedDevices[0]);
+
+            return _path is { Count: > 0 };
+        }
+
+        private void AbandonCurrentDevice()
+        {
+            Debug.LogWarning($"{Npc.name}: no path to hacked device {_hackedDevices[0]}, giving up on it");
+
+            _hackedDevices.RemoveAt(0);
+            lookingAt = false;
+
+            if (_hackedDevices.Count == 0)
+            {
+                Npc.PreviousState();
+                return;
+            }
+
+            TryComputePathToCurrentDevice();
+            DestinationReached = false;
         }
 
         private bool IsLookingAt(Vector3 targetPos)

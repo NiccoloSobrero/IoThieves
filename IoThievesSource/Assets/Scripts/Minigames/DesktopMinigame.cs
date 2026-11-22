@@ -163,7 +163,7 @@ namespace Minigames
             
             GenerateFolder(desktopScrObj, desktopFoldersParent);
             
-            ComputeTargetFilesList(_desktop);
+            _targetFilesNum = CountTargetFiles(_desktop);
             
             ResetPathToDesktop();
             
@@ -426,22 +426,24 @@ namespace Minigames
             return result;
         }
 
-        private void ComputeTargetFilesList(FolderContentScrObj folderContentScrObj)
+        private static int CountTargetFiles(FolderContentScrObj folderContentScrObj)
         {
-            _targetFilesNum = 0;
-            
+            int count = 0;
+
             foreach (DesktopItem folderItem in folderContentScrObj.folderItems)
             {
                 if (folderItem.itemType == DesktopItemType.TargetFile)
                 {
-                    _targetFilesNum++;
+                    count++;
                 }
-                else if (folderItem.itemType is DesktopItemType.FolderInFolder or DesktopItemType.FolderOnDesktop && 
+                else if (folderItem.itemType is DesktopItemType.FolderInFolder or DesktopItemType.FolderOnDesktop &&
                          folderItem.folderContent != null)
                 {
-                    ComputeTargetFilesList(folderItem.folderContent);
+                    count += CountTargetFiles(folderItem.folderContent);
                 }
             }
+
+            return count;
         }
 
         public void CloseDesktop()

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,42 +23,61 @@ public class DoorTrigger : MonoBehaviour
     private bool _isLocked = false;
     private bool _isAlreadyOpen = false;
 
+    private readonly HashSet<Collider> _occupants = new();
+
     #region Events
 
     [HideInInspector] public UnityEvent onTriggerEnterEvent;
 
     #endregion
 
+    private static bool CanOpenDoor(Collider other)
+    {
+        return other.CompareTag("Player") || other.gameObject.layer == LayerMask.NameToLayer("Enemy");
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        if (!(other.CompareTag("Player") || other.gameObject.layer == LayerMask.NameToLayer("Enemy")))
+        if (!CanOpenDoor(other))
             return;
-        
-        onTriggerEnterEvent.Invoke();
-        
+
+        if (other.CompareTag("Player"))
+            onTriggerEnterEvent.Invoke();
+
         if (_isLocked) return;
-        
+
+        _occupants.Add(other);
+
         if (otherTrigger != null)
             otherTrigger.BlockAudio();
-        
+
         if (!_isAlreadyOpen)
         {
             PlayDoorOpenSound();
             _isAlreadyOpen = true;
         }
-        
+
         animator.SetBool(GetBoolParam(), true);
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (_isLocked) return;
-        
+
+        if (!CanOpenDoor(other))
+            return;
+
+        _occupants.Remove(other);
+
+        _occupants.RemoveWhere(c => c == null || !c.enabled || !c.gameObject.activeInHierarchy);
+
+        if (_occupants.Count > 0) return;
+
         if (otherTrigger != null)
             otherTrigger.UnblockAudio();
-        
-        _isAlreadyOpen = false;  
-        
+
+        _isAlreadyOpen = false;
+
         animator.SetBool(GetBoolParam(), false);
     }
     
@@ -86,5 +106,8 @@ public class DoorTrigger : MonoBehaviour
     public void SetLocked(bool locked)
     {
         _isLocked = locked;
+
+        if (locked)
+            _occupants.Clear();
     }
 }

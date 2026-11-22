@@ -35,6 +35,12 @@ namespace AI
             EventsManager.OnRestartGame.AddListener(ResetNpc);
         }
 
+        private void OnDestroy()
+        {
+            EventsManager.OnGameOverTriggered.RemoveListener(DisableAll);
+            EventsManager.OnRestartGame.RemoveListener(ResetNpc);
+        }
+
         private void Start()
         {
             ResetNpc();

@@ -85,8 +85,7 @@ public class TerminalCreditMenu : TerminalMenu
                 break;
             case "restart":
                 PrintLine("Connection established...");
-                EventsManager.OnRestartGame?.Invoke();
-                gameObject.SetActive(false);
+                EventsManager.OnPlayLevel?.Invoke(GameManager.Instance.currentLevel);
                 break;
             case "cd ..":
                 PrintLine("Going to main menu...");

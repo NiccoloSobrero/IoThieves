@@ -16,6 +16,8 @@ namespace Minigames
 
         private bool _foundSolution;
 
+        private bool _isCompleting;
+
         private int _passwordLength;
         private string _targetPassword;
         private int _typedPasswordLength;
@@ -34,12 +36,17 @@ namespace Minigames
 
         private void OnEnable()
         {
-            EventsManager.OnFoundCodePadSolution.AddListener(() => _foundSolution = true);
+            EventsManager.OnFoundCodePadSolution.AddListener(MarkSolutionFound);
         }
 
         private void OnDisable()
         {
-            EventsManager.OnFoundCodePadSolution.RemoveListener(() => _foundSolution = true);
+            EventsManager.OnFoundCodePadSolution.RemoveListener(MarkSolutionFound);
+        }
+
+        private void MarkSolutionFound()
+        {
+            _foundSolution = true;
         }
 
         public void InitMinigame(string targetPassword)
@@ -48,6 +55,7 @@ namespace Minigames
             _passwordLength = targetPassword.Length;
             _currentTypedPassword = new StringBuilder();
             _typedPasswordLength = 0;
+            _isCompleting = false;
 
             for (int i = 0; i < _passwordLength; i++)
             {
@@ -85,8 +93,11 @@ namespace Minigames
 
         public void Confirm()
         {
+            if (_isCompleting) return;
+
             if (_currentTypedPassword.Equals(_targetPassword))
             {
+                _isCompleting = true;
                 StartCoroutine(CompleteMinigameAfter(waitTime));
             }
         }

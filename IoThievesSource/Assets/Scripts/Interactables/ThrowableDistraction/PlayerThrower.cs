@@ -85,6 +85,18 @@ namespace Interactables.ThrowableDistraction
             return true;
         }
 
+        public bool TrySpawnAndPickUp(GameObject throwablePrefab, Vector3 spawnPosition, float attractionRange)
+        {
+            if (IsHolding || throwablePrefab == null) return false;
+
+            GameObject spawned = Instantiate(throwablePrefab, spawnPosition, Quaternion.identity);
+
+            if (TryPickUp(spawned.GetComponent<Throwable>(), attractionRange)) return true;
+
+            Destroy(spawned);
+            return false;
+        }
+
         public void Throw()
         {
             if (!IsHolding) return;

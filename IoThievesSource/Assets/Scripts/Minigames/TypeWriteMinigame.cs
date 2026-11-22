@@ -18,12 +18,17 @@ namespace Minigames
 
         private void OnEnable()
         {
-            EventsManager.OnGameOverTriggered.AddListener(() => typingSections[_currentIndex].OnDeselect(null));
+            EventsManager.OnGameOverTriggered.AddListener(DeselectCurrentSection);
         }
         
         private void OnDisable()
         {
-            EventsManager.OnGameOverTriggered.RemoveListener(() => typingSections[_currentIndex].OnDeselect(null));
+            EventsManager.OnGameOverTriggered.RemoveListener(DeselectCurrentSection);
+        }
+
+        private void DeselectCurrentSection()
+        {
+            typingSections[_currentIndex].OnDeselect(null);
         }
 
         public void Init()

@@ -27,6 +27,8 @@ namespace Interactables
         
         public override void Interact()
         {
+            if (!triggerArea.IsPlayerInRange) return;
+
             if (!isPlayingMusic)
             {
                isPlayingMusic = true;

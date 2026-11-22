@@ -7,6 +7,9 @@ namespace AI.NavigationAndWaypoints
 	{
         public static List<Waypoint> FindPath(Waypoint start, Waypoint goal)
         {
+            if (start == null || goal == null)
+                return null;
+
             var openSet = new List<Waypoint> { start };
             var cameFrom = new Dictionary<Waypoint, Waypoint>();
         
@@ -27,6 +30,9 @@ namespace AI.NavigationAndWaypoints
 
                 foreach (Waypoint neighbor in current.neighbours)
                 {
+                    if (neighbor == null)
+                        continue;
+
                     float tentativeG = gScore[current] + EuclideanDistance(current, neighbor);
 
                     if (!gScore.ContainsKey(neighbor) || tentativeG < gScore[neighbor])

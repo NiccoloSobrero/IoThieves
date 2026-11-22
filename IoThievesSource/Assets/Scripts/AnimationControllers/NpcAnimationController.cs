@@ -14,6 +14,12 @@ namespace AnimationControllers
         private AIController _aiController;
         public void Initialize()
         {
+            if (_aiController != null)
+            {
+                _aiController.OnStateChanged -= StateChanged;
+                _aiController.BeforeStateChanged -= StateAboutToChange;
+            }
+            
             _aiController = enemyAdapter.AIController;
             SetWalking(false);
             SetStunned(false);

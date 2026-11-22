@@ -58,11 +58,8 @@ namespace Interactables
             {
                 PlayerThrower player = interactTriggerArea.PlayerObject.GetComponent<PlayerThrower>();
 
-                if (player.TryPickUp(Instantiate(
-                            distractionPrefab, 
-                            gameObject.transform.position, 
-                            Quaternion.identity).GetComponent<Throwable>(), 
-                        attractionRange))
+                if (player != null &&
+                    player.TrySpawnAndPickUp(distractionPrefab, gameObject.transform.position, attractionRange))
                 {
                     _hasCreatedDistraction = false;
                     canStartProduction = true;
@@ -79,11 +76,8 @@ namespace Interactables
             {
                 PlayerThrower player = interactTriggerArea.PlayerObject.GetComponent<PlayerThrower>();
 
-                if (player.TryPickUp(Instantiate(
-                            distractionPrefab, 
-                            gameObject.transform.position, 
-                            Quaternion.identity).GetComponent<Throwable>(), 
-                        attractionRange))
+                if (player != null &&
+                    player.TrySpawnAndPickUp(distractionPrefab, gameObject.transform.position, attractionRange))
                 {
                     progressBillboard.SetActive(false);
                     checkObj.SetActive(false);

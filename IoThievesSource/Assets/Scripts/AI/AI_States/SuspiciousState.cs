@@ -47,7 +47,9 @@ namespace AI.AI_States
         public override void Enter()
         {
             _destinationWaypoint = AIUtilities.FindNearestWaypoint(Npc.transform.position);
-            ComputeMiddlePoints();
+
+            if (_destinationWaypoint != null)
+                ComputeMiddlePoints();
             
             _midpointReached = true;
             
